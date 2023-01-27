@@ -20,7 +20,12 @@
                 <div class="col-4">
                 	<div class="card">
                 		<div class="card-header">
-                			<h4 class="card-title">Vehicle Details</h4>
+                			<div class="d-flex">
+                				<h4 class="card-title">Vehicle Details</h4>
+                				<div class="ms-auto">
+                					<a href="{{ url('admin/vehicles/2/edit') }}" class="btn btn-primary btn-sm"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                				</div>
+                			</div>
                 		</div>
                 		<div class="card-body">
                 			<ul class="list-group">

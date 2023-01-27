@@ -1,0 +1,14 @@
+.card-header {
+    padding: 8px var(--bs-card-cap-padding-x);
+}
+.card-title{
+    margin: 7px 0 7px 0;
+}
+.btn-primary{
+    background-color: #8cd50a;
+    border-color: #8cd50a;
+}
+.btn-primary:hover{
+    background-color: #2e2d2c;
+    border-color: #2e2d2c;
+}

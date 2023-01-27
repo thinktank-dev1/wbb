@@ -28,8 +28,12 @@ class VehicleController extends Controller
      */
     public function index()
     {
+        $this->setClassValues();
         $vehicles = Vehicle::paginate(12);
-        return view('admin.vehicles.list', ['vehicles'=>$vehicles]);
+        return view('admin.vehicles.list', [
+            'vehicles'=>$vehicles,
+            'car_list' => $this->car_list,
+        ]);
     }
 
     /**

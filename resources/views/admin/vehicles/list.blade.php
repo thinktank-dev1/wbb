@@ -20,7 +20,40 @@
                 <div class="col-12">
                 	<div class="card">
                 		<div class="card-header">
-                			<h4 class="card-title">List Vehicles</h4>
+                            <div class="d-flex">
+                                <h4 class="card-title">List Vehicles</h4>
+                                <div class="ms-auto">
+                                    <div class="">
+                                        <form method="get">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search Key">
+                                                <select class="form-control" id="year-select">
+                                                    @php
+                                                    $date_start = date("Y", strtotime('-30 year'));
+                                                    $date_end = date("Y");
+                                                    @endphp
+                                                    @for($i = $date_end; $i >= $date_start; $i--)
+                                                    <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endfor
+                                                </select>
+                                                <select class="form-control" id="make-select">
+                                                    <option value="" disabled selected>Select Make</option>
+                                                    @foreach($car_list AS $list)
+                                                    <option value="{{ $list->make }}">{{ $list->make }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <select class="form-control" id="model-select">
+                                                    <option value="">Select Make First</option>
+                                                </select>
+                                                <select class="form-control" id="variant-select">
+                                                    <option value="">Select Make & Model First</option>
+                                                </select>
+                                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bx bx-search-alt align-middle"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                 		</div>
                 		<div class="card-body">
                 			<table class="table">
@@ -58,4 +91,74 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    //const choices = new Choices('.single-select');
+    $(document).ready(function(){
+        $('#year-select').on('change', function(){
+            var year = $('#year-select').val();
+            var make = $('#make-select').val();
+            if(year != "" && make != ""){
+                getModels();
+            }
+        });
+        $('#make-select').on('change', function(){
+            var year = $('#year-select').val();
+            var make = $('#make-select').val();
+            if(year != "" && make != ""){
+                getModels();
+            }
+        });
+        $('#model-select').on('change', function(){
+            var year = $('#year-select').val();
+            var make = $('#make-select').val();
+            var model = $('#model-select').val();
+            if(year != "" && make != "" && model != ""){
+                getVariants();
+            }
+        });
+    });
+    function getModels(){
+        var year = $('#year-select').val();
+        var make = $("#make-select").val();
+        console.log(year);
+        console.log(make);
+        $.ajax({
+            url: "{{ url('getModels') }}/"+year+"/"+make,
+            type: 'GET',
+            dataType:'json',
+            success: function(res) {
+                console.log(res);
+                if(res.status == "success"){
+                    $('#model-select').html(res.html);
+                    var model = "{{ old('model') ?? $vehicle->model }}";
+                    if(model != ""){
+                        $('#model-select option[value="'+model+'"]').attr("selected", "selected");
+                        getVariants();
+                    }
+                }
+            }
+        });
+    }
+    function getVariants(){
+        var make = $("#make-select").val();
+        var year = $('#year-select').val();
+        var model = $('#model-select').val();
+        $.ajax({
+            url: "{{ url('getVariants') }}/"+year+"/"+make+"/"+model,
+            type: 'GET',
+            dataType:'json',
+            success: function(res) {
+                if(res.status == "success"){
+                    $('#variant-select').html(res.html);
+                    var variant = "{{ old('variant') ?? $vehicle->variant }}";
+                    if(variant != ""){
+                        $('#variant-select option[value="'+variant+'"]').attr("selected", "selected");
+                    }
+                }
+            }
+        });
+    }
+</script>
+@endpush
 @endsection

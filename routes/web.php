@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VehicleController;
+use App\Http\Controllers\Admin\AuctionGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('vehicles', VehicleController::class);
     Route::get('delete-vehicle-image/{id}', [VehicleController::class, 'deleteVehicleImage']);
     Route::get('delete-report/{id}', [VehicleController::class, 'deleteReport']);
+    Route::resource('auction-groups', AuctionGroupController::class);
 });
 
 require __DIR__.'/auth.php';

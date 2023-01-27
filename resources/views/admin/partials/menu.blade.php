@@ -16,7 +16,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="#">
+                            <a href="{{ url('admin/auction-groups') }}">
                                 <span data-key="t-auction-group">Auction Groups</span>
                             </a>
                         </li>
