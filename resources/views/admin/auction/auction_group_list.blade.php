@@ -20,7 +20,12 @@
                 <div class="col-12">
                     <div class="card">
                     	<div class="card-header">
-                    		<h4 class="card-title">List Form Groups</h4>
+                    	    <div class="d-flex">
+                    		    <h4 class="card-title">List Form Groups</h4>
+                    		    <div class="ms-auto">
+                    		        <a href="{{ url('admin/auction-groups/create') }}" class="btn btn-primary btn-sm">Add Auction Group</a>
+                    		    </div>
+                    		</div>
                     	</div>
                     	<div class="card-body">
                     		<table class="table table-striped">
@@ -41,7 +46,7 @@
                     					<td>{{ $group->start_time.' - '.$group->end_time }}</td>
                     					<td></td>
                     					<th class="text-end">
-                    						<a href="#">Lots</a>
+                    						<a href="{{ url('admin/add-lots-to-auction-group/'.$group->id) }}">Lots</a>
                     						&nbsp;|&nbsp;
                     						<a href="{{ url('admin/auction-groups/'.$group->id) }}">View</a>
                     						&nbsp;|&nbsp;

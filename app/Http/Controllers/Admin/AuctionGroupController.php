@@ -114,4 +114,8 @@ class AuctionGroupController extends Controller
     {
         //
     }
+    
+    public function showAddLots(){
+        return view('admin.auction.add_lots');
+    }
 }

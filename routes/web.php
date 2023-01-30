@@ -72,6 +72,8 @@ Route::middleware('auth')->group(function () {
         Route::get('delete-vehicle-image/{id}', [VehicleController::class, 'deleteVehicleImage']);
         Route::get('delete-report/{id}', [VehicleController::class, 'deleteReport']);
         Route::resource('auction-groups', AuctionGroupController::class);
+        
+        Route::get('add-lots-to-auction-group/{id}', [AuctionGroupController::class, 'showAddLots']);
     });
 });
 
