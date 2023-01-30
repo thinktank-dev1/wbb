@@ -1,0 +1,3076 @@
+@font-face {
+    font-family: Bold;
+    src: url(../fonts/HyundaiSansHeadOffice-Bold.ttf);
+}
+
+@font-face {
+    font-family: Regular;
+    src: url(../fonts/HyundaiSansHeadOffice-Regular.ttf);
+}
+
+@font-face {
+    font-family: Medium;
+    src: url(../fonts/HyundaiSansHeadOffice-Medium.ttf);
+}
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: Regular;
+    margin: 0;
+}
+
+[hidden] {
+    display: none;
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+    border: 0 solid #e2e8f0;
+}
+
+/** Home Start **/
+.navbar-mobile, .mobile-nav-collapse{
+    display: none;
+}
+
+.favourites-nav {
+    margin-top: 10%;
+}
+
+.links {
+    margin-left: auto;
+    margin-top: 1%;
+}
+
+.contact-nav {
+    margin-top: -6%;
+}
+
+.navbar-expand-sm {
+    background-color: #8cd50a;
+    height: 40px;
+}
+
+.nav-containter {
+    position: absolute;
+    right: 0px;
+    left: 0px;
+}
+
+.container-img {
+    margin-top: -1px;
+    width: 100%;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    max-height: 70vh;
+    margin-bottom: 50px;
+    border-bottom-width: thin;
+}
+
+div.nav-containter {
+    z-index: 100 !important;
+}
+
+.footer{
+    background: #efefef;   
+}
+
+.footer-headings{
+    text-transform: uppercase;
+    font-family: Bold;
+    font-size: 18px;
+    color: #2e2d2c;
+}
+
+.footer-links{
+   font-family: Regular; 
+   font-size: 18px;
+   color: #2e2d2c;
+}
+
+div .buttons {
+    margin-left: 55px !important;
+}
+
+.online-auction-info-section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.online-auction-info {
+    background-color: #8cd50a;
+    min-height: 50vh;
+    max-width: 49.2%;
+}
+
+.info-heading {
+    font-weight: 600 !important;
+    font-family: Bold;
+    margin-left: 185px;
+    margin-bottom: 4.px;
+    margin-top: 14px;
+}
+
+.info-paragraph {
+    color: #ffffff;
+    font-family: Regular;
+    margin-left: 185px;
+    margin-right: 178px;
+    font-size: 25px;
+    line-height: 1;
+}
+
+.learn-more-btn {
+    margin-left: 84px;
+    margin-top: 34px;
+}
+
+.registration-info-section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.registration-info {
+    background-color: #efefef;
+    min-height: 50vh;
+    max-width: 49.2%;
+}
+
+.register-info-heading{
+    font-family: Bold;
+    font-size: 31px;
+    color:#2e2d2c;
+    margin-left: 185px;
+    margin-top:95px;
+    margin-bottom: 25px;
+}
+
+.registering-steps-section{
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow-x: hidden;
+}
+
+.registering-steps-heading{
+    font-family: Bold;
+    margin-top:95px;
+    margin-bottom: 35px;
+    font-size: 43px;
+}
+
+.registering-steps-arrow-img{
+    position: relative;
+    z-index: 2;
+    margin-left: -20px;
+}
+
+.registering-steps-img{
+    margin-left: -20px;
+}
+
+.reg-paragraph {
+    font-family: Bold;
+    font-size: 20px;
+    color: #2e2d2c;
+}
+
+.bullet{
+    list-style-image: url('../images/wbbonline_img_8.png');
+    margin-left: 164px;
+    margin-right: 160px;
+}
+
+.card-icons{
+    width: 80px;
+}
+
+.form-card {
+    border-radius: 1.5rem;
+    position: absolute;
+    height: 600px !important;
+    width: 56% !important;
+    z-index: 100 !important;
+    margin-left: 155px;
+    margin-top: -48px;
+}
+
+.card-span{
+    font-weight: 500;
+    font-family: Bold;
+    font-size: 15px;
+    color: #8cd50a;
+}
+
+.card-disclaimer{
+    font-family: Regular;
+    font-size: 12px;
+    color: #8cd50a;  
+}
+
+.join-auction-section{
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow-x: hidden;
+}
+
+.join-auction-banner{
+    background-color: #efefef;
+    height: 20vh;
+}
+
+.join-auction-card{
+    position: absolute;
+    width: 96%;
+    z-index: 100 !important;
+    border-radius: 1.25rem;
+    margin-top: -158px;
+    margin-left: 144px;
+    background-color: transparent;
+    border: 0px !important;
+}
+
+.view-catalogue-card{
+    position: absolute;
+    width: 70%;
+    z-index: 100 !important;
+    border-radius: 1.25rem;
+    margin-top: -158px;
+    margin-left: 122px;
+    background-color: transparent;
+    border: 0px !important;
+}
+
+.green-banner {
+    background-color: #8cd50a;
+    height: 15vh;
+}
+
+.home-footer-banner{
+    background-color: #ffffff;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+/** Home End **/
+
+/** About Start **/
+
+.about-heading {
+    font-family: Bold;
+    font-size: 39px;
+    margin-left: 185px;
+    margin-bottom: 20px;
+    margin-top: 90px;
+    color: #8cd50a;
+}
+
+.about-subtitle {
+    font-family: Bold;
+    font-size: 16px;
+    margin-left: 185px;
+    margin-bottom: 10px;
+    color: #2e2d2c;
+}
+
+.about-text {
+    font-family: Regular;
+    line-height: normal;
+    font-size: 16px;
+    margin-left: 185px;
+    margin-bottom: 10px;
+    color:#2e2d2c;
+}
+
+.faq-header{
+    font-family: Bold;
+    font-size: 25px;
+    color: #2e2d2c; 
+    line-height: normal;
+}
+
+.faq-text{
+    font-family: Regular;
+    font-size: 16px;
+    color: #2e2d2c;
+    line-height: normal;
+}
+
+.about-img {
+    margin-top: 142px;
+    margin-left: 15px;
+}
+
+.accordion {
+    width: 80%;
+    margin-left: 185px;
+}
+
+.btn-link {
+    color: #2e2d2c;
+}
+
+.btn-link:hover {
+    color: #8cd50a;
+}
+
+.faq-card{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.card-header {
+    background-color: transparent !important;
+    border-bottom: 3px solid #bfbfbf;
+}
+
+.plus-btn{
+    position: absolute;
+    margin-left: 1388px;
+    margin-top: -32px;
+}
+
+/**About End **/
+
+/** Auth Start **/
+.login-card {
+    border: none;
+    min-width: 30%;
+}
+
+.login-title{
+    font-weight: 600 !important;
+    color: #8cd50a;
+    font-family: Bold;
+    font-size: 31px;
+}
+
+.login-subtitle{
+    font-family: Regular;
+    font-size: 20px;
+    color: #2e2d2c;
+}
+
+.login-input{
+    width: 50%;
+    margin-left: 152px;
+}
+
+.input-group{
+    width: 67%;
+}
+
+.login-anchor, .login-anchor:hover{
+    color: #bfbfbf;
+}
+
+.login-input:focus {
+    border: 1px solid #8cd50a;
+}
+
+.login-btn{
+    margin-left: 310px;
+}
+
+.forgot-pass-anchor{
+    color: #2e2d2c;
+    margin-left: 156px;
+}
+
+.register-anchor{
+    color: #8cd50a;
+}
+
+.register-span{
+    margin-right: 96px;
+}
+/** Auth End **/
+
+/** Assistance Banner Start **/
+.assistance{
+    overflow-x: hidden;
+}
+
+.assistance-banner{
+    height: 25vh;
+}
+
+.assistance-banner-bottom{
+    background-color: #8cd50a;
+}
+
+.assistance-banner-img{
+    margin-top: 140px;
+}
+
+.assistance-info{
+    background-color: #8cd50a;
+}
+
+.assistance-form-card {
+    border: 1px solid #efefef !important;
+    border-radius: 1.5rem !important;
+    position: absolute;
+    width: 60% !important;
+    z-index: 100 !important;
+    margin-top: -130px;
+    margin-left: 70px;
+}
+
+.assistance-bakkie{
+    position: absolute;
+    z-index: 105 !important;
+    margin-top: 64px;
+    margin-left: 108px;
+}
+
+.assistance-btn{
+    margin-top: -90px;
+    margin-bottom: 105px;
+    margin-left: -100px;
+}
+
+.assistance-card-title{
+    font-family: Bold;
+    font-size: 22px;
+    color:#2e2d2c;
+}
+
+.assistance-card-subtitle{
+    font-family: Regular;
+    font-size: 18px;
+    color: #2e2d2c;
+}
+/** Assistance Banner End **/
+
+/** Lot Start **/
+.lot{
+    overflow-x: hidden;
+}
+
+.lot-heading{
+    font-family: Bold;
+    font-weight: 600;
+    font-size: 31px;
+    color: #8cd50a;    
+}
+
+.lot-heading-span{
+    font-style: Bold;
+    font-weight: 600;
+    font-size: 31px;
+    color: #2e2d2c;    
+}
+
+.lot-title-div{
+    background-color: #efefef;
+    max-width: 92%;
+    border-radius: .5em;
+}
+
+.lot-make{
+    font-family: Bold;
+    font-weight: 600;
+    font-size: 31px;
+    color: #2e2d2c;
+}
+
+.lot-model{
+    font-family: Medium;
+    font-weight: 100;
+    font-size: 25px;
+}
+
+.lot-start-head{
+    font-family: Bold;
+    font-weight: 300;
+    font-size: 18px;
+    color: #bfbfbf;
+}
+
+.lot-start-span {
+    font-family: Medium;
+    font-size: 20px;
+    color: #2d2e2d;
+}
+
+.lot-details{
+    max-width: 92%;
+}
+
+.lot-card{
+    position: relative;
+}
+ 
+.lot-details-card{
+    border-radius: .5em;
+}
+
+.lot-slide {
+    display: none;
+    border-radius: .1em;
+}
+
+.cursor {
+    cursor: pointer;
+}
+  
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+  
+.next {
+    right: -16px;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: -17px;
+    border-radius: 3px 0 0 3px;
+}
+  
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+  
+.zoom-in {
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+.view-all{
+    padding: 230px 18px;
+    position: absolute;
+    top: 0;
+}
+
+.zoomin-btn{
+    padding: 0px 5px !important;
+}
+
+.view-all-btn{
+    background-color: #2e2d2c !important;
+    border-color: #2e2d2c !important;
+    border-radius: 0rem !important;
+    padding: 0px 5px !important;
+}
+  
+.row-thumnail:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+  
+.column {
+    float: left;
+    border-radius: .1em;
+}
+  
+.lot-thumbnail {
+    opacity: 0.6;
+}
+  
+.active,
+.lot-thumbnail:hover {
+    opacity: 1;
+}
+
+.lot-details-header{
+    border-radius: .5em;
+    background-color: #8cd50a;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+.lot-details-footer{
+    border-radius: .5em;
+    min-height: 15px;
+    background-color: #8cd50a;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+}
+.lot-details-heading {
+    font-family: Bold;
+    font-size: 20px;
+    color: #2e2d2c;
+}
+
+.lot-details-body{
+    background-color:#efefef;
+    padding-bottom: 175px;
+}
+
+.lot-details-text, .lot-reserve-price-text, .lot-total-bids-text{
+    font-family: Medium;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 0.1;
+    color: #8cd50a;
+    margin-top: 1.3em;
+}
+
+.lot-details-desc, .lot-reserve-price-desc, .lot-total-bids-desc{
+    font-family: Medium;
+    font-size: 12px;
+    line-height: 0.1;
+    color: #2e2d2c;
+    margin-top: 1.3em;
+}
+
+.lot-current-bid-text{
+    font-family: Bold;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2e2d2c;
+    line-height: 0.5;
+    text-transform: uppercase;
+    margin-top: 12px;
+}
+
+.lot-bid-increment-text{
+    font-family: Medium;
+    font-size: 12px;
+    font-weight: 400;
+    color: #2e2d2c;
+    line-height: 0.5;
+    text-transform: uppercase;
+
+}
+
+.lot-current-bid-desc{
+    font-family: Bold;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2e2d2c;
+    line-height: 0.5;
+    margin-left: -8px;
+    margin-right: 8px;
+    margin-top: 12px;
+}
+
+.lot-bid-increment-desc{
+    font-family: Medium;
+    font-size: 12px;
+    font-weight: 300;
+    color: #2e2d2c;
+    line-height: 0.5;
+}
+
+.lot-next-bid-text{
+  font-family: Bold;
+  font-weight: 400;
+  font-size: 16px;
+  color: #2e2d2c; 
+  text-transform: uppercase; 
+}
+
+.lot-next-bid-desc{
+    font-family: Bold;
+    font-size: 20px;
+    font-weight: 400;
+    color: #2e2c2d;
+    margin-left: -34px;
+    margin-right: -1px;
+}
+
+.line-one{
+    margin-top: -6px;
+    width: 269px;
+}
+
+.line-one-notes {
+    margin-top: -6px;
+    width: 372px;
+}
+
+.line-two{
+    margin-top: -6px;
+}
+
+.line-one-bid-info{
+    margin-top: -6px;
+    width: 194px;
+}
+
+.line-two-bid-info{
+    margin-top: -6px;
+}
+
+.bids-block{
+    border: 1px solid #8cd50a;
+    border-radius: 1em;
+    min-width: 290px;
+    max-height: 55px !important;
+    margin-left: -14px;
+}
+
+.bid-now-btn{
+    padding: 0px 15px !important;
+}
+
+.bid-now-btn-section{
+    margin-top: -29px;
+    position: relative;
+    max-width: 94%;
+    margin-left: 32px;
+}
+
+.auto-bid-section{
+    position: relative;
+    background-color: #2e2d2c;
+    min-width: 302px;
+    margin-left: -20px;
+    padding-top: 1px;
+    padding-bottom: 10px;
+}
+
+.similar-lot-section{
+    position: relative;
+    min-width: 302px;
+    margin-left: -20px;
+}
+
+.similar-lot-body{
+    background-color: #efefef;
+}
+
+.bid-disclaimer-section{
+    position: relative;
+    min-width: 302px;
+    margin-left: -20px;
+    max-height: 28px;
+    margin-top: 5px;
+}
+
+.auto-bid-title{
+    font-family: Bold;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.auto-max-bid-label{
+    font-family: Medium;
+    font-size: 12px;
+    color: #8cd50a;
+}
+
+.maximum-bid-input{
+    max-width:100px;
+}
+
+.decimal-span{
+    background-color: #8cd50a !important;
+    color: #ffffff !important;
+}
+
+.input-group-section{
+    margin-left: 92px;
+    margin-top: -50px;
+}
+
+.bid-disclaimer-text{
+    font-family: Regular;
+    font-size: 10px;
+    color: #2e2c2d;
+}
+
+.lot-auto-body{ 
+   padding-bottom: 1px;
+}
+
+.alert-input-field, .alert-input-field::placeholder{
+    border-radius: .3em;
+    font-size: 12px;
+    font-family: Medium;
+    color: #bfbfbf !important;
+}
+
+.extras-details-body{
+    background-color: #efefef;
+}
+
+.report-details-body{
+    background-color: #efefef;
+}
+
+.question-mark{
+    font-size: 7px; 
+}
+
+.question-mark::before{
+    vertical-align: baseline;
+    line-height: 0.1 !important;
+}
+
+
+.line-one-extras{
+    margin-top: -6px;
+    width: 418px;
+}
+
+.inspection-report-header{
+    background-color: #2e2d2c;
+    border-radius: .5em;
+}
+
+.inspection-title{
+    font-family: Bold;
+    font-weight: 200;
+    font-size: 25px;
+    color: #8cd50a;
+    text-transform: uppercase;
+}
+
+.top-card{
+    border-radius: .5em;
+}
+
+.top-body{
+    background-color: #efefef;
+}
+
+.top-row{
+    border-bottom: 1px solid #8cd50a;
+}
+
+.top-card-header{
+    background-color: #8cd50a;
+    border-radius: .5em;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+.top-card-footer{
+    background-color: #bfbfbf;
+    border-radius: .5em;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+    min-height: 15px;
+}
+
+.top-title{
+    font-family: Bold;
+    font-size: 20px;
+    font-weight: 200;
+    text-transform: uppercase;
+    color: #2e2d2c;
+}
+
+.magnify{
+    font-size: 12px;
+    padding: 8px 102px;
+    position: absolute;
+}  
+
+.magnify-btn{
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    border-radius: 0.9rem; 
+    color: #8cd50a;  
+    padding: 0px 5px !important;
+}
+
+.no-insp-text{
+    font-family: Regular;
+    font-size: 18px;
+    color: #2e2d2c;
+}
+
+.insp-text{
+    font-family: Regular;
+    font-weight: 600;
+    font-size: 12px;
+    color: #2e2d2c; 
+    line-height: .8;
+}
+
+.inspection-img{
+    border-radius: .5em;
+    max-width: 140px;
+}
+
+.line-three{
+    margin-top: -6px;
+}
+
+.line-four {
+    margin-top: -6px;
+    width: 862px;
+}
+
+.line-four-notes {
+    margin-top: -6px;
+    width: 1262px;
+}
+
+.auto-bid-footer{
+    border-radius: .5em;
+    min-height: 15px;
+    background-color: #bfbfbf;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+}
+
+.border-right {
+    border-right: 3px solid #bfbfbf;
+}
+
+.auction-card{
+    background-color: #efefef;
+}
+
+.previous-lot-header{
+    background-color: #bfbfbf;
+    border-radius: .5em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.lot-details-table td {
+    padding: .3rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top: none;
+    
+}
+
+.lot-details-data-text{
+    text-transform: uppercase;
+    font-family: Medium;
+    font-weight: 600;
+    font-size: 12px;
+    color: #8cd50a;
+}
+
+.lot-details--data-desc{
+    font-family: Medium;
+    font-weight: 600;
+    font-size: 12px;
+    color: #2e2d2c;
+}
+/** Lot End **/
+
+/** Auction Start **/
+.auction-heading{
+    font-family: Bold;
+    font-size: 39px;
+    font-weight: 400;
+    color: #8cd50a;
+}
+
+.back-to-cat-btn{
+    position: absolute;
+    margin-top: 12px;
+    font-weight: 600;
+    top: 0;
+}
+
+.lot-number-title{
+    font-family: Regular;
+    font-size: 25px;
+    color:#2e2d2c;
+}
+
+.lot-number-span{
+    font-family: Bold;
+    font-weight: 400;
+    font-size: 31px;
+    color: #8cd50a;
+}
+
+.lot-vehicle{
+    height: 350px;
+}
+
+.closing-time-title{
+    text-transform: uppercase;
+    font-family: Bold;
+    font-weight: 500;
+    font-size: 18px;
+    color: #bfbfbf;
+}
+
+.auction-timer{
+    font-family: Medium;
+    font-size: 31px;
+    color: #2e2d2c;
+}
+
+.auction-reserve-price-desc, .auction-details-desc, .auction-total-bids-desc{
+    font-family: Bold;
+    font-size: 25px;
+    color: #2e2d2c;
+    line-height: .1;
+}
+
+.auction-bids-block {
+    border: 1px solid #2e2c2d;
+    background-color: #2e2c2d;
+    border-radius: 1em;
+    max-width: 290px;
+    max-height: 70px !important;
+}
+
+.auction-current-bid-text{
+    font-family: Bold;
+    font-size: 16px;
+    font-weight: 600;
+    color: #8cd50a;
+    line-height: 0.5;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.auction-current-bid-desc{
+    font-family: Bold;
+    font-size: 25px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 0.5;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.auction-bid-increment-desc{
+    font-family: Bold;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 0.5;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.bid-increment-desc, .staring-bid-desc {
+    font-family: Bold;
+    font-size: 25px;
+    color: #2e2d2c;
+    line-height: .1;
+}
+
+.asking-bid-block{
+    min-width: 290px;
+}
+
+.asking-bid-btn{
+    border-top-right-radius: .5em !important;
+    border-bottom-right-radius: .5em !important;
+    background-color: #8cd50a;
+    border-color: #8cd50a;
+    color: #2e2c2d;
+    max-height: 85px;
+}
+
+.asking-bid-check{
+    color: #ffffff;
+    line-height: .1;
+}
+
+.place-bid-text{
+    font-family: Bold;
+    margin-top: -2px;
+    line-height: .5;
+}
+
+.click-text{
+    margin-top: 5px;
+    line-height: .3;
+}
+
+.auction-auto-bid-block{
+    background-color: #2e2d2c;
+}
+
+.auction-auto-bid{
+    font-family: Bold;
+    font-size: 16px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.auto-bid-label{
+    font-family: Medium;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.auction-max-bid-text{
+    background-color: #8cd50a;
+    color: #ffffff;
+    font-family: Bold; 
+}
+
+.prev-lot-no{
+    text-transform: uppercase;
+    line-height: 2;
+    font-family: Medium;
+    font-size: 14px;
+    color: #8cd50a;
+}
+
+.prev-lot-span{
+    font-family: Bold;
+    font-size: 18px;
+    color: #2e2d2c;
+}
+
+.prev-lot-make-model{
+    font-family: Medium;
+    line-height: .5;
+    font-size: 18px;
+    color: #2e2d2c;
+}
+
+.prev-lot-details-text{
+    font-family: Medium;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 0.1;
+    color: #8cd50a;
+}
+
+.prev-lot-details-desc {
+    font-family: Regular;
+    font-size: 14px;
+    line-height: 0.1;
+    color: #2e2d2c;
+}
+
+.prev-lot-status{
+    font-family: Medium;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #8cd50a;
+    font-weight:400;
+    line-height: .1;
+    margin-bottom: 0.5em;
+}
+
+.prev-lot-status-span{
+    font-family: Bold;
+    font-size: 18px;
+    color: #2e2d2c;
+    line-height: .1;
+}
+
+.prev-lot-bids{
+    font-family: Regular;
+    font-weight: 600;
+    font-size: 14px;
+    color: #2e2d2c;
+}
+
+.next-lot-header{
+    background-color: #8cd50a;
+    border-radius: .5em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.next-lot-footer {
+    background-color: #8cd50a;
+    border-radius: .5em;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+    min-height: 15px;
+}  
+/** Auction End **/
+
+/** Catalogue Start **/
+.catalogue-heading {
+    font-weight: 600;
+    font-size: 39px;
+    font-family: Bold;
+    margin-left: 70px;
+    margin-bottom: 20px;
+    margin-top: 90px;
+    color: #8cd50a;
+}
+
+.catalogue-card{
+    width: 25rem;
+    border-radius: .75rem;
+    margin-left: 70px;
+    border: 2px solid rgba(191, 191, 191, 0.125) !important;
+}
+
+.catalogue-card-title{
+    font-weight: 400 !important;
+    font-size: 18px;
+    font-family: Bold;
+    margin-left: 6px;
+    margin-top: 15px;
+    color: #8cd50a;
+}
+
+.catalogue-title-div{
+    background-color: #2e2d2c;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    border-top-left-radius: .75rem;
+    border-top-right-radius: .75rem;
+}
+
+.finder-input{
+    margin-bottom: 5px;
+}
+
+.finder-span{
+    font-family: Regular;
+    font-size: 10px;
+    color: #2e2d2c;
+}
+
+.catalogue-btn{
+    margin-top: 15px;
+}
+
+.catalogue-label {
+    font-family: Regular;
+    font-size: 14px;
+    color: #2e2d2c;
+    text-transform: none;
+}
+
+.catalogue-header{
+    background-color: #efefef;
+    margin-top: 160px;
+    border-radius: .55rem;
+    width: 95%;
+}
+
+.catalogue-title{
+    font-weight: 500 !important;
+    font-family: Bold;
+    font-size: 20px;
+    color: #bfbfbf; 
+}
+
+.date-span{
+    font-weight: 500 !important;
+    font-family: Bold;
+    font-size: 31px;
+    color: #2e2d2c; 
+}
+
+.search-input{
+    border-radius: 1rem;
+    background-color: #efefef;
+    border: 1px solid #2e2d2c !important;
+}
+
+.search-append{
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border: 1px solid #2e2d2c !important;
+}
+
+.search-label {
+    font-weight: 600 !important;
+    font-family: Medium;
+    font-size: 14px;
+    color: #2e2d2c;
+    text-transform: none;
+}
+
+.sort-span{
+    font-weight: 600 !important;
+    font-family: Medium;
+    font-size: 12px;
+    color: #bfbfbf;
+    margin-right: 5px;
+}
+
+.sort-anchor{
+    font-family: Medium;
+    font-size: 14px;
+    color: #2e2d2c;
+}
+
+.results-anchor{
+    font-family: Medium;
+    font-size: 14px;
+    color: #2e2d2c;
+}
+
+.rounded {
+    border-radius: .75rem !important;
+    border: 2px solid rgba(191, 191, 191, 0.125);
+}
+
+.bakkie-card{
+    width: 95%;
+}
+
+.bakkie-make{
+    font-weight: 500 !important;
+    font-family: Bold;
+    font-size: 21px;
+    color: #2e2d2c; 
+    margin-bottom: .1rem;
+    line-height: 1.0;
+}
+
+.bakkie-model{
+    font-family: Medium;
+    font-size: 20px;
+    color: #2e2d2c; 
+    margin-bottom: .7rem;
+    line-height: 1.0;
+}
+
+.specifications-text{
+    font-family: Medium;
+    font-size: 12px;
+    color: #8cd50a; 
+    line-height: .2;
+}
+
+.specifications-span{
+    font-family: Regular;
+    font-size: 14px;
+    color: #2e2d2c;
+    line-height: .2;
+}
+
+.lot-text{
+    font-family: Regular;
+    font-size: 14px;
+    color: #2e2d2c;
+    margin-top: 5px;
+}
+
+.lot-span{
+    font-family: Regular;
+    font-size: 14px;
+    color: #8cd50a;
+    margin-left: .2rem;
+}
+
+.bid-text{
+    font-family: Medium;
+    font-size: 12px;
+    color: #8cd50a;
+}
+
+.bid-price{
+    font-family: Bold;
+    font-size: 25px;
+    color: #2e2d2c;
+    margin-top: -18px;
+}
+
+.starting-bid{
+    margin-top: -8px;
+}
+
+.starting-bid-price{
+    font-family: Bold;
+    font-size: 14px;
+    margin-top: -18px;
+}
+
+.trade-price{
+    margin-top: -2px;
+}
+
+.time-span{
+    font-family: Bold;
+    font-size: 14px;
+    color: #8cd50a;
+    line-height: 1.0;
+}
+
+.time-text{
+    font-family: Medium;
+    font-size: 14px;
+    color: #2e2d2c;
+    line-height: .5;
+    margin-top: -10px;
+}
+
+.join-auction-text{
+    font-family: Medium;
+    font-size: 14px;
+    color: #2e2d2c;
+    line-height: .5;
+}
+
+.join-auction-div{
+    margin-top: -16px;
+}
+
+.catalogue-btn-div{
+    margin-top: -15px;
+}
+
+.favourite-span{
+    font-family: Bold;
+    font-size: 14px;
+    color: #8cd50a;
+    line-height: 1;
+}
+
+.heart-div{
+    margin-top: -45px;
+    margin-left: 95px;
+}
+
+.pagination-span{
+    font-family: Medium;
+    font-size: 14px;
+    color: #bfbfbf;
+}
+/** Catalogue End **/
+
+/** Contact Start **/
+.contact-us{
+    overflow-x: hidden;
+}
+
+.contact-title{
+    text-transform: uppercase;
+    font-family: Bold;
+    font-size: 39px;
+    color: #8cd50a;
+}
+
+.contact-subtitle{
+    font-family: Regular;
+    font-size: 25px;
+    color: #2e2d2c;
+}
+
+.contact-email{
+    font-family: Regular;
+    font-size: 20px;
+    color: #8cd50a;
+}
+
+.contact-label{
+    font-family: Medium;
+    font-size: 14px;
+    color: #8cd50a;
+    line-height: .5;
+}
+
+.contact-disclaimer{
+    font-family: Regular;
+    font-weight: 600;
+    font-size: 14px;
+    color: #2e2d2c;
+}
+
+.contact-bakkies{
+    position: absolute;
+    z-index: 1;
+    margin-left: 81px;
+    margin-top: -89px;
+}
+
+.getting-started{
+    overflow-x: hidden;
+}
+
+.contact-banner{
+    position: relative;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+}
+
+.contact-button-section{
+    background-color: #8cd50a;
+    min-height: 25vh;
+}
+
+.get-started-title{
+    font-family: Bold;
+    font-size: 25px;
+    color: #2e2d2c;
+}
+
+.get-ready-title-section{
+    background-color: #8cd50a;
+}
+
+.contact-footer-banner{
+    background-color: #8cd50a;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+/** Contact End **/
+
+@media screen and (max-device-width: 1600px) {
+    /** Home Start **/
+    .navbar-mobile, .mobile-nav-collapse{
+        display:none;
+    }
+
+    .banner {
+        max-height: 80vh;
+    }
+
+    .online-auction-info {
+        min-height: 72vh;
+        max-width: 48.9%;
+    }
+
+    .info-paragraph {
+        margin-left: 89px;
+        margin-right: 0px;
+    }
+
+    .info-heading {
+        margin-left: 89px;
+        margin-top: 14px;
+    }
+
+    .learn-more-btn {
+        margin-left: 35px;
+        margin-top: 34px;
+    }
+
+    .registration-info {
+        min-height: 100vh;
+    }
+
+    .register-info-heading {
+        margin-left: 92px;
+        margin-top: 60px;
+    }
+
+    .bullet {
+        margin-left: 72px;
+        margin-right: 0px;
+    }
+
+    .form-card {
+        width: 70% !important;
+        margin-left: 130px;
+    }
+
+    .steps{
+        width: 20%;
+    }
+
+    .registering-steps-section {
+        height: 65vh;
+    }
+
+    .join-auction-card {
+        margin-top: -112px;
+        margin-left: 100px;
+    }
+
+    .view-catalogue-card {
+        margin-top: -112px;
+        margin-left: 74px;
+    }
+
+    /** Home End **/
+
+    /** About Start**/
+
+    .about-heading {
+        margin-left: 98px;
+    }
+
+    .about-subtitle {
+        margin-left: 98px;
+    }
+
+    .about-text {
+        margin-left: 98px;
+    }
+
+    .accordion {
+        margin-left: 98px;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+
+    .login-input {
+        width: 55%;
+        margin-left: 182px;
+    }
+
+    .input-group {
+        width: 79%;          
+    }
+
+    .register-span {
+        margin-right: -30px;
+    }
+
+    .forgot-pass-anchor {
+        margin-left: 183px;
+    }
+
+    .plus-btn {
+        margin-left: 1170px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-banner-img {
+        margin-top: 215px;
+    }
+
+    .assistance-banner-bottom {
+        background-color: #8cd50a;
+        height: 20vh;
+    }
+
+    .assistance-banner-bottom-img{
+        margin-top: 46px;
+    }
+
+    .assistance-banner {
+        height: 34vh;
+    }
+    /** Assistance Banner End **/
+
+}
+
+@media  screen and (max-device-width: 1500px) {
+    /** Home Start **/
+    .navbar-mobile, .mobile-nav-collapse{
+        display: none;
+    }
+
+    .banner {
+        max-height: 80vh;
+    }
+
+    .online-auction-info {
+        min-height: 70vh;
+    }
+      
+    .registration-info {
+        min-height: 80vh;
+    }
+    /** Home End **/
+
+    /** About Start**/
+    .about-heading {
+    margin-left: 65px;
+    }
+
+    .about-subtitle {
+        margin-left: 65px;
+    }
+
+    .about-text {
+        margin-left: 65px;
+    }
+
+    .accordion {
+        margin-left: 65px;
+        width: 85%;
+          
+    }
+
+    .plus-btn {
+        margin-left: 1000px;
+    }
+    /** About End**/
+
+    /** Auth Start **/
+    .login-btn {
+    margin-left: 305px;
+    }
+
+    .login-input {
+        width: 55%;
+    }
+
+    .input-group {
+        width: 75%;
+    }
+
+    .forgot-pass-anchor {
+        margin-left: 150px;
+    }
+
+    .register-span {
+        margin-right: 20px;
+    }
+    /** Auth End **/
+    
+    /** Assistance Banner Start **/
+    .assistance-bakkie {
+        margin-top: 105px;
+        margin-left: 74px;
+    }
+
+    .assistance-form-card {
+        width: 78% !important;
+        margin-top: -105px;
+        margin-left: 42px;
+    }
+
+    .assistance-btn {
+        margin-top: -56px;
+        margin-bottom: 88px;
+        margin-left: -84px;
+    }
+
+    .assistance-banner-bottom-img {
+        margin-top: 54px;
+    }
+    /** Assistance Banner End **/
+}
+
+@media screen and (max-device-width: 1440px) {
+    /** Home Start **/
+    .banner {
+        max-height: 60vh;
+    }
+    /** Home End **/
+
+    /** Assistance Banner Start **/
+    .assistance-banner-img {
+        margin-top: 260px;
+    }
+
+    .faq {
+        margin-bottom:30px;
+    }
+
+    .assistance-form-card {
+        margin-top: -122px;
+    }
+
+    .assistance-banner-bottom-img {
+        margin-top: -9px;
+    }
+
+    .assistance-btn {
+        margin-top: -82px;
+        margin-bottom: 95px;
+    }
+
+    .assistance-banner-bottom {
+        height: 10vh;
+    }
+    /** Assistance Banner End **/
+
+    /** Catalogue Start **/
+    .catalogue-card {
+        width: 24rem;
+    }
+
+    .heart-div {
+        margin-top: -15px;
+        margin-left: 32px;
+    }
+    /** Catalogue End **/
+
+    /** Auction Start **/
+    .auction-reserve-price-desc{
+        margin-top: 16px;
+    }
+
+    .lot-reserve-price-text{
+        line-height: 1;
+    }
+
+    .bid-increment-desc{
+        line-height: 1;
+        margin-top: 14px; 
+    }
+
+    /** Auction End **/
+}
+
+@media screen and (max-device-width: 1366px){
+    /** Home Start **/
+    .banner {
+        max-height: 80vh;
+    }
+
+    .registering-steps-section {
+        min-height: 75vh;
+    }
+    /** Home End **/
+
+    /** Catalogue Start **/
+    .catalogue-card {
+        width: 22rem;
+        margin-left: 68px;
+    }
+
+    .catalogue-header {
+        width: 98%;
+    }
+
+    .bakkie-card {
+        width: 98%;
+    }
+
+    .heart-div {
+        margin-top: -10px;
+        margin-left: 33px;
+    }
+    /** Catalogue End **/
+
+    /** Lot Start **/
+    .bids-block {
+        min-width: 270px;
+    }
+
+    .lot-current-bid-desc {
+        font-size: 14px;
+    }
+
+    .auto-bid-section {
+        min-width: 282px;
+    }
+
+    .maximum-bid-input {
+        max-width: 83px;
+    }
+
+    .alert-input-field{
+        width: 86%;
+    }
+
+    .line-one {
+        width: 252px;
+    }
+
+    .lot-details-desc{
+        font-size: 11px;
+    }
+    
+    .line-one-notes {
+        width: 350px;
+    }
+
+    .line-one-extras {
+        width: 392px;
+    }
+    /** Lot End **/
+}
+
+@media screen and (max-device-width: 1280px) {
+    /** Home Start **/
+    .navbar-mobile, .mobile-nav-collapse{
+        display: none;
+    }
+
+    .banner {
+        max-height: 52vh;
+    }
+
+    .registering-steps-section {
+    height: 54vh;
+    }
+    /** Home End **/
+
+    /** About Start **/
+
+    .plus-btn {
+        margin-left: 900px;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+    .login-input {
+        margin-left: 98px;
+        width: 58%;
+    }
+
+    .input-group {
+        width: 72%;
+    }
+
+    .forgot-pass-anchor {
+        margin-left: 100px;
+    }
+
+    .register-span {
+        margin-right: 98px;
+    }
+
+    .login-btn {
+        margin-left: 228px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-banner-img {
+        margin-top: 230px;
+    }
+
+    .assistance-banner-bottom {
+        height: 35vh;
+    }
+
+    .assistance-form-card {
+        width: 80% !important;
+        margin-top: -122px;
+        margin-left: 12px;
+    }
+
+    .assistance-bakkie {
+        margin-top: 105px;
+        margin-left: 44px;
+    }
+
+    .assistance-btn {
+        margin-top: -60px;
+        margin-bottom: 75px;
+        margin-left: -68px;
+    }
+
+    .assistance-banner-bottom-img {
+        margin-top: 192px;
+    }
+    /** Assistance Banner End **/
+
+    /** Auction Start **/
+    .auction-current-bid-text {
+        font-size: 15px;
+    }
+
+    .auction-current-bid-desc {
+        font-size: 24px;
+        margin-top: 13px;
+    }
+    /** Auction End **/
+}
+
+@media screen and (max-device-width: 1024px){
+    /** Assistance Banner Start **/
+    .assistance-banner-img {
+        margin-top: 430px;
+    }
+
+    .assistance-form-card {
+        width: 91% !important;
+        margin-top: -122px;
+        margin-left: -6px;
+    }
+
+    .assistance-bakkie {
+        margin-left: 20px;
+    }
+
+    .assistance-btn {
+        margin-top: 97px;
+        margin-bottom: -97px;
+    }
+
+    .assistance-banner-bottom {
+        height: 18vh;
+    }
+
+    .assistance-banner-bottom-img {
+        margin-top: 175px;
+    }
+    /** Assistance Banner End **/
+
+    /** Auction Start **/
+    .auction-current-bid-text {
+        font-size: 14px;
+        line-height: 0.8;
+        margin-top: 12px;
+    }
+
+    .auction-current-bid-desc {
+        font-size: 17px;
+        margin-top: 10px;
+        margin-bottom: 23px;
+        line-height: 1;
+    }
+
+    .bid-prepend {
+        margin-right: 58px;
+    }
+
+    .auction-reserve-price-desc, .auction-details-desc, .auction-total-bids-desc {
+        font-size: 20px;
+    }
+
+    .auction-reserve-price-desc {
+        margin-top: 23px;
+    }
+
+    .auction-details-desc {
+        margin-top: 39px;
+    }
+
+    .bid-increment-desc {
+        font-size: 21px;
+        line-height: 1.2;
+        margin-top: 18px;
+    }
+
+    .staring-bid-desc {
+        font-size: 21px;
+        margin-top: 20px;
+    }
+
+    .auto-bid-label {
+        margin-top: 2px;
+    }
+    /** Auction End **/
+}
+
+@media screen and (max-device-width: 810px){
+    /** Home Start **/
+    .navbar-mobile, .mobile-nav-collapse{
+        display: none;
+    }
+
+    .container-img {
+        margin-top: -4px;
+    }
+
+    .online-auction-info {
+        min-height: 66vh;
+      }
+
+    .banner {
+        height: 34vh;
+    }
+
+    .online-auction-bakkie {
+        margin-top: 62px;
+    }
+
+    .form-card {
+        width: 93% !important;
+        margin-left: -18px;
+    }
+
+    .join-auction-banner {
+        height: 10vh;
+    }
+
+    .join-auction-card {
+        margin-top: -86px;
+    }
+
+    .view-catalogue-card {
+        margin-top: -86px;
+        width: 74%;
+        margin-left: 23px;
+    }
+
+    .registration-info {
+        min-height: 64vh;
+    }
+
+    .registering-steps-section {
+        height: 80vh;
+    }
+
+    .registering-steps-arrow-img {
+        display: none;
+    }
+
+    .info-heading {
+        font-size: 30px;
+        margin-left: 56px;
+    }
+
+    .info-paragraph {
+        margin-right: -12px;
+        margin-left: 55px;
+        font-size: 18px;
+    }
+
+    .learn-more-btn {
+        margin-left: 17px;
+    }
+
+    .online-auction-bakkie {
+        margin-top: 172px;
+    }
+
+    .green-banner {
+        height: 5vh;
+    }
+
+    .register-info-heading {
+        margin-left: 50px;
+    }
+
+    .bullet {
+        margin-left: 29px;
+    }
+
+    .steps {
+        width: 35%;
+        margin: 10px;
+    }
+    /** Home End **/
+
+    /** About Start **/
+    .plus-btn {
+        margin-left: 580px;
+    }
+
+    .about-heading {
+        margin-left: 45px;
+    }
+
+    .about-subtitle {
+        margin-left: 45px;
+        margin-right: 25px;
+    }
+
+    .about-text {
+        margin-left: 45px;
+        margin-right: 45px;
+    }
+
+    /** About End **/
+
+    /** Auth Start **/
+
+    .login-input {
+        margin-left: 40px;
+    }
+
+    .input-group {
+        width: 72%;
+    }
+
+    .forgot-pass-anchor {
+        margin-left: 40px;
+    }
+
+    .register-span {
+        margin-right: 122px;
+    }
+
+    .login-btn {
+        margin-left: 200px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-banner-img {
+        margin-top: 340px;
+    }
+
+    .assistance-bakkie {
+        margin-top: 50px;
+        margin-left: 98px;
+    }
+
+    .assistance-form-card {
+        width: 55% !important;
+        margin-top: -162px;
+        margin-left: 175px;
+    }
+
+    .assistance-btn {
+        margin-top: 2px;
+        margin-bottom: -29px;
+        margin-left: 1px;
+        max-width: 52%;
+    }
+
+    .assistance-banner-bottom {
+        height: 5vh;
+    }
+
+    .assistance-banner-bottom-img {
+        margin-top: -1px;
+    }
+    /** Assistance Banner End **/
+
+    /** Auction Start **/
+    .auction-reserve-price-desc {
+        margin-top: 24px;
+    }
+
+    .prev-lot-dl{
+        margin-top: 20px;
+    }
+    /** Auction End **/
+}
+
+@media screen and (max-device-width: 768px){
+    /** Home Start **/
+    .navbar-mobile, .mobile-nav-collapse{
+        display: none;
+    }
+
+    .banner {
+        height: 35vh;
+    }
+
+    .container-img {
+        margin-top: -7px;
+    }
+
+    .registration-info {
+        max-width: 100%;
+        min-height: 58vh;
+    }
+
+    .bullet {
+    margin-right: 105px;
+    }
+
+    .form-card {
+        width: 66% !important;
+        margin-left: 112px;
+        margin-top: -100px;
+    }
+
+    .steps {
+        width: 35%;
+    }
+
+    .join-auction-card {
+        margin-left: 54px;
+        width: 100%;
+    }
+
+    .view-catalogue-card {
+        margin-left: 40px;
+        width: 75%;
+    }
+
+    .favourites-nav {
+        margin-top: 10%;
+        width: 100%;
+    }
+
+    .register-nav{
+        width: 100%;
+    }
+
+    .online-auction-info {
+        min-height: 68vh;
+    }
+    /** Home End **/
+
+    /** About Start **/
+    .plus-btn {
+        margin-left: 550px;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+    .input-group {
+        width: 73%;
+    }
+
+
+    .login-btn {
+        margin-left: 180px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-banner-img {
+        margin-top: 322px;
+    }
+
+    .assistance-form-card {
+        margin-top: -140px;
+    }
+
+    .assistance-btn {
+        margin-top: 45px;
+        margin-bottom: -75px;
+        max-width: 50%;
+    }
+    /** Assistance Banner End **/
+}
+
+@media screen and (max-device-width: 576px){
+    /** Home Start **/
+    .navbar-expand-sm{
+        display: none;
+    }
+
+    .navbar-mobile, .mobile-nav-collapse, .mobile-nav-card{
+        display: block;
+        background-color: #8cd50a;
+    }
+
+    .logo{
+        margin-left: 124px;
+    }
+
+    .icon-nav-container{
+        height: 146px;
+    }
+
+    .register-nav {
+        margin-top: -6%;
+        width: 80%;
+        margin-left: 6%;
+    }
+
+    .favourites-nav {
+        width: 80%;
+        margin-top: -67%;
+        margin-left: 142%;
+    }
+
+    .contact-nav {
+        margin-top: -2%;
+        margin-left: -10px;
+    }
+
+    .btn-link {
+        color: #ffffff;
+    }
+
+    .btn-link:hover {
+        color: #ffffff;
+    }
+
+    .btn.focus, .btn:focus {
+        box-shadow: 0 0 0 .2rem rgb(255, 255, 255);
+    }
+
+    .container-img {
+        margin-top: -14px;
+    }
+
+    .banner {
+        height: 25vh;
+    }
+
+    .online-auction-section-img {
+        margin-bottom: -3px;
+    }
+
+    .online-auction-info {
+        min-height: 50vh;
+        max-width: 100%;
+    }
+
+    .banner-btn-col {
+        margin-left: -65px;
+    }
+
+    .form-card {
+        width: 69% !important;
+        margin-top: -92px;
+        margin-left: 70px;
+    }
+
+    .registration-info {
+        min-height: 62vh;
+    }
+
+    .join-auction-card {
+        width: 58%;
+        margin-left: -5px;
+    }
+
+    .view-catalogue-card {
+        margin-left: 304px;
+        width: 44%;
+    }
+
+    .info-heading {
+        font-size: 25px;
+    }
+
+    .info-paragraph {
+        margin-right: 50px;
+        margin-top: -20px;
+        margin-bottom: 37px;
+    }
+
+    .online-auction-bakkie {
+        max-width: 85%;
+        margin-top: 48px;
+        margin-left: 22px;
+    }
+
+    .steps {
+        width: 42%;
+    }
+
+    /** Home End **/
+
+    /** About Start **/
+    .accordion {
+        margin-left: 45px;
+    }
+
+    .plus-btn {
+        margin-left: 370px;
+    }
+
+    .accord-btn {
+        color: #2e2d2c !important;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+
+    .login-input {
+        width: 82%;
+        margin-left: 20px;
+    }
+
+    .input-group {
+        width: 86%;
+    }
+
+    .forgot-pass-anchor {
+        margin-left: 26px;
+    }
+
+    .register-span {
+        margin-right: 50px;
+    }
+
+    .login-btn {
+        margin-left: 152px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-banner-img {
+        margin-top: 206px;
+    }
+
+    .assistance-bakkie {
+        margin-left: 22px;
+    }
+
+    .assistance-form-card {
+        width: 68% !important;
+        margin-top: -283px;
+        margin-left: 80px;
+    }
+
+    .assistance-btn {
+        max-width: 55%;
+    }
+    /** Assistance Banner End **/
+}
+
+@media screen and (max-device-width: 428px){
+    /** Home Start **/
+    .logo{
+        margin-left: 50px;
+    }
+
+    .icon-nav-container{
+        height: 146px;
+    }
+
+    .online-auction-info {
+        min-height: 60vh;
+    }
+
+    .register-nav {
+        margin-top: -6%;
+        width: 76%;
+        margin-left: 1%;
+    }
+
+    .favourites-nav {
+        width: 80%;
+        margin-top: -64%;
+        margin-left: 90%;
+    }
+
+    .container-img {
+        margin-top: -14px;
+    }
+
+    .banner {
+        height: 20vh;
+    }
+
+    .online-auction-section-img {
+        margin-bottom: -5px;
+    }
+
+    .info-heading {
+        margin-left: 39px;
+    }
+
+    .info-paragraph {
+        margin-left: 39px;
+        margin-right: 31px;
+    }
+
+    .bullet {
+        margin-left: 14px;
+        margin-right: 30px;
+    }
+
+    .register-info-heading {
+        margin-left: 33px;
+    }
+
+    .form-card {
+        width: 84% !important;
+        margin-top: -58px;
+        margin-left: 22px;
+    }
+
+    .steps {
+        width: 45%;
+        margin: 4px 4px;
+    }
+
+    .registering-steps-section {
+        height: 60vh;
+    }
+
+    .join-auction-card {
+        width: 64%;
+        margin-left: -25px;
+        margin-top: -58px;
+    }
+
+    .view-catalogue-card {
+        margin-left: 217px;
+        margin-top: -59px;
+        width: 48%;
+    }
+
+    .registration-info {
+        min-height: 65vh;
+    }
+
+    .submit-img {
+        max-width: 65%;
+    }
+
+    .join-auction-banner {
+        height: 7vh;
+    }
+
+    .learn-more-btn {
+        margin-left: 10px;
+    }
+
+    .learn-more-img{
+        max-width: 42%;
+    }
+
+    .online-auction-image {
+        height: 35vh !important;
+    }
+    /** Home End **/
+
+    /** About Start **/
+
+    .plus-btn {
+        margin-left: 260px;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+
+    .input-group {
+        width: 88%;
+    }
+
+    .forgot-pass-anchor {
+        margin-left: 21px;
+    }
+
+    .register-span {
+        margin-left: 21px;
+    }
+
+    .login-btn {
+        margin-left: 110px;
+    }
+    /** Auth End **/
+
+    /** Auction Banner Start **/
+
+    .assistance-banner-img {
+        margin-top: 302px;
+    }
+
+    .assistance-bakkie {
+        margin-left: 15px;
+        width: 85%;
+    }
+
+    .assistance-form-card {
+        width: 84% !important;
+        margin-top: -148px;
+        margin-left: 20px;
+    }
+
+    .assistance-btn {
+        margin-top: 103px;
+        margin-bottom: -117px;
+        margin-left: -2px;
+        max-width: 60%;
+    }
+
+    .assistance-banner-bottom {
+        height: 5vh;
+    }
+
+    .assistance-banner-bottom-img {
+        margin-top: 18px;
+    }
+    /** Auction Banner End **/
+}
+
+@media screen and (max-device-width: 414px){
+    /** Home Start **/
+    .online-auction-info {
+        min-height: 62vh;
+    }
+
+    .info-heading {
+        font-size: 25px;
+        margin-top: 64px;
+    }
+
+    .info-paragraph {
+        font-size: 16px;
+    }
+
+    .learn-more-btn {
+        margin-left: 10px;
+        margin-top: 24px;
+    }
+
+    .learn-more-img{
+        max-width: 35%;
+    }
+
+    .online-auction-bakkie {
+        margin-top: 5px;
+    }
+
+    .online-auction-image {
+        height: 35vh !important;
+    }
+
+    .registration-info {
+        min-height: 68vh;
+    }
+
+    .green-banner {
+       display: none;
+    }
+
+    .card-icons {
+        width: 60px;
+        margin-left: -14px;
+    }
+
+    .form-card {
+        margin-top: -50px;
+    }
+
+    .submit-img {
+        max-width: 56%;
+    }
+
+    .view-catalogue-card {
+        margin-left: 208px;
+    }
+    /** Home End **/
+
+    /** About Start **/
+    .plus-btn {
+        margin-left: 250px;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+    .login-subtitle {
+        margin-left: 10px;
+        margin-right: 16px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-form-card {
+        width: 84% !important;
+        margin-top: -140px;
+        margin-left: 22px;
+    }
+
+    .assistance-btn {
+        margin-top: 116px;
+        margin-bottom: -135px;
+    }
+    /** Assistance Banner End **/
+}
+
+@media screen and (max-device-width: 412px){
+    /** Home Start **/
+    .container-img {
+        margin-top: -16px;
+    }
+
+    .online-auction-info {
+        min-height: 58vh;
+    }
+
+    .online-auction-image{
+        height: 38vh !important;
+    }
+
+    .info-heading {
+        font-size: 25px;
+        margin-top: 64px;
+    }
+
+    .info-paragraph {
+        font-size: 16px;
+    }
+
+    .learn-more-btn {
+        margin-left: 10px;
+        margin-top: 24px;
+    }
+
+    .green-banner {
+        height: 5vh;
+    }
+
+    .learn-more-img{
+        max-width: 38%;
+    }
+
+    .register-info-heading {
+        font-size: 25px;
+    }
+
+    .reg-paragraph {
+        font-size: 16px;
+    }
+
+
+    .submit-img {
+        max-width: 45%;
+    }
+
+    .card-disclaimer {
+        font-size: 14px;
+    }
+
+    .registering-steps-section {
+        height: 56vh;
+    }
+
+    .registering-steps-heading {
+        font-size: 43px;
+    }
+
+    .registration-info {
+        min-height: 64vh;
+    }
+
+    .join-auction-card {
+        margin-top: -56px;
+    }      
+
+    .view-catalogue-card {
+        margin-left: 208px;
+        margin-top: -56px;
+    }
+
+    .join-auction-banner {
+        height: 6vh;
+    }
+
+    .green-banner {
+        display: none;
+    }
+    /** Home End **/
+
+    /** About Start **/
+    .accordion {
+        margin-left: 14px;
+        width: 90%;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-form-card {
+        margin-top: -148px;
+    }
+
+    .assistance-btn {
+        margin-top: 45px;
+        margin-bottom: -60px;
+    }
+    /** Assistance Banner End **/
+}
+
+@media screen and (max-device-width: 390px){
+    /** Home Start **/
+    .favourites-nav {
+        margin-left: 76%;
+      }
+
+    .online-auction-info {
+        min-height: 62vh;
+    }
+
+    .view-catalogue-card {
+        margin-left: 196px;
+    }
+    /** Home End **/
+
+    /** About Start **/
+
+    .plus-btn {
+        margin-left: 235px;
+    }
+
+    .accordion {
+        margin-left: 12px;
+        width: 91%;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+
+    .login-subtitle {
+        margin-left: -1px;
+    }
+
+    .login-btn {
+        margin-left: 96px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-form-card {
+        margin-top: -145px;
+    }
+
+    .assistance-btn {
+        margin-top: 90px;
+        margin-bottom: -105px;
+    }
+
+    .assistance-banner-img {
+        margin-top: 275px;
+    }
+    /** Assistance Banner End **/
+}
+
+@media screen and (max-device-width: 384px){
+    /** Home Start **/
+    .favourites-nav {
+        margin-left: 74%;
+    }
+
+    .banner {
+        height: 24vh;
+    }
+
+    .online-auction-section-img {
+        margin-bottom: -6px;
+    }
+
+    .online-auction-info {
+        min-height: 64vh;
+    }
+
+    .registration-info {
+        min-height: 68vh;
+    }
+
+    .registering-steps-section {
+        height: 60vh;
+    }
+
+    .join-auction-banner {
+        height: 8vh;
+    }
+
+    .card-icons {
+        width: 60px;
+        margin-left: -14px;
+    }
+
+    .view-catalogue-card {
+        margin-left: 195px;
+    }
+
+    .form-card {
+        margin-left: 18px;
+    }
+    /** Home End **/
+
+    /** About Start **/
+
+    .plus-btn {
+        margin-left: 230px;
+    }
+
+    .accordion {
+        margin-left: 12px;
+        width: 90%;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+
+    .login-input {
+        width: 85%;
+        margin-left: 12px;
+    }
+
+    .input-group {
+        width: 89%;
+    }
+
+    .forgot-pass-anchor {
+        margin-left: 13px;
+    }
+
+    .register-span {
+        margin-left: 13px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-form-card {
+        margin-top: -152px;
+        margin-left: 19px;
+    }
+
+    .assistance-btn {
+        margin-top: 75px;
+        margin-bottom: -94px;
+    }
+
+    .assistance-banner-img {
+        margin-top: 279px;
+    }
+    /** Assistance Banner End **/
+}
+
+@media screen and (max-device-width: 375px){
+    /** Home Start **/
+    .banner {
+        height: 24vh;
+    }
+
+    .register-nav {
+        margin-left: -4%;
+    }  
+    
+    .online-auction-info {
+        min-height: 68vh;
+    }
+
+    .registration-info {
+        min-height: 74vh;
+    }
+
+    .view-catalogue-card {
+        margin-left: 188px;
+    }
+
+    .online-auction-image {
+        height: 36vh !important;
+    }
+
+    .online-auction-bakkie {
+        margin-top: 14px;
+    }
+    /** Home End **/
+
+    /** About Start **/
+
+    .plus-btn {
+        margin-left: 222px;
+    }
+
+    .accordion {
+        margin-left: 18px;
+        width: 90%;
+    }
+    /** About End **/
+
+    /** Auth Start **/
+
+    .login-btn {
+        margin-left: 86px;
+    }
+    /** Auth End **/
+
+    /** Assistance Banner Start **/
+    .assistance-form-card {
+        margin-top: -165px;
+    }
+
+    .assistance-btn {
+        margin-top: 80px;
+        margin-bottom: -80px;
+    }
+
+    .assistance-banner-bottom {
+        height: 15vh;
+    }
+
+    .assistance-banner-bottom-img {
+        margin-top: 75px;
+    }
+
+    .assistance-banner-img {
+        margin-top: 215px;
+    }
+    /** Assistance Banner End **/
+}
+
+
+
+
+
+

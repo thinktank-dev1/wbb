@@ -1,52 +1,117 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+@extends('layouts.main')
+@section('content')
+@section('title', 'Register')
+<section class="login">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h5 class="card-title login-title">Register</h5>
+                <p>Please fill in your information to create your account and have exclusive access to top quality bakkies on our online auctions.</p>
+            </div>
+            <div class="col-md-12 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="rg_step_cont">
+                                    <li class="rg_step"><div class="rg_step_text active">Account Holder Info</div></li>
+                                    <li class="rg_step"><div class="rg_step_text">Company Info</div></li>
+                                    <li class="rg_step"><div class="rg_step_text">Payment Info</div></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-8 offset-md-2">
+                                <form method="post" action="register">
+                                    @csrf
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 mb-3">
+                                            @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                {{ $errors->first() }}
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contact Number (Primary)</label>
+                                                <input type="text" class="form-control" name="contact_primary" value="{{ old('contact_primary') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contact Number (Secondary)</label>
+                                                <input type="text" class="form-control" name="contact_secondary" value="{{ old('contact_secondary') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" class="form-control" name="email" value="{{ old('email') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Confirm Email</label>
+                                                <input type="text" class="form-control" name="email_confirmation" value="{{ old('email_confirmation') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>ID Type</label>
+                                                <select class="form-control" name="id_type">
+                                                    <option value="">Select Option</option>
+                                                    <option value="SA ID Number" @if(old('id_type')) @if(old('id_type') == 'SA ID Number') selected @endif @endif >SA ID Number</option>
+                                                    <option value="Passport" @if(old('id_type')) @if(old('id_type') == 'Passport') selected @endif @endif >Passport Number</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>ID Number</label>
+                                                <input type="text" class="form-control" name="id_number" value="{{ old('id_number') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Confirm Password</label>
+                                                <input type="password" class="form-control" name="password_confirmation">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <input type="submit" value="NEXT" class="btn btn-primary btn-sm">
+                                            <div class="mt-3">
+                                                <p>Already have an account? <a href="{{ url('login') }}">Log In</a></p>
+                                            </div>
+                                            <div class="mt-3">
+                                                <p>By clicking 'Register Now' you agree to our <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</section>
+@include('includes.assistance')
+@endsection

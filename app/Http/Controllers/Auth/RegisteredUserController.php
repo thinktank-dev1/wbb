@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use App\Models\Role;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -31,12 +33,24 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'contact_primary' => ['required'],
+            'id_type' => ['required'],
+            'id_number' => ['required'],
+            'email' => ['required', 'confirmed', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:6'],
         ]);
-
+    
+        $role = Role::where('name', 'user')->first();
         $user = User::create([
+            'role_id' => $role->id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'contact_primary' => $request->contact_primary,
+            'contact_secondary' => $request->contact_secondary,
+            'id_type' => $request->id_type,
+            'id_number' => $request->id_number,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -46,6 +60,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
+        return redirect('register/step2');
     }
 }

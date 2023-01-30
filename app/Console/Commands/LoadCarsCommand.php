@@ -34,7 +34,7 @@ class LoadCarsCommand extends Command
     }
 
     public function init(){
-        $file = '/home/wilson/Downloads/CodesandDescriptionsFull1222/CodesAndDescriptionsFull1222.csv';
+        $file = '/var/www/html/wbb/storage/vehicle-codes/CodesAndDescriptionsFull0223.csv';
         Excel::import(new CarsImport, $file);
     }
 }
