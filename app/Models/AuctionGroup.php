@@ -15,4 +15,8 @@ class AuctionGroup extends Model
         'start_time',
         'end_time'
     ];
+
+    public function lots(){
+    	return $this->hasMany(Lot::class);
+    }
 }

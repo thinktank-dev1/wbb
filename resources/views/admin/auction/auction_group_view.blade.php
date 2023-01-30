@@ -44,6 +44,43 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Lots</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Make</th>
+                                        <th>Model</th>
+                                        <th>Variant</th>
+                                        <th>Start Price</th>
+                                        <th>Increament</th>
+                                        <th>Reserve</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($auctionGroup->lots AS $lot)
+                                    <tr>
+                                        <td>{{ $lot->vehicle->year }}</td>
+                                        <td>{{ $lot->vehicle->make }}</td>
+                                        <td>{{ $lot->vehicle->model }}</td>
+                                        <td>{{ $lot->vehicle->variant }}</td>
+                                        <td class="text-end">{{ number_format($lot->start_price,2) }}</td>
+                                        <td class="text-end">{{ number_format($lot->increament_value,2) }}</td>
+                                        <td class="text-end">{{ number_format($lot->reserve_price,2) }}</td>
+                                        <th class="text-end"><a href="{{ url('admin/remove-lot/'.$lot->id) }}" class="text-danger">Remove</a></th>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -74,6 +74,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('auction-groups', AuctionGroupController::class);
         
         Route::get('add-lots-to-auction-group/{id}', [AuctionGroupController::class, 'showAddLots']);
+        Route::post('save-lots', [AuctionGroupController::class, 'saveLots']);
+        Route::get('remove-lot/{id}', [AuctionGroupController::class, 'removeLot']);
     });
 });
 

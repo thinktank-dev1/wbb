@@ -54,5 +54,9 @@ class Vehicle extends Model
 
     public function inspectionBySide($side){
         return $this->inspection->where('side', $side);
+    }
+
+    public function lot(){
+        return $this->hasOne(Lot::class);
     }  
 }

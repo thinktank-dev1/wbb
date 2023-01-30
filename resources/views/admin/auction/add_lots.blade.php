@@ -18,7 +18,44 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Add Lots To Auction Group</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="{{ url('admin/save-lots') }}">
+                                @csrf
+                                <input type="hidden" name="group_id" value="{{ $group_id }}">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Values</th>
+                                            <th>Year - Make - Model - Variant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($cars AS $car)
+                                        <tr>
+                                            <td>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Start Price" name="car[{{ $car->id }}][start_price]">
+                                                    <input type="text" class="form-control" placeholder="Increament Value" name="car[{{ $car->id }}][increament_value]">
+                                                    <input type="text" class="form-control" placeholder="Peserve Price" name="car[{{ $car->id }}][reserve_price]">
+                                                </div>
+                                            </td>
+                                            <td>{{ $car->year.' - '.$car->make.' - '.$car->model.' - '.$car->variant }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="mt-3">
+                                    <div class="d-grid gap-2">
+                                        <input type="submit" class="btn btn-primary" value="SAVE LOTS">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

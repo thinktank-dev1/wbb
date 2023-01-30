@@ -7,6 +7,9 @@ use App\Models\AuctionGroup;
 use Illuminate\Http\Request;
 use Validator;
 
+use App\Models\Vehicle;
+use App\Models\Lot;
+
 class AuctionGroupController extends Controller
 {
     /**
@@ -115,7 +118,31 @@ class AuctionGroupController extends Controller
         //
     }
     
-    public function showAddLots(){
-        return view('admin.auction.add_lots');
+    public function showAddLots($id){
+        $cars = Vehicle::whereDoesntHave('lot')->get();
+        return view('admin.auction.add_lots', ['group_id'=>$id, 'cars'=>$cars]);
+    }
+
+    public function saveLots(Request $request){
+        $group_id = $request->group_id;
+        $cars = $request->car;
+        foreach($cars AS $k=>$car){
+            if($car['start_price'] && $car['increament_value'] && $car['reserve_price']){
+                Lot::create([
+                    'auction_group_id' => $group_id,
+                    'vehicle_id' => $k,
+                    'start_price' => $car['start_price'],
+                    'increament_value' => $car['increament_value'],
+                    'reserve_price' => $car['reserve_price']
+                ]);
+            }
+        }
+        return redirect('admin/auction-groups/'.$group_id);
+    }
+
+    public function removeLot($id){
+        $lot = Lot::find($id);
+        $lot->delete();
+        return back();
     }
 }
