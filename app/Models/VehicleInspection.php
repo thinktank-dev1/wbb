@@ -15,6 +15,7 @@ class VehicleInspection extends Model
         'side',
         'poasition',
         'type',
-        'severity'
+        'severity',
+        'estimate_damage_cost'
     ];
 }

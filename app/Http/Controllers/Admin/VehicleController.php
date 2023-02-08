@@ -15,12 +15,17 @@ use App\Models\VehicleExtras;
 use App\Models\VehicleAccidentReport;
 use App\Models\VehicleImages;
 use App\Models\VehicleInspection;
+use App\Models\Lot;
+use App\Models\Bid;
 
 class VehicleController extends Controller
 {
     
     public $fuel_types, $transmission_types, $car_list, $extras_list, $conditions_list, $damage_types, $damage_severity_list;
     public $top_positions, $left_right_positions, $front_positions, $back_positions;
+    public $service_history_options = [];
+    public $extras_options = [];
+    public $damage_positions = [];
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +64,10 @@ class VehicleController extends Controller
             'damage_severity_list' => $this->damage_severity_list,
             'left_right_positions' => $this->left_right_positions,
             'front_positions' => $this->front_positions,
-            'back_positions' => $this->back_positions
+            'back_positions' => $this->back_positions,
+            'service_history_options' => $this->service_history_options,
+            'extras_options' => $this->extras_options,
+            'damage_positions' => $this->damage_positions
         ]);
     }
 
@@ -85,7 +93,7 @@ class VehicleController extends Controller
             'cylinders' => 'required',
             'vin_number' => 'required',
             'engine_number' => 'required',
-            'natis' => 'required',
+            // 'natis' => 'required',
             'service_history' => 'required',
             'service_book' => 'required',
             'service_plan' => 'required',
@@ -94,6 +102,7 @@ class VehicleController extends Controller
             'previous_body_repairs' => 'required',
             'previous_cosmetic_repairs' => 'required',
             'mechanical_faults_warnig_lights' => 'required',
+            'mechanical_faults_warnig_lights_description' => 'required_if:mechanical_faults_warnig_lights,yes',
             'windscreen_condition' => 'required',
             'rims_condition' => 'required',
             'interior_condition' => 'required',
@@ -142,7 +151,7 @@ class VehicleController extends Controller
             'vehicle_id' => $vehicle->id,
             'previous_body_repairs' => $request->previous_body_repairs,
             'previous_cosmetic_repairs' => $request->previous_cosmetic_repairs,
-            'mechanical_faults_warnig_lights' => $request->previous_cosmetic_repairs,
+            'mechanical_faults_warnig_lights' => $request->mechanical_faults_warnig_lights,
             'mechanical_faults_warnig_lights_description' => $request->mechanical_faults_warnig_lights_description,
             'windscreen_condition' => $request->windscreen_condition,
             'rims_condition' => $request->rims_condition,
@@ -168,10 +177,12 @@ class VehicleController extends Controller
             $po_name = $side.'-position';
             $tp_name = $side."-type";
             $sv_name = $side."-severity";
+            $cost_name = $side."estimate_damage_cost";
             
             $pos = $request->input($po_name);
             $type = $request->input($tp_name);
             $severity = $request->input($sv_name);
+            $cost = $request->input($cost_name);
             for($i = 0; $i < count($pos); $i++){
                 if($pos[$i] && $type[$i] && $severity[$i]){
 
@@ -190,7 +201,8 @@ class VehicleController extends Controller
                         'side' => $side,
                         'poasition' => $pos[$i],
                         'type' => $type[$i],
-                        'severity' => $severity[$i]
+                        'severity' => $severity[$i],
+                        'estimate_damage_cost'=>$cost[$i]
                     ]);        
                 }
             }
@@ -232,7 +244,10 @@ class VehicleController extends Controller
             'damage_severity_list' => $this->damage_severity_list,
             'left_right_positions' => $this->left_right_positions,
             'front_positions' => $this->front_positions,
-            'back_positions' => $this->back_positions
+            'back_positions' => $this->back_positions,
+            'service_history_options' => $this->service_history_options,
+            'extras_options' => $this->extras_options,
+            'damage_positions' => $this->damage_positions
         ]);
     }
 
@@ -259,7 +274,7 @@ class VehicleController extends Controller
             'cylinders' => 'required',
             'vin_number' => 'required',
             'engine_number' => 'required',
-            'natis' => 'required',
+            // 'natis' => 'required',
             'service_history' => 'required',
             'service_book' => 'required',
             'service_plan' => 'required',
@@ -332,16 +347,18 @@ class VehicleController extends Controller
         $report->back_right_tire = $request->back_right_tire;
         $report->save();
 
-        if($request->has('images') && $request->file('images')->count() > 0){
-            foreach($request->file('images') AS $image){
-                if($image->isValid()){
-                    $path = Storage::disk('public')->putFile('featured_images', $image);
-                    VehicleImages::create([
-                        'vehicle_id' => $vehicle->id,
-                        'image_url' => $path
-                    ]);
+        if($request->has('images')){
+            //if(count($request->file('images')) > 0){
+                foreach($request->file('images') AS $image){
+                    if($image->isValid()){
+                        $path = Storage::disk('public')->putFile('featured_images', $image);
+                        VehicleImages::create([
+                            'vehicle_id' => $vehicle->id,
+                            'image_url' => $path
+                        ]);
+                    }
                 }
-            }
+            //}
         }
 
         $sides = ['top', 'left', 'right', 'front', 'back'];
@@ -349,10 +366,12 @@ class VehicleController extends Controller
             $po_name = $side.'-position';
             $tp_name = $side."-type";
             $sv_name = $side."-severity";
+            $cost_name = $side."estimate_damage_cost";
             
             $pos = $request->input($po_name);
             $type = $request->input($tp_name);
             $severity = $request->input($sv_name);
+            $cost = $request->input($cost_name);
             for($i = 0; $i < count($pos); $i++){
                 if($pos[$i] && $type[$i] && $severity[$i]){
 
@@ -371,7 +390,8 @@ class VehicleController extends Controller
                         'side' => $side,
                         'poasition' => $pos[$i],
                         'type' => $type[$i],
-                        'severity' => $severity[$i]
+                        'severity' => $severity[$i],
+                        'estimate_damage_cost'=>$cost[$i]
                     ]);        
                 }
             }
@@ -402,6 +422,128 @@ class VehicleController extends Controller
         $this->left_right_positions = ['Bumper End', 'Fender','Front Door','Front Glass','Front Quarter', 'Lower Front Door Skin','Back Door','Back Door Glass', 'Lower Back Door Skin','Back Quarter', 'Valance panel', 'Inner Fender', 'Cowl Panel', 'Rocker Panel', 'Cab Coner', 'Bedside','Rear Panel','Wheel Arch Panel','Wheel House','Lower Rear Bedside', 'Miror', 'Front Door Handle', 'Back Door Handle'];
         $this->front_positions = ['Hood','Bumper','Grille','Crash Guards','Left Head Lights', 'Right Head Lights', 'Left Fog Lamp', 'Right Fog Lamp', 'Left Indicator Lights', 'Right Indicator Lights', 'Left Wiper Blade', 'Right Wiper Blade', 'Radiator', 'Radiator Supports', 'Cowl Panel'];
         $this->back_positions = ['Windishield','Tail Gate', 'Right Tail Light', 'Left Tail Light', 'Boot', 'Rear Bamper'];
+        $this->damage_positions = ['top', 'left', 'right','front','back'];
+        $this->service_history_options = [
+            'Full history with agent',
+            'Full history with agent and independent workshop',
+            'Partial service history',
+            'No history',
+        ];
+        $this->extras_options = [
+            'Basic' => [
+                'ABS Brake',
+                'Air Conditioning',
+                'Alarm',
+                'Alloy Wheel',
+                'Automatic',
+                'Balance Of Factory warranty',
+                'Central Locking',
+                'Electric Windows',
+                'Front Electric Windows',
+                'Full Service History',
+                'Immobilizer',
+                'iPod Input',
+                'Maintanance Plan',
+                'Manual',
+                'Power Steering',
+                'Service Plan',
+                'USB Input',
+            ],
+            'Exterior' => [
+                'Bullbar',
+                'Canopy',
+                'Locknuts',
+                'Nudge Bar',
+                'Rollbar',
+                'Roof Rack',
+                'Roof Rails',
+                'Rubberized Load Body',
+                'Running Boards',
+                'Skylights',
+                'Sunroof',
+                'Towbar',
+                'Winch'
+            ],
+            'Standard' => [
+                '4x2',
+                '4x4',
+                'Airbags',
+                'All Wheel Drive',
+                'Auxiliary Audio Input',
+                'CD Multi Changer',
+                'Descent Control',
+                'Diff Lock',
+                'Drink Cooler',
+                'Drink Holder',
+                'EBD Electric Brake Distribution',
+                'Electric Mirrors',
+                'ESP Electric Stability Programe',
+                'Fog Lights',
+                'Front Wheel Drive',
+                'Full House',
+                'Full Spare wheel',
+                'Radio',
+                'Radio/CD',
+                'Radio/CD/MP3',
+                'Rear windshield Defroster',
+                'Tinted Windows',
+                'Tonneau Cover'
+            ],
+            'Top Spec' => [
+                'Adjustable Suspension',
+                'Auto Dim Rear View Mirrors',
+                'Automatic Start Stop',
+                'Bluetooth Ready',
+                'Climate Controll',
+                'Cruise Controll',
+                'Detachable Tow Bar',
+                'DVD Vidio System',
+                'Electric Memory Seats',
+                'Headlight Washers',
+                'Heated Electric Mirrors',
+                'Keyless Go',
+                'Leather',
+                'LED Daytime Lights',
+                'Multifunctional Steering',
+                'Panoramic Roof',
+                'Rain Sensor',
+                'Rear Air Conditioning',
+                'Rear View Camera',
+                'Run-Flat Tires',
+                'Sat Nav',
+                'Seat Heaters',
+                'S-Line Package',
+                'Smash And Grab Windows ...',
+                'Sports Pack',
+                'Sports Seats',
+                'Third Rear Seat',
+                'Tracker',
+                'Traction Controll',
+                'Trip Computer',
+                'Tyre Presure Monitor',
+                'Voice Command',
+                'Xenon Headlights'
+            ]
+        ];
+    }
+    
+    public function getCarByMMCode($code){
+        $car = CarList::where('mmcode', $code)->first();
+        if($car){
+            return [
+                'status' => 'success',
+                'data' => [
+                    'year' => $car->year,
+                    'make' => $car->make,
+                    'model' => $car->model,
+                    'variant' => $car->variant
+                ]
+            ];
+        }
+        return [
+            'status' => 'error',
+            'message' => 'Car not found'
+        ];
     }
 
     public function getModels($year, $make){
@@ -414,6 +556,20 @@ class VehicleController extends Controller
             'status' => "success",
             'html' => $ret_html
         ];
+        return json_encode($ret);
+    }
+    
+    public function getModels2($make){
+        $vehicles = CarList::where('make', $make)->orderBy('model', 'ASC')->distinct()->get(['model']);
+        $options = '';
+        foreach($vehicles AS $vehicle){
+            $options .= "<option value='".$vehicle->model."'>".$vehicle->model."</option>";
+        }
+        $ret = [
+            'status' => 'success',
+            'data' => $options
+        ];
+        
         return json_encode($ret);
     }
 
@@ -513,6 +669,42 @@ class VehicleController extends Controller
         $report = VehicleInspection::find($id);
         unlink('storage/'.$report->image_url);
         $report->delete();
+        return back();
+    }
+    
+    public function listByStatus($status){
+        $car_arr = [];
+        $lots = Lot::whereHas('bids',function($q){
+            return $q->where('bid_type', 'live');
+        })->get();
+        
+        if($status == "not-sold"){
+            foreach($lots AS $lot){
+                if($lot->reserve_price > $lot->highestBid()->bid_amount){
+                    $car_arr[] = $lot->vehicle_id;    
+                }
+            }
+        }
+        if($status == "sold"){
+            foreach($lots AS $lot){
+                if($lot->reserve_price < $lot->highestBid()->bid_amount){
+                    $car_arr[] = $lot->vehicle_id;    
+                }
+            }
+        }
+        
+        $cars = Vehicle::whereIn('id', $car_arr)->paginate(12);
+        return view('admin.vehicles.list_by_status', ['cars'=>$cars, 'status'=>$status]);
+    }
+    
+    public function resetCar($id){
+        $car = Vehicle::find($id);
+        $lot = Lot::where('vehicle_id', $car->id)->first();
+        $bids = Bid::where('lot_id', $lot->id)->get();
+        foreach($bids AS $bid){
+            $bid->delete();
+        }
+        $lot->delete();
         return back();
     }
 }

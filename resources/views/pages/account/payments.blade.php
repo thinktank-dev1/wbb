@@ -30,6 +30,7 @@
                                         @endif
                                     </div>
                                 </div>
+                                @if($payments)
                                 <form method="post" action="{{ url('payments') }}" id="payments-frm">
                                     @csrf
                                     <div class="row">
@@ -78,6 +79,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                @endif
                             </div>
                         </div>
                     </div>

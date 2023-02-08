@@ -29,16 +29,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for($i = 1; $i <= 5; $i++)
+                                        @foreach($cars AS $car)
                                         <tr>
-                                            <td>{{ $i }}</td>
-                                            <td>Ford</td>
-                                            <td>Figo</td>
-                                            <td>2016</td>
-                                            <td>2023-01-01</td>
-                                            <td>R 350, 000</td>
+                                            <td>{{ $car->lot->id }}</td>
+                                            <td>{{ $car->make }}</td>
+                                            <td>{{ $car->model }}</td>
+                                            <td>{{ $car->year }}</td>
+                                            <td>{{ $car->lot->group->date }}</td>
+                                            <td>{{ $car->lot->highestBid()->bid_amount }}</td>
                                         </tr>
-                                        @endfor
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

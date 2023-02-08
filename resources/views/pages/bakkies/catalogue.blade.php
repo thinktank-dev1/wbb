@@ -11,14 +11,18 @@
                         <h5 class="catalogue-card-title">BAKKIE FINDER</h5>
                     </div>
                     <div class="card-body catalogue-card-body">
-                        <form>
+                        <form method="get" action="{{ url('filter-catalogue') }}">
+                        
                             <div class="row">
-                                <div class="col-4">
+                                  <div class="col-4">
                                     <label class="catalogue-label" for="make">Make</label>
                                 </div>
                                 <div class="col-8">
                                     <select id="make" name="make" class="form-control form-control-sm finder-input">
-                                        <option></option>
+                                        <option value="">Select Make</option>
+                                        @foreach($car_list as $list)
+                                            <option value="{{ $list->make }}">{{ $list->make }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-4">
@@ -26,7 +30,7 @@
                                 </div>
                                 <div class="col-8">
                                     <select id="model" name="model" class="form-control form-control-sm finder-input">
-                                        <option></option>
+                                        <option value="">Select Model</option>
                                     </select>
                                 </div>
                                 <div class="col-4">
@@ -34,46 +38,66 @@
                                 </div>
                                 <div class="col-8">
                                     <select id="body" name="body" class="form-control form-control-sm finder-input">
-                                        <option></option>
+                                          <option value="">Select Body Type</option>
+                                            @foreach($body_types as $body_type)
+                                                <option value="{{ $body_type->name }}">{{ $body_type->name }}</option>
+                                            @endforeach
                                     </select>
                                 </div>
                                 <div class="col-4">
                                     <label class="catalogue-label" for="mileage">Mileage</label>
                                 </div>
-                                <div class="col-8">
-                                    <input class="multi-range" id="mileage" name="mileage" type="range"/>
+                                <div class="col-8 slider-wrapper">
+                                    <output class="mileage-output" for="widget1" aria-hidden="true"></output><span class="ml-1">km</span>
+                                    <input type="range" min="0" max="500000" value="10000" id="widget1" name="mileage" step="1">
                                 </div>  
                                 <div class="col-4">
                                     <label class="catalogue-label" for="year">Year</label>
                                 </div>
                                 <div class="col-8">
                                     <div class="row">
-                                        <div class="col-5">
+                                        <div class="col-12">
                                             <select id="from" name="from" class="form-control form-control-sm w-30 finder-input">
-                                                <option></option>
+                                                	<option value="">From</option>
+                            						@php
+                            						    $date_start = date("Y", strtotime('-30 year'));
+                            						    $date_end = date("Y");
+                            						@endphp
+                            						@for($i = $date_end; $i >= $date_start; $i--)
+                            						    @php
+                            						        $sel = '';
+                            						        if(old('year') == $i){
+                            							        $sel = "selected";
+                            						        }
+                            						    @endphp
+                            						    <option value="{{ $i }}" {{ $sel }}>{{ $i }}</option>
+                            						@endfor
                                             </select>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-12 text-center">
                                             <span class="catalogue-label">to</span>
                                         </div>
-                                        <div class="col-5">
-                                            <select id="from" name="from" class="form-control form-control-sm w-30 finder-input">
-                                                <option></option>
+                                        <div class="col-12">
+                                            <select id="to" name="to" class="form-control form-control-sm w-30 finder-input">
+                                                <option value="">To</option>
+                                            	@for($i = $date_end; $i >= $date_start; $i--)
+                        						    @php
+                        						        $sel = '';
+                        						        if(old('year') == $i){
+                        							        $sel = "selected";
+                        						        }
+                        						    @endphp
+                        						    <option value="{{ $i }}" {{ $sel }}>{{ $i }}</option>
+                        						@endfor
                                             </select>
                                         </div>
                                     </div>
                                 </div>  
-                                <div class="col-4">
-                                    <label class="catalogue-label" for="lot">Lot #</label>
-                                </div>
-                                <div class="col-8">
-                                    <input class="form-control form-control-sm" type="text" name="lot" id="lot">
-                                </div>   
                                 <div class="col-6 justify-content-left catalogue-btn">
-                                    <a type="submit"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_25.png') }}" alt="search-catalogue"></a></a>
+                                    <button class="btn btn-primary finder-search-btn" type="submit">SEARCH</button>
                                 </div>
                                 <div class="col-6 justify-content-left catalogue-btn">
-                                    <a href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_26.png') }}" alt="reset-catalogue"></a></a>
+                                    <a class="btn btn-primary finder-reset-btn" href="{{ url('catalogue') }}">RESET</a>
                                 </div>        
                             </div>
                         </form>
@@ -83,165 +107,265 @@
                     <span class="finder-span">OR</span>
                 </div>
                 <div class="col text-center mt-2">
-                    <a href="{{ route('favourites') }}"> <img class="img-fluid" src="{{ asset('images/wbbonline_btn_27.png') }}" alt="favourites"></a>
+                    <a class="view-fav-btn" href="{{ route('favourites') }}"> <img class="img-fluid" src="{{ asset('images/wbbonline_btn_27.png') }}" alt="favourites"></a>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 catalogue-header">
-                    <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 catalogue-header">
+                        <div class="row">
                         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 mt-3">
-                            <h6 class="catalogue-title">AUCTION DATE: <span class="date-span">12 DECEMBER 2022</span></h6>
+                            <h6 class="catalogue-title">AUCTION DATE: 
+                            <span class="date-span ml-2">
+                                @if($auction_date)
+                                {{ $auction_date->date }} | {{ $auction_date->start_time }}
+                                @else
+                                No Auction 
+                                @endif
+                            </span></h6>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-2">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
                             <form>
                                 <div class="row">
-                                    <div class="col-3 mt-2">
+                                    <div class="col-3 mt-2 ">
                                         <label class="search-label" for="search">SEARCH</label>
                                     </div>
                                     <div class="col-9"> 
-                                        <div class="input-group"> 
-                                            <input class="form-control form-control-sm py-2 mt-1 border search-input" type="search" id="search">
+                                    <form method="GET" action="{{ url('filter-catalogue') }}"> 
+                                        <div class="input-group">
+                                            <input class="form-control form-control-sm py-2 mt-1 border search-input" type="search" id="search" name="search">
                                             <span class="input-group-append">
-                                                <button class="btn btn-outline-secondary btn-sm mt-1 border search-append" type="button">
+                                                <button class="btn btn-outline-secondary btn-sm mt-1 border search-append" type="submit" onclick="this.form.submit()">
                                                     <i style="color:#2e2d2c" class="fa fa-search"></i>
                                                 </button>
                                             </span>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="row">
                         <div class="col-8 mt-3 mb-4">
                             <div class="row">
                                 <div class="col-4">
-                                    <span class="sort-span">SORT:</span>
-                                    <div class="btn-group">
-                                        <a type="button" class="dropdown-toggle sort-anchor" data-toggle="dropdown" aria-expanded="false">
-                                            Alphabetically
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <button class="dropdown-item" type="button">Action</button>
-                                            <button class="dropdown-item" type="button">Another action</button>
-                                            <button class="dropdown-item" type="button">Something else here</button>
-                                        </div>
-                                    </div>
+                                    <form method="get" action="{{ url('sort-catalogue') }}">
+                                         <div class="row">
+                                            <div class="col-sm-2">
+                                                <label for="staticEmail" class="sort-span">SORT:</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                              <select class="sort-select" name="day" onchange="this.form.submit()">
+                                                  <option value="">Auction Dates</option>
+                                                  @foreach($dates as $date)
+                                                    <option value="{{ $date->date }}">{{ $date->date }}</option>
+                                                  @endforeach
+                                                </select>
+                                            </div>
+                                          </div>
+                                    </form>
                                 </div>
-                                <div class="col-8">
-                                    <span class="sort-span">SHOW RESULTS:</span>
-                                    <div class="btn-group">
-                                        <a type="button" class="dropdown-toggle results-anchor" data-toggle="dropdown" aria-expanded="false">
-                                            10
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <button class="dropdown-item" type="button">Action</button>
-                                            <button class="dropdown-item" type="button">Another action</button>
-                                            <button class="dropdown-item" type="button">Something else here</button>
-                                        </div>
-                                    </div>
+                                <div class="col-4">
+                                    <form method="get" action="{{ url('filter-catalogue') }}">
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-2">
+                                                <label for="staticEmail" class="sort-span">SORT:</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                             <select class="sort-select" name="sort" onchange="this.form.submit()">
+                                                <option value="">Alphabetically</option>
+                                                <option value="ASC">A-Z</option>
+                                                <option value="DESC">Z-A</option>
+                                            </select>
+                                            </div>
+                                          </div>
+                                    </form>
+                                </div>
+                                <div class="col-4">
+                                    <form method="get" action="{{ url('filter-catalogue') }}">
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="staticEmail" class="sort-span">SHOW RESULTS:</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                             <select class="sort-select" name="paginate" onchange="this.form.submit()">
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                            </div>
+                                          </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 mt-3 mb-4">
-                            <span class="sort-span">GO TO PAGE:</span>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <span class="sort-span text-right">GO TO PAGE:</span>
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ $catalogue->appends($_GET)->links() }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 bakkie-card">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col-auto d-none d-lg-block">
-                            <img class="img-fluid"  width="300" height="250" src="{{ asset('images/wbbonline_img_22.png') }}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" alt="view-catalogue">
-                        </div>
-                        <div class="col p-4 d-flex flex-column position-static">
-                           <div class="row">
-                                <div class="col-6">
-                                    <h4 class="bakkie-make">TOYOTA</h4>
-                                    <h6 class="bakkie-model">HILUX 2.8 GD-6 RAIDER</h6>
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <p class="specifications-text">YEAR</p>
-                                            <p class="specifications-text">BODY TYPE</p>
-                                            <p class="specifications-text">MILEAGE</p>
-                                            <p class="specifications-text">FUEL</p>
-                                            <p class="specifications-text">TRANSMISSION</p>
-                                            <p class="specifications-text">COLOUR</p>
-                                        </div>
-                                        <div class="col-7">
-                                            <p class="specifications-span">2019</p>
-                                            <p class="specifications-span">Double Cap</p>
-                                            <p class="specifications-span">96000 km</p>
-                                            <p class="specifications-span">Diesel</p>
-                                            <p class="specifications-span">Automatic</p>
-                                            <p class="specifications-span">White</p>
+                     @foreach($catalogue as $vehicle)
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 bakkie-card">
+                        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col-auto d-none d-lg-block">
+                                
+                                @php
+                                    $image = $vehicle->images()->first();
+                                @endphp
+                                @if($image)
+                                    <img class="img-fluid" src="storage/{{$image->image_url}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" alt="view-catalogue">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('images/wbbonline_img_53.png') }}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" alt="view-catalogue">
+                                @endif
+                                
+                            </div>
+                            <div class="col p-4 d-flex flex-column position-static">
+                               <div class="row">
+                                    <div class="col-6">
+                                        <h4 class="bakkie-make">{{ $vehicle->make }}</h4>
+                                        <h6 class="bakkie-model">{{ $vehicle->model }}</h6>
+                                        <p class="specifications-span">{{ $vehicle->variant }}</p>
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <p class="specifications-text">YEAR</p>
+                                                <p class="specifications-text">BODY TYPE</p>
+                                                <p class="specifications-text">MILEAGE</p>
+                                                <p class="specifications-text">FUEL</p>
+                                                <p class="specifications-text">TRANSMISSION</p>
+                                                <p class="specifications-text">COLOUR</p>
+                                            </div>
+                                            <div class="col-7">
+                                                <p class="specifications-span">{{ $vehicle->year }}</p>
+                                                <p class="specifications-span">{{ $vehicle->body_type }}</p>
+                                                <p class="specifications-span">{{ $vehicle->mileage }} km</p>
+                                                <p class="specifications-span">{{ $vehicle->fuel_type }}</p>
+                                                <p class="specifications-span">{{ $vehicle->transmission }}</p>
+                                                <p class="specifications-span">{{ $vehicle->color }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-3">
-                                    <p class="lot-text">Lot #<span class="lot-span">2340</span></p>
-                                    <p class="bid-text">CURRENT BID</p>
-                                    <!-- <h6 class="bid-price">R -</h6> -->
-                                    <h6 class="bid-price">R 480000</h6>
-                                    <p class="bid-text starting-bid">STARTING BID</p>
-                                    <h6 class="starting-bid-price">R -</h6>
-                                    <!-- <h6 class="starting-bid-price">R 480000</h6> -->
-                                    <p class="bid-text trade-price">TADE PRICE</p>
-                                    <h6 class="starting-bid-price">R 480000</h6>
-                                </div>
-                                <div class="col-3">
-                                    <p class="time-span">AUCTION STARTS IN</p>
-                                    <p class="time-text"><i class="bi bi-stopwatch"></i> 1:16:20:25</p>
-                                    <!-- <p class="time-span">AUCTION STARTED</p>
-                                    <div class="join-auction-div">
-                                        <a href=""><span class="join-auction-text"><i class="bi bi-stopwatch"></i>JOIN AUCTION</span></a>
-                                    </div> -->
-                                    <div class="catalogue-btn-div">
-                                        <a href="{{ route('lot') }}">
-                                            <img class="img-fluid" src="{{ asset('images/wbbonline_btn_30.png') }}" alt="view-details">
-                                        </a>
-                                        <a href="">
-                                            <img class="img-fluid" src="{{ asset('images/wbbonline_btn_31.png') }}" alt="pre-bid">
-                                        </a>
-                                        <!-- <a href="">
-                                            <img class="img-fluid" src="{{ asset('images/wbbonline_btn_32.png') }}" alt="bid-now">
-                                        </a> -->
+                                    <div class="col-3">
+                                        <p class="lot-text">Lot #<span class="lot-span">{{ str_pad($vehicle->lot->id, 4, '0', STR_PAD_LEFT) }}</span></p>
+                                        <p class="bid-text">CURRENT BID</p>
+                                         <h6 class="bid-price">R -</h6> 
+                                        <p class="bid-text starting-bid">STARTING BID</p>
+                                        <h6 class="starting-bid-price">R {{ number_format($vehicle->lot->start_price,2) }}</h6>
+                                        <p class="bid-text trade-price">TRADE PRICE</p>
+                                        <h6 class="starting-bid-price">R {{ number_format($vehicle->lot->reserve_price,2) }}</h6>
                                     </div>
-                                    <div class="">
-                                        <p class="favourite-span">ADD TO FAVOURITES</p>
-                                        <div class="heart-div">
-                                            <a href="">
-                                                <img class="img-fluid" height="20px" width="20px" src="{{ asset('images/wbbonline_img_31.png') }}" alt="bid-now">
+                                    <div class="col-3">
+                                        <p class="time-span">AUCTION STARTS IN</p>
+                                        <p class="time-text"><i class="bi bi-stopwatch"></i> {{ $vehicle->lot->auction->date }}</p>
+                                        <!-- <p class="time-span">AUCTION STARTED</p>
+                                        <div class="join-auction-div">
+                                            <a href=""><span class="join-auction-text"><i class="bi bi-stopwatch"></i>JOIN AUCTION</span></a>
+                                        </div> -->
+                                        <div class="catalogue-btn-div">
+                                            <a href="{{ url('view-lot/'. $vehicle->lot->id) }}">
+                                                <img class="img-fluid" src="{{ asset('images/wbbonline_btn_30.png') }}" alt="view-details">
                                             </a>
+                                            <a href="">
+                                                <img class="img-fluid" src="{{ asset('images/wbbonline_btn_31.png') }}" alt="pre-bid">
+                                            </a>
+                                            <!-- <a href="">
+                                                <img class="img-fluid" src="{{ asset('images/wbbonline_btn_32.png') }}" alt="bid-now">
+                                            </a> -->
                                         </div>
-                                        
-                                        <!--<p class="favourite-span">ADD TO FAVOURITES</p>
-                                            <div class="heart-div">
-                                             <a href="">
-                                            <img class="img-fluid" height="20px" width="20px"  src="{{ asset('images/wbbonline_img_32.png') }}" alt="bid-now">
-                                        </a> 
-                                        </div>-->
+                                        <div class="favourite-btn-space">
+                                            @if($vehicle->lot->favourite(Auth::user()->id, $vehicle->lot->id))
+                                                <a href="{{ url('add-to-favourites/'.$vehicle->lot->id) }}"><p class="favourite-span">REMOVE FAVOURITES</p></a>
+                                                <div class="heart-div">
+                                                     <a href="{{ url('remove-favourite/'.$vehicle->lot->id) }}">
+                                                        <img class="img-fluid"  src="{{ asset('images/wbbonline_img_32.png') }}" alt="bid-now">
+                                                    </a> 
+                                                </div>
+                                            @else    
+                                                <a href="{{ url('add-to-favourites/'.$vehicle->lot->id) }}"><p class="favourite-span">ADD TO FAVOURITES</p></a>
+                                                <div class="heart-div">
+                                                    <a href="{{ url('add-to-favourites/'.$vehicle->lot->id) }}">
+                                                        <img class="img-fluid" src="{{ asset('images/wbbonline_img_31.png') }}" alt="bid-now">
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                           </div>
+                               </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-4 mb-4 ml-1">
-                        <span class="pagination-span">GO TO PAGE:</span>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="col-6 mt-2 d-flex justify-content-end">
-                            <a href=""><img width="100%" src="{{ asset('images/wbbonline_btn_28.png') }}" alt="share-catalogue"></a>
-                        </div>
-                        <div class="col-6 mt-2 d-flex justify-content-center">
-                            <a href=""><img width="100%" src="{{ asset('images/wbbonline_btn_29.png') }}" alt="download-catalogue"></a>
-                        </div>
-                    </div>
-                </div>    
+                    @endforeach
+                <div class="mt-4 mb-4 ml-1">
+                    <span class="pagination-span">GO TO PAGE: {{ $catalogue->appends($_GET)->links() }}</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 @include('includes.assistance')
+@push('scripts')
+<script>
+$(document).ready(function(){
+    $('#make').on('change', function(e){
+        var make = $(this).val();
+        getModels();
+    });
+});
+function getModels(){
+    var make = $('#make').val();
+    if(make !== ""){
+        $.ajax({
+			url: "{{ url('getModels2') }}/"+make,
+			type: 'GET',
+			dataType:'json',
+			success: function(res) {
+				if(res.status == "success"){
+					$('#model').html(res.data);
+				}
+			}
+		});
+    }
+}
+
+const slider = document.querySelector('.slider-wrapper'),
+      sliderInput = slider.querySelector('input'),
+      sliderOutput = slider.querySelector('output'),
+      sliderThumb = slider.querySelector('.custom-thumb'),
+      sliderFill = slider.querySelector('.custom-fill');
+      
+function initSlider(min, max, startValue) {
+  sliderInput.setAttribute('min', min);
+  sliderInput.setAttribute('max', max);
+  sliderInput.value = startValue;
+  
+  const onSliderChange = function(event) {
+    let value = event.target.value;
+    sliderOutput.innerHTML = value;
+    sliderThumb.style.left = (value/max * 100) + '%';
+    sliderFill.style.width = (value/max * 100) + '%';
+  }
+  
+  sliderInput.addEventListener('input', onSliderChange);
+  sliderInput.addEventListener('change', onSliderChange);
+  
+  // set slider to initial value
+  const initialInput = new Event('input', {
+    'target': { 'value': startValue }
+  });
+  sliderInput.dispatchEvent(initialInput);
+}
+
+initSlider(0, 500000, 10000);
+</script>
+@endpush
 @endsection

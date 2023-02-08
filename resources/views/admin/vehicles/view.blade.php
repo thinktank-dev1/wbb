@@ -94,6 +94,27 @@
                 	</div>
                 </div>
                 <div class="col-md-8">
+                	@if($vehicle->lot)
+	                	@if($vehicle->lot->bids)
+		                	<div class="row mb-3">
+		                		<div class="card">
+		                			<div class="card-header">
+		                				<h4 class="card-title">TOP Bids</h4>
+		                			</div>
+		                			<div class="card-body">
+		                				<table class="table">
+		                					@foreach($vehicle->lot->bids->where('bid_type', 'live')->take(5) AS $bid)
+		                					<tr>
+		                						<td>{{ $bid->bidder->first_name.' '.$bid->bidder->last_name }}</td>
+		                						<td class="text-end">{{ number_format($bid->bid_amount, 2) }}</td>
+		                					</tr>
+		                					@endforeach
+		                				</div>
+		                			</div>
+		                		</div>
+		                	</div>
+	                	@endif
+                	@endif
                 	<div class="mb-3">
             			<table class="table table-bordered">
             				<tr>
@@ -144,7 +165,10 @@
                 	@endif
                 	<div class="card">
                 		<div class="card-body">
-                			<h4>Inspection Report</h4>
+                			<div class="d-flex">
+                				<h4>Inspection Report</h4>
+                				<span class="ms-auto">Total Estimate Damage: {{ $vehicle->totalDamageCost() }}</span>
+                			</div>
                 			<table class="table">
 								<thead>
 									<th></th>

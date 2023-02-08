@@ -18,6 +18,12 @@
 	</div>
 	<div class="card-body">
 		<div class="row">
+			<div class="col-md-12">
+				<div class="mb-3">
+					<label class="form-label">MMCODE</label>
+					<input type="text" class="form-control" id="mmcode" name="mmcode">
+				</div>
+			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Year</label>
@@ -183,14 +189,29 @@
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Service History: </label><br />
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" value="yes" id="sh1" name="service_history" @if(old('service_history') == "yes") checked @elseif ($vehicle->service_history == "yes") checked @endif required>
-						<label class="form-check-label" for="sh1">Yes</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" value="no" id="sh2" name="service_history" @if(old('service_history') == "no") checked @elseif($vehicle->service_history == "no") checked @endif required>
-						<label class="form-check-label" for="sh2">No</label>
-					</div>
+					<select class="form-control" name="service_history" required>
+						<option value="">Select Option</option>
+						@foreach($service_history_options AS $srv)
+						@php
+						$sel = '';
+						if(old('service_history') == $srv){
+							$sel = "selected";
+						}
+						elseif($vehicle->service_history == $srv){
+							$sel = "selected";
+						}
+						@endphp
+						<option value="{{ $srv }}" {{ $sel }} >{{ $srv }}</option>
+						@endforeach
+					</select>
+					<!--<div class="form-check form-check-inline">-->
+					<!--	<input class="form-check-input" type="radio" value="yes" id="sh1" name="service_history" @if(old('service_history') == "yes") checked @elseif ($vehicle->service_history == "yes") checked @endif required>-->
+					<!--	<label class="form-check-label" for="sh1">Yes</label>-->
+					<!--</div>-->
+					<!--<div class="form-check form-check-inline">-->
+					<!--	<input class="form-check-input" type="radio" value="no" id="sh2" name="service_history" @if(old('service_history') == "no") checked @elseif($vehicle->service_history == "no") checked @endif required>-->
+					<!--	<label class="form-check-label" for="sh2">No</label>-->
+					<!--</div>-->
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -247,6 +268,20 @@
 	</div>
 	<div class="card-body">
 		<div class="row">
+			@foreach($extras_options AS $k=>$extra_arr)
+			<div class="col-md-3">
+				<h5>{{ $k }}</h5>
+				@foreach($extra_arr AS $list)
+				<div class="mb-3">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="{{ $list }}" value="{{ $list }}" name="extras[]" @if(old('extras')) @if( in_array($list, old('extras'))) checked @endif @elseif($vehicle->hasExtra($list)) checked @endif>
+						<label class="form-check-label" for="{{ $list }}">{{ $list }}</label>
+					</div>
+				</div>
+				@endforeach
+			</div>
+			@endforeach
+			{{--
 			@foreach($extras_list AS $list)
 			<div class="col-md-3">
 				<div class="form-check form-check-inline">
@@ -255,6 +290,7 @@
 				</div>
 			</div>
 			@endforeach
+			--}}
 		</div>
 	</div>
 </div>
@@ -518,31 +554,32 @@
 		@endif
 	</div>
 </div>
+@foreach($damage_positions AS $pos)
 <div class="card">
 	<div class="card-header">
 		<div class="d-flex">
-			<h4 class="card-title">Vehicle Inspection Report - TOP</h4>
+			<h4 class="card-title">Vehicle Inspection Report - {{ ucwords($pos) }}</h4>
 			<div class="ms-auto">
-				<a href="#" class="btn btn-primary" id="top-add-btn">Add More</a>
-				<a href="#" class="btn btn-primary" id="top-add-custom">Add More With Custom Descriptions</a>
+				<a href="#" class="btn btn-primary" id="{{ $pos }}-add-btn">Add More</a>
+				<a href="#" class="btn btn-primary" id="{{ $pos }}-add-custom">Add More With Custom Descriptions</a>
 			</div>
 		</div>
 	</div>
-	<div class="card-body top-damage-cont">
-		<div class="row" id="top-damesges-row">
+	<div class="card-body {{ $pos }}-damage-cont">
+		<div class="row" id="{{ $pos }}-damesges-row">
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control field" name="top-damage-images[]">
+					<input type="file" class="form-control field" name="{{ $pos }}-damage-images[]">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Position</label>
-					<select class="form-control img-input field" name="top-position[]">
+					<select class="form-control img-input field" name="{{ $pos }}-position[]">
 						<option value="">Select Option</option>
-						@foreach($top_positions AS $pos)
-						<option value="{{ $pos }}">{{ $pos }}</option>
+						@foreach($top_positions AS $ppos)
+						<option value="{{ $ppos }}">{{ $ppos }}</option>
 						@endforeach
 					</select>
 				</div>
@@ -550,7 +587,7 @@
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Type Of Damage</label>
-					<select class="form-control img-input field" name="top-type[]">
+					<select class="form-control img-input field" name="{{ $pos }}-type[]">
 						<option value="">Select Option</option>
 						@foreach($damage_types AS $type)
 						<option value="{{ $type }}">{{ $type }}</option>
@@ -561,7 +598,7 @@
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Severity Of Damage</label>
-					<select class="form-control img-input field" name="top-severity[]">
+					<select class="form-control img-input field" name="{{ $pos }}-severity[]">
 						<option value="">Select Option</option>
 						@foreach($damage_severity_list AS $severity)
 						<option value="{{ $severity }}">{{ $severity }}</option>
@@ -569,34 +606,48 @@
 					</select>
 				</div>
 			</div>
+			<div class="col-md-12">
+				<div class="mb-3">
+					<label class="form-label">Estimate Damage Cost</label>
+					<input type="text" class="form-control" name="{{ $pos }}-estimate_damage_cost">
+				</div>
+				<hr />
+			</div>
 		</div>
-		<div class="row" id="top-custom" style="display:none">
+		<div class="row" id="{{ $pos }}-custom" style="display:none">
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control img-input field" name="top-damage-images[]">
+					<input type="file" class="form-control img-input field" name="{{$pos }}-damage-images[]">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Position</label>
-					<input type="text" class="form-control img-input field" name="top-position[]">
+					<input type="text" class="form-control img-input field" name="{{ $pos }}-position[]">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Type Of Damage</label>
-					<input type="text" class="form-control img-input field" name="top-type[]">
+					<input type="text" class="form-control img-input field" name="{{ $pos }}-type[]">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">Severity Of Damage</label>
-					<input type="text" class="form-control img-input field" name="top-severity[]">
+					<input type="text" class="form-control img-input field" name="{{ $pos }}-severity[]">
 				</div>
 			</div>
+			<div class="col-md-12">
+				<div class="mb-3">
+					<label class="form-label">Estimate Damage Cost</label>
+					<input type="text" class="form-control" name="{{ $pos }}-estimate_damage_cost">
+				</div>
+				<hr />
+			</div>
 		</div>
-		@if($vehicle->inspectionBySide('top')->count() > 0)
+		@if($vehicle->inspectionBySide($pos)->count() > 0)
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table">
@@ -609,7 +660,7 @@
 					</thead>
 					<tbody>
 						@php
-						$damages = $vehicle->inspectionBySide('top');
+						$damages = $vehicle->inspectionBySide($pos);
 						@endphp
 						@foreach($damages AS $damage)
 						<tr>
@@ -629,450 +680,8 @@
 		@endif
 	</div>
 </div>
-<div class="card">
-	<div class="card-header">
-		<div class="d-flex">
-			<h4 class="card-title">Vehicle Inspection Report - LEFT</h4>
-			<div class="ms-auto">
-				<a href="#" class="btn btn-primary" id="left-add-btn">Add More</a>
-				<a href="#" class="btn btn-primary" id="left-add-custom">Add More With Custom Descriptions</a>
-			</div>
-		</div>
-	</div>
-	<div class="card-body left-damage-cont">
-		<div class="row" id="left-damesges-row">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control field" name="left-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<select class="form-control img-input field" name="left-position[]">
-						<option value="">Select Option</option>
-						@foreach($left_right_positions AS $pos)
-						<option value="{{ $pos }}">{{ $pos }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<select class="form-control img-input field" name="left-type[]">
-						<option value="">Select Option</option>
-						@foreach($damage_types AS $type)
-						<option value="{{ $type }}">{{ $type }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<select class="form-control img-input field" name="left-severity[]">
-						<option value="">Select Option</option>
-						@foreach($damage_severity_list AS $severity)
-						<option value="{{ $severity }}">{{ $severity }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="left-custom" style="display:none">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control img-input field" name="left-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<input type="text" class="form-control img-input field" name="left-position[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<input type="text" class="form-control img-input field" name="left-type[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<input type="text" class="form-control img-input field" name="left-severity[]">
-				</div>
-			</div>
-		</div>
-		@if($vehicle->inspectionBySide('left')->count() > 0)
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<th></th>
-						<th>Position</th>
-						<th>Type Of Damage</th>
-						<th>Severity</th>
-						<th></th>
-					</thead>
-					<tbody>
-						@php
-						$damages = $vehicle->inspectionBySide('left');
-						@endphp
-						@foreach($damages AS $damage)
-						<tr>
-							<td><img src="{{ asset('storage/'.$damage->image_url) }}" style="height:50px"></td>
-							<td>{{ $damage->poasition }}</td>
-							<td>{{ $damage->type }}</td>
-							<td>{{ $damage->severity }}</td>
-							<td class="text-end">
-								<a href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
-		</div>
-		@endif
-	</div>
-</div>
-<div class="card">
-	<div class="card-header">
-		<div class="d-flex">
-			<h4 class="card-title">Vehicle Inspection Report - RIGHT</h4>
-			<div class="ms-auto">
-				<a href="#" class="btn btn-primary" id="right-add-btn">Add More</a>
-				<a href="#" class="btn btn-primary" id="right-add-custom">Add More With Custom Descriptions</a>
-			</div>
-		</div>
-	</div>
-	<div class="card-body right-damage-cont">
-		<div class="row" id="right-damesges-row">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control field" name="right-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<select class="form-control img-input field" name="right-position[]">
-						<option value="">Select Option</option>
-						@foreach($left_right_positions AS $pos)
-						<option value="{{ $pos }}">{{ $pos }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<select class="form-control img-input field" name="right-type[]">
-						<option value="">Select Option</option>
-						@foreach($damage_types AS $type)
-						<option value="{{ $type }}">{{ $type }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<select class="form-control img-input field" name="right-severity[]">
-						<option value="">Select Option</option>
-						@foreach($damage_severity_list AS $severity)
-						<option value="{{ $severity }}">{{ $severity }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="right-custom" style="display:none">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control img-input field" name="right-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<input type="text" class="form-control img-input field" name="right-position[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<input type="text" class="form-control img-input field" name="right-type[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<input type="text" class="form-control img-input field" name="right-severity[]">
-				</div>
-			</div>
-		</div>
-		@if($vehicle->inspectionBySide('right')->count() > 0)
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<th></th>
-						<th>Position</th>
-						<th>Type Of Damage</th>
-						<th>Severity</th>
-						<th></th>
-					</thead>
-					<tbody>
-						@php
-						$damages = $vehicle->inspectionBySide('right');
-						@endphp
-						@foreach($damages AS $damage)
-						<tr>
-							<td><img src="{{ asset('storage/'.$damage->image_url) }}" style="height:50px"></td>
-							<td>{{ $damage->poasition }}</td>
-							<td>{{ $damage->type }}</td>
-							<td>{{ $damage->severity }}</td>
-							<td class="text-end">
-								<a href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
-		</div>
-		@endif
-	</div>
-</div>
-<div class="card">
-	<div class="card-header">
-		<div class="d-flex">
-			<h4 class="card-title">Vehicle Inspection Report - FRONT</h4>
-			<div class="ms-auto">
-				<a href="#" class="btn btn-primary" id="front-add-btn">Add More</a>
-				<a href="#" class="btn btn-primary" id="front-add-custom">Add More With Custom Descriptions</a>
-			</div>
-		</div>
-	</div>
-	<div class="card-body front-damage-cont">
-		<div class="row" id="front-damesges-row">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control field" name="front-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<select class="form-control img-input field" name="front-position[]">
-						<option value="">Select Option</option>
-						@foreach($front_positions AS $pos)
-						<option value="{{ $pos }}">{{ $pos }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<select class="form-control img-input field" name="front-type[]">
-						<option value="">Select Option</option>
-						@foreach($damage_types AS $type)
-						<option value="{{ $type }}">{{ $type }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<select class="form-control img-input field" name="front-severity[]">
-						<option value="">Select Option</option>
-						@foreach($damage_severity_list AS $severity)
-						<option value="{{ $severity }}">{{ $severity }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="front-custom" style="display:none">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control img-input field" name="front-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<input type="text" class="form-control img-input field" name="front-position[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<input type="text" class="form-control img-input field" name="front-type[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<input type="text" class="form-control img-input field" name="front-severity[]">
-				</div>
-			</div>
-		</div>
-		@if($vehicle->inspectionBySide('front')->count() > 0)
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<th></th>
-						<th>Position</th>
-						<th>Type Of Damage</th>
-						<th>Severity</th>
-						<th></th>
-					</thead>
-					<tbody>
-						@php
-						$damages = $vehicle->inspectionBySide('front');
-						@endphp
-						@foreach($damages AS $damage)
-						<tr>
-							<td><img src="{{ asset('storage/'.$damage->image_url) }}" style="height:50px"></td>
-							<td>{{ $damage->poasition }}</td>
-							<td>{{ $damage->type }}</td>
-							<td>{{ $damage->severity }}</td>
-							<td class="text-end">
-								<a href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
-		</div>
-		@endif
-	</div>
-</div>
-<div class="card">
-	<div class="card-header">
-		<div class="d-flex">
-			<h4 class="card-title">Vehicle Inspection Report - BACK</h4>
-			<div class="ms-auto">
-				<a href="#" class="btn btn-primary" id="back-add-btn">Add More</a>
-				<a href="#" class="btn btn-primary" id="back-add-custom">Add More With Custom Descriptions</a>
-			</div>
-		</div>
-	</div>
-	<div class="card-body back-damage-cont">
-		<div class="row" id="back-damesges-row">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control field" name="back-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<select class="form-control img-input field" name="back-position[]">
-						<option value="">Select Option</option>
-						@foreach($back_positions AS $pos)
-						<option value="{{ $pos }}">{{ $pos }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<select class="form-control img-input field" name="back-type[]">
-						<option value="">Select Option</option>
-						@foreach($damage_types AS $type)
-						<option value="{{ $type }}">{{ $type }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<select class="form-control img-input field" name="back-severity[]">
-						<option value="">Select Option</option>
-						@foreach($damage_severity_list AS $severity)
-						<option value="{{ $severity }}">{{ $severity }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="back-custom" style="display:none">
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Upload Damage Image</label>
-					<input type="file" class="form-control img-input field" name="back-damage-images[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Position</label>
-					<input type="text" class="form-control img-input field" name="back-position[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Type Of Damage</label>
-					<input type="text" class="form-control img-input field" name="back-type[]">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Severity Of Damage</label>
-					<input type="text" class="form-control img-input field" name="back-severity[]">
-				</div>
-			</div>
-		</div>
-		@if($vehicle->inspectionBySide('back')->count() > 0)
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<th></th>
-						<th>Position</th>
-						<th>Type Of Damage</th>
-						<th>Severity</th>
-						<th></th>
-					</thead>
-					<tbody>
-						@php
-						$damages = $vehicle->inspectionBySide('tbackp');
-						@endphp
-						@foreach($damages AS $damage)
-						<tr>
-							<td><img src="{{ asset('storage/'.$damage->image_url) }}" style="height:50px"></td>
-							<td>{{ $damage->poasition }}</td>
-							<td>{{ $damage->type }}</td>
-							<td>{{ $damage->severity }}</td>
-							<td class="text-end">
-								<a href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
-		</div>
-		@endif
-	</div>
-</div>
+@endforeach
+
 <div class="card">
 	<div class="card-body">
 		<div class="row">
@@ -1090,7 +699,11 @@
 	const choices = new Choices('.single-select');
 	$(document).ready(function(){
 		onLoadValues();
-
+		
+		$('#mmcode').on('input', function(){
+			getCarByMMCode();
+		});
+		
 		$('input[type=radio][name=mechanical_faults_warnig_lights]').change(function() {
 			if($(this).val() == "yes"){
 				$("#mechanical_faults_warnig_lights_description_cont").show();
@@ -1228,6 +841,7 @@
 			url: "{{ url('getModels') }}/"+year+"/"+make,
 			type: 'GET',
 			dataType:'json',
+			async: 'false',
 			success: function(res) {
 				if(res.status == "success"){
 					$('#model-select').html(res.html);
@@ -1280,6 +894,64 @@
 			}
 		});
 
+	}
+	
+	function getCarByMMCode(){
+		var mmcode = $('#mmcode').val();
+		if(mmcode != ""){
+			$.ajax({
+				url: "{{ url('getCarByMMCode') }}/"+mmcode,
+				type: 'GET',
+				dataType:'json',
+				success: function(res) {
+					if(res.status == "success"){
+						var dd = res.data;
+						$('#year-select').val(res.data.year);
+						$("#make-select").val(res.data.make);
+						choices.setChoiceByValue(res.data.make);
+						
+						var make = dd.make;
+						var year = dd.year;
+						var model = dd.model;
+						
+						$.ajax({
+							url: "{{ url('getModels') }}/"+year+"/"+make,
+							type: 'GET',
+							dataType:'json',
+							success: function(res) {
+								if(res.status == "success"){
+									$('#model-select').html(res.html);
+									var model = dd.model;
+									console.log("THE" + model);
+									if(model != ""){
+										$('#model-select option[value="'+model+'"]').attr("selected", "selected");
+										
+										//Get Variants
+										$.ajax({
+											url: "{{ url('getVariants') }}/"+year+"/"+make+"/"+model,
+											type: 'GET',
+											dataType:'json',
+											success: function(res2) {
+												if(res2.status == "success"){
+													$('#variant-select').html(res2.html);
+													var variant = dd.variant;
+													if(variant != ""){
+														$('#variant-select option[value="'+variant+'"]').attr("selected", "selected");
+														
+														getCarInfo();
+													}
+												}
+											}
+										});
+										
+									}
+								}
+							}
+						});
+					}
+				}
+			});
+		}
 	}
 
 	(function(){

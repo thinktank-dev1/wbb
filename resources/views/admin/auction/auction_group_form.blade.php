@@ -18,12 +18,14 @@
 				        </div>
 				        @endif
 					</div>
+					{{--
 					<div class="col-md-12">
 						<div class="mb-3">
 							<label class="form-label">Group Name</label>
 							<input type="text" class="form-control" name="name" value="{{ old('name') ?? $auctionGroup->name }}">
 						</div>
 					</div>
+					--}}
 					<div class="col-md-12">
 						<div class="mb-3">
 							<label class="form-label">Auction Date</label>

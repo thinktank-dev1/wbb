@@ -59,4 +59,8 @@ class Vehicle extends Model
     public function lot(){
         return $this->hasOne(Lot::class);
     }  
+    
+    public function totalDamageCost(){
+        return $this->inspection->sum('estimate_damage_cost');
+    }
 }

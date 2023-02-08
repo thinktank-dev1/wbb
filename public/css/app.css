@@ -45,11 +45,31 @@ body {
 
 .links {
     margin-left: auto;
-    margin-top: 1%;
+    margin-top: 3%;
+    z-index: 1000;
+}
+
+.nav-links{
+    font-family: Bold;
+    font-size: 18px;
+    color: #2e2d2c !important;
+}
+
+
+.navbar-nav > .active > a {
+    color: #ffffff;
+}
+
+.navbar-light .navbar-nav .nav-links:hover{
+    color: #ffffff;
 }
 
 .contact-nav {
     margin-top: -6%;
+}
+
+.contact-us-btn-section{
+  margin-top: 9rem !important;
 }
 
 .navbar-expand-sm {
@@ -63,6 +83,51 @@ body {
     left: 0px;
 }
 
+.footer-container{
+    width: 80%;
+}
+
+.footer-email-link{
+    margin-left: -40px;
+}
+
+
+.footer-btn-div {
+    margin-left: -52px;
+}
+
+.footer-login-btn{
+    width: 140px; 
+    color: #8cd50a;
+    font-family: Bold;
+}
+
+.footer-register-btn{
+    color: #2e2d2c;
+    font-family: Bold;
+}
+
+.copyright{
+    background-color: #ffffff;
+    overflow-x: hidden !important;
+}
+
+.copyright-text{
+    font-family: Regular;
+    font-size: 12px;
+    color: #8cd50a;
+}
+
+.footer-row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.navbar-expand-sm .navbar-nav .nav-link {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
 .container-img {
     margin-top: -1px;
     width: 100%;
@@ -73,11 +138,14 @@ body {
     width: 100%;
     max-height: 70vh;
     margin-bottom: 50px;
-    border-bottom-width: thin;
 }
 
 div.nav-containter {
     z-index: 100 !important;
+}
+
+.nav-container{
+    max-width: 85% !important;
 }
 
 .footer{
@@ -90,7 +158,9 @@ div.nav-containter {
     font-size: 18px;
     color: #2e2d2c;
 }
-
+a-link a:active{
+    color: #fff!important;
+}
 .footer-links{
    font-family: Regular; 
    font-size: 18px;
@@ -99,6 +169,11 @@ div.nav-containter {
 
 div .buttons {
     margin-left: 55px !important;
+    margin-top: -124px;
+}
+
+.buttons-container{
+    width: 92%;    
 }
 
 .online-auction-info-section {
@@ -120,6 +195,7 @@ div .buttons {
     margin-left: 185px;
     margin-bottom: 4.px;
     margin-top: 14px;
+    color: #2e2d2c;
 }
 
 .info-paragraph {
@@ -134,6 +210,8 @@ div .buttons {
 .learn-more-btn {
     margin-left: 84px;
     margin-top: 34px;
+    padding: 6px 36px !important;
+    font-family: Bold;
 }
 
 .registration-info-section {
@@ -184,8 +262,12 @@ div .buttons {
 
 .reg-paragraph {
     font-family: Bold;
-    font-size: 20px;
+    font-size: 18px;
     color: #2e2d2c;
+}
+
+.reg-bottom-img{
+    margin-top: -50px;
 }
 
 .bullet{
@@ -201,11 +283,18 @@ div .buttons {
 .form-card {
     border-radius: 1.5rem;
     position: absolute;
-    height: 600px !important;
     width: 56% !important;
     z-index: 100 !important;
     margin-left: 155px;
     margin-top: -48px;
+    padding: 17px;
+    box-shadow: 10px 8px 20px #888888;
+}
+
+.assist-btn{
+    padding: 2px 55px !important;
+    box-shadow: 10px 4px 10px #888888;
+    font-weight: 600;
 }
 
 .card-span{
@@ -224,13 +313,13 @@ div .buttons {
 .join-auction-section{
     position: relative;
     width: 100%;
-    height: 60vh;
+    height: auto;
     overflow-x: hidden;
 }
 
 .join-auction-banner{
     background-color: #efefef;
-    height: 20vh;
+    height: 15vh;
 }
 
 .join-auction-card{
@@ -238,7 +327,7 @@ div .buttons {
     width: 96%;
     z-index: 100 !important;
     border-radius: 1.25rem;
-    margin-top: -158px;
+    margin-top: -150px;
     margin-left: 144px;
     background-color: transparent;
     border: 0px !important;
@@ -249,7 +338,7 @@ div .buttons {
     width: 70%;
     z-index: 100 !important;
     border-radius: 1.25rem;
-    margin-top: -158px;
+    margin-top: -150px;
     margin-left: 122px;
     background-color: transparent;
     border: 0px !important;
@@ -276,6 +365,18 @@ div .buttons {
     margin-bottom: 20px;
     margin-top: 90px;
     color: #8cd50a;
+}
+
+.accord-btn{
+    border: none;
+    font-family: Bold;
+    font-size: 25px;
+    color:#2e2d2c;
+}
+
+.accord-btn.focus, .accord-btn:focus {
+  outline: 0;
+  box-shadow: none;
 }
 
 .about-subtitle {
@@ -340,7 +441,7 @@ div .buttons {
 
 .plus-btn{
     position: absolute;
-    margin-left: 1388px;
+    margin-left: 95%;
     margin-top: -32px;
 }
 
@@ -414,7 +515,7 @@ div .buttons {
 }
 
 .assistance-banner-img{
-    margin-top: 140px;
+    margin-top: 180px;
 }
 
 .assistance-info{
@@ -425,23 +526,29 @@ div .buttons {
     border: 1px solid #efefef !important;
     border-radius: 1.5rem !important;
     position: absolute;
-    width: 60% !important;
+    width: 67% !important;
     z-index: 100 !important;
     margin-top: -130px;
     margin-left: 70px;
+    padding: 17px;
+    box-shadow: 10px 8px 20px #888888;
+}
+
+.assistance-text{
+    font-size: 18px;
 }
 
 .assistance-bakkie{
     position: absolute;
     z-index: 105 !important;
     margin-top: 64px;
-    margin-left: 108px;
+    margin-left: 32%;
 }
 
 .assistance-btn{
     margin-top: -90px;
     margin-bottom: 105px;
-    margin-left: -100px;
+    margin-right: 68%;
 }
 
 .assistance-card-title{
@@ -461,12 +568,17 @@ div .buttons {
 .lot{
     overflow-x: hidden;
 }
+.col-lot-box{
+    padding-left: 0px!important;
+    padding-right: 0!important;
+}
 
 .lot-heading{
     font-family: Bold;
     font-weight: 600;
     font-size: 31px;
-    color: #8cd50a;    
+    color: #8cd50a;   
+    margin-left: 0px!important;
 }
 
 .lot-heading-span{
@@ -487,6 +599,7 @@ div .buttons {
     font-weight: 600;
     font-size: 31px;
     color: #2e2d2c;
+    margin-top: 6px;
 }
 
 .lot-model{
@@ -568,13 +681,17 @@ div .buttons {
 }
 
 .view-all{
-    padding: 230px 18px;
     position: absolute;
     top: 0;
+    margin-top: 65%;
+    margin-left: 2%;
 }
 
 .zoomin-btn{
     padding: 0px 5px !important;
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #8cd50a;
 }
 
 .view-all-btn{
@@ -618,6 +735,7 @@ div .buttons {
     border-top-left-radius: 0%;
     border-top-right-radius: 0%;
 }
+
 .lot-details-heading {
     font-family: Bold;
     font-size: 20px;
@@ -692,14 +810,37 @@ div .buttons {
   color: #2e2d2c; 
   text-transform: uppercase; 
 }
-
+.web-btn{
+    margin-bottom: 18px;
+    margin-top: 16px;
+}
+.bid-btn-row{
+    margin-left: 16px!important;
+}
+.bid-info-block{
+    padding: 0px!important;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.bid-info-row{
+    margin: 0px!important;
+}
+.bid-info-blk{
+    margin-left: 0px!important;
+}
+.bid-info-t-c{
+    margin-left: 0px!important;
+}
+.bid-current-block{
+    margin-bottom: 0px!important;
+}
 .lot-next-bid-desc{
     font-family: Bold;
     font-size: 20px;
     font-weight: 400;
     color: #2e2c2d;
     margin-left: -34px;
-    margin-right: -1px;
+    margin-right: 10px;
 }
 
 .line-one{
@@ -724,13 +865,14 @@ div .buttons {
 .line-two-bid-info{
     margin-top: -6px;
 }
-
+#no-margin{
+    margin-left: 0px!important;
+}
 .bids-block{
     border: 1px solid #8cd50a;
     border-radius: 1em;
-    min-width: 290px;
-    max-height: 55px !important;
-    margin-left: -14px;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .bid-now-btn{
@@ -747,7 +889,6 @@ div .buttons {
 .auto-bid-section{
     position: relative;
     background-color: #2e2d2c;
-    min-width: 302px;
     margin-left: -20px;
     padding-top: 1px;
     padding-bottom: 10px;
@@ -796,14 +937,21 @@ div .buttons {
 }
 
 .input-group-section{
-    margin-left: 92px;
+    margin-left: 130px;
     margin-top: -50px;
 }
-
+.text-bid-td{
+    font-size: 12px;
+    font-weight: 500;
+}
+.slider-btn{
+    padding: 2px 15px !important;
+}
 .bid-disclaimer-text{
     font-family: Regular;
-    font-size: 10px;
-    color: #2e2c2d;
+    font-size: 12px;
+    margin-top: 13px;
+    color: #2e2c2d!important;
 }
 
 .lot-auto-body{ 
@@ -964,13 +1112,15 @@ div .buttons {
     border-top: none;
     
 }
-
+.lot-row{
+        justify-content: center;
+}
 .lot-details-data-text{
     text-transform: uppercase;
     font-family: Medium;
     font-weight: 600;
     font-size: 12px;
-    color: #8cd50a;
+    color: #2e2d2c;
 }
 
 .lot-details--data-desc{
@@ -987,6 +1137,15 @@ div .buttons {
     font-size: 39px;
     font-weight: 400;
     color: #8cd50a;
+}
+
+.live-bid-section {
+  position: relative;
+  background-color: #2e2d2c !important;
+  width: 100%;
+  padding-top: 20px;
+  margin-left: .1rem !important;
+  border-radius: .5em;
 }
 
 .back-to-cat-btn{
@@ -1038,8 +1197,6 @@ div .buttons {
     border: 1px solid #2e2c2d;
     background-color: #2e2c2d;
     border-radius: 1em;
-    max-width: 290px;
-    max-height: 70px !important;
 }
 
 .auction-current-bid-text{
@@ -1077,10 +1234,6 @@ div .buttons {
     font-size: 25px;
     color: #2e2d2c;
     line-height: .1;
-}
-
-.asking-bid-block{
-    min-width: 290px;
 }
 
 .asking-bid-btn{
@@ -1147,7 +1300,7 @@ div .buttons {
 
 .prev-lot-make-model{
     font-family: Medium;
-    line-height: .5;
+    line-height: 1;
     font-size: 18px;
     color: #2e2d2c;
 }
@@ -1204,7 +1357,21 @@ div .buttons {
     border-top-left-radius: 0%;
     border-top-right-radius: 0%;
     min-height: 15px;
-}  
+} 
+
+.asking-bid-input{
+    height: calc(1.5em + 3.4rem + 3px) !important;
+}
+
+.asking-bid-input::placeholder {
+    font-family: Bold;
+    font-size: 16px;
+    color: #8cd50a;
+}
+
+.bids-tbl td, .increments-tbl td, .current-bid-tbl td{
+    border: none;
+}
 /** Auction End **/
 
 /** Catalogue Start **/
@@ -1250,6 +1417,11 @@ div .buttons {
     font-family: Regular;
     font-size: 10px;
     color: #2e2d2c;
+    margin-right: 18%;
+}
+
+.view-fav-btn{
+    margin-right: 15%;
 }
 
 .catalogue-btn{
@@ -1268,6 +1440,7 @@ div .buttons {
     margin-top: 160px;
     border-radius: .55rem;
     width: 95%;
+    padding-bottom: 10px;
 }
 
 .catalogue-title{
@@ -1302,6 +1475,8 @@ div .buttons {
     font-size: 14px;
     color: #2e2d2c;
     text-transform: none;
+    margin-left: 85%;
+    margin-top: 4%;
 }
 
 .sort-span{
@@ -1309,10 +1484,16 @@ div .buttons {
     font-family: Medium;
     font-size: 12px;
     color: #bfbfbf;
-    margin-right: 5px;
 }
 
 .sort-anchor{
+    font-family: Medium;
+    font-size: 14px;
+    color: #2e2d2c;
+}
+
+.sort-select{
+    background-color: transparent;
     font-family: Medium;
     font-size: 14px;
     color: #2e2d2c;
@@ -1442,9 +1623,26 @@ div .buttons {
     line-height: 1;
 }
 
+.added-span {
+  font-family: Bold;
+  font-size: 14px;
+  color: #2e2d2c;
+  line-height: 1;
+  margin-left: 30%;
+}
+
+.favourite-btn-space {
+    margin-top: 25px;
+}
+
 .heart-div{
-    margin-top: -45px;
-    margin-left: 95px;
+    margin-top: -35px;
+    margin-left: 150px;
+}
+
+.favourite-heart-div {
+  margin-top: -35px;
+  margin-left: 105px !important;
 }
 
 .pagination-span{
@@ -1452,9 +1650,39 @@ div .buttons {
     font-size: 14px;
     color: #bfbfbf;
 }
+
+.finder-search-btn{
+    font-family: Bold;
+    color: #2e2d2c !important;
+}
+
+.finder-search-btn:hover {
+      color:#ffffff !important;
+      transition: 0.7s;
+}
+
+.mileage-output{
+    color: #8cd50a;
+}
+
+.bi-caret-left-fill, bi-caret-right-fill{
+    
+    color: #8cd50a;
+}
+
+
+.finder-reset-btn{
+    font-family: Bold;
+    color: #ffffff !important;
+}
+
+.d-lg-block{
+  width: 27%;
+}
 /** Catalogue End **/
 
 /** Contact Start **/
+
 .contact-us{
     overflow-x: hidden;
 }
@@ -1495,7 +1723,7 @@ div .buttons {
 .contact-bakkies{
     position: absolute;
     z-index: 1;
-    margin-left: 81px;
+    margin-left: 117px;
     margin-top: -89px;
 }
 
@@ -1543,7 +1771,7 @@ div .buttons {
     }
 
     .online-auction-info {
-        min-height: 72vh;
+        min-height: 50vh;
         max-width: 48.9%;
     }
 
@@ -1555,17 +1783,28 @@ div .buttons {
     .info-heading {
         margin-left: 89px;
         margin-top: 14px;
+        margin-bottom: 45px !important;
     }
 
     .learn-more-btn {
         margin-left: 35px;
         margin-top: 34px;
+        padding: 6px 36px !important;
     }
 
-    .registration-info {
-        min-height: 100vh;
+    .reg-bottom-img{
+       margin-top: 0;
+   }
+   
+    .favourite-btn-space {
+        margin-top: 0;
     }
-
+   
+    .heart-div {
+        margin-top: -15px;
+        margin-left: 0;
+   }
+   
     .register-info-heading {
         margin-left: 92px;
         margin-top: 60px;
@@ -1590,19 +1829,22 @@ div .buttons {
     }
 
     .join-auction-card {
-        margin-top: -112px;
+        margin-top: -135px;
         margin-left: 100px;
     }
 
     .view-catalogue-card {
-        margin-top: -112px;
+        margin-top: -127px;
         margin-left: 74px;
     }
 
     /** Home End **/
 
     /** About Start**/
-
+    .plus-btn{
+        margin-left: 95% !important;
+    }
+    
     .about-heading {
         margin-left: 98px;
     }
@@ -1617,6 +1859,19 @@ div .buttons {
 
     .accordion {
         margin-left: 98px;
+    }
+    
+    .assistance-bakkie{
+        margin-left: 6%;
+    }
+    
+    .assistance-form-card{
+        margin-left: 0;
+        width: 82% !important;
+    }
+    
+    .assistance-btn{
+        margin-right: 45%;
     }
     /** About End **/
 
@@ -1638,10 +1893,6 @@ div .buttons {
     .forgot-pass-anchor {
         margin-left: 183px;
     }
-
-    .plus-btn {
-        margin-left: 1170px;
-    }
     /** Auth End **/
 
     /** Assistance Banner Start **/
@@ -1662,7 +1913,17 @@ div .buttons {
         height: 34vh;
     }
     /** Assistance Banner End **/
-
+    .contact-us-btn-section{
+      margin-top: 4rem !important;
+    }
+    
+    .finder-span{
+    margin-right: 0;
+    }
+    
+    .view-fav-btn{
+        margin-right: 0;
+    }
 }
 
 @media  screen and (max-device-width: 1500px) {
@@ -1676,11 +1937,16 @@ div .buttons {
     }
 
     .online-auction-info {
-        min-height: 70vh;
+        min-height: 55vh;
     }
       
     .registration-info {
-        min-height: 80vh;
+        min-height: 57vh;
+    }
+    
+    .form-card {
+      width: 72% !important;
+      margin-left: 115px;
     }
     /** Home End **/
 
@@ -1703,9 +1969,6 @@ div .buttons {
           
     }
 
-    .plus-btn {
-        margin-left: 1000px;
-    }
     /** About End**/
 
     /** Auth Start **/
@@ -1897,15 +2160,20 @@ div .buttons {
     }
 
     .registering-steps-section {
-    height: 54vh;
+        height: 54vh;
+    }
+    
+    .card-icons {
+      width: 65px !important;
+    }
+    
+    .assistance-icons {
+      margin-left: -18px;
     }
     /** Home End **/
 
     /** About Start **/
 
-    .plus-btn {
-        margin-left: 900px;
-    }
     /** About End **/
 
     /** Auth Start **/
@@ -2018,10 +2286,6 @@ div .buttons {
         line-height: 1;
     }
 
-    .bid-prepend {
-        margin-right: 58px;
-    }
-
     .auction-reserve-price-desc, .auction-details-desc, .auction-total-bids-desc {
         font-size: 20px;
     }
@@ -2048,7 +2312,26 @@ div .buttons {
     .auto-bid-label {
         margin-top: 2px;
     }
+
+    .lot-details-text, .auction-details-desc, .staring-bid-desc, 
+    .prev-lot-status, .prev-lot-status-span, .prev-lot-make-model, 
+    .prev-lot-details-text{
+        line-height: 0.9;
+    }
     /** Auction End **/
+}
+
+@media screen and (max-width: 992px){
+    /*Home Start*/
+    
+    .nav-top-bar{
+        display: block!important;
+        text-align: center!important;
+    }
+    
+    .nav-second-top-bar{
+        display: block!important;
+    }
 }
 
 @media screen and (max-device-width: 810px){
@@ -2142,9 +2425,6 @@ div .buttons {
     /** Home End **/
 
     /** About Start **/
-    .plus-btn {
-        margin-left: 580px;
-    }
 
     .about-heading {
         margin-left: 45px;
@@ -2286,9 +2566,6 @@ div .buttons {
     /** Home End **/
 
     /** About Start **/
-    .plus-btn {
-        margin-left: 550px;
-    }
     /** About End **/
 
     /** Auth Start **/
@@ -2433,10 +2710,6 @@ div .buttons {
     /** About Start **/
     .accordion {
         margin-left: 45px;
-    }
-
-    .plus-btn {
-        margin-left: 370px;
     }
 
     .accord-btn {
@@ -2599,9 +2872,6 @@ div .buttons {
 
     /** About Start **/
 
-    .plus-btn {
-        margin-left: 260px;
-    }
     /** About End **/
 
     /** Auth Start **/
@@ -2716,9 +2986,6 @@ div .buttons {
     /** Home End **/
 
     /** About Start **/
-    .plus-btn {
-        margin-left: 250px;
-    }
     /** About End **/
 
     /** Auth Start **/
@@ -2865,9 +3132,6 @@ div .buttons {
 
     /** About Start **/
 
-    .plus-btn {
-        margin-left: 235px;
-    }
 
     .accordion {
         margin-left: 12px;
@@ -2948,9 +3212,6 @@ div .buttons {
 
     /** About Start **/
 
-    .plus-btn {
-        margin-left: 230px;
-    }
 
     .accordion {
         margin-left: 12px;
@@ -3028,9 +3289,6 @@ div .buttons {
 
     /** About Start **/
 
-    .plus-btn {
-        margin-left: 222px;
-    }
 
     .accordion {
         margin-left: 18px;
@@ -3070,7 +3328,49 @@ div .buttons {
 }
 
 
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}
 
 
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #8cd50a;
+  background: #ffffff;
+  cursor: pointer;
+}
 
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  border: 1px solid #8cd50a;
+  background: #ffffff;
+  cursor: pointer;
+}
 
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  cursor: pointer;
+  background: #8cd50a;
+
+}

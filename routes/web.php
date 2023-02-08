@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\LotsController;
 
 use App\Http\Livewire\Auction;
+use App\Http\Livewire\ViewLot;
 
 use App\Http\Controllers\RedirectController;
 
@@ -18,6 +19,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VehicleController;
 use App\Http\Controllers\Admin\AuctionGroupController;
+use App\Http\Controllers\Admin\AuctionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,10 @@ use App\Http\Controllers\Admin\AuctionGroupController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('test-mail', function(){
+    return view('mail.comm1');
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,6 +53,8 @@ Route::post('register/step3', [RegisterController::class, 'saveStep3']);
 Route::post('assistance', [PagesController::class, 'assistance'])->name('assistance');
 Route::post('contact', [PagesController::class, 'contactUs'])->name('contact');
 
+Route::get('getModels2/{make}', [VehicleController::class, 'getModels2']);
+
 Route::get('redirects', [RedirectController::class, 'redirects']);
 
 Route::middleware('auth')->group(function () {
@@ -58,12 +66,23 @@ Route::middleware('auth')->group(function () {
     Route::get('my-lots', [LotsController::class, 'user_lots']);
     Route::get('catalogue', [CatalogueController::class, 'catalogue'])->name('catalogue');
     Route::get('favourites', [CatalogueController::class, 'favourites'])->name('favourites');
-    Route::get('lot', [LotsController::class, 'view_lot'])->name('lot');
+    Route::get('lot/{id}', [LotsController::class, 'view_lot'])->name('lot');
     Route::get('auction', Auction::class)->name('auction');
+    Route::get('view-lot/{id}', ViewLot::class)->name('view-lot');
     
     Route::get('getModels/{year}/{make}', [VehicleController::class, 'getModels']);
     Route::get('getVariants/{year}/{make}/{model}', [VehicleController::class, 'getVariants']);
     Route::get('getCarInfo/{year}/{make}/{model}/{variant}', [VehicleController::class, 'getCarInfo']);
+    Route::get('getCarByMMCode/{mmcode}', [VehicleController::class, 'getCarByMMCode']);
+    
+    Route::get('add-to-favourites/{id}', [CatalogueController::class, 'add_to_favourites']);
+    Route::get('remove-favourite/{id}', [CatalogueController::class, 'remove_favourite']);
+    
+
+    Route::get('filter-catalogue', [CatalogueController::class, 'filterCatalogue'])->name('filter-catalogue');    
+    Route::get('sort-catalogue',[CatalogueController::class, 'sortCatalogueByDate']);
+    Route::get('sort-favourites', [CatalogueController::class, 'sortFavouritesByDate']);
+    Route::get('filter-favourites', [CatalogueController::class, 'filterFavourites'])->name('filter-favourites'); 
     
     Route::group(['prefix' => 'admin'], function(){
         Route::get('dashboard', [AdminDashboardController::class, 'index']);
@@ -76,6 +95,10 @@ Route::middleware('auth')->group(function () {
         Route::get('add-lots-to-auction-group/{id}', [AuctionGroupController::class, 'showAddLots']);
         Route::post('save-lots', [AuctionGroupController::class, 'saveLots']);
         Route::get('remove-lot/{id}', [AuctionGroupController::class, 'removeLot']);
+        
+        Route::get('auction-results', [AuctionController::class, 'index']);
+        Route::get('vehicles/status/{status}', [VehicleController::class, 'listByStatus']);
+        Route::get('reset-car/{id}', [VehicleController::class, 'resetCar']);
     });
 });
 

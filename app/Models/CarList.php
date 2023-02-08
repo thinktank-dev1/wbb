@@ -21,4 +21,8 @@ class CarList extends Model
         'fuel_type',
         'cylinders',
     ];
+    
+    public function lot(){
+        return $this->hasOne(Lot::class);
+    }
 }

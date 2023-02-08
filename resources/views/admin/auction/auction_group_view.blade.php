@@ -47,7 +47,12 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Lots</h4>
+                            <div class="d-flex">
+                                <h4 class="card-title">Lots</h4>
+                                <span class="ms-auto">
+                                    <a href="{{ url('admin/add-lots-to-auction-group/'.$auctionGroup->id) }}" class="btn btn-primary btn-sm">Add Lots</a>
+                                </span>
+                            </div>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped">
@@ -65,6 +70,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($auctionGroup->lots AS $lot)
+                                    @if($lot->vehicle)
                                     <tr>
                                         <td>{{ $lot->vehicle->year }}</td>
                                         <td>{{ $lot->vehicle->make }}</td>
@@ -75,6 +81,7 @@
                                         <td class="text-end">{{ number_format($lot->reserve_price,2) }}</td>
                                         <th class="text-end"><a href="{{ url('admin/remove-lot/'.$lot->id) }}" class="text-danger">Remove</a></th>
                                     </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>

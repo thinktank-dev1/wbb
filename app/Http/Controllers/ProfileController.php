@@ -8,6 +8,7 @@ use Validator;
 use Hash;
 use Auth;
 use App\Models\User;
+use App\Models\Lot;
 
 class ProfileController extends Controller
 {

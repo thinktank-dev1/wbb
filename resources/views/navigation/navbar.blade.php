@@ -1,16 +1,19 @@
 <header class="navbar-light header-sticky">
 	<!-- Nav START -->
 	<nav class="navbar navbar-expand-md">
-		<div class="container icon-nav-container">
+		<div class="container nav-container icon-nav-container nav-top-bar">
 			<a class="nav-link" href="{{ url('/') }}">
 				<img class="light-mode-item logo" src="{{ asset('images/wbbonline_img_1.png') }}" alt="logo">
 			</a>
 
-			<div class="d-flex order-lg-2 ms-auto header-right-icons"> 
+			<div class="d-flex order-lg-2 ms-auto header-right-icons nav-second-top-bar"> 
 				<ul class="navbar-nav justify-content-end">
-					<li class="nav-item">
+					@if(Auth::user())
+					@else
+						<li class="nav-item">
 						<a class="nav-link" href="{{ route('register') }}"><img class="register-nav" src="{{ asset('images/wbbonline_btn_1.png') }}" alt="register"></a>
 					</li>
+					@endif
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('favourites') }}"><img class="favourites-nav" src="{{ asset('images/wbbonline_btn_2.png') }}" alt="favourites"></a>
 					</li>
@@ -20,13 +23,13 @@
 	</nav>
 
 	<nav class="navbar navbar-expand-sm">
-		<div class="container">
+		<div class="container nav-container">
 			<ul class="navbar-nav justify-content-end links">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url('/') }}">HOME</a>
+					<a class="nav-link nav-links a-link" href="{{ url('/') }}">HOME</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link dropdown-toggle nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					AUCTIONS
 					</a>
 					<div class="dropdown-menu">
@@ -35,29 +38,34 @@
 					</div>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link dropdown-toggle nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					DEALERS
 					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="{{ url('profile') }}">MY ACCOUNT</a>
 						<a class="dropdown-item" href="{{ url('dashboard') }}">DASHBOARD</a>
-						<form method="POST" action="{{ route('logout') }}" id="logout">
+						@if(Auth::user())
+							@if(Auth::user()->hasAnyRole(['su', 'admin']))
+							<a class="dropdown-item" href="{{ url('admin/dashboard') }}">ADMIN DASHBOARD</a>
+							@endif
+							<form method="POST" action="{{ route('logout') }}" id="logout">
 							@csrf
 							<a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">LOGOUT</a>
 						</form>
+						@endif
 					</div>
 				</li>
+				<!--<li class="nav-item dropdown">-->
+				<!--	<a class="nav-link dropdown-toggle nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">-->
+				<!--	OPTIONS-->
+				<!--	</a>-->
+				<!--	<div class="dropdown-menu">-->
+				<!--		<a class="dropdown-item" href="#">Action</a>-->
+				<!--		<a class="dropdown-item" href="#">Action</a>-->
+				<!--	</div>-->
+				<!--</li>-->
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-					OPTIONS
-					</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Action</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link dropdown-toggle nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					COMPANY
 					</a>
 					<div class="dropdown-menu">
@@ -84,10 +92,10 @@
 		<div class="card card-body mobile-nav-card">
 			<ul class="navbar-nav justify-content-center">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url('/') }}">HOME</a>
+					<a class="nav-link nav-links" href="{{ url('/') }}">HOME</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link dropdown-toggle active nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					AUCTIONS
 					</a>
 					<div class="dropdown-menu">
@@ -96,26 +104,34 @@
 					</div>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link dropdown-toggle active nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					DEALERS
 					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="{{ url('profile') }}">MY ACCOUNT</a>
 						<a class="dropdown-item" href="{{ url('dashboard') }}">DASHBOARD</a>
-						<a class="dropdown-item" href="#">LOGOUT</a>
+						@if(Auth::user())
+						@if(Auth::user()->hasAnyRole(['su', 'admin']))
+						<a class="dropdown-item" href="{{ url('admin/dashboard') }}">ADMIN DASHBOARD</a>
+						@endif
+						<form method="POST" action="{{ route('logout') }}" id="logout">
+							@csrf
+							<a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">LOGOUT</a>
+						</form>
+						@endif
 					</div>
 				</li>
+				<!--<li class="nav-item dropdown">-->
+				<!--	<a class="nav-link dropdown-toggle active nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">-->
+				<!--	OPTIONS-->
+				<!--	</a>-->
+				<!--	<div class="dropdown-menu">-->
+				<!--		<a class="dropdown-item" href="#">Action</a>-->
+				<!--		<a class="dropdown-item" href="#">Action</a>-->
+				<!--	</div>-->
+				<!--</li>-->
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-					OPTIONS
-					</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Action</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link dropdown-toggle active nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					COMPANY
 					</a>
 					<div class="dropdown-menu">
@@ -135,3 +151,14 @@
 	
 	<!-- Nav END -->
 </header>
+
+@push('scripts')
+	<script>
+	  $(document).ready(function () {
+	      $("ul.navbar-nav > li").click(function (e) {
+	       $("ul.navbar-nav > li").removeClass("active");
+	       $(this).addClass("active");
+	        });
+	    });
+	</script>
+@endpush

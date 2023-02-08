@@ -4,7 +4,7 @@
 <!-- BANNER START -->
 <section class="banner">
     <img class="img-fluid" src="{{ asset('images/wbbonline_img_5.png') }}" alt="banner">
-    <div class="container-fluid">
+    <div class="container-fluid buttons-container">
         <div class="row align-items-center buttons">
             <div class="col banner-btn-col">
                 <a href="{{ route('login') }}"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_4.png') }}" alt="login"></a>
@@ -27,7 +27,7 @@
             <img class="img-fluid" src="{{ asset('images/wbbonline_img_6.png') }}" alt="section-two-img">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 text-left online-auction-info">
-            <h2 class="info-heading">100% ONLINE BAKKIE AUCTIONS</h2>
+            <h2 class="info-heading mb-4">100% ONLINE BAKKIE AUCTIONS</h2>
             <p class="info-paragraph">
                 With over 35 years of experience We Buy Bakkies now offers ONLINE bakkie auctions, providing top quality vehicles and a transparent and fair buying process. 
             </p>
@@ -38,7 +38,7 @@
                 It’s bakkie buying, simplified! 
             </p>
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 learn-more-btn">
-                <a class="learn-more-btn" href=""><img class="img-fluid learn-more-img" src="{{ asset('images/wbbonline_btn_7.png') }}" alt="section-two-img"></a>
+                <a class="btn btn-secondary learn-more-btn" href="{{ url('about-us') }}">LEARN MORE</a>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 online-auction-info online-auction-image">
@@ -54,27 +54,27 @@
             <h3 class="register-info-heading">REGISTER NOW TO START BIDDING!</h3>
             <ul class="bullet">
                 <li>
-                    <p class="reg-paragraph">
+                    <p class="reg-paragraph ml-3">
                         Exclusive access to top quality bakkies.  
                     </p>
                 </li>
                 <li>
-                    <p class="reg-paragraph">
+                    <p class="reg-paragraph ml-3">
                         Detailed inspection reports and photos to show the conditions of the vehicles from top to bottom.   
                     </p>
                 </li>
                 <li>
-                    <p class="reg-paragraph">
+                    <p class="reg-paragraph ml-3">
                         Friendly customer support for assistance with the processes and setting up your account.    
                     </p>
                 </li>
                 <li>
-                    <p class="reg-paragraph">
+                    <p class="reg-paragraph ml-3">
                         Bid from anywhere, on any smart device or web-browser.    
                     </p>
                 </li>
                 <li>
-                    <p class="reg-paragraph">
+                    <p class="reg-paragraph ml-3">
                         Don’t let our best bakkie buys get away!    
                     </p>
                 </li>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <p class="assistance-text"><span class="reg-paragraph">OR</span> Fill in the form and we will contact you.</p>
-                    <form method="post" action="{{ route('assistance') }}">
+                    <form method="get" action="{{ url('') }}">
                         @csrf
                         <div class="form-group">
                             <input type="text" name="first-name" class="form-control form-control-sm" type="text" placeholder="First Name">
@@ -108,7 +108,7 @@
                         <div class="form-group">
                             <input type="email" name="email" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="Email">
                         </div>
-                        <center><button class="btn btn-primary" type="submit">SUBMIT</button></center>
+                        <center><button class="btn btn-primary assist-btn mb-2" type="submit">SUBMIT</button></center>
                     </form>
                     <p class="card-disclaimer">
                         *By clicking SUBMIT you grant We Buy Bakkies Online permission
@@ -117,7 +117,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 reg-bottom-img">
             <img class="img-fluid" src="{{ asset('images/wbbonline_img_13.png') }}" alt="section-two-img">
         </div>
     </div>
@@ -149,14 +149,14 @@
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="card join-auction-card">
                             <div class="card-body">
-                                <a href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_9.png') }}" alt="join-auction-img"></a>
+                                <a href="{{ url('auction') }}"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_9.png') }}" alt="join-auction-img"></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="card view-catalogue-card">
                             <div class="card-body">
-                                <a href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_10.png') }}" alt="view-catalogue-img"></a>
+                                <a href="{{ url('catalogue') }}"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_10.png') }}" alt="view-catalogue-img"></a>
                             </div>
                         </div>  
                     </div>

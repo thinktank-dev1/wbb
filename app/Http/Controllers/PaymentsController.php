@@ -13,7 +13,10 @@ class PaymentsController extends Controller
 {
     public function index(){
         $cmp = Auth::user()->company;
-        $payments = $cmp->payementDetails;
+        $payments = null;
+        if($cmp){
+            $payments = $cmp->payment;
+        }
         return view('pages.account.payments', compact('payments'));
     }
 

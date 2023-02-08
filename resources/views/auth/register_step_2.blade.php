@@ -9,7 +9,7 @@
                 <p>Please fill in your information to create your account and have exclusive access to top quality bakkies on our online auctions.</p>
             </div>
             <div class="col-md-12 mb-5">
-                <div class="card">
+                <div class="card register-card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">

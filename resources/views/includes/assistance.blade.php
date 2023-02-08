@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <p class="assistance-text"><span class="reg-paragraph">OR</span> Fill in the form and we will contact you.</p>
-                    <form method="post" action="{{ route('assistance') }}">
+                    <form method="get" action="{{ url('') }}">
                         @csrf
                         <div class="form-group">
                             <input type="text" name="first-name" class="form-control form-control-sm" type="text" placeholder="First Name">
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <input type="email" name="email" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="Email">
                         </div>
-                        <center><button class="btn btn-primary" type="submit">SUBMIT</button></center>
+                        <center><button class="btn btn-primary assist-btn mb-2" type="submit">SUBMIT</button></center>
                     </form>
                     <p class="card-disclaimer">
                         *By clicking SUBMIT you grant We Buy Bakkies Online permission
@@ -49,10 +49,10 @@
                     <a href="{{ route('login') }}"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_16.png') }}" alt="login"></a>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 assistance-btn">
-                    <a href=""><img class="img-fluid " src="{{ asset('images/wbbonline_btn_17.png') }}" alt="view-catalogue"></a>
+                    <a href="{{ url('catalogue') }}"><img class="img-fluid " src="{{ asset('images/wbbonline_btn_17.png') }}" alt="view-catalogue"></a>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 assistance-btn">
-                    <a href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_18.png') }}" alt="join-auction"></a>
+                    <a href="{{ url('auction') }}"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_18.png') }}" alt="join-auction"></a>
                 </div>
             </div>
         </div>

@@ -41,7 +41,7 @@ class AuctionGroupController extends Controller
     public function store(Request $request)
     {
         $valid = Validator::make($request->all(),[
-            'name' => 'required',
+            // 'name' => 'required',
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required'
@@ -49,8 +49,10 @@ class AuctionGroupController extends Controller
         if($valid->fails()){
             return back()->withErrors($valid)->withInput();
         }
+        $index = AuctionGroup::count();
+        $index++;
         AuctionGroup::create([
-            'name' => $request->name,
+            'name' => 'WBB '.$index,
             'date' => $request->date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time
@@ -90,7 +92,7 @@ class AuctionGroupController extends Controller
     public function update(Request $request, AuctionGroup $auctionGroup)
     {
         $valid = Validator::make($request->all(),[
-            'name' => 'required',
+            // 'name' => 'required',
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required'
@@ -99,7 +101,7 @@ class AuctionGroupController extends Controller
             return back()->withErrors($valid)->withInput();
         }
         
-        $auctionGroup->name = $request->name;
+        // $auctionGroup->name = $request->name;
         $auctionGroup->date = $request->date;
         $auctionGroup->start_time = $request->start_time;
         $auctionGroup->end_time = $request->end_time;
@@ -126,14 +128,23 @@ class AuctionGroupController extends Controller
     public function saveLots(Request $request){
         $group_id = $request->group_id;
         $cars = $request->car;
+        
         foreach($cars AS $k=>$car){
             if($car['start_price'] && $car['increament_value'] && $car['reserve_price']){
+                $show = 0;
+                if(isset($car['show_reseve_price'])){
+                    if($car['show_reseve_price']){
+                        $show = 1;
+                    }
+                }
                 Lot::create([
                     'auction_group_id' => $group_id,
                     'vehicle_id' => $k,
                     'start_price' => $car['start_price'],
                     'increament_value' => $car['increament_value'],
-                    'reserve_price' => $car['reserve_price']
+                    'reserve_price' => $car['reserve_price'],
+                    'show_reseve_price' => $show
+                    
                 ]);
             }
         }

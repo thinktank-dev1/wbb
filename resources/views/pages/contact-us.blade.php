@@ -11,7 +11,7 @@
                 <h4 class="contact-subtitle mt-4">OR fill in your details below and we will get in touch with you.</h4>
             </div>
             <div class="col-md-5 ml-5">
-                <form method="post" action="{{ route('contact') }}">
+                <form method="get" action="{{ url('') }}">
                     <div class="row">
                         <div class="col-md-6 mb-3 ">
                             <label for="name" class="contact-label">First Name</label>
@@ -49,7 +49,7 @@
             <div class="col-md-6">
                 <img class="img-fluid contact-bakkies" src="{{ asset('images/wbbonline_img_48.png') }}" alt="">
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 contact-us-btn-section">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center get-ready-title-section">
                         <h4 class="get-started-title mt-5">Ready to get started?</h4>

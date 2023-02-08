@@ -29,6 +29,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th>Show Reserve Price</th>
                                             <th>Values</th>
                                             <th>Year - Make - Model - Variant</th>
                                         </tr>
@@ -37,10 +38,15 @@
                                         @foreach($cars AS $car)
                                         <tr>
                                             <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="1" name="car[{{ $car->id }}]['show_reseve_price]">
+                                                </div>
+                                            </td>
+                                            <td>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Start Price" name="car[{{ $car->id }}][start_price]">
                                                     <input type="text" class="form-control" placeholder="Increament Value" name="car[{{ $car->id }}][increament_value]">
-                                                    <input type="text" class="form-control" placeholder="Peserve Price" name="car[{{ $car->id }}][reserve_price]">
+                                                    <input type="text" class="form-control" placeholder="Reserve Price" name="car[{{ $car->id }}][reserve_price]">
                                                 </div>
                                             </td>
                                             <td>{{ $car->year.' - '.$car->make.' - '.$car->model.' - '.$car->variant }}</td>

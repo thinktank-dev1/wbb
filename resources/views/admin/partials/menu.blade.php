@@ -21,14 +21,14 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ url('admin/auction-results') }}">
                                 <span data-key="t-auction-result">Auction Results</span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ url('auction') }}">
                         <i class="mdi mdi-web"></i>
                         <span data-key="t-live-auction">Live Auction</span>
                     </a>
@@ -50,12 +50,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ url('admin/vehicles/status/sold') }}">
                                 <span data-key="t-sold-vehicles">Sold Vehicles</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ url('admin/vehicles/status/not-sold') }}">
                                 <span data-key="t-not-sold-vehicles">Not Sold Vehicles</span>
                             </a>
                         </li>

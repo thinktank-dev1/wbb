@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('cylinders');
             $table->string('vin_number');
             $table->string('engine_number');
-            $table->string('natis');
+            $table->string('natis')->nullable();
             $table->string('service_history');
             $table->string('service_book');
             $table->string('service_plan');

@@ -26,6 +26,12 @@ body {
 /*
  * Sidebar
  */
+ 
+ .register-card{
+    border: 1px solid #bfbfbf !important;
+    border-radius: 5px !important;
+  }
+
 
 .register-bakkie-title {
   font-weight: 600 !important;
