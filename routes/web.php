@@ -33,7 +33,14 @@ use App\Http\Controllers\Admin\AuctionController;
 */
 
 Route::get('test-mail', function(){
-    return view('mail.comm1');
+    $options = [
+        'name' => 'Wilson Ndlovu',
+        'year' => '2016',
+        'make' => 'Ford',
+        'model' => 'Fogo',
+        'variant' => 'Titanium Power Shift 1.5D'
+    ];
+    return view('mail.comm1', ['options' => $options]);
 });
 
 Route::get('/', function () {
