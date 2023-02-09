@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('previous_body_repairs');
             $table->string('previous_cosmetic_repairs');
             $table->string('mechanical_faults_warnig_lights');
-            $table->text('mechanical_faults_warnig_lights_description')->nulluable();
+            $table->text('mechanical_faults_warnig_lights_description')->nullable();
             $table->string('windscreen_condition');
             $table->string('rims_condition');
             $table->string('interior_condition');

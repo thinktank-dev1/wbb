@@ -3,14 +3,14 @@
 @section('title', 'Contact Us')
 <section class="contact-us">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 mt-5 ml-5">
+        <div class="row contact-txt-block">
+            <div class="col-md-12 mt-5 ml-5 contact-txt-block">
                 <h2 class="contact-title">contact us</h2>
                 <h4 class="contact-subtitle">Please feel free to send us an email for more information</h4>
                 <a href="mailto:info@webuybakkiesonline.co.za" class="contact-email"><img class="img-fluid" src="{{ asset('images/wbbonline_img_50.png') }}" alt="mail"> info@webuybakkiesonline.co.za</a>
                 <h4 class="contact-subtitle mt-4">OR fill in your details below and we will get in touch with you.</h4>
             </div>
-            <div class="col-md-5 ml-5">
+            <div class="col-md-5 ml-5 contact-txt-block">
                 <form method="get" action="{{ url('') }}">
                     <div class="row">
                         <div class="col-md-6 mb-3 ">
@@ -50,7 +50,7 @@
                 <img class="img-fluid contact-bakkies" src="{{ asset('images/wbbonline_img_48.png') }}" alt="">
             </div>
             <div class="col-md-12 contact-us-btn-section">
-                <div class="row">
+                <div class="row contact-txt-block">
                     <div class="col-md-12 d-flex justify-content-center get-ready-title-section">
                         <h4 class="get-started-title mt-5">Ready to get started?</h4>
                     </div>

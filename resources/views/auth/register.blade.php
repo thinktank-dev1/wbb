@@ -99,8 +99,8 @@
                                             <div class="mt-3">
                                                 <p>Already have an account? <a href="{{ url('login') }}">Log In</a></p>
                                             </div>
-                                            <div class="mt-3">
-                                                <p>By clicking 'Register Now' you agree to our <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
+                                            <div class="mt-1 mb-2 text-center">
+                                                <input type="checkbox" class="form-check-input register-terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
                                             </div>
                                         </div>
                                     </div>

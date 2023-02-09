@@ -72,9 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::post('payments', [PaymentsController::class, 'updatePayments']);
     Route::get('my-lots', [LotsController::class, 'user_lots']);
     Route::get('catalogue', [CatalogueController::class, 'catalogue'])->name('catalogue');
-    Route::get('favourites', [CatalogueController::class, 'favourites'])->name('favourites');
     Route::get('lot/{id}', [LotsController::class, 'view_lot'])->name('lot');
     Route::get('auction', Auction::class)->name('auction');
+    Route::get('auction/{favs}', Auction::class)->name('favourites');
     Route::get('view-lot/{id}', ViewLot::class)->name('view-lot');
     
     Route::get('getModels/{year}/{make}', [VehicleController::class, 'getModels']);

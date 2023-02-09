@@ -71,7 +71,7 @@ class CatalogueController extends Controller
         $body_types = VehicleBodyType::all();
         $dates = AuctionGroup::whereDate('date','>=' ,$date)->orderBy('date', 'ASC')->get();
         $items = Favourites::where('user_id', $user_id)->count();
-        $favourites = Favourites::where('user_id', $user_id)->paginate(1);
+        $favourites = Favourites::where('user_id', $user_id)->paginate(5);
         return view('pages.bakkies.favourites')
         ->with([
             'dates' => $dates,

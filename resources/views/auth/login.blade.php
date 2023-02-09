@@ -39,22 +39,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 text-left">
+                                    <div class="col-md-6 text-left fp-txt">
                                         <a class="" href="{{ route('password.request') }}">Forgot your password?</a>
                                     </div>
-                                    <div class="col-md-6 text-right">
+                                    <div class="col-md-6 text-right fp-txt">
                                         <span>Not registered?<a class="register-anchor" href="{{ route('register') }}">Click here</a></span>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="row justify-content-center">
-                                        <div class="col-sm">
-                                            
-                                        </div>
-                                        <div class="col register-span">
-                                            
-                                        </div>
-                                    </div>
+                                <div class="mt-1 mb-2 text-left">
+                                    <input type="checkbox" class="form-check-input terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary btn-sm">LOG IN</button>

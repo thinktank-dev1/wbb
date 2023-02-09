@@ -11,6 +11,7 @@ class Vehicle extends Model
 
     protected $fillable = [
         'mmcode',
+        'stock_number',
         'year',
         'make',
         'model',

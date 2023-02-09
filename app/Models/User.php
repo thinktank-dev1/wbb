@@ -68,4 +68,8 @@ class User extends Authenticatable
     public function boughtCars(){
         return 0;
     }
+    
+    public function favourites(){
+        return $this->hasMany(Favourites::class, 'user_id');
+    }
 }

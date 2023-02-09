@@ -25,7 +25,11 @@ class Lot extends Model
 
     public function vehicle(){
     	return $this->belongsTo(Vehicle::class,'vehicle_id');
-    } 
+    }
+    
+    public function repairTotal(){
+        return $this->vehicle->inspection->sum('estimate_damage_cost');
+    }
     
     public function auction(){
         return $this->belongsTo(AuctionGroup::class,'auction_group_id');

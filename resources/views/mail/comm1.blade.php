@@ -99,16 +99,19 @@
                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;" width="100%">
                                         <tr>
                                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">
-                                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">Hello {{ $options['name'] }},</p>
+                                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
+                                                    Hello {{ $name }},
+                                                </p>
                                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                                                     Congradulations you won the We Buy Bakkies auction bid for the below mentioned vehicle:
                                                 </p>
                                                 <br />
                                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                                    <tr><td>Year:</td><td><b>{{ $options['year'] }}</b></td></tr>
-                                                    <tr><td>Make:</td><td><b>{{ $options['make'] }}</b></td></tr>
-                                                    <tr><td>Model:</td><td><b>{{ $options['model'] }}</b></td></tr>
-                                                    <tr><td>Variant:</td><td><b>{{ $options['variant'] }}</b></td></tr>
+                                                    <tr><td>Year:</td><td><b>{{ $year }}</b></td></tr>
+                                                    <tr><td>Make:</td><td><b>{{ $make }}</b></td></tr>
+                                                    <tr><td>Model:</td><td><b>{{ $model }}</b></td></tr>
+                                                    <tr><td>Variant:</td><td><b>{{ $variant }}</b></td></tr>
+                                                    <tr><td>Bid Amount:</td><td><b>{{ $amount }}</b></td></tr>
                                                 </table>
                                                 <br /><br />
                                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
@@ -116,7 +119,7 @@
                                                 </p>
                                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                                                     Thank You,<br />
-                                                    We Buy Barkies Team
+                                                    We Buy Bakkies Team
                                                 </p>
                                             </td>
                                         </tr>

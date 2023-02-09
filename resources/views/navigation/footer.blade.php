@@ -1,7 +1,7 @@
 <div class="footer">
 <div class="container-fluid footer-container">
-  <div class="row">
-    <div class="col-lg-3 col-xs-12 mt-3">
+  <div class="row mobile-center more-padding-top">
+    <div class="col-lg-3 col-xs-12 mt-3 no-margin">
       <h2 class="footer-headings mb-3">HOME</h2>
       <h2 class="footer-headings">Auctions</h2>
       <ul class="ml-0 mb-3">
@@ -10,7 +10,7 @@
       </ul>
       <h2 class="footer-headings">My Favourites</h2>
       <ul class="ml-0">
-        <li><a class="footer-links" href="{{ route('favourites') }}">Selected Vehicles</a></li>
+        <li><a class="footer-links" href="{{ route('favourites', 'favourites') }}">Selected Vehicles</a></li>
       </ul>
     </div>
     <div class="col-lg-2 col-xs-12 mt-3">
@@ -38,8 +38,8 @@
     <div class="col-lg-3 col-xs-12 mt-3">
       <h2 class="footer-headings">Dealers</h2>
       <ul class="ml-0 mb-3">
-        <li><a class="footer-links" href="{{ route('favourites') }}">Terms and Conditions</a></li>
-        <li><a class="footer-links" href="{{ route('favourites') }}">Privacy Policy</a></li>
+        <li><a class="footer-links" href="{{ route('favourites', 'favourites') }}">Terms and Conditions</a></li>
+        <li><a class="footer-links" href="{{ route('favourites', 'favourites') }}">Privacy Policy</a></li>
       </ul>
     </div>
     <div class="col-lg-4 col-xs-12 mt-3">
@@ -47,7 +47,7 @@
       <ul class="mb-3">
         <a class="footer-links footer-email-link" href="mailto:info@webuybakkiesonline.co.za"><img class="img-fluid" src="{{ asset('images/wbbonline_img_18.png') }}" alt="mail"> info@webuybakkiesonline.co.za</a>
       </ul>
-      <div class="row ml-4 mb-3">
+      <div class="row ml-4 mb-3 no-margin">
         <div class="col-sm-6">
           <div class="col-sm-12 mb-3 footer-btn-div">
             @if(Auth::user())

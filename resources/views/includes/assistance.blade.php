@@ -6,16 +6,16 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 assistance-info">
             <img class="img-fluid assistance-bakkie" src="{{ asset('images/wbbonline_img_22.png') }}" alt="assistance-section-bakkie">
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 assistance-info">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 assistance-info form-assist-blck">
             <div class="card assistance-form-card mb-5">
                 <div class="card-body">
                     <h5 class="card-title assistance-card-title">NEED ASSISTANCE OR WANT TO FIND OUT MORE ABOUT OUR AUCTIONS?</h5>
                     <h6 class="card-subtitle assistance-card-subtitle mb-2">Get in touch with us</h6>
-                    <div class="row">
-                        <div class="col-6 assistance-icons">
+                    <div class="row scl-lnk-icon">
+                        <div class="col-5 assistance-icons">
                             <a href=""><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_11.png') }}" alt="phone-icon"></a><span class="card-span">CALL US</span>
                         </div>
-                        <div class="col-6 assistance-icons"> 
+                        <div class="col-7 assistance-icons"> 
                             <a href=""><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_10.png') }}" alt="email-icon"></a><span class="card-span">SEND AN EMAIL</span>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <input type="email" name="email" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="Email">
                         </div>
-                        <center><button class="btn btn-primary assist-btn mb-2" type="submit">SUBMIT</button></center>
+                        <center><button class="btn btn-primary assist-btn mb-2 sbmt-btn" type="submit">SUBMIT</button></center>
                     </form>
                     <p class="card-disclaimer">
                         *By clicking SUBMIT you grant We Buy Bakkies Online permission

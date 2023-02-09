@@ -7,6 +7,10 @@ use Illuminate\Console\Command;
 use App\Models\AuctionGroup;
 use App\Events\AuctionEvent;
 
+use App\Models\Favourites;
+
+use Mail;
+
 class AuctionCommand extends Command
 {
     /**
@@ -30,8 +34,8 @@ class AuctionCommand extends Command
      */
     public function handle()
     {
-        //$this->init();
-        $this->sendComm(1);
+        $this->init();
+        //$this->sendComm(1);
     }
     
     public function init(){
@@ -58,8 +62,8 @@ class AuctionCommand extends Command
             
             $data = ['action' => 'stop'];
             broadcast(new AuctionEvent($data));
-            
             $this->sendComm($group->id);
+            $this->removeFavourites($group->id);
         }
     }
     
@@ -67,11 +71,47 @@ class AuctionCommand extends Command
         $group = AuctionGroup::find($id);
         $lots = $group->lots;
         foreach($lots AS $lot){
-            if($lot->highestBid()->bid_amount >= $lot->reserve_price){
-                $bid = $lot->highestBid();
-                $user = $bid->bidder;
-                dd($user);
+            
+            if($lot->highestBid()){
+                $this->info("BID AMOUNT: ".$lot->highestBid()->bid_amount);
                 
+                if($lot->highestBid()->bid_amount >= $lot->reserve_price){
+                    $bid = $lot->highestBid();
+                    $user = $bid->bidder;
+                    $car = $lot->vehicle;
+                    
+                    
+                    $data = [
+                        'name' => $user->first_name.' '.$user->last_name,
+                        'year' => $car->year,
+                        'make' => $car->make,
+                        'model' => $car->model,
+                        'variant' => $car->variant,
+                        'amount' => number_format($bid->bid_amount, 2)    
+                    ];
+                    //dd($data);
+                    
+                    Mail::send('mail.comm1', $data, function($message) use($user){
+                        $message
+                        ->to($user->email, $user->first_name.' '.$user->last_name)
+                        ->cc('ndlovu28@gmail.com', 'We Buy Bakkies')
+                        ->subject('We Buy Bakkies Auction Results');
+                        $message->from('info@webuybakkies.co.za','We Buy Bakkies');
+                    });
+                }
+            }
+            else{
+                $this->warn("Lot # ".$lot->id);
+            }
+        }
+    }
+    
+    public function removeFavourites($id){
+        $group = AuctionGroup::find($id);
+        foreach($group->lots AS $lot){
+            $favs = Favourites::where('lot_id', $lot->id);
+            foreach($favs AS $fav){
+                $fav->delete();
             }
         }
     }

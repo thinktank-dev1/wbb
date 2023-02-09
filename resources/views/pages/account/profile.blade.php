@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 <div class="faq">
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5 mobile-center btm-padding">
             <div class="col-md-12">
                 <h5 class="page-title">MY ACCOUNT</h5>
             </div>

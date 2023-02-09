@@ -18,6 +18,8 @@ use App\Models\VehicleInspection;
 use App\Models\Lot;
 use App\Models\Bid;
 
+use App\Lib\TransUnionApi;
+
 class VehicleController extends Controller
 {
     
@@ -26,6 +28,7 @@ class VehicleController extends Controller
     public $service_history_options = [];
     public $extras_options = [];
     public $damage_positions = [];
+    public $natis_options = [];
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +70,8 @@ class VehicleController extends Controller
             'back_positions' => $this->back_positions,
             'service_history_options' => $this->service_history_options,
             'extras_options' => $this->extras_options,
-            'damage_positions' => $this->damage_positions
+            'damage_positions' => $this->damage_positions,
+            'natis_options' => $this->natis_options
         ]);
     }
 
@@ -117,8 +121,16 @@ class VehicleController extends Controller
         }
 
         $car = CarList::where('year', $request->year)->where('make', $request->make)->where('model', $request->model)->where('variant', $request->variant)->first();
+        
+        /*
+        $api = new TransUnionApi();
+        $car_info = $api->getCarData($car->mmcode, $request->year, $request->mileage);
+        dd($car_info);
+        */
+        
         $vehicle = Vehicle::create([
             'mmcode' => $car->mmcode,
+            'stock_number' => $request->stock_number,
             'year' => $request->year,
             'make' => $request->make,
             'model' => $request->model,
@@ -177,7 +189,7 @@ class VehicleController extends Controller
             $po_name = $side.'-position';
             $tp_name = $side."-type";
             $sv_name = $side."-severity";
-            $cost_name = $side."estimate_damage_cost";
+            $cost_name = $side."_estimate_damage_cost";
             
             $pos = $request->input($po_name);
             $type = $request->input($tp_name);
@@ -247,7 +259,8 @@ class VehicleController extends Controller
             'back_positions' => $this->back_positions,
             'service_history_options' => $this->service_history_options,
             'extras_options' => $this->extras_options,
-            'damage_positions' => $this->damage_positions
+            'damage_positions' => $this->damage_positions,
+            'natis_options' => $this->natis_options
         ]);
     }
 
@@ -299,6 +312,7 @@ class VehicleController extends Controller
         $car = CarList::where('year', $request->year)->where('make', $request->make)->where('model', $request->model)->where('variant', $request->variant)->first();
         
         $vehicle->mmcode = $car->mmcode;
+        $vehicle->stock_number = $request->stock_number;
         $vehicle->year = $request->year;
         $vehicle->make = $request->make;
         $vehicle->model = $request->model;
@@ -366,15 +380,17 @@ class VehicleController extends Controller
             $po_name = $side.'-position';
             $tp_name = $side."-type";
             $sv_name = $side."-severity";
-            $cost_name = $side."estimate_damage_cost";
+            $cost_name = $side."_estimate_damage_cost";
             
             $pos = $request->input($po_name);
             $type = $request->input($tp_name);
             $severity = $request->input($sv_name);
             $cost = $request->input($cost_name);
+            //dd($request->all());
             for($i = 0; $i < count($pos); $i++){
                 if($pos[$i] && $type[$i] && $severity[$i]){
-
+                    //dd($pos[$i], $type[$i], $severity[$i]);
+                    //dd($cost_name, $side, $cost);    
                     $path = "";
                     $img_name = $side."-damage-images";
                     if($request->has($img_name)){
@@ -423,6 +439,7 @@ class VehicleController extends Controller
         $this->front_positions = ['Hood','Bumper','Grille','Crash Guards','Left Head Lights', 'Right Head Lights', 'Left Fog Lamp', 'Right Fog Lamp', 'Left Indicator Lights', 'Right Indicator Lights', 'Left Wiper Blade', 'Right Wiper Blade', 'Radiator', 'Radiator Supports', 'Cowl Panel'];
         $this->back_positions = ['Windishield','Tail Gate', 'Right Tail Light', 'Left Tail Light', 'Boot', 'Rear Bamper'];
         $this->damage_positions = ['top', 'left', 'right','front','back'];
+        $this->natis_options = ['Bank', 'Dealer'];
         $this->service_history_options = [
             'Full history with agent',
             'Full history with agent and independent workshop',

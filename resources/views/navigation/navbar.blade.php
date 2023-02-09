@@ -1,13 +1,13 @@
 <header class="navbar-light header-sticky">
 	<!-- Nav START -->
-	<nav class="navbar navbar-expand-md">
+	<nav class="navbar navbar-expand-md nav-container remove-nav-height">
 		<div class="container nav-container icon-nav-container nav-top-bar">
 			<a class="nav-link" href="{{ url('/') }}">
 				<img class="light-mode-item logo" src="{{ asset('images/wbbonline_img_1.png') }}" alt="logo">
 			</a>
 
-			<div class="d-flex order-lg-2 ms-auto header-right-icons nav-second-top-bar"> 
-				<ul class="navbar-nav justify-content-end">
+			<div id="nav-second-top-bar" class="d-flex order-lg-2 ms-auto header-right-icons nav-second-top-bar"> 
+				<ul id="nav-second-top-bar" class="navbar-nav justify-content-end nav-second-top-bar">
 					@if(Auth::user())
 					@else
 						<li class="nav-item">
@@ -15,7 +15,7 @@
 					</li>
 					@endif
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('favourites') }}"><img class="favourites-nav" src="{{ asset('images/wbbonline_btn_2.png') }}" alt="favourites"></a>
+						<a class="nav-link" href="{{ route('favourites', 'favourites') }}"><img class="favourites-nav" src="{{ asset('images/wbbonline_btn_2.png') }}" alt="favourites"></a>
 					</li>
 				</ul>
 			</div>

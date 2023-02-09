@@ -107,7 +107,7 @@
                     <span class="finder-span">OR</span>
                 </div>
                 <div class="col text-center mt-2">
-                    <a class="view-fav-btn" href="{{ route('favourites') }}"> <img class="img-fluid" src="{{ asset('images/wbbonline_btn_27.png') }}" alt="favourites"></a>
+                    <a class="view-fav-btn" href="{{ route('favourites', 'favourite') }}"> <img class="img-fluid" src="{{ asset('images/wbbonline_btn_27.png') }}" alt="favourites"></a>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
@@ -127,7 +127,7 @@
                             <form>
                                 <div class="row">
                                     <div class="col-3 mt-2 ">
-                                        <label class="search-label" for="search">SEARCH</label>
+                                        <label class="catalogue-search-label" for="search">SEARCH</label>
                                     </div>
                                     <div class="col-9"> 
                                     <form method="GET" action="{{ url('filter-catalogue') }}"> 
@@ -236,30 +236,41 @@
                                         <h4 class="bakkie-make">{{ $vehicle->make }}</h4>
                                         <h6 class="bakkie-model">{{ $vehicle->model }}</h6>
                                         <p class="specifications-span">{{ $vehicle->variant }}</p>
-                                        <div class="row">
-                                            <div class="col-5">
-                                                <p class="specifications-text">YEAR</p>
-                                                <p class="specifications-text">BODY TYPE</p>
-                                                <p class="specifications-text">MILEAGE</p>
-                                                <p class="specifications-text">FUEL</p>
-                                                <p class="specifications-text">TRANSMISSION</p>
-                                                <p class="specifications-text">COLOUR</p>
-                                            </div>
-                                            <div class="col-7">
-                                                <p class="specifications-span">{{ $vehicle->year }}</p>
-                                                <p class="specifications-span">{{ $vehicle->body_type }}</p>
-                                                <p class="specifications-span">{{ $vehicle->mileage }} km</p>
-                                                <p class="specifications-span">{{ $vehicle->fuel_type }}</p>
-                                                <p class="specifications-span">{{ $vehicle->transmission }}</p>
-                                                <p class="specifications-span">{{ $vehicle->color }}</p>
-                                            </div>
-                                        </div>
+                                        <table class="table catalogue-details-table">
+                                          <tbody>
+                                            <tr>
+                                              <th class="specifications-text">YEAR</th>
+                                              <td class="specifications-span">{{ $vehicle->year }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th class="specifications-text">BODY TYPE</th>
+                                              <td class="specifications-span">{{ $vehicle->body_type }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th class="specifications-text">MILEAGE</th>
+                                              <td class="specifications-span">{{ $vehicle->mileage }} km</td>
+                                            </tr>
+                                            <tr>
+                                              <th class="specifications-text">FUEL</th>
+                                              <td class="specifications-span">{{ $vehicle->fuel_type }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th class="specifications-text">TRANSMISSION</th>
+                                              <td class="specifications-span">{{ $vehicle->transmission }}</td>
+                                            </tr>
+                                            <tr>
+                                              <th class="specifications-text">COLOUR</th>
+                                              <td class="specifications-span">{{ $vehicle->color }}</td>
+                                            </tr>
+
+                                          </tbody>
+                                        </table>
                                     </div>
                                     <div class="col-3">
                                         <p class="lot-text">Lot #<span class="lot-span">{{ str_pad($vehicle->lot->id, 4, '0', STR_PAD_LEFT) }}</span></p>
                                         <p class="bid-text">CURRENT BID</p>
                                          <h6 class="bid-price">R -</h6> 
-                                        <p class="bid-text starting-bid">STARTING BID</p>
+                                        <p class="bid-text starting-bid">OPENING BID</p>
                                         <h6 class="starting-bid-price">R {{ number_format($vehicle->lot->start_price,2) }}</h6>
                                         <p class="bid-text trade-price">TRADE PRICE</p>
                                         <h6 class="starting-bid-price">R {{ number_format($vehicle->lot->reserve_price,2) }}</h6>
@@ -284,7 +295,7 @@
                                         </div>
                                         <div class="favourite-btn-space">
                                             @if($vehicle->lot->favourite(Auth::user()->id, $vehicle->lot->id))
-                                                <a href="{{ url('add-to-favourites/'.$vehicle->lot->id) }}"><p class="favourite-span">REMOVE FAVOURITES</p></a>
+                                                <a href="{{ url('remove-favourite/'.$vehicle->lot->id) }}"><p class="favourite-span">REMOVE FAVOURITES</p></a>
                                                 <div class="heart-div">
                                                      <a href="{{ url('remove-favourite/'.$vehicle->lot->id) }}">
                                                         <img class="img-fluid"  src="{{ asset('images/wbbonline_img_32.png') }}" alt="bid-now">
@@ -305,9 +316,16 @@
                         </div>
                     </div>
                     @endforeach
-                <div class="mt-4 mb-4 ml-1">
-                    <span class="pagination-span">GO TO PAGE: {{ $catalogue->appends($_GET)->links() }}</span>
-                </div>
+                    <div class="col-sm-7 mt-4 mb-4 ml-1">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <span class="sort-span">GO TO PAGE:</span>
+                            </div>
+                            <div class="col-sm-8">
+                                {{ $catalogue->appends($_GET)->links() }}
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

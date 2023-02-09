@@ -20,8 +20,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="mb-3">
+					<label class="form-label">Stock Number</label>
+					<input type="text" class="form-control" id="stock_number" name="stock_number" value="{{ $vehicle->stock_number }}">
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="mb-3">
 					<label class="form-label">MMCODE</label>
-					<input type="text" class="form-control" id="mmcode" name="mmcode">
+					<input type="text" class="form-control" id="mmcode" name="mmcode" value="{{ $vehicle->mmcode }}">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -159,7 +165,26 @@
 			<div class="col-md-2">
 				<div class="mb-3">
 					<label class="form-label">NATIS</label>
+					{{--
 					<input type="text" class="form-control" name="natis" value="@if(old('natis')) {{ old('natis') }} @else {{ $vehicle->natis }} @endif" required>
+					--}}
+					<select class="form-control" name="natis">
+						<option value="">Select Option</option>
+						@foreach($natis_options AS $nat_op)
+						@php
+						$sel = '';
+						if(old('natis')){
+							if(old('natis') == $nat_op){
+								$sel = "selected";
+							}
+						}
+						elseif($vehicle->natis == $nat_op){
+							$sel = "selected";
+						}
+						@endphp
+						<option value="{{ $nat_op }}" {{ $sel }}>{{ $nat_op }}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -263,34 +288,32 @@
 	</div>
 </div>
 <div class="card">
-	<div class="card-header">
-		<h4 class="card-title">Vehicle Extras</h4>
-	</div>
-	<div class="card-body">
-		<div class="row">
-			@foreach($extras_options AS $k=>$extra_arr)
-			<div class="col-md-3">
-				<h5>{{ $k }}</h5>
-				@foreach($extra_arr AS $list)
-				<div class="mb-3">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="{{ $list }}" value="{{ $list }}" name="extras[]" @if(old('extras')) @if( in_array($list, old('extras'))) checked @endif @elseif($vehicle->hasExtra($list)) checked @endif>
-						<label class="form-check-label" for="{{ $list }}">{{ $list }}</label>
+	<div class="accordion" id="accordionExample">
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingOne">
+				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					Extras
+				</button>
+			</h2>
+			<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<div class="row">
+						@foreach($extras_options AS $k=>$extra_arr)
+						<div class="col-md-3">
+							<h5>{{ $k }}</h5>
+							@foreach($extra_arr AS $list)
+							<div class="mb-3">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="{{ $list }}" value="{{ $list }}" name="extras[]" @if(old('extras')) @if( in_array($list, old('extras'))) checked @endif @elseif($vehicle->hasExtra($list)) checked @endif>
+									<label class="form-check-label" for="{{ $list }}">{{ $list }}</label>
+								</div>
+							</div>
+							@endforeach
+						</div>
+						@endforeach
 					</div>
 				</div>
-				@endforeach
 			</div>
-			@endforeach
-			{{--
-			@foreach($extras_list AS $list)
-			<div class="col-md-3">
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" id="{{ $list }}" value="{{ $list }}" name="extras[]" @if(old('extras')) @if( in_array($list, old('extras'))) checked @endif @elseif($vehicle->hasExtra($list)) checked @endif>
-					<label class="form-check-label" for="{{ $list }}">{{ $list }}</label>
-				</div>
-			</div>
-			@endforeach
-			--}}
 		</div>
 	</div>
 </div>
@@ -609,7 +632,10 @@
 			<div class="col-md-12">
 				<div class="mb-3">
 					<label class="form-label">Estimate Damage Cost</label>
-					<input type="text" class="form-control" name="{{ $pos }}-estimate_damage_cost">
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">R</span>
+						<input type="number" class="form-control" name="{{ $pos }}_estimate_damage_cost[]">
+					</div>
 				</div>
 				<hr />
 			</div>
@@ -642,7 +668,10 @@
 			<div class="col-md-12">
 				<div class="mb-3">
 					<label class="form-label">Estimate Damage Cost</label>
-					<input type="text" class="form-control" name="{{ $pos }}-estimate_damage_cost">
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">R</span>
+						<input type="number" class="form-control" name="{{ $pos }}_estimate_damage_cost[]">
+					</div>
 				</div>
 				<hr />
 			</div>
@@ -656,6 +685,7 @@
 						<th>Position</th>
 						<th>Type Of Damage</th>
 						<th>Severity</th>
+						<th>Cost</th>
 						<th></th>
 					</thead>
 					<tbody>
@@ -668,6 +698,7 @@
 							<td>{{ $damage->poasition }}</td>
 							<td>{{ $damage->type }}</td>
 							<td>{{ $damage->severity }}</td>
+							<td>{{ $damage->estimate_damage_cost }}</td>
 							<td class="text-end">
 								<a href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
 							</td>

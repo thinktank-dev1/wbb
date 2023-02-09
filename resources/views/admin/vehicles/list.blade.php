@@ -131,7 +131,7 @@
                 console.log(res);
                 if(res.status == "success"){
                     $('#model-select').html(res.html);
-                    var model = "{{ old('model') ?? $vehicle->model }}";
+                    var model = "{{ old('model') ?? "" }}";
                     if(model != ""){
                         $('#model-select option[value="'+model+'"]').attr("selected", "selected");
                         getVariants();
@@ -151,7 +151,7 @@
             success: function(res) {
                 if(res.status == "success"){
                     $('#variant-select').html(res.html);
-                    var variant = "{{ old('variant') ?? $vehicle->variant }}";
+                    var variant = "{{ old('variant') ?? "" }}";
                     if(variant != ""){
                         $('#variant-select option[value="'+variant+'"]').attr("selected", "selected");
                     }

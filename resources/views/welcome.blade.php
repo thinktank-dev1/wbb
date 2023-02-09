@@ -5,7 +5,7 @@
 <section class="banner">
     <img class="img-fluid" src="{{ asset('images/wbbonline_img_5.png') }}" alt="banner">
     <div class="container-fluid buttons-container">
-        <div class="row align-items-center buttons">
+        <div class="row align-items-center buttons banner-btns">
             <div class="col banner-btn-col">
                 <a href="{{ route('login') }}"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_4.png') }}" alt="login"></a>
             </div>
@@ -80,16 +80,16 @@
                 </li>
             </ul>      
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 registration-info">
+        <div id="reg-info" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 registration-info">
             <div class="card form-card">
                 <div class="card-body">
                     <h5 class="card-title assistance-card-title">NEED ASSISTANCE OR WANT TO FIND OUT MORE ABOUT OUR AUCTIONS?</h5>
                     <h6 class="card-subtitle assistance-card-subtitle mb-2">Get in touch with us</h6>
-                    <div class="row">
-                        <div class="col-6 assistance-icons">
+                    <div class="row scl-lnk-icon">
+                        <div id="grid-lnks" class="col-5 assistance-icons">
                             <a href=""><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_11.png') }}" alt="phone-icon"></a><span class="card-span">CALL US</span>
                         </div>
-                        <div class="col-6 assistance-icons"> 
+                        <div id="grid-lnks" class="col-7 assistance-icons"> 
                             <a href="mailto:info@webuybakkiesonline.co.za"><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_10.png') }}" alt="email-icon"></a><span class="card-span">SEND AN EMAIL</span>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         <div class="form-group">
                             <input type="email" name="email" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="Email">
                         </div>
-                        <center><button class="btn btn-primary assist-btn mb-2" type="submit">SUBMIT</button></center>
+                        <center><button class="btn btn-primary assist-btn mb-2 sbmt-btn" type="submit">SUBMIT</button></center>
                     </form>
                     <p class="card-disclaimer">
                         *By clicking SUBMIT you grant We Buy Bakkies Online permission

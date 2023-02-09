@@ -143,7 +143,7 @@
                                 <dl class="row bid-info-row">
                                     <dt class="col-sm-8">
                                         <p class="lot-details-text text-left"> trade price</p>
-                                        <p class="lot-details-text text-left"> starting bid <i class="bi bi-question-circle-fill question-mark"></i></p>
+                                        <p class="lot-details-text text-left"> opening bid <i class="bi bi-question-circle-fill question-mark"></i></p>
                                     </dt>
                                     <dd class="col-sm-4">
                                         <p class="lot-details-desc text-right">R 0.00</p>
@@ -162,18 +162,22 @@
                                         </dd>
                                     </dl> 
                                 </div>
-                                <dl class="row bid-info-row">
-                                    <dt class="col-sm-7">
-                                        <p id="no-margin" class="lot-reserve-price-text text-left mt-4 ml-2">reserve price met <i class="bi bi-question-circle-fill question-mark"></i></p>
-                                        <p id="no-margin" class="lot-total-bids-text text-left ml-2">total bids</p>
-                                        <p id="no-margin"  class="lot-next-bid-text text-left ml-2">next bid</p>
-                                    </dt>
-                                    <dd class="col-sm-5">
-                                        <p class="lot-reserve-price-desc text-right mt-4 mr-2">@if($lot->highestBid()) @if($lot->highestBid()->bid_amount >= $lot->reserve_price) Yes @else No @endif @else No @endif </p>
-                                        <p class="lot-total-bids-desc text-right mr-2">{{ $lot->bids->count() }}</p>
-                                        <p class="lot-next-bid-desc text-right">R {{ number_format($lot->nextBidAmount(), 2) }}</p>
-                                    </dd>
-                                </dl> 
+                                <table class="table mt-4">
+                                  <tbody>
+                                    <tr>
+                                      <td class="lot-reserve-price-text text-left">reserve price met <i class="bi bi-question-circle-fill question-mark"></i></td>
+                                      <td class="lot-reserve-price-desc text-right">@if($lot->highestBid()) @if($lot->highestBid()->bid_amount >= $lot->reserve_price) Yes @else No @endif @else No @endif </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="lot-total-bids-text text-left">total bids</td>
+                                      <td class="lot-total-bids-desc text-right">{{ $lot->bids->count() }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="lot-next-bid-text text-left">next bid</td>
+                                      <td class="lot-next-bid-desc text-right">R {{ number_format($lot->nextBidAmount(), 2) }}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                                 <div class="col-md-12 bid-now-btn-section d-flex justify-content-end mb-1 bid-btn-row">
                                     <button class="btn btn-primary bid-now-btn web-btn" wire:click.prevent="placeBid" >BID NOW</button>
                                 </div>
@@ -262,7 +266,7 @@
                     <div class="col-md-6 mb-5">
                         <div class="card lot-details-card">
                             <div class="col lot-details-header">
-                                <h3 class="lot-details-heading mt-2">ACCIDENT REPORT</h3>
+                                <h3 class="lot-details-heading mt-2">VEHICLE CONDITION REPORT</h3>
                             </div>
                             <div class="card-body report-details-body">
                                 <table class="table lot-details-table">
@@ -319,10 +323,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 d-flex justify-start inspection-report-header mb-4">
-                        <h3 class="inspection-title mt-3">
-                            Inspection Report
-                        </h3>
+                    <div class="col-md-12 inspection-report-header mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="inspection-title mt-3">
+                                    Inspection Report
+                                </h3>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <h3 class="mt-3 mr-5 estimate-title">Estimated Repair Cost: R{{ $lot->repairTotal() }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="est-text ml-2 mt-2 mb-4"> 
+                            This estimate repair cost is to be used as a guide only.
+                            We strongly suggest that you view the car before you bid.
+                        </p>
                     </div>
                     <div class="col-md-12 mb-4">
                         <div class="card w-100 top-card">
@@ -344,12 +361,14 @@
                                                 <p class="insp-text ml-2 mt-4"> POSITION</p>
                                                 <p class="insp-text ml-2"> {{ $inspection->poasition  }}</p>
                                                 <hr class="line-three">
+                                                <p class="insp-text ml-2 mt-4"> ESTIMATED REPAIR COST</p>
+                                                <p class="insp-text ml-2"> R {{ $inspection->estimate_damage_cost   }}</p>
                                             </div>
                                             <div class="col-sm-3 mb-3">
                                                 <p class="insp-text ml-2 mt-4"> TYPE OF DAMAGE</p>
                                                 <p class="insp-text ml-2"> {{ $inspection->type  }}</p>
                                             </div>
-                                            <div class="col-sm- mb-3">
+                                            <div class="col-sm-3 mb-3">
                                                 <p class="insp-text ml-2 mt-4"> DAMAGE SEVERITY</p>
                                                 <p class="insp-text ml-2">{{ $inspection->severity   }}</p>
                                             </div>
@@ -395,6 +414,8 @@
                                                 <p class="insp-text ml-2 mt-4"> POSITION</p>
                                                 <p class="insp-text ml-2"> {{ $inspection->poasition  }}</p>
                                                 <hr class="line-three">
+                                                <p class="insp-text ml-2 mt-4"> ESTIMATED REPAIR COST</p>
+                                                <p class="insp-text ml-2"> R {{ $inspection->estimate_damage_cost   }}</p>
                                             </div>
                                             <div class="col-sm-3 mb-3">
                                                 <p class="insp-text ml-2 mt-4"> TYPE OF DAMAGE</p>
@@ -446,6 +467,8 @@
                                                 <p class="insp-text ml-2 mt-4"> POSITION</p>
                                                 <p class="insp-text ml-2"> {{ $inspection->poasition  }}</p>
                                                 <hr class="line-three">
+                                                <p class="insp-text ml-2 mt-4"> ESTIMATED REPAIR COST</p>
+                                                <p class="insp-text ml-2"> R {{ $inspection->estimate_damage_cost   }}</p>
                                             </div>
                                             <div class="col-sm-3 mb-3">
                                                 <p class="insp-text ml-2 mt-4"> TYPE OF DAMAGE</p>
@@ -497,6 +520,8 @@
                                                 <p class="insp-text ml-2 mt-4"> POSITION</p>
                                                 <p class="insp-text ml-2"> {{ $inspection->poasition  }}</p>
                                                 <hr class="line-three">
+                                                <p class="insp-text ml-2 mt-4"> ESTIMATED REPAIR COST</p>
+                                                <p class="insp-text ml-2"> R {{ $inspection->estimate_damage_cost   }}</p>
                                             </div>
                                             <div class="col-sm-3 mb-3">
                                                 <p class="insp-text ml-2 mt-4"> TYPE OF DAMAGE</p>
@@ -548,6 +573,8 @@
                                                 <p class="insp-text ml-2 mt-4"> POSITION</p>
                                                 <p class="insp-text ml-2"> {{ $inspection->poasition  }}</p>
                                                 <hr class="line-three">
+                                                <p class="insp-text ml-2 mt-4"> ESTIMATED REPAIR COST</p>
+                                                <p class="insp-text ml-2"> R {{ $inspection->estimate_damage_cost   }}</p>
                                             </div>
                                             <div class="col-sm-3 mb-3">
                                                 <p class="insp-text ml-2 mt-4"> TYPE OF DAMAGE</p>
@@ -595,6 +622,12 @@
         $(document).ready(function(){
             window.Echo.channel('auction-chanel').listen('.auction.update', (data) => {
                 if(data.action == 'bid_placed'){
+                    Livewire.emit('reloadCar');
+                }
+                if(data.action == 'start'){
+                    Livewire.emit('reloadCar');
+                }
+                if(data.action == 'end'){
                     Livewire.emit('reloadCar');
                 }
             });   
