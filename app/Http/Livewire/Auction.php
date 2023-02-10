@@ -21,6 +21,7 @@ class Auction extends Component
     public $view_type;
     public $next_auction_time;
     public $is_fvourite;
+    public $auto_bid_amount;
     
     protected $listeners = ['reloadCar' => '$refresh'];
     
@@ -49,18 +50,39 @@ class Auction extends Component
     
     public function placeBid($lot_id){
         $lot = Lot::find($lot_id);
-        if($this->custom_amount){
-            $bid_amount = $this->custom_amount;
-            $this->custom_amount = null;
+        if($this->group->status != 2){
+            if($this->custom_amount){
+                $bid_amount = $this->custom_amount;
+                $this->custom_amount = null;
+            }
+            else{
+                $bid_amount = $lot->nextBidAmount();
+            }
+            
+            $functions = new AuctionFunctions();
+            $bid = $functions->placeBid($lot_id, Auth::user()->id, $bid_amount, 'live');
+            if($bid['status'] == "success"){
+                $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
+            }
         }
         else{
-            $bid_amount = $lot->nextBidAmount();
+            $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => "Auction has closed"]);    
         }
-        
-        $functions = new AuctionFunctions();
-        $bid = $functions->placeBid($lot_id, Auth::user()->id, $bid_amount, 'live');
-        if($bid['status'] == "success"){
-            $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
+    }
+    
+    public function updatedAutoBidAmount(){
+        if($this->group->status != 2){
+            foreach($this->auto_bid_amount AS $k=>$v){
+                $functions = new AuctionFunctions();
+                $bid = $functions->placeBid($k, Auth::user()->id, $v, 'auto');
+                if($bid['status'] == "success"){
+                    $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
+                }
+                if($bid['status'] == "error"){
+                    $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => $bid['message']]);
+                } 
+            }
+            $this->auto_bid_amount = [];
         }
     }
     

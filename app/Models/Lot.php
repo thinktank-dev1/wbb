@@ -56,15 +56,15 @@ class Lot extends Model
     }
     
     public function highestBid(){
-        return $this->bids()->where('bid_type','live')->orderBy('bid_amount', 'DESC')->first();
+        return $this->bids()->where('bid_type','live')->orderBy('bid_amount', 'DESC')->orderBy('id', 'ASC')->first();
     }
     
     public function highestAutoBid(){
-        return $this->bids()->where('bid_type','auto')->orderBy('bid_amount', 'DESC')->first();
+        return $this->bids()->where('bid_type','auto')->orderBy('bid_amount', 'DESC')->orderBy('created_at', 'ASC')->first();
     }
     
     public function userHighestBid(){
-        return $this->bids()->where('user_id', Auth::user()->id)->orderBy('bid_amount', 'DESC')->first();
+        return $this->bids()->where('user_id', Auth::user()->id)->orderBy('bid_amount', 'DESC')->orderBy('id', 'ASC')->first();
     }
     
     public function nextBidAmount(){
@@ -76,5 +76,9 @@ class Lot extends Model
             $bid_amount = $this->start_price;
         }
         return $bid_amount;
+    }
+    
+    public function userHasBid(){
+        return null !== $this->bids()->where('user_id', Auth::user()->id)->first();
     }
 }

@@ -88,8 +88,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('filter-catalogue', [CatalogueController::class, 'filterCatalogue'])->name('filter-catalogue');    
     Route::get('sort-catalogue',[CatalogueController::class, 'sortCatalogueByDate']);
-    Route::get('sort-favourites', [CatalogueController::class, 'sortFavouritesByDate']);
-    Route::get('filter-favourites', [CatalogueController::class, 'filterFavourites'])->name('filter-favourites'); 
     
     Route::group(['prefix' => 'admin'], function(){
         Route::get('dashboard', [AdminDashboardController::class, 'index']);

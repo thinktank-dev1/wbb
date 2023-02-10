@@ -24,24 +24,34 @@ class ViewLot extends Component
     }
     
     public function placeBid(){
-        $bid_amount = $this->lot->nextBidAmount();
-        
-        $functions = new AuctionFunctions();
-        $bid = $functions->placeBid($this->lot->id, Auth::user()->id, $bid_amount, 'live');
-        if($bid['status'] == "success"){
-            $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
+        if($this->lot->group->status == 1){
+            $bid_amount = $this->lot->nextBidAmount();
+            
+            $functions = new AuctionFunctions();
+            $bid = $functions->placeBid($this->lot->id, Auth::user()->id, $bid_amount, 'live');
+            if($bid['status'] == "success"){
+                $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
+            }
+        }
+        else{
+            $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => "Auction is closed"]);
         }
     }
     
     public function updatedAutoBidAmount(){
-        $bid_amount = $this->auto_bid_amount;
-        $functions = new AuctionFunctions();
-        $bid = $functions->placeBid($this->lot->id, Auth::user()->id, $bid_amount, 'auto');
-        if($bid['status'] == "success"){
-            $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
+        if($this->lot->group->status == 1){
+            $bid_amount = $this->auto_bid_amount;
+            $functions = new AuctionFunctions();
+            $bid = $functions->placeBid($this->lot->id, Auth::user()->id, $bid_amount, 'auto');
+            if($bid['status'] == "success"){
+                $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
+            }
+            if($bid['status'] == "error"){
+                $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => $bid['message']]);
+            }
         }
-        if($bid['status'] == "error"){
-            $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => $bid['message']]);
+        else{
+            $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => "Auction is closed"]);
         }
     }
     

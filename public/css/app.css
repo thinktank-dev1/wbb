@@ -242,7 +242,7 @@ div .buttons {
 .registering-steps-section{
     position: relative;
     width: 100%;
-    height: 60vh;
+    min-height: 60vh;
     overflow-x: hidden;
 }
 
@@ -1820,6 +1820,18 @@ div .buttons {
   line-height: .8;
 }
 
+.auction-tbl td {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.list-auto-bid{
+    margin-left: -14px;
+}
+
+.list-maximum-bid-input{
+  max-width: 150px !important;
+}
+
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
@@ -1868,6 +1880,11 @@ input[type="range"]::-moz-range-track {
     /** Home Start **/
     .navbar-mobile, .mobile-nav-collapse{
         display:none;
+    }
+    
+    .input-group-section{
+        margin-left: 90px;
+        margin-top: -50px;
     }
 
     .banner {
@@ -1929,7 +1946,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .registering-steps-section {
-        height: 65vh;
+        min-height: 65vh;
     }
 
     .join-auction-card {
@@ -2040,6 +2057,14 @@ input[type="range"]::-moz-range-track {
     .links {
       margin-top: 1%;
     }
+    
+    .bid-disclaimer-section {
+      max-height: 39px;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 91px !important;
+    }
 }
 
 @media  screen and (max-device-width: 1500px) {
@@ -2136,12 +2161,8 @@ input[type="range"]::-moz-range-track {
       margin-top: 19%;
     }
     
-    .icon-btn{
-         margin-top: 4%;
-    }
-    
-    .maximum-bid-input {
-      max-width: 100px;
+    .tbl-maximum-bid-input {
+      max-width: 158px;
     }
     
     .bid-disclaimer-section {
@@ -2154,6 +2175,10 @@ input[type="range"]::-moz-range-track {
     
     .contact-bakkies {
       margin-top: -60px;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 97px !important;
     }
 }
 
@@ -2228,6 +2253,10 @@ input[type="range"]::-moz-range-track {
     
     .catalogue-search-label {
       margin-left: 20%;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 94px !important;
     }
 }
 
@@ -2359,6 +2388,18 @@ input[type="range"]::-moz-range-track {
       width: 76% !important;
       margin-left: 115px;
     }
+    
+    .lot-next-bid-desc {
+      font-size: 18px;
+    }
+    
+    .input-group-section {
+      margin-left: 80px;
+    }
+    
+    .tbl-maximum-bid-input {
+      max-width: 212px;
+    }
 }
 
 @media screen and (max-device-width: 1280px) {
@@ -2372,7 +2413,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .registering-steps-section {
-        height: 54vh;
+        min-height: 54vh;
     }
     
     .card-icons {
@@ -2460,6 +2501,42 @@ input[type="range"]::-moz-range-track {
     .lot-current-bid-text {
       line-height: 0.9;
     }
+    
+    .lot-current-bid-desc {
+      margin-top: 24px;
+    } 
+    
+    .lot-bid-increment-desc {
+      margin-top: 30%;
+    }
+    
+    .auto-bid-section {
+      min-width: 265px;
+    }
+    
+    .input-group-section {
+      margin-left: 72px;
+    }
+    
+    .lot-next-bid-desc {
+      font-size: 18px;
+    }
+    
+    .bid-disclaimer-text {
+      margin-right: 13%;
+    }
+    
+    .tbl-maximum-bid-input {
+      max-width: 229px;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 88px !important;
+    }
+    
+    .variant-spec-span {
+      line-height: 1;
+    }
 }
 
 @media screen and (max-device-width: 1024px){
@@ -2539,6 +2616,37 @@ input[type="range"]::-moz-range-track {
         line-height: 0.9;
     }
     /** Auction End **/
+    
+    .online-auction-bakkie{
+      margin-top: 32% !important;
+    }
+    
+    .form-card {
+      width: 86% !important;
+      margin-left: 29px;
+    }
+    
+    .registration-info {
+      min-height: 40vh;
+    }
+    
+    .registering-steps-section {
+      min-height: 32vh;
+    }
+    
+    .join-auction-banner {
+      height: 8vh !important;
+    }
+    
+    .list-view-btn{
+      margin-left: -64%;
+      position: absolute;
+    }
+    
+    .table-view-btn{
+      margin-left: -93%;
+    }
+
 }
 
 @media screen and (max-device-width: 992px){
@@ -2791,7 +2899,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .registering-steps-section {
-        height: 80vh;
+        min-height: 80vh;
     }
 
     .registering-steps-arrow-img {
@@ -3199,7 +3307,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .registering-steps-section {
-        height: 60vh;
+        min-height: 60vh;
     }
     /*
     .join-auction-card {
@@ -3417,7 +3525,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .registering-steps-section {
-        height: 56vh;
+        min-height: 56vh;
     }
 
     .registering-steps-heading {
@@ -3535,7 +3643,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .registering-steps-section {
-        height: 60vh;
+        min-height: 60vh;
     }
     /*
     .join-auction-banner {

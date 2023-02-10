@@ -11,6 +11,8 @@ use App\Models\Favourites;
 
 use Mail;
 
+use App\Lib\SmsApi;
+
 class AuctionCommand extends Command
 {
     /**
@@ -35,6 +37,7 @@ class AuctionCommand extends Command
     public function handle()
     {
         $this->init();
+        $this->removeFavourites(1);
         //$this->sendComm(1);
     }
     
@@ -89,7 +92,6 @@ class AuctionCommand extends Command
                         'variant' => $car->variant,
                         'amount' => number_format($bid->bid_amount, 2)    
                     ];
-                    //dd($data);
                     
                     Mail::send('mail.comm1', $data, function($message) use($user){
                         $message
@@ -98,6 +100,12 @@ class AuctionCommand extends Command
                         ->subject('We Buy Bakkies Auction Results');
                         $message->from('info@webuybakkies.co.za','We Buy Bakkies');
                     });
+                    
+                    //Send SMS
+                    $sms = new SmsApi();
+                    $message = "Congratulations, You have won We Buy Bakkies bid on ".$car->year.' '.$car->make;
+                    $cell = $user->contact_primary;
+                    $res = $sms->sendSms($cell, $message);
                 }
             }
             else{
@@ -109,7 +117,7 @@ class AuctionCommand extends Command
     public function removeFavourites($id){
         $group = AuctionGroup::find($id);
         foreach($group->lots AS $lot){
-            $favs = Favourites::where('lot_id', $lot->id);
+            $favs = Favourites::where('lot_id', $lot->id)->get();
             foreach($favs AS $fav){
                 $fav->delete();
             }

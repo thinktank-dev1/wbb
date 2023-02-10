@@ -39,7 +39,6 @@
                                 <div class="lot-slide mb-2">
                                 <div class="zoom-in"> <a class="btn btn-primary zoomin-btn zb" href="{{ asset('storage/'.$image->image_url) }}" ><i class="bi bi-zoom-in"></i> Click image to Zoom</a> </div>
                                 <img id="lot-car" class="img-fluid" src="{{ asset('storage/'.$image->image_url) }}" alt="favourites">
-                                <div class="view-all"> <a class="btn btn-primary view-all-btn slider-btn" href=""> VIEW ALL</a> </div>
                             </div>
                             @endforeach
                             <a class="next" onclick="plusSlides(1)"><img class="img-fluid lot-thumbnail cursor" src="{{ asset('images/wbbonline_btn_54.png') }}" alt="next-button"></a>
@@ -196,6 +195,9 @@
                                                 <input type="text" class="form-control maximum-bid-input" id="bid-amnt" wire:model.lazy="auto_bid_amount">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text decimal-span">.00</span>
+                                                </div>
+                                                <div class="col-sm-12 mt-3 ml-4">
+                                                    <a href="Javascript:void(0)" class="btn btn-primary">GO</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -627,8 +629,22 @@
                 if(data.action == 'start'){
                     Livewire.emit('reloadCar');
                 }
-                if(data.action == 'end'){
-                    Livewire.emit('reloadCar');
+                if(data.action == 'stop'){
+                    //Livewire.emit('reloadCar');
+                    location.reload();
+                }
+                if(data.action == "outbid"){
+                    id = data.user_id;
+                    cur_id = {{ Auth::user()->id }};
+                    if(id == cur_id){
+                        $.toast({
+                            heading: 'Error',
+                            text: "Your Auto Bid Has Been out bid",
+                            showHideTransition: 'slide',
+                            icon: 'error',
+                            position: 'mid-center',
+                        });
+                    }
                 }
             });   
             

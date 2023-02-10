@@ -11,8 +11,7 @@
                         <h5 class="catalogue-card-title">BAKKIE FINDER</h5>
                     </div>
                     <div class="card-body catalogue-card-body">
-                        <form method="get" action="{{ url('filter-catalogue') }}">
-                        
+                        <form method="GET" action="{{ url('filter-catalogue') }}">
                             <div class="row">
                                   <div class="col-4">
                                     <label class="catalogue-label" for="make">Make</label>
@@ -235,7 +234,7 @@
                                     <div class="col-6">
                                         <h4 class="bakkie-make">{{ $vehicle->make }}</h4>
                                         <h6 class="bakkie-model">{{ $vehicle->model }}</h6>
-                                        <p class="specifications-span">{{ $vehicle->variant }}</p>
+                                        <p class="specifications-span variant-spec-span">{{ $vehicle->variant }}</p>
                                         <table class="table catalogue-details-table">
                                           <tbody>
                                             <tr>
