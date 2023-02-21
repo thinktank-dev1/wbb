@@ -52,7 +52,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Company Registration Number</label>
-                                                <input type="text" class="form-control" name="company_registration_number" value="{{ old('company_registration_number') }}">
+                                                <input type="text" class="form-control" name="registration_number" value="{{ old('registration_number') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">

@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VehicleController;
 use App\Http\Controllers\Admin\AuctionGroupController;
 use App\Http\Controllers\Admin\AuctionController;
+use App\Http\Controllers\Admin\OptionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('vehicles', VehicleController::class);
         Route::get('delete-vehicle-image/{id}', [VehicleController::class, 'deleteVehicleImage']);
         Route::get('delete-report/{id}', [VehicleController::class, 'deleteReport']);
+        Route::get('vehicle/delete/{id}',[VehicleController::class, 'deleteVehicle']);
         Route::resource('auction-groups', AuctionGroupController::class);
         
         Route::get('add-lots-to-auction-group/{id}', [AuctionGroupController::class, 'showAddLots']);
@@ -104,6 +106,12 @@ Route::middleware('auth')->group(function () {
         Route::get('auction-results', [AuctionController::class, 'index']);
         Route::get('vehicles/status/{status}', [VehicleController::class, 'listByStatus']);
         Route::get('reset-car/{id}', [VehicleController::class, 'resetCar']);
+        Route::post('update-user-status/{id}', [UserController::class, 'updateUserStatus']);
+        
+        Route::get('options/{type}', [OptionsController::class, 'index']);
+        Route::get('options/{type}/{id}', [OptionsController::class, 'index']);
+        Route::post('saveOption', [OptionsController::class, 'saveOption']);
+        Route::get('delete-option/{id}', [OptionsController::class, 'deleteOption']);
     });
 });
 

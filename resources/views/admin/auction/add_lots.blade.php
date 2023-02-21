@@ -31,7 +31,7 @@
                                         <tr>
                                             <th>Show Reserve Price</th>
                                             <th>Values</th>
-                                            <th>Year - Make - Model - Variant</th>
+                                            <th>Stock No - Year - Make - Model - Variant</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -49,7 +49,7 @@
                                                     <input type="text" class="form-control" placeholder="Reserve Price" name="car[{{ $car->id }}][reserve_price]">
                                                 </div>
                                             </td>
-                                            <td>{{ $car->year.' - '.$car->make.' - '.$car->model.' - '.$car->variant }}</td>
+                                            <td>{{ $car->stock_number.' - '.$car->year.' - '.$car->make.' - '.$car->model.' - '.$car->variant }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

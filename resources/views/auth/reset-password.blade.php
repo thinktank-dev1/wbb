@@ -17,6 +17,7 @@
                         </div>
                         <form method="POST" action="{{ route('password.update') }}">
                             @csrf
+                            @method('PUT')
                             <input type="hidden" name="token" value="{{ $request->route('token') }}">
                             <div class="row">
                                 <div class="col-md-12">

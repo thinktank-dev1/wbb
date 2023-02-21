@@ -47,7 +47,7 @@
                                         <td class="text-end">R @if($car->lot->highestBid()) {{ number_format($car->lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif</td>
                                         <td>@if($car->lot->highestBid()) {{ ucwords($car->lot->highestBid()->bidder->first_name.' '.$car->lot->highestBid()->bidder->last_name) }} @endif</td>
                                         <td class="text-end">
-                                            <a href="{{ url('admin/vehicles/'.$car->id) }}">View</a>
+                                            <a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$car->id) }}">View</a>
                                         </td>
                                     </tr>
                                     @endforeach

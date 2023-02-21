@@ -79,7 +79,7 @@
                                         <td class="text-end">{{ number_format($lot->start_price,2) }}</td>
                                         <td class="text-end">{{ number_format($lot->increament_value,2) }}</td>
                                         <td class="text-end">{{ number_format($lot->reserve_price,2) }}</td>
-                                        <th class="text-end"><a href="{{ url('admin/remove-lot/'.$lot->id) }}" class="text-danger">Remove</a></th>
+                                        <th class="text-end"><a style="color:#8cd50a" href="{{ url('admin/remove-lot/'.$lot->id) }}" class="text-danger">Remove</a></th>
                                     </tr>
                                     @endif
                                     @endforeach

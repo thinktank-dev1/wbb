@@ -14,6 +14,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 use App\Models\Role;
+use Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -41,6 +42,34 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'confirmed', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:6'],
         ]);
+        
+        $id_document = $request->file('id_document');
+        $proxy_id = $request->file('proxy_id');
+        $proof_of_residence = $request->file('proof_of_residence');
+        $brm = $request->file('brm');
+        $vat_registration = $request->file('vat_registration');
+        
+        if($id_document){
+            $id_url = Storage::disk('public')->putFile('documents', $id_document);  
+        }
+        
+        
+        if($proxy_id){
+            $proxy_url = Storage::disk('public')->putFile('documents', $proxy_id);
+        }
+        
+        if($proof_of_residence){
+            $proof_url = Storage::disk('public')->putFile('documents', $proof_of_residence);
+        }
+        
+        if($brm){
+        
+            $brm_url = Storage::disk('public')->putFile('documents', $brm);
+        }
+        
+        if($vat_registration){
+            $vat_url = Storage::disk('public')->putFile('documents', $vat_registration);
+        }
     
         $role = Role::where('name', 'user')->first();
         $user = User::create([
@@ -54,6 +83,12 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'proxy_id' => $proxy_url,
+            'proof_of_residence' => $proof_url,
+            'brm' => $brm_url,
+            'vat_registration' => $vat_url,
+            'id_document' => $id_url,
+            'status' => 'In-Active'
         ]);
 
         event(new Registered($user));

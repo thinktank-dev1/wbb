@@ -23,7 +23,7 @@
 	</nav>
 
 	<nav class="navbar navbar-expand-sm">
-		<div class="container nav-container">
+		<div class="container nav-container" id="navigation">
 			<ul class="navbar-nav justify-content-end links">
 				<li class="nav-item">
 					<a class="nav-link nav-links a-link" href="{{ url('/') }}">HOME</a>
@@ -32,7 +32,7 @@
 					<a class="nav-link dropdown-toggle nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					AUCTIONS
 					</a>
-					<div class="dropdown-menu">
+					<div id="dropdown" class="dropdown-menu">
 						<a class="dropdown-item" href="{{ route('auction') }}">LIVE AUCTION</a>
 						<a class="dropdown-item" href="{{ route('catalogue') }}">AUCTION CATALOGUE</a>
 					</div>
@@ -41,7 +41,7 @@
 					<a class="nav-link dropdown-toggle nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					DEALERS
 					</a>
-					<div class="dropdown-menu">
+					<div id="dropdown" class="dropdown-menu">
 						<a class="dropdown-item" href="{{ url('profile') }}">MY ACCOUNT</a>
 						<a class="dropdown-item" href="{{ url('dashboard') }}">DASHBOARD</a>
 						@if(Auth::user())
@@ -68,7 +68,7 @@
 					<a class="nav-link dropdown-toggle nav-links" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
 					COMPANY
 					</a>
-					<div class="dropdown-menu">
+					<div id="dropdown" class="dropdown-menu">
 						<a class="dropdown-item" href="{{ url('/about-us') }}">ABOUT</a>
 					</div>
 				</li>

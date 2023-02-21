@@ -40,7 +40,7 @@
                             <p class="contact-disclaimer">
                                 *By clicking SUBMIT you grant We Buy Bakkies Online permission to collect and 
                                 manage your information according to the POPI Act. 
-                                Read more about our Privacy Policy <a href="">here</a>. 
+                                Read more about our Privacy Policy <a href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">here</a>. 
                             </p>
                         </div>
                     </div>

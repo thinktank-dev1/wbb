@@ -23,7 +23,7 @@
                             <h4 class="card-title">Create User</h4>
                         </div>
                         <div class="card-body">
-                            <form method="post" action="{{ url('admin/users') }}">
+                            <form method="post" action="{{ url('admin/users') }}" enctype="multipart/form-data">
                                 @csrf
                                 @include('admin.users.form')
                             </form>    

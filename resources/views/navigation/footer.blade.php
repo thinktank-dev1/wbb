@@ -36,10 +36,10 @@
       </ul>
     </div>
     <div class="col-lg-3 col-xs-12 mt-3">
-      <h2 class="footer-headings">Dealers</h2>
+      <h2 class="footer-headings">Privacy</h2>
       <ul class="ml-0 mb-3">
-        <li><a class="footer-links" href="{{ route('favourites', 'favourites') }}">Terms and Conditions</a></li>
-        <li><a class="footer-links" href="{{ route('favourites', 'favourites') }}">Privacy Policy</a></li>
+        <li><a class="footer-links" href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a></li>
+        <li><a class="footer-links" href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">Privacy Policy</a></li>
       </ul>
     </div>
     <div class="col-lg-4 col-xs-12 mt-3">
@@ -77,7 +77,7 @@
 </div>
 <div class="row footer-row mt-5">
     <div class="col copyright text-center">
-      <p class="copyright-text mt-4">Copyright © 2022 We Buy Bakkies Online | All rights reserved | Powered by <a href="https://thinktank.co.za" target="blank">ThinkTank Creative</a></p>
+      <p class="copyright-text mt-4">Copyright © 2023 We Buy Bakkies Online | All rights reserved | Powered by <a href="https://thinktank.co.za" target="blank">ThinkTank Creative</a></p>
     </div>
   </div>
 </div>

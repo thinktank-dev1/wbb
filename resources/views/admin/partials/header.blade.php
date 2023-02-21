@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn header-item border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user"></i>
                     <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>

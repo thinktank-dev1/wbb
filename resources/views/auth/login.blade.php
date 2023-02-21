@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1 mb-2 text-left">
-                                    <input type="checkbox" class="form-check-input terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
+                                    <input type="checkbox" class="form-check-input terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary btn-sm">LOG IN</button>

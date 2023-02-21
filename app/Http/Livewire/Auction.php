@@ -16,6 +16,7 @@ class Auction extends Component
     
     public $group;
     public $end_time;
+    public $start_time;
     public $has_auction;
     public $custom_amount;
     public $view_type;
@@ -24,6 +25,8 @@ class Auction extends Component
     public $auto_bid_amount;
     
     protected $listeners = ['reloadCar' => '$refresh'];
+    
+    //protected $listeners = ['refreshComponent' => '$refresh'];
     
     public function mount($favs = null){
         if($favs){
@@ -38,52 +41,16 @@ class Auction extends Component
             $this->end_time = date('M d, Y H:i:s', strtotime($end_time));
         }
         $now = date('Y-m-d');
-        $next_auction = AuctionGroup::where('status', 0)->where('date', '>=', $now)->first();
+        $next_auction = AuctionGroup::where('status', 0)->where('date', '=', $now)->orWhere('date', '>', $now)->first();
         if($next_auction){
             $this->next_auction_time = $next_auction->date.' '.$next_auction->start_time;
+            $start_time = $next_auction->date.' '.$next_auction->start_time;
+            $this->start_time = date('M d, Y H:i:s', strtotime($start_time));
         }
     }
     
     public function changeView($view){
         $this->view_type = $view;
-    }
-    
-    public function placeBid($lot_id){
-        $lot = Lot::find($lot_id);
-        if($this->group->status != 2){
-            if($this->custom_amount){
-                $bid_amount = $this->custom_amount;
-                $this->custom_amount = null;
-            }
-            else{
-                $bid_amount = $lot->nextBidAmount();
-            }
-            
-            $functions = new AuctionFunctions();
-            $bid = $functions->placeBid($lot_id, Auth::user()->id, $bid_amount, 'live');
-            if($bid['status'] == "success"){
-                $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
-            }
-        }
-        else{
-            $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => "Auction has closed"]);    
-        }
-    }
-    
-    public function updatedAutoBidAmount(){
-        if($this->group->status != 2){
-            foreach($this->auto_bid_amount AS $k=>$v){
-                $functions = new AuctionFunctions();
-                $bid = $functions->placeBid($k, Auth::user()->id, $v, 'auto');
-                if($bid['status'] == "success"){
-                    $this->dispatchBrowserEvent('toast', ['type' => 'success', 'message' => $bid['message']]);
-                }
-                if($bid['status'] == "error"){
-                    $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => $bid['message']]);
-                } 
-            }
-            $this->auto_bid_amount = [];
-        }
     }
     
     public function render(){

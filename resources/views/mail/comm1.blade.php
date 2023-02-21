@@ -103,7 +103,7 @@
                                                     Hello {{ $name }},
                                                 </p>
                                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                                                    Congradulations you won the We Buy Bakkies auction bid for the below mentioned vehicle:
+                                                    Congratulations you are the winning bidder on the below mentioned vehicle:
                                                 </p>
                                                 <br />
                                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">

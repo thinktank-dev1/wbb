@@ -45,23 +45,32 @@ body {
 
 .links {
     margin-left: auto;
-    margin-top: 3%;
+    margin-top: 1%;
     z-index: 1000;
 }
 
-.nav-links{
+#navigation a{
     font-family: Bold;
     font-size: 18px;
+    color: #2e2d2c;
+}
+
+
+#navigation .active a{
+    color: #ffffff;
+}
+
+
+#navigation a:hover {
+	color: #ffffff;
+}
+
+#dropdown a{
     color: #2e2d2c !important;
 }
 
-
-.navbar-nav > .active > a {
-    color: #ffffff;
-}
-
-.navbar-light .navbar-nav .nav-links:hover{
-    color: #ffffff;
+#dropdown a:hover{
+    background-color: #8cd50a !important;
 }
 
 .contact-nav {
@@ -539,6 +548,7 @@ div .buttons {
 
 .assistance-text{
     font-size: 18px;
+    line-height: 1 !important;
 }
 
 .assistance-bakkie{
@@ -1156,6 +1166,9 @@ div .buttons {
     margin-top: 12px;
     font-weight: 600;
     top: 0;
+    margin-left: 89% !important;
+    line-height: 1 !important;
+   
 }
 
 .lot-number-title{
@@ -1548,14 +1561,14 @@ div .buttons {
     font-family: Medium;
     font-size: 12px;
     color: #8cd50a; 
-    line-height: .2;
+    line-height: 1;
 }
 
 .specifications-span{
     font-family: Regular;
     font-size: 14px;
     color: #2e2d2c;
-    line-height: .2;
+    line-height: 1;
 }
 
 .lot-text{
@@ -1610,7 +1623,7 @@ div .buttons {
     font-family: Medium;
     font-size: 14px;
     color: #2e2d2c;
-    line-height: .5;
+    line-height: 1;
     margin-top: -10px;
 }
 
@@ -1631,9 +1644,10 @@ div .buttons {
 
 .favourite-span{
     font-family: Bold;
-    font-size: 14px;
+    font-size: 12px;
     color: #8cd50a;
     line-height: 1;
+    margin-top: 10px !important;
 }
 
 .added-span {
@@ -1831,6 +1845,17 @@ div .buttons {
 .list-maximum-bid-input{
   max-width: 150px !important;
 }
+
+.make-td{
+    width: 16%;
+}
+
+
+.timer_num{
+    font-size: 18px !important;
+}
+
+
 
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
@@ -2180,6 +2205,10 @@ input[type="range"]::-moz-range-track {
     .list-maximum-bid-input {
       max-width: 97px !important;
     }
+    
+    .back-to-cat-btn {
+        margin-left: 83% !important;
+    }
 }
 
 @media screen and (max-device-width: 1440px) {
@@ -2257,6 +2286,15 @@ input[type="range"]::-moz-range-track {
     
     .list-maximum-bid-input {
       max-width: 94px !important;
+    }
+    
+    .make-td,.lv-auto-btn {
+      line-height: 1.0 !important;
+    }
+    
+    .lv-bid-btn{
+        padding: 2px 30px !important;
+        line-height: 1 !important;
     }
 }
 
@@ -2367,7 +2405,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .specifications-span {
-      line-height: .1;
+      line-height: 1;
     }
     
     .favourite-heart-div {
@@ -2399,6 +2437,14 @@ input[type="range"]::-moz-range-track {
     
     .tbl-maximum-bid-input {
       max-width: 212px;
+    }
+    
+    .favourite-btn-space {
+      margin-top: 10px;
+    }
+    
+    .back-to-cat-btn {
+      margin-left: 80%;
     }
 }
 
@@ -2536,6 +2582,10 @@ input[type="range"]::-moz-range-track {
     
     .variant-spec-span {
       line-height: 1;
+    }
+    
+    .lv-bid-btn {
+      padding: 10px 30px !important
     }
 }
 
@@ -2774,7 +2824,35 @@ input[type="range"]::-moz-range-track {
     }
     
     /*Live Auction*/
-    
+        .list-view-btn {
+        position: relative;
+        margin-left: 0%;
+    }
+    .input-group{
+        margin-left: 0px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+
+    }
+    #no-padding{
+        padding: 0px!important;
+    }
+    .winning-bid-title{
+        width: 100%;
+    }
+    .go-btn{
+        margin-right: 12px;
+    }
+    .input-group-section{
+        margin-top: 0px;
+    }
+    #view-list{
+        display: none!important;
+    }
+    .table-view-btn {
+        margin-left: 0%
+    }
     .lot-top-bar{
         display: block!important;
         width: 100%!important;
@@ -2856,6 +2934,7 @@ input[type="range"]::-moz-range-track {
     .mrg-btm{
         margin-bottom: 20px;
     }
+
 }
 
 @media screen and (max-device-width: 810px){
@@ -3102,24 +3181,10 @@ input[type="range"]::-moz-range-track {
         background-color: #8cd50a;
     }
 
-  
-
     .icon-nav-container{
         height: 146px;
     }
-/*
-    .register-nav {
-        margin-top: -6%;
-        width: 80%;
-        margin-left: 6%;
-    }
 
-    .favourites-nav {
-        width: 80%;
-        margin-top: -67%;
-        margin-left: 142%;
-    }
-*/
     .contact-nav {
         margin-top: -2%;
         margin-left: -10px;
@@ -3151,28 +3216,11 @@ input[type="range"]::-moz-range-track {
         min-height: 50vh;
         max-width: 100%;
     }
-/*
-    .banner-btn-col {
-        margin-left: -65px;
-    }
-*/
- 
 
     .registration-info {
         min-height: 62vh;
     }
-    /*
-    .join-auction-card {
-        width: 58%;
-        margin-left: -5px;
-    }
-    */
-    /*
-    .view-catalogue-card {
-        margin-left: 304px;
-        width: 44%;
-    }
-    */
+
     .info-heading {
         font-size: 25px;
     }
@@ -3229,19 +3277,62 @@ input[type="range"]::-moz-range-track {
     }
     /** Auth End **/
 
-    /** Assistance Banner Start 
-    .assistance-banner-img {
-        margin-top: 206px;
-    }
-    **/
+    /** Assistance Banner Start **/
     .assistance-bakkie {
         margin-left: 22px;
     }
 
    
-
+     .lot-dt-tbl{
+        display: none !important;
+    }
+    
     
     /** Assistance Banner End **/
+    .list-maximum-bid-input {
+      max-width: 160px !important;
+    }
+    
+    .lot-make {
+      font-size: 20px !important;
+      line-height: 1 !important;
+    }
+    
+    .lot-model {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+    
+    .catalogue-card {
+      margin-left: 0%;
+    }
+    
+    .mobile-bakkie-card{
+        display: block !important;
+    }
+    
+    .bakkie-card{
+        display: none !important;
+    }
+    
+    .mobile-catalogue-card{
+         border: 2px solid rgba(191, 191, 191, 0.125) !important;   
+         border-radius: 0.5rem;
+    }
+    
+    .back-to-cat-btn {
+      position: absolute !important;
+      margin-top: 35px;
+      margin-left: -2%;
+    }
+    
+    .maximum-bid-input {
+      max-width: 130px;
+    }
+    
+    .view-lot-prepend {
+      margin-left: -120px;
+    }
 }
 
 @media screen and (max-device-width: 428px){
@@ -3254,19 +3345,7 @@ input[type="range"]::-moz-range-track {
     .online-auction-info {
         min-height: 60vh;
     }
-/*
-    .register-nav {
-        margin-top: -6%;
-        width: 76%;
-        margin-left: 1%;
-    }
 
-    .favourites-nav {
-        width: 80%;
-        margin-top: -64%;
-        margin-left: 90%;
-    }
-*/
     .container-img {
         margin-top: -14px;
     }
@@ -3309,20 +3388,7 @@ input[type="range"]::-moz-range-track {
     .registering-steps-section {
         min-height: 60vh;
     }
-    /*
-    .join-auction-card {
-        width: 64%;
-        margin-left: -25px;
-        margin-top: -58px;
-    }
-    */
-    /*
-    .view-catalogue-card {
-        margin-left: 217px;
-        margin-top: -59px;
-        width: 48%;
-    }
-    */
+    
     .registration-info {
         min-height: 65vh;
     }
@@ -3330,11 +3396,6 @@ input[type="range"]::-moz-range-track {
     .submit-img {
         max-width: 65%;
     }
-    /*
-    .join-auction-banner {
-        height: 7vh;
-    }
-    */
 
     .learn-more-btn {
         margin-left: 10px;
@@ -3372,21 +3433,12 @@ input[type="range"]::-moz-range-track {
     }
     /** Auth End **/
 
-    /** Auction Banner Start 
-
-    .assistance-banner-img {
-        margin-top: 302px;
-    }
-    **/
+    /** Auction Banner Start **/
     .assistance-bakkie {
         margin-left: 15px;
         width: 85%;
     }
-
     
-
-    
-
     .assistance-banner-bottom {
         height: 5vh;
     }
@@ -3395,6 +3447,48 @@ input[type="range"]::-moz-range-track {
         margin-top: 18px;
     }
     /** Auction Banner End **/
+    
+    .lot-dt-tbl{
+        display: none !important;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 160px !important;
+    }
+    
+    .lot-make {
+      font-size: 20px !important;
+      line-height: 1 !important;
+    }
+    
+    .lot-model {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+    
+    .catalogue-card {
+      margin-left: 0%;
+    }
+    
+    .mobile-bakkie-card{
+        display: block !important;
+        border-radius: .5em;
+    }
+    
+    .bakkie-card{
+        display: none !important;
+    }
+    
+    .mobile-catalogue-card{
+        border: 2px solid rgba(191, 191, 191, 0.125) !important;   
+        border-radius: 0.5rem;
+    }
+    
+    .back-to-cat-btn {
+      position: absolute !important;
+      margin-top: 35px;
+      margin-left: 6% !important;
+    }
 }
 
 @media screen and (max-device-width: 414px){
@@ -3469,6 +3563,47 @@ input[type="range"]::-moz-range-track {
 
    
     /** Assistance Banner End **/
+    .lot-dt-tbl{
+        display: none !important;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 160px !important;
+    }
+    
+    .lot-make {
+      font-size: 20px !important;
+      line-height: 1 !important;
+    }
+    
+    .lot-model {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+    
+    .catalogue-card {
+      margin-left: 0%;
+    }
+    
+    .mobile-bakkie-card{
+        display: block !important;
+        border-radius: .5em;
+    }
+    
+    .bakkie-card{
+        display: none !important;
+    }
+    
+    .mobile-catalogue-card{
+        border: 2px solid rgba(191, 191, 191, 0.125) !important;   
+        border-radius: 0.5rem;
+    }
+    
+    .back-to-cat-btn {
+      position: absolute !important;
+      margin-top: 35px;
+      margin-left: -2%;
+    }
 }
 
 @media screen and (max-device-width: 412px){
@@ -3535,22 +3670,7 @@ input[type="range"]::-moz-range-track {
     .registration-info {
         min-height: 64vh;
     }
-    /*
-    .join-auction-card {
-        margin-top: -56px;
-    }
-    */
-    /*
-    .view-catalogue-card {
-        margin-left: 208px;
-        margin-top: -56px;
-    }
     
-    
-    .join-auction-banner {
-        height: 6vh;
-    }
-    */
     .green-banner {
         display: none;
     }
@@ -3571,22 +3691,52 @@ input[type="range"]::-moz-range-track {
 
     
     /** Assistance Banner End **/
+    .lot-dt-tbl{
+        display: none !important;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 160px !important;
+    }
+    
+    .lot-make {
+      font-size: 20px !important;
+      line-height: 1 !important;
+    }
+    
+    .lot-model {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+    
+    .mobile-bakkie-card{
+        display: block !important;
+        border-radius: .5em;
+    }
+    
+    .bakkie-card{
+        display: none !important;
+    }
+    
+    .mobile-catalogue-card{
+        border: 2px solid rgba(191, 191, 191, 0.125) !important;   
+        border-radius: 0.5rem;
+    }
+    
+    .back-to-cat-btn {
+      position: absolute !important;
+      margin-top: 35px;
+      margin-left: -2%;
+    }
 }
 
 @media screen and (max-device-width: 390px){
     /** Home Start **/
-    .favourites-nav {
-        margin-left: 76%;
-      }
 
     .online-auction-info {
         min-height: 62vh;
     }
-    /*
-    .view-catalogue-card {
-        margin-left: 196px;
-    }
-    */
+
     /** Home End **/
 
     /** About Start **/
@@ -3615,20 +3765,52 @@ input[type="range"]::-moz-range-track {
     }
 
     
-    /** 
-    .assistance-banner-img {
-        margin-top: 275px;
+    /** Assistance Banner End **/
+    .lot-dt-tbl{
+        display: none !important;
     }
-    Assistance Banner End **/
+    
+    .list-maximum-bid-input {
+      max-width: 160px !important;
+    }
+    
+    .lot-make {
+      font-size: 20px !important;
+      line-height: 1 !important;
+    }
+    
+    .lot-model {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+    
+    .catalogue-card {
+      margin-left: 0%;
+    }
+    
+    .mobile-bakkie-card{
+        display: block !important;
+        border-radius: .5em;
+    }
+    
+    .bakkie-card{
+        display: none !important;
+    }
+    
+    .mobile-catalogue-card{
+        border: 2px solid rgba(191, 191, 191, 0.125) !important;   
+        border-radius: 0.5rem;
+    }
+    
+    .back-to-cat-btn {
+      position: absolute !important;
+      margin-top: 35px;
+      margin-left: -2%;
+    }
 }
 
 @media screen and (max-device-width: 384px){
     /** Home Start **/
-    .favourites-nav {
-        margin-left: 74%;
-    }
-
- 
 
     .online-auction-section-img {
         margin-bottom: -6px;
@@ -3645,20 +3827,11 @@ input[type="range"]::-moz-range-track {
     .registering-steps-section {
         min-height: 60vh;
     }
-    /*
-    .join-auction-banner {
-        height: 8vh;
-    }
-    */
+    
     .card-icons {
         width: 60px;
         margin-left: -14px;
     }
-    /*
-    .view-catalogue-card {
-        margin-left: 195px;
-    }
-    */
     
     /** Home End **/
 
@@ -3695,17 +3868,49 @@ input[type="range"]::-moz-range-track {
     
 
     
-    /**
-    .assistance-banner-img {
-        margin-top: 279px;
+    /** Assistance Banner End **/
+     
+    .lot-dt-tbl{
+        display: none !important;
     }
-     Assistance Banner End **/
+    
+    .list-maximum-bid-input {
+      max-width: 160px !important;
+    }
+    
+    .lot-make {
+      font-size: 20px !important;
+      line-height: 1 !important;
+    }
+    
+    .lot-model {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+    
+    .mobile-bakkie-card{
+        display: block !important;
+        border-radius: .5em;
+    }
+    
+    .bakkie-card{
+        display: none !important;
+    }
+    
+    .mobile-catalogue-card{
+        border: 2px solid rgba(191, 191, 191, 0.125) !important;   
+        border-radius: 0.5rem;
+    }
+    
+    .back-to-cat-btn {
+      position: absolute !important;
+      margin-top: 35px;
+      margin-left: -2%;
+    }
 }
 
 @media screen and (max-device-width: 375px){
     /** Home Start **/
-    
-
     .register-nav {
         margin-left: -4%;
     }  
@@ -3717,11 +3922,7 @@ input[type="range"]::-moz-range-track {
     .registration-info {
         min-height: 74vh;
     }
-    /*
-    .view-catalogue-card {
-        margin-left: 188px;
-    }
-    */
+    
     .online-auction-image {
         height: 36vh !important;
     }
@@ -3749,9 +3950,6 @@ input[type="range"]::-moz-range-track {
 
     /** Assistance Banner Start **/
    
-
-    
-
     .assistance-banner-bottom {
         height: 15vh;
     }
@@ -3764,6 +3962,52 @@ input[type="range"]::-moz-range-track {
         margin-top: 215px;
     }
     /** Assistance Banner End **/
+    
+     .lot-dt-tbl{
+        display: none !important;
+    }
+    
+    .list-maximum-bid-input {
+      max-width: 160px !important;
+    }
+    
+    .lot-make {
+      font-size: 20px !important;
+      line-height: 1 !important;
+    }
+    
+    .lot-model {
+      font-size: 18px !important;
+      line-height: 1 !important;
+    }
+    
+     .mobile-bakkie-card{
+        display: block !important;
+        border-radius: .5em;
+    }
+    
+    .bakkie-card{
+        display: none !important;
+    }
+    
+    .mobile-catalogue-card{
+        border: 2px solid rgba(191, 191, 191, 0.125) !important;   
+        border-radius: 0.5rem;
+    }
+    
+    .catalogue-card {
+      margin-left: 0%;
+    }
+    
+    .back-to-cat-btn {
+      position: absolute !important;
+      margin-top: 35px;
+      margin-left: -2%;
+    }
+    
+    .view-lot-prepend {
+      margin-left: -76px;
+    }
 }
 
 

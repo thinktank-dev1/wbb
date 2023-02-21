@@ -56,7 +56,7 @@ class Lot extends Model
     }
     
     public function highestBid(){
-        return $this->bids()->where('bid_type','live')->orderBy('bid_amount', 'DESC')->orderBy('id', 'ASC')->first();
+        return $this->bids()->where('bid_type', 'live')->orderBy('bid_amount', 'DESC')->orderBy('created_at', 'ASC')->first();
     }
     
     public function highestAutoBid(){
@@ -64,7 +64,12 @@ class Lot extends Model
     }
     
     public function userHighestBid(){
-        return $this->bids()->where('user_id', Auth::user()->id)->orderBy('bid_amount', 'DESC')->orderBy('id', 'ASC')->first();
+        return $this->bids()->where('user_id', Auth::user()->id)->where('bid_type','live')->orderBy('bid_amount', 'DESC')->first();
+    }
+    
+    
+    public function userHighestAutoBid(){
+        return $this->bids()->where('user_id', Auth::user()->id)->where('bid_type','auto')->orderBy('bid_amount', 'DESC')->orderBy('id', 'ASC')->first();
     }
     
     public function nextBidAmount(){
@@ -80,5 +85,18 @@ class Lot extends Model
     
     public function userHasBid(){
         return null !== $this->bids()->where('user_id', Auth::user()->id)->first();
+    }
+    
+    public function status(){
+        $reserve = $this->reserve_price;
+        if($this->highestBid() !== null ){
+            $high = $this->highestBid()->bid_amount;
+            if($reserve <= $high){
+                return "Sold";
+            }
+            else{
+                return "Not Sold";
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ use App\Models\VehicleImages;
 use App\Models\VehicleInspection;
 use App\Models\Lot;
 use App\Models\Bid;
+use App\Models\Option;
 
 use App\Lib\TransUnionApi;
 
@@ -29,6 +30,7 @@ class VehicleController extends Controller
     public $extras_options = [];
     public $damage_positions = [];
     public $natis_options = [];
+    public $tire_condition;
     /**
      * Display a listing of the resource.
      *
@@ -62,6 +64,7 @@ class VehicleController extends Controller
             'car_list' => $this->car_list,
             'extras_list' => $this->extras_list,
             'conditions_list' => $this->conditions_list,
+            'windscreen_list' => $this->windscreen_list,
             'top_positions' => $this->top_positions,
             'damage_types' => $this->damage_types,
             'damage_severity_list' => $this->damage_severity_list,
@@ -71,7 +74,8 @@ class VehicleController extends Controller
             'service_history_options' => $this->service_history_options,
             'extras_options' => $this->extras_options,
             'damage_positions' => $this->damage_positions,
-            'natis_options' => $this->natis_options
+            'natis_options' => $this->natis_options,
+            'tire_condition' => $this->tire_condition,
         ]);
     }
 
@@ -251,6 +255,7 @@ class VehicleController extends Controller
             'car_list' => $this->car_list,
             'extras_list' => $this->extras_list,
             'conditions_list' => $this->conditions_list,
+            'windscreen_list' => $this->windscreen_list,
             'top_positions' => $this->top_positions,
             'damage_types' => $this->damage_types,
             'damage_severity_list' => $this->damage_severity_list,
@@ -260,7 +265,8 @@ class VehicleController extends Controller
             'service_history_options' => $this->service_history_options,
             'extras_options' => $this->extras_options,
             'damage_positions' => $this->damage_positions,
-            'natis_options' => $this->natis_options
+            'natis_options' => $this->natis_options,
+            'tire_condition' => $this->tire_condition,
         ]);
     }
 
@@ -430,117 +436,92 @@ class VehicleController extends Controller
         $this->fuel_types = ['Petrol', 'Diesel', 'Electric', 'Hybrid', 'Gas'];
         $this->transmission_types = ['Manual', 'Automatic'];
         $this->car_list = CarList::distinct()->get(['make']);
-        $this->extras_list = ['Spare Keys', 'Digital Info Display', 'Canopy', 'Leather Seats', 'Nudge Bar', 'Roll Bar', 'Pano Roof', 'Satellite Navigation', 'Sunroof', 'Towbar', 'Multifunctional Steering wheel', 'Winch'];
-        $this->conditions_list = ['Excelent', 'Good', 'Fair', "Bad"];
-        $this->damage_types = ['Dent', 'Scratch', 'Chip', 'Crack'];
-        $this->damage_severity_list = ['Minor','Fair','Bad','Very Bad','Severe' ];
-        $this->top_positions = ['Head Panel','Hood','Roof Panel', 'Pano Roof', 'Sunroof', 'Truck Bed', 'Wheel Tub','Tail Gate'];
-        $this->left_right_positions = ['Bumper End', 'Fender','Front Door','Front Glass','Front Quarter', 'Lower Front Door Skin','Back Door','Back Door Glass', 'Lower Back Door Skin','Back Quarter', 'Valance panel', 'Inner Fender', 'Cowl Panel', 'Rocker Panel', 'Cab Coner', 'Bedside','Rear Panel','Wheel Arch Panel','Wheel House','Lower Rear Bedside', 'Miror', 'Front Door Handle', 'Back Door Handle'];
-        $this->front_positions = ['Hood','Bumper','Grille','Crash Guards','Left Head Lights', 'Right Head Lights', 'Left Fog Lamp', 'Right Fog Lamp', 'Left Indicator Lights', 'Right Indicator Lights', 'Left Wiper Blade', 'Right Wiper Blade', 'Radiator', 'Radiator Supports', 'Cowl Panel'];
-        $this->back_positions = ['Windishield','Tail Gate', 'Right Tail Light', 'Left Tail Light', 'Boot', 'Rear Bamper'];
+        
+        $cnds = Option::where('type', 'vehicle-condition')->select('name')->get();
+        foreach($cnds AS $cnd){
+            $this->conditions_list[] = $cnd->name;
+        }
+        
+        $wnd_scrns = Option::where('type', 'windscreen-condition')->select('name')->get();
+        foreach($wnd_scrns AS $wnd_scrn){
+            $this->windscreen_list[] = $wnd_scrn->name;
+        }
+        
+        $dmgs = Option::where('type', 'body-damage')->select('name')->get();
+        foreach($dmgs AS $dmg){
+            $this->damage_types[] = $dmg->name;
+        }
+        
+        $dmgs_servs = Option::where('type', 'damage-severity')->select('name')->get();
+        foreach($dmgs_servs AS $dmgs_serv){
+            $this->damage_severity_list[] = $dmgs_serv->name;
+        }
+        
+        $top_pos = Option::where('type', 'top-positions')->select('name')->get();
+        foreach($top_pos AS $top){
+            $this->top_positions[] = $top->name;
+        }
+        
+        $side_pos = Option::where('type', 'side-positions')->select('name')->get();
+        foreach($side_pos AS $side){
+            $this->left_right_positions[] = $side->name;
+        }
+        
+        $front_pos = Option::where('type', 'front-positions')->select('name')->get();
+        foreach($front_pos AS $front){
+            $this->front_positions[] = $front->name;
+        }
+        
+        $back_pos = Option::where('type', 'back-positions')->select('name')->get();
+        foreach($back_pos AS $back){
+            $this->back_positions[] = $back->name;
+        }
         $this->damage_positions = ['top', 'left', 'right','front','back'];
-        $this->natis_options = ['Bank', 'Dealer'];
-        $this->service_history_options = [
-            'Full history with agent',
-            'Full history with agent and independent workshop',
-            'Partial service history',
-            'No history',
-        ];
+        
+        $natis_ops = Option::where('type', 'natis-options')->select('name')->get();
+        foreach($natis_ops AS $natis_op){
+            $this->natis_options[] = $natis_op->name;
+        }
+        
+        $tire_conds = Option::where('type', 'tire-condition')->select('name')->get();
+        foreach($tire_conds AS $tire_cond){
+            $this->tire_condition[] = $tire_cond->name;
+        }
+        
+        $srvs_hists = Option::where('type', 'service-history')->select('name')->get();
+        foreach($srvs_hists AS $srvs_hist){
+            $this->service_history_options[] = $srvs_hist->name;
+        }
+        
+        $basic = [];
+        $ext_basic = Option::where('type', 'extras-basic')->select('name')->get();
+        foreach($ext_basic AS $ext_b){
+            $basic[] = $ext_b->name;
+        }
+        
+        $exterior = [];
+        $ext_exterior = Option::where('type', 'extras-exterior')->select('name')->get();
+        foreach($ext_exterior AS $ext_e){
+            $exterior[] = $ext_e->name;
+        }
+        
+        $standard = [];
+        $ext_standard = Option::where('type', 'extras-standard')->select('name')->get();
+        foreach($ext_standard AS $ext_s){
+            $standard[] = $ext_s->name;
+        }
+        
+        $top_spec = [];
+        $ext_top_spec = Option::where('type', 'extras-top-spec')->select('name')->get();
+        foreach($ext_top_spec AS $ext_t){
+            $top_spec[] = $ext_t->name;
+        }
+        
         $this->extras_options = [
-            'Basic' => [
-                'ABS Brake',
-                'Air Conditioning',
-                'Alarm',
-                'Alloy Wheel',
-                'Automatic',
-                'Balance Of Factory warranty',
-                'Central Locking',
-                'Electric Windows',
-                'Front Electric Windows',
-                'Full Service History',
-                'Immobilizer',
-                'iPod Input',
-                'Maintanance Plan',
-                'Manual',
-                'Power Steering',
-                'Service Plan',
-                'USB Input',
-            ],
-            'Exterior' => [
-                'Bullbar',
-                'Canopy',
-                'Locknuts',
-                'Nudge Bar',
-                'Rollbar',
-                'Roof Rack',
-                'Roof Rails',
-                'Rubberized Load Body',
-                'Running Boards',
-                'Skylights',
-                'Sunroof',
-                'Towbar',
-                'Winch'
-            ],
-            'Standard' => [
-                '4x2',
-                '4x4',
-                'Airbags',
-                'All Wheel Drive',
-                'Auxiliary Audio Input',
-                'CD Multi Changer',
-                'Descent Control',
-                'Diff Lock',
-                'Drink Cooler',
-                'Drink Holder',
-                'EBD Electric Brake Distribution',
-                'Electric Mirrors',
-                'ESP Electric Stability Programe',
-                'Fog Lights',
-                'Front Wheel Drive',
-                'Full House',
-                'Full Spare wheel',
-                'Radio',
-                'Radio/CD',
-                'Radio/CD/MP3',
-                'Rear windshield Defroster',
-                'Tinted Windows',
-                'Tonneau Cover'
-            ],
-            'Top Spec' => [
-                'Adjustable Suspension',
-                'Auto Dim Rear View Mirrors',
-                'Automatic Start Stop',
-                'Bluetooth Ready',
-                'Climate Controll',
-                'Cruise Controll',
-                'Detachable Tow Bar',
-                'DVD Vidio System',
-                'Electric Memory Seats',
-                'Headlight Washers',
-                'Heated Electric Mirrors',
-                'Keyless Go',
-                'Leather',
-                'LED Daytime Lights',
-                'Multifunctional Steering',
-                'Panoramic Roof',
-                'Rain Sensor',
-                'Rear Air Conditioning',
-                'Rear View Camera',
-                'Run-Flat Tires',
-                'Sat Nav',
-                'Seat Heaters',
-                'S-Line Package',
-                'Smash And Grab Windows ...',
-                'Sports Pack',
-                'Sports Seats',
-                'Third Rear Seat',
-                'Tracker',
-                'Traction Controll',
-                'Trip Computer',
-                'Tyre Presure Monitor',
-                'Voice Command',
-                'Xenon Headlights'
-            ]
+            'Basic' => $basic,
+            'Exterior' => $exterior,
+            'Standard' => $standard,
+            'Top Spec' => $top_spec
         ];
     }
     
@@ -689,6 +670,56 @@ class VehicleController extends Controller
         return back();
     }
     
+    public function deleteVehicle($id){
+        $vehicle = Vehicle::find($id);
+        $lot = Lot::where('vehicle_id', $id)->first();
+        $accident_report = VehicleAccidentReport::where('vehicle_id', $id)->first();
+        $vehicle_extras = VehicleExtras::where('vehicle_id', $id)->get();
+        $vehicle_images = VehicleImages::where('vehicle_id', $id)->get();
+        $vehicle_inspections = VehicleInspection::where('vehicle_id', $id)->get();
+        
+        if($lot){
+            $lot->delete();    
+        }
+        
+        if($accident_report){
+            $accident_report->delete();
+        }
+        
+        if($vehicle_extras){
+            foreach($vehicle_extras as $extra){
+              $extra->delete();  
+            }
+            
+        }
+        
+        if($vehicle_images){
+            foreach($vehicle_images as $img){
+                if($img->image_url){
+                    unlink("storage/".$img->image_url);    
+                }
+                $img->delete();
+            }
+            
+        }
+        
+        if($vehicle_inspections){
+            foreach($vehicle_inspections as $inspection){
+                if($inspection->image_url){
+                    unlink("storage/".$inspection->image_url);   
+                }
+                $inspection->delete();
+            }
+            
+        }
+        
+        if($vehicle){
+            $vehicle->delete();    
+        }
+        
+        return back();
+    }
+    
     public function listByStatus($status){
         $car_arr = [];
         $lots = Lot::whereHas('bids',function($q){
@@ -704,7 +735,7 @@ class VehicleController extends Controller
         }
         if($status == "sold"){
             foreach($lots AS $lot){
-                if($lot->reserve_price < $lot->highestBid()->bid_amount){
+                if($lot->reserve_price <= $lot->highestBid()->bid_amount){
                     $car_arr[] = $lot->vehicle_id;    
                 }
             }

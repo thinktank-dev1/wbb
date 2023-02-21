@@ -53,6 +53,12 @@ class AuctionCommand extends Command
             $group->status = 1;
             $group->save();
             
+            foreach($group->lots AS $lot){
+                $lot->status = 1;
+                $lot->extra_time = 0;
+                $lot->save();
+            }
+            
             $data = ['action' => 'start'];
             broadcast(new AuctionEvent($data));
         }
@@ -60,13 +66,35 @@ class AuctionCommand extends Command
         //Stop Auctions
         $groups = AuctionGroup::where('status', 1)->where('date', $date)->where('end_time', '<', $time)->get();
         foreach($groups AS $group){
-            $group->status = 2;
-            $group->save();
+            $close = true;
+            foreach($group->lots AS $lot){
+                $now = date('Y-m-d H:i:s');
+                if($lot->extra_time){
+                    $auction_end_time = $group->date.' '.$group->end_time;
+                    $end_time = date('Y-m-d H:i:s', strtotime("+".$lot->extra_time." minutes ".$auction_end_time));
+                    if($end_time <= $now){
+                        $lot->status = 2;
+                        $lot->save();
+                    }
+                    else{
+                        $close = false;
+                    }
+                }
+                else{
+                    $lot->status = "2";
+                    $lot->save();
+                }
+            }
+            if($close){
+                $group->status = 2;
+                $group->save();
+                
+                $this->sendComm($group->id);
+                $this->removeFavourites($group->id);
+            }
             
             $data = ['action' => 'stop'];
             broadcast(new AuctionEvent($data));
-            $this->sendComm($group->id);
-            $this->removeFavourites($group->id);
         }
     }
     
@@ -103,7 +131,7 @@ class AuctionCommand extends Command
                     
                     //Send SMS
                     $sms = new SmsApi();
-                    $message = "Congratulations, You have won We Buy Bakkies bid on ".$car->year.' '.$car->make;
+                    $message = "Congratulations you are the winning bidder on".' '.$car->year.' '.$car->make.' '.$car->variant.' '."for R". number_format($bid->bid_amount, 2);
                     $cell = $user->contact_primary;
                     $res = $sms->sendSms($cell, $message);
                 }

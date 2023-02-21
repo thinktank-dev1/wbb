@@ -20,7 +20,7 @@
                                 </ul>
                             </div>
                             <div class="col-md-8 offset-md-2">
-                                <form method="post" action="register">
+                                <form method="post" action="register" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mt-3">
                                         <div class="col-md-12 mb-3">
@@ -94,13 +94,49 @@
                                                 <input type="password" class="form-control" name="password_confirmation">
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                    		<hr />
+                                    	</div>
+                            			<div class="col-md-12">
+                            				<h5>Documents</h5>
+                            			</div>
+                            			<div class="col-md-6">
+                            				<div class="mb-3">
+                            					<label class="form-label">Identity Document</label>
+                            					<input type="file" class="form-control" name="id_document">
+                            				</div>
+                            			</div>
+                            			<div class="col-md-6">
+                            				<div class="mb-3">
+                            					<label class="form-label">Proof Of Residence</label>
+                            					<input type="file" class="form-control" name="proof_of_residence">
+                            				</div>
+                            			</div>
+                            			<div class="col-md-6">
+                            				<div class="mb-3">
+                            					<label class="form-label">VAT Registration</label>
+                            					<input type="file" class="form-control" name="vat_registration">
+                            				</div>
+                            			</div>
+                            			<div class="col-md-6">
+                            				<div class="mb-3">
+                            					<label class="form-label">BRM</label>
+                            					<input type="file" class="form-control" name="brm">
+                            				</div>
+                            			</div>
+                            			<div class="col-md-6">
+                            				<div class="mb-3">
+                            					<label class="form-label">Proxy ID</label>
+                            					<input type="file" class="form-control" name="proxy_id">
+                            				</div>
+                            			</div>
                                         <div class="col-md-12 text-center">
                                             <input type="submit" value="NEXT" class="btn btn-primary btn-sm">
                                             <div class="mt-3">
                                                 <p>Already have an account? <a href="{{ url('login') }}">Log In</a></p>
                                             </div>
                                             <div class="mt-1 mb-2 text-center">
-                                                <input type="checkbox" class="form-check-input register-terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
+                                                <input type="checkbox" class="form-check-input register-terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
                                             </div>
                                         </div>
                                     </div>

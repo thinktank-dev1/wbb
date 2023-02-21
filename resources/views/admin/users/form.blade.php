@@ -70,7 +70,17 @@
 					<input type="password" class="form-control" name="password_confirmation">
 				</div>
 			</div>
-
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">Status</label>
+					<select class="form-control custom-select custom-select-sm" name="status">
+                      <option selected>Change Status</option>
+                      <option value="{{ $user->status }}" disabled>{{ $user->status }}</option>
+                      <option value="Active"/>Approve</option>
+                      <option value="Rejected"/>Reject</option>
+                    </select>
+                </div>
+            </div>
 		</div>
 	</div>
 	<div class="col-md-6">
@@ -183,6 +193,81 @@
 					<label class="form-label">Code</label>
 					<input type="text" class="form-control" name="payment_code" value="@if($user->company) @if($user->company->payment) {{ $user->company->payment->code }} @endif  @endif">
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<hr />
+	</div>
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				<h5>Documents</h5>
+			</div>
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">Identity Document</label>
+					<input type="file" class="form-control" name="id_document">
+				</div>
+				@if($user->id_document)
+					<div class="mb-3">
+						<a href="{{ url('storage/'.$user->id_document) }}" target="_blank">
+							<i style="font-size:30px; color:#8cd50a" class="mdi mdi-file"></i>
+						</a>
+					</div>
+				@endif
+			</div>
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">Proof Of Residence</label>
+					<input type="file" class="form-control" name="proof_of_residence">
+				</div>
+				@if($user->proof_of_residence)
+					<div class="mb-3">
+						<a href="{{ url('storage/'.$user->proof_of_residence) }}" target="_blank">
+							<i style="font-size:30px; color:#8cd50a" class="mdi mdi-file"></i>
+						</a>
+					</div>
+				@endif
+			</div>
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">VAT Registration</label>
+					<input type="file" class="form-control" name="vat_registration">
+				</div>
+				@if($user->vat_registration)
+					<div class="mb-3">
+						<a href="{{ url('storage/'.$user->vat_registration) }}" target="_blank">
+							<i style="font-size:30px; color:#8cd50a" class="mdi mdi-file"></i>
+						</a>
+					</div>
+				@endif
+			</div>
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">BRM</label>
+					<input type="file" class="form-control" name="brm">
+				</div>
+				@if($user->brm)
+					<div class="mb-3">
+						<a href="{{ url('storage/'.$user->brm) }}" target="_blank">
+							<i style="font-size:30px; color:#8cd50a" class="mdi mdi-file"></i>
+						</a>
+					</div>
+				@endif
+			</div>
+			<div class="col-md-6">
+				<div class="mb-3">
+					<label class="form-label">Proxy ID</label>
+					<input type="file" class="form-control" name="proxy_id">
+				</div>
+				@if($user->proxy_id)
+					<div class="mb-3">
+						<a href="{{ url('storage/'.$user->proxy_id) }}" target="_blank">
+							<i style="font-size:30px; color:#8cd50a" class="mdi mdi-file"></i>
+						</a>
+					</div>
+				@endif
 			</div>
 		</div>
 	</div>

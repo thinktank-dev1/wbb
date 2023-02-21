@@ -28,6 +28,12 @@ class User extends Authenticatable
         'company_id',
         'email',
         'password',
+        'proxy_id',
+        'proof_of_residence',
+        'brm',
+        'vat_registration',
+        'id_document',
+        'status',
     ];
 
     /**

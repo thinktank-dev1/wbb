@@ -3,7 +3,7 @@
 <section class="login">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-5 text-center">
+            <div class="col-md-5 mt-5 mb-5 text-center">
                 <div class="card login-card">
                     <div class="card-body">
                         <h5 class="card-title login-title">PASSWORD RESET</h5>

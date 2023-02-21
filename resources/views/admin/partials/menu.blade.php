@@ -34,6 +34,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ url('/') }}">
+                        <i class="mdi mdi-home"></i>
+                        <span data-key="t-dashboard">Back To Website</span>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="mdi mdi-car-multiple"></i>
                         <span data-key="t-vehicles">Vehicles</span>
@@ -70,6 +76,30 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ url('admin/users/create') }}" data-key="t-user-create">Create User</a></li>
                         <li><a href="{{ url('admin/users') }}" data-key="t-user-list">List Users</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="mdi mdi-format-list-bulleted-square"></i>
+                        <span data-key="t-users">Dropdown Options</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ url('admin/options/body-types') }}">Body Types</a></li>
+                        <li><a href="{{ url('admin/options/vehicle-condition') }}">Vehicle Condition</a></li>
+                        <li><a href="{{ url('admin/options/windscreen-condition') }}">Windscreen Condition</a></li>
+                        <li><a href="{{ url('admin/options/body-damage') }}">Body Damage Types</a></li>
+                        <li><a href="{{ url('admin/options/damage-severity') }}">Damage Severity Types</a></li>
+                        <li><a href="{{ url('admin/options/top-positions') }}">Top Positions</a></li>
+                        <li><a href="{{ url('admin/options/side-positions') }}">Side Positions</a></li>
+                        <li><a href="{{ url('admin/options/front-positions') }}">Front Positions</a></li>
+                        <li><a href="{{ url('admin/options/back-positions') }}">Back Positions</a></li>
+                        <li><a href="{{ url('admin/options/natis-options') }}">Natis Options</a></li>
+                        <li><a href="{{ url('admin/options/tire-condition') }}">Tire Condition Options</a></li>
+                        <li><a href="{{ url('admin/options/service-history') }}">Service History Options</a></li>
+                        <li><a href="{{ url('admin/options/extras-basic') }}">Extras Basic</a></li>
+                        <li><a href="{{ url('admin/options/extras-exterior') }}">Extras Exterior</a></li>
+                        <li><a href="{{ url('admin/options/extras-standard') }}">Extras Standard</a></li>
+                        <li><a href="{{ url('admin/options/extras-top-spec') }}">Extras Top Spec</a></li>
                     </ul>
                 </li>
             </ul>

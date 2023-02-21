@@ -44,7 +44,52 @@
                         			{{ ucwords($user->id_type) }} Number:
                         			<span class="">{{ $user->id_number }}</span>
                         		</li>
+                        		<li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    Status:
+                                    <span class="">{{ $user->status }}</span>
+                        		</li>
+                        		<li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    Identity Documnent:
+                        		    @if($user->id_document)
+                						<a href="{{ url('storage/'.$user->id_document) }}" target="_blank">
+                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						</a>
+                					@endif
+                        		</li>
+                        		<li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    Proof Of Residence:
+                        			@if($user->proof_of_residence)
+                						<a href="{{ url('storage/'.$user->proof_of_residence) }}" target="_blank">
+                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						</a>
+                    				@endif
+                    			</li>
+                    			<li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    VAT Registration:
+                        			@if($user->vat_registration)
+                						<a href="{{ url('storage/'.$user->vat_registration) }}" target="_blank">
+                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						</a>
+                    				@endif
+                    		    </li>
+                    		    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    BRM:
+                        		    @if($user->brm)
+                						<a href="{{ url('storage/'.$user->brm) }}" target="_blank">
+                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						</a>
+                    				@endif
+                				</li>
+                				<li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    Proxy ID:
+                					@if($user->proxy_id)
+                						<a href="{{ url('storage/'.$user->proxy_id) }}" target="_blank">
+                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						</a>
+                    				@endif
+                    			</li>
                         	</ul>
+                        	
                         </div>
                     </div>
                     @if($user->company)
@@ -87,6 +132,7 @@
                         	</ul>
                         </div>
                     </div>
+                    @endif
                     @if($user->company->payment)
                     <div class="card">
                         <div class="card-header">
@@ -111,7 +157,6 @@
                         	</ul>
                         </div>
                     </div>
-                    @endif
                     @endif
                 </div>
                 <div class="col-md-8">

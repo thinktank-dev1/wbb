@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Storage as Storage;
 use Hash;
 use App\Models\User;
 use App\Models\Role;
@@ -56,7 +57,35 @@ class UserController extends Controller
         if($valid->fails()){
             return back()->withErrors($valid)->withInput();
         }
-
+        
+        $id_document = $request->file('id_document');
+        $proxy_id = $request->file('proxy_id');
+        $proof_of_residence = $request->file('proof_of_residence');
+        $brm = $request->file('brm');
+        $vat_registration = $request->file('vat_registration');
+        
+        if($id_document){
+            $id_url = Storage::disk('public')->putFile('documents', $id_document);  
+        }
+        
+        
+        if($proxy_id){
+            $proxy_url = Storage::disk('public')->putFile('documents', $proxy_id);
+        }
+        
+        if($proof_of_residence){
+            $proof_url = Storage::disk('public')->putFile('documents', $proof_of_residence);
+        }
+        
+        if($brm){
+        
+            $brm_url = Storage::disk('public')->putFile('documents', $brm);
+        }
+        
+        if($vat_registration){
+            $vat_url = Storage::disk('public')->putFile('document', $vat_registration);
+        }
+        
         $cmp = null;
         if($request->input('company_name')){
             $cmp = Company::create([
@@ -96,6 +125,12 @@ class UserController extends Controller
             'company_id' => $cmp->id ?? null,
             'email'  => $request->input('email'),
             'password'  => Hash::make($request->input('password')),
+            'proxy_id' => $proxy_url,
+            'proof_of_residence' => $proof_url,
+            'brm' => $brm_url,
+            'vat_registration' => $vat_url,
+            'id_document' => $id_url,
+            'status' => 'In-Active'
         ]);
         return redirect('admin/users');
     }
@@ -147,9 +182,47 @@ class UserController extends Controller
         $user->contact_secondary = $request->input('contact_secondary');
         $user->id_type = $request->input('id_type');
         $user->id_number = $request->input('id_number');
+        $user->status = $request->input('status');
         if($request->input('password')){
             $user->password  = Hash::make($request->input('password'));
         }
+        
+        $id_document = $request->file('id_document');
+        $proxy_id = $request->file('proxy_id');
+        $proof_of_residence = $request->file('proof_of_residence');
+        $brm = $request->file('brm');
+        $vat_registration = $request->file('vat_registration');
+        
+        if($id_document){
+            Storage::disk('public')->delete($user->id_document);
+            $id_url = Storage::disk('public')->putFile('documents', $id_document);  
+            $user->id_document = $id_url;
+        }
+        
+        if($proxy_id){
+            Storage::disk('public')->delete($user->proxy_id);
+            $proxy_url = Storage::disk('public')->putFile('documents', $proxy_id);
+            $user->proxy_id = $proxy_url;
+        }
+        
+        if($proof_of_residence){
+            Storage::disk('public')->delete($user->proof_of_residence);
+            $proof_url = Storage::disk('public')->putFile('documents', $proof_of_residence);
+            $user->proof_of_residence = $proof_url;
+        }
+        
+        if($brm){
+            Storage::disk('public')->delete($user->brm);
+            $brm_url = Storage::disk('public')->putFile('documents', $brm);
+            $user->brm = $brm_url;
+        }
+        
+        if($vat_registration){
+            Storage::disk('public')->delete($user->vat_registration);
+            $vat_url = Storage::disk('public')->putFile('document', $vat_registration);
+            $user->vat_registration = $vat_url; 
+        }
+        
         $user->save();
 
         $cmp = null;
@@ -205,5 +278,12 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+    
+    public function updateUserStatus($id, Request $request){
+        $status = $request->input('status');
+        $user = User::where('id',$id)->update(['status' => $status]);
+        
+        return back();
     }
 }

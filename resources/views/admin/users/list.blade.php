@@ -31,7 +31,7 @@
                                         <th>Contact</th>
                                         <th>Role</th>
                                         <th>Cars Bought</th>
-                                        <th></th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,10 +42,15 @@
                                         <td>{{ $user->contact_primary }}</td>
                                         <td>{{ $user->roles->description }}</td>
                                         <td>{{ $user->boughtCars() }}</td>
-                                        <td class="text-end">
-                                            <a href="{{ url('admin/users/'.$user->id) }}"><i class="mdi mdi-account-eye-outline"></i> View</a>
+                                        @if($user->status == NULL)
+                                            <td> In-Active</td>
+                                        @else
+                                            <td>{{ $user->status }}</td>
+                                        @endif
+                                        <td style="color:#8cd50a" class="text-end">
+                                            <a style="color:#8cd50a" href="{{ url('admin/users/'.$user->id) }}"><i class="mdi mdi-account-eye-outline"></i> View</a>
                                             &nbsp;|&nbsp;
-                                            <a href="{{ url('admin/users/'.$user->id.'/edit') }}"><i class="mdi mdi-account-edit-outline"></i> Edit</a>
+                                            <a style="color:#8cd50a" href="{{ url('admin/users/'.$user->id.'/edit') }}"><i class="mdi mdi-account-edit-outline"></i> Edit</a>
                                         </td>
                                     </tr>
                                     @endforeach

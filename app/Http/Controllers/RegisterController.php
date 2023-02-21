@@ -18,7 +18,7 @@ class RegisterController extends Controller
         $valid = Validator::make(Request::all(),[
             'company_name' => 'required',
             'company_type' => 'required',
-            'company_registration_number' => 'required',
+            'registration_number' => 'required',
             'contact_number' => 'required',
             'email' => 'required|email',
             'street' => 'required',
@@ -34,7 +34,7 @@ class RegisterController extends Controller
             'user_id' => Auth::user()->id,
             'company_name' => Request::input('company_name'),
             'company_type' => Request::input('company_type'),
-            'company_registration_number' => Request::input('company_registration_number'),
+            'registration_number' => Request::input('registration_number'),
             'contact_number' => Request::input('contact_number'),
             'email' => Request::input('email'),
             'street' => Request::input('street'),

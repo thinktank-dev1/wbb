@@ -23,7 +23,7 @@
                             <h4 class="card-title">Edit User</h4>
                         </div>
                         <div class="card-body">
-                            <form method="post" action="{{ url('admin/users/'.$user->id) }}">
+                            <form method="post" action="{{ url('admin/users/'.$user->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                 @include('admin.users.form')

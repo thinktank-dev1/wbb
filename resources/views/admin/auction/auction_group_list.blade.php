@@ -45,12 +45,12 @@
                     					<td>{{ $group->name }}</td>
                     					<td>{{ $group->start_time.' - '.$group->end_time }}</td>
                     					<td></td>
-                    					<th class="text-end">
-                    						<a href="{{ url('admin/add-lots-to-auction-group/'.$group->id) }}">Lots</a>
+                    					<th style="color:#8cd50a" class="text-end">
+                    						<a style="color:#8cd50a" href="{{ url('admin/add-lots-to-auction-group/'.$group->id) }}">Lots</a>
                     						&nbsp;|&nbsp;
-                    						<a href="{{ url('admin/auction-groups/'.$group->id) }}">View</a>
+                    						<a style="color:#8cd50a" href="{{ url('admin/auction-groups/'.$group->id) }}">View</a>
                     						&nbsp;|&nbsp;
-                    						<a href="{{ url('admin/auction-groups/'.$group->id.'/edit') }}">Edit</a>
+                    						<a style="color:#8cd50a" href="{{ url('admin/auction-groups/'.$group->id.'/edit') }}">Edit</a>
                     					</th>
                     				</tr>
                     				@endforeach

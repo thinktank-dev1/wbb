@@ -59,26 +59,40 @@
                 			<table class="table">
                 				<thead>
                 					<tr>
+                					    <th>Stock No.</th>
                 						<th>MM Code</th>
                 						<th>Year</th>
                 						<th>Make</th>
                 						<th>Model</th>
                 						<th>Variant</th>
+                						<th>Auction Date</th>
                 						<th></th>
                 					</tr>
                 				</thead>
                 				<tbody>
                 					@foreach($vehicles AS $vehicle)
                 					<tr>
+                					    <td>{{ $vehicle->stock_number }}</td>
                 						<td>{{ $vehicle->mmcode }}</td>
                 						<td>{{ $vehicle->year }}</td>
                 						<td>{{ $vehicle->make }}</td>
                 						<td>{{ $vehicle->model }}</td>
                 						<td>{{ $vehicle->variant }}</td>
-                						<td class="text-end">
-                							<a href="{{ url('admin/vehicles/'.$vehicle->id.'/edit') }}"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                						<td>@if($vehicle->lot()->exists()){{$vehicle->lot->auction->date}}@else - @endif</td>
+                						<td style="color:#8cd50a" class="text-end">
+                						    @if($vehicle->lot()->exists())
+                						        <a style="color:#8cd50a" href="javascript:void(0)"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                						    @else
+                						        <a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$vehicle->id.'/edit') }}"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                						    @endif
                 							&nbsp;|&nbsp;
-                							<a href="{{ url('admin/vehicles/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> View</a>
+                							<a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> View</a>
+                							&nbsp;|&nbsp;
+                							@if($vehicle->lot()->exists())
+                							    <a style="color:#8cd50a" href="javascript:void(0)"><i class="mdi mdi-car-info"></i> Delete</a>
+                							@else
+                							<a style="color:#8cd50a" href="{{ url('admin/vehicle/delete/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> Delete</a>
+                							@endif
                 						</td>
                 					</tr>
                 					@endforeach

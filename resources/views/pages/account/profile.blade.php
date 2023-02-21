@@ -30,7 +30,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <form method="post" action="{{ url('profile') }}" id="profile-frm">
+                                <form method="post" action="{{ url('profile') }}" id="profile-frm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -59,6 +59,71 @@
                                                         <input type="text" class="form-control" name="contact_secondary" value="{{ $user->contact_secondary }}">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                    				<div class="form-group">
+                                    					<label class="form-label">Identity Document</label>
+                                    					<input type="file" class="form-control" name="id_document">
+                                    				</div>
+                                    				@if($user->id_document)
+                                    					<div class="mb-3">
+                                    						<a href="{{ url('storage/'.$user->id_document) }}" target="_blank">
+                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						</a>
+                                    					</div>
+                                    				@endif
+                                    			</div>
+                                    			<div class="col-md-6">
+                                    				<div class="form-group">
+                                    					<label class="form-label">Proof Of Residence</label>
+                                    					<input type="file" class="form-control" name="proof_of_residence">
+                                    				</div>
+                                    				@if($user->proof_of_residence)
+                                    					<div class="mb-3">
+                                    						<a href="{{ url('storage/'.$user->proof_of_residence) }}" target="_blank">
+                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						</a>
+                                    					</div>
+                                    				@endif
+                                    			</div>
+                                    			<div class="col-md-6">
+                                    				<div class="form-group">
+                                    					<label class="form-label">VAT Registration</label>
+                                    					<input type="file" class="form-control" name="vat_registration">
+                                    				</div>
+                                    				@if($user->vat_registration)
+                                    					<div class="mb-3">
+                                    						<a href="{{ url('storage/'.$user->vat_registration) }}" target="_blank">
+                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						</a>
+                                    					</div>
+                                    				@endif
+                                    			</div>
+                                    			<div class="col-md-6">
+                                    				<div class="form-group">
+                                    					<label class="form-label">BRM</label>
+                                    					<input type="file" class="form-control" name="brm">
+                                    				</div>
+                                    				@if($user->brm)
+                                    					<div class="mb-3">
+                                    						<a href="{{ url('storage/'.$user->brm) }}" target="_blank">
+                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						</a>
+                                    					</div>
+                                    				@endif
+                                    			</div>
+                                    			<div class="col-md-6">
+                                    				<div class="form-group">
+                                    					<label class="form-label">Proxy ID</label>
+                                    					<input type="file" class="form-control" name="proxy_id">
+                                    				</div>
+                                    				@if($user->proxy_id)
+                                    					<div class="mb-3">
+                                    						<a href="{{ url('storage/'.$user->proxy_id) }}" target="_blank">
+                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						</a>
+                                    					</div>
+                                    				@endif
+                                    			</div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Email</label>
@@ -97,7 +162,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label clas="form-label">Company registration</label>
-                                                            <input type="text" class="form-control" name="company_registration_number" value="{{ $user->company->company_registration_number }}">
+                                                            <input type="text" class="form-control" name="registration_number" value="{{ $user->company->registration_number }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">

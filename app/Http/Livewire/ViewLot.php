@@ -34,12 +34,12 @@ class ViewLot extends Component
             }
         }
         else{
-            $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => "Auction is closed"]);
+            $this->dispatchBrowserEvent('toast', ['type' => 'error', 'message' => "Auction not active"]);
         }
     }
     
     public function updatedAutoBidAmount(){
-        if($this->lot->group->status == 1){
+        if($this->lot->group->status == 1 || $this->lot->group->status == 0){
             $bid_amount = $this->auto_bid_amount;
             $functions = new AuctionFunctions();
             $bid = $functions->placeBid($this->lot->id, Auth::user()->id, $bid_amount, 'auto');

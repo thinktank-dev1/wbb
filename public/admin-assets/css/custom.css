@@ -12,3 +12,8 @@
     background-color: #2e2d2c;
     border-color: #2e2d2c;
 }
+
+.vertical-menu {
+  background: #bfbfbf !important;
+  border-right: 1px solid #bfbfbf !important;
+}

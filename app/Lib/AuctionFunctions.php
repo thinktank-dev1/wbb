@@ -12,45 +12,136 @@ class AuctionFunctions{
         $lot = Lot::find($lot_id);
         $high_bid = $lot->highestBid();
         $save = true;
+        $prev_auto = $lot->highestAutoBid();
+        $start_price = $lot->start_price;
         
         if($type == "auto"){
             if($high_bid){
-                if($high_bid->bid_amount >= $bid_amount){
+                if($high_bid->bid_amount > $bid_amount){
                     $save = false;
                     return [
                         'status' => "error",
-                        'message' => "Bid amount must be greater than ".$high_bid->bid_amount
+                        'message' => "Bid amount is too low"
+                    ];
+                }
+            }
+            if($prev_auto){
+                //Check If Prev Is higher than new
+                if($prev_auto->bid_amount > $bid_amount){
+                    $save = false;
+                    return [
+                        'status' => "error",
+                        'message' => "Bid amount is too low"
+                    ];
+                }
+                elseif($prev_auto->bid_amount == $bid_amount){
+                    if($prev_auto->user_id != $user_id){
+                        Bid::create([
+                            'lot_id' => $lot_id,
+                            'user_id' => $user_id,
+                            'bid_amount' => $bid_amount,
+                            'bid_type' => 'live'    
+                        ]);
+                        Bid::create([
+                            'lot_id' => $lot_id,
+                            'user_id' => $prev_auto->user_id,
+                            'bid_amount' => $prev_auto->bid_amount,
+                            'bid_type' => 'live'    
+                        ]);
+                        $save = false;
+                    }
+                    
+                    $data = ['action' => 'bid_placed'];
+                    broadcast(new AuctionEvent($data));
+                    
+                    return [
+                        'status' => 'success',
+                        'message' => 'Bid placed sucessfully'
                     ];
                 }
                 else{
-                    //$prev_auto = $lot->bids->where('bid_type', 'auto')->sortByDesc('bid_amount')->sortBy('id')->first();
-                    $prev_auto = $lot->highestAutoBid();
+                    Bid::create([
+                        'lot_id' => $lot_id,
+                        'user_id' => $user_id,
+                        'bid_amount' => $bid_amount,
+                        'bid_type' => 'auto'    
+                    ]);
+                    Bid::create([
+                        'lot_id' => $lot_id,
+                        'user_id' => $user_id,
+                        'bid_amount' => $prev_auto->bid_amount,
+                        'bid_type' => 'live'    
+                    ]);
                     
-                    if($prev_auto){
-                        //Check If Prev Is higher than new
+                    //Notify Prev Bidder
+                    $sms = new SmsApi();
+                    $message = "Your We Buy Bakkies Auto Bid of ".$prev_auto->bid_amount." has been outbid, please login to place a new bid.";
+                    $cnt_user = User::find($prev_auto->user_id);
+                    $cell = $cnt_user->contact_primary;
+                    $res = $sms->sendSms($cell, $message);
+                    
+                    //Notify bidder if logged in
+                    $data = [
+                        "action" => "outbid",
+                        "user_id" => $cnt_user->id
+                    ];
+                    broadcast(new AuctionEvent($data));
+                    
+                    $data = ['action' => 'bid_placed'];
+                    broadcast(new AuctionEvent($data));
+                    
+                    return [
+                        'status' => "success",
+                        'message' => "Bid placed successfully"
+                    ];
+                }
+            }
+            else{
+                if($lot->nextBidAmount() < $bid_amount){
+                    Bid::create([
+                        'lot_id' => $lot_id,
+                        'user_id' => $user_id,
+                        'bid_amount' => $bid_amount,
+                        'bid_type' => 'auto'    
+                    ]);
+                    
+                    $data = ['action' => 'bid_placed'];
+                    broadcast(new AuctionEvent($data));
+                    
+                    return [
+                        'status' => "success",
+                        'message' => "Bid placed successfully"
+                    ];
+                }
+                else{
+                    return [
+                        'status' => "error",
+                        'message' => "Bid amount is too low"
+                    ];
+                }
+            }
+        }
+        
+        if($save){
+            $go = true;
+            if($prev_auto){
+                if($high_bid){
+                    if($prev_auto->bid_amount > $high_bid->bid_amount){
                         if($prev_auto->bid_amount > $bid_amount){
-                            $save = false;
-                            return [
-                                'status' => "error",
-                                'message' => "Bid amount must be greater than ".$prev_auto->bid_amount
-                            ];
-                        }
-                        else{
-                            if($prev_auto->bid_amount == $bid_amount){
-                                Bid::create([
-                                    'lot_id' => $lot_id,
-                                    'user_id' => $prev_auto->user_id,
-                                    'bid_amount' => $prev_auto->bid_amount,
-                                    'bid_type' => 'live'    
-                                ]);
+                            if($prev_auto->bid_amount >= $lot->nextBidAmount()){
                                 Bid::create([
                                     'lot_id' => $lot_id,
                                     'user_id' => $user_id,
-                                    'bid_amount' => $prev_auto->bid_amount,
+                                    'bid_amount' => $bid_amount,
+                                    'bid_type' => $type 
+                                ]);
+                                Bid::create([
+                                    'lot_id' => $lot_id,
+                                    'user_id' => $prev_auto->user_id,
+                                    'bid_amount' => $lot->nextBidAmount(),
                                     'bid_type' => 'live'    
                                 ]);
-                                $save = false;
-                                
+                                $go = false;
                                 $data = ['action' => 'bid_placed'];
                                 broadcast(new AuctionEvent($data));
                                 
@@ -60,87 +151,116 @@ class AuctionFunctions{
                                 ];
                             }
                             else{
-                                //if($prev_auto->bid_amount >= $lot->nextBidAmount()){
-                                    //Make Prev auto new highest value
-                                    Bid::create([
-                                        'lot_id' => $lot_id,
-                                        'user_id' => $user_id,
-                                        'bid_amount' => $prev_auto->bid_amount,
-                                        'bid_type' => 'live'    
-                                    ]);
-                                //}
-                                
-                                //Notify Prev Bidder
-                                $sms = new SmsApi();
-                                $message = "Your We Buy Bakkies Auto Bid of ".$prev_auto->bid_amount." has been outbid, please login to place a new bid.";
-                                $cnt_user = User::find($prev_auto->user_id);
-                                $cell = $cnt_user->contact_primary;
-                                $res = $sms->sendSms($cell, $message);
-                                
-                                //Notify bidder if logged in
-                                $data = [
-                                    "action" => "outbid",
-                                    "user_id" => $cnt_user->id
-                                ];
+                                Bid::create([
+                                    'lot_id' => $lot_id,
+                                    'user_id' => $prev_auto->user_id,
+                                    'bid_amount' => $bid_amount,
+                                    'bid_type' => 'live'    
+                                ]);
+                                Bid::create([
+                                    'lot_id' => $lot_id,
+                                    'user_id' => $user_id,
+                                    'bid_amount' => $bid_amount,
+                                    'bid_type' => $type 
+                                ]);
+                                $go = false;
+                                $data = ['action' => 'bid_placed'];
                                 broadcast(new AuctionEvent($data));
+                                return [
+                                    'status' => 'success',
+                                    'message' => 'Bid placed sucessfully'
+                                ];
                             }
                         }
                     }
                 }
-            }
-            else{
-                //Place your Bid
-                Bid::create([
-                    'lot_id' => $lot_id,
-                    'user_id' => $user_id,
-                    'bid_amount' => $lot->nextBidAmount(),
-                    'bid_type' => 'live'    
-                ]);
-            }
-        }
-        if($save){
-            //Check Auto Bids
-            $high_auto = $lot->highestAutoBid();
-            if($high_auto){
-                if($high_auto->bid_amount >= $bid_amount && $high_auto->bid_amount >= $lot->nextBidAmount()){
-                    if($high_auto){
+                else{
+                    if($prev_auto->bid_amount >= $lot->nextBidAmount()){
                         Bid::create([
                             'lot_id' => $lot_id,
-                            'user_id' => $high_auto->user_id,
-                            'bid_amount' => $lot->nextBidAmount(),
-                            'bid_type' => 'live' 
+                            'user_id' => $user_id,
+                            'bid_amount' => $bid_amount,
+                            'bid_type' => $type 
                         ]);
+                        Bid::create([
+                            'lot_id' => $lot_id,
+                            'user_id' => $prev_auto->user_id,
+                            'bid_amount' => $lot->nextBidAmount(),
+                            'bid_type' => 'live'    
+                        ]);
+                        $go = false;
+                        $data = ['action' => 'bid_placed'];
+                        broadcast(new AuctionEvent($data));
+                        
+                        return [
+                            'status' => 'success',
+                            'message' => 'Bid placed sucessfully'
+                        ];
+                    }
+                    else{
+                        Bid::create([
+                            'lot_id' => $lot_id,
+                            'user_id' => $prev_auto->user_id,
+                            'bid_amount' => $bid_amount,
+                            'bid_type' => 'live'    
+                        ]);
+                        Bid::create([
+                            'lot_id' => $lot_id,
+                            'user_id' => $user_id,
+                            'bid_amount' => $bid_amount,
+                            'bid_type' => $type 
+                        ]);
+                        $go = false;
+                        $data = ['action' => 'bid_placed'];
+                        broadcast(new AuctionEvent($data));
+                        return [
+                            'status' => 'success',
+                            'message' => 'Bid placed sucessfully'
+                        ];
                     }
                 }
-                else{
-                    //Notify Prev Bidder
-                    // $sms = new SmsApi();
-                    // $message = "Your We Buy Bakkies Auto Bid of ".$prev_auto->bid_amount." has been outbid, please login to place a new bid.";
-                    // $cnt_user = User::find($prev_auto->user_id);
-                    // $cell = $cnt_user->contact_primary;
-                    // $res = $sms->sendSms($cell, $message);
+            }
+            if($go){
+                if($high_bid){
+                    if($high_bid->bid_amount <= $bid_amount){
+                         Bid::create([
+                            'lot_id' => $lot_id,
+                            'user_id' => $user_id,
+                            'bid_amount' => $bid_amount,
+                            'bid_type' => $type 
+                        ]);
+                        
+                        $data = ['action' => 'bid_placed'];
+                        broadcast(new AuctionEvent($data));
+                        
+                        return [
+                            'status' => 'success',
+                            'message' => 'Bid placed sucessfully'
+                        ];
+                    }elseif($high_bid->bid_amount > $bid_amount){
+                        $save = false;
+                        return [
+                            'status' => "error",
+                            'message' => "Bid amount is too low"
+                        ];
+                    }
+                }else{
+                     Bid::create([
+                        'lot_id' => $lot_id,
+                        'user_id' => $user_id,
+                        'bid_amount' => $bid_amount,
+                        'bid_type' => $type 
+                    ]);
                     
-                    //Notify bidder if logged in
-                    // $data = [
-                    //     "action" => "outbid",
-                    //     "user_id" => $cnt_user->id
-                    // ];
-                    // broadcast(new AuctionEvent($data));
+                    $data = ['action' => 'bid_placed'];
+                    broadcast(new AuctionEvent($data));
+                    
+                    return [
+                        'status' => 'success',
+                        'message' => 'Bid placed sucessfully'
+                    ];
                 }
             }
-            Bid::create([
-                'lot_id' => $lot_id,
-                'user_id' => $user_id,
-                'bid_amount' => $bid_amount,
-                'bid_type' => $type 
-            ]);
-            $data = ['action' => 'bid_placed'];
-            broadcast(new AuctionEvent($data));
-            
-            return [
-                'status' => 'success',
-                'message' => 'Bid placed sucessfully'
-            ];
         }
     }
 }
