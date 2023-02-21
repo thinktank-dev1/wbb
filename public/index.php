@@ -1,4 +1,14 @@
 <?php
+ini_set('memory_limit', -1);
+ini_set('upload_max_filesize', 0);
+ini_set('post_max_size', -1);
+
+//echo ini_get('memory_limit');
+//echo ini_get('upload_max_filesize');
+//echo ini_get('post_max_size');
+//die();
+
+
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;

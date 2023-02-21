@@ -19,6 +19,8 @@ use App\Models\Lot;
 use App\Models\Bid;
 use App\Models\Option;
 
+use Image;
+
 use App\Lib\TransUnionApi;
 
 class VehicleController extends Controller
@@ -31,6 +33,8 @@ class VehicleController extends Controller
     public $damage_positions = [];
     public $natis_options = [];
     public $tire_condition;
+    public $windscreen_list;
+
     /**
      * Display a listing of the resource.
      *
@@ -181,9 +185,24 @@ class VehicleController extends Controller
         foreach($request->file('images') AS $image){
             if($image->isValid()){
                 $path = Storage::disk('public')->putFile('featured_images', $image);
+                $thumb = null;
+
+                $name = time().'.'.$image->getClientOriginalExtension();
+                
+                $size = $image->getSize();
+                if($size > 2000000){
+                    $thumb_file = Image::make($image->getRealPath());
+                    $thumb_file->resize('500',null, function($constraint){
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                    $thumb_file->save(storage_path('/app/public/thumbnails/'.$name), 70);
+                    $thumb = 'thumbnails/'.$name;
+                }
                 VehicleImages::create([
                     'vehicle_id' => $vehicle->id,
-                    'image_url' => $path
+                    'image_url' => $path,
+                    'thumbnail' => $thumb, 
                 ]);
             }
         }

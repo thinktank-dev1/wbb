@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleTableSeeder::class,
-            BodyTypeTableSeeder::class
+            BodyTypeTableSeeder::class,
+            OptionsTableSeeder::class,
         ]);
     }
 }

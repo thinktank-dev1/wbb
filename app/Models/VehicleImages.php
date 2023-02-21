@@ -11,6 +11,7 @@ class VehicleImages extends Model
 
     protected $fillable = [
         'vehicle_id',
-        'image_url'
+        'image_url',
+        'thumbnail'
     ];
 }
