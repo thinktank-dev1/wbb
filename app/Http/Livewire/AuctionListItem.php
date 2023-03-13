@@ -22,10 +22,17 @@ class AuctionListItem extends Component
         $group = $this->lot->group;
         
         $end_time = $group->date.' '.$group->end_time;
+        $start_time = $group->date.' '.$group->start_time;
         if($this->lot->extra_time){
             $end_time = date('Y-m-d H:i:s', strtotime("+".$this->lot->extra_time." minutes ".$end_time));
         }
-        $this->time_left = date('M d, Y H:i:s', strtotime($end_time));
+        if($group->status == 1){
+            $this->time_left = date('M d, Y H:i:s', strtotime($end_time));
+        }
+        else{
+            $this->time_left = date('M d, Y H:i:s', strtotime($start_time));
+        }
+        //dd($this->time_left);
     }
     
     public function updatedViewType(){
@@ -101,7 +108,11 @@ class AuctionListItem extends Component
     public function updatedAutoBidAmount(){
         $lot = $this->lot;
         $bid_amount = $this->auto_bid_amount;
-        if($lot->status == 1){
+        
+        if(is_array($bid_amount)){
+            $bid_amount = $bid_amount[$lot->id];
+        }
+        if($lot->status == 1 || $lot->status == 0){
             $functions = new AuctionFunctions();
             $bid = $functions->placeBid($lot->id, Auth::user()->id, $bid_amount, 'auto');
             if($bid['status'] == "success"){

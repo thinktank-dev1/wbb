@@ -1,5 +1,5 @@
 @if($view_type == "list")
-    <div>
+    <div style="width:100%">
         <style>
             .timer_num{
                 font-weight: 900;
@@ -19,6 +19,8 @@
                         <div class="col-sm-6 col-md-6 col-lg-2">
                             @if($lot->vehicle->images->count() > 0)
                                 <img src="{{ asset('storage/'.$lot->vehicle->images->first()->image_url) }}" class="w-100">
+                            @else
+                                <img src="{{ asset('../images/wbbonline_img_53.png') }}" class="w-100">
                             @endif
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-3 border-right">
@@ -26,13 +28,12 @@
                             <p class="prev-lot-make-model">{{ $lot->vehicle->make }}</p>
                             <p class="prev-lot-make-model">{{ $lot->vehicle->model }}</p>
                             <p class="prev-lot-make-model">{{ $lot->vehicle->variant }}</p>
-                            <p class="assistance-text">We strongly suggest that you view the car before you bid.</p>
                             <br />
-                            <a href="{{ url('view-lot/'.$lot->id) }}" class="btn btn-primary mt-2">VIEW DETAILS</a>
+                            <a href="{{ url('view-lot/'.$lot->id) }}" class="btn btn-primary lv-dt-btn mt-2">VIEW DETAILS</a>
                             @if($lot->favourite(Auth::user()->id, $lot->id))
                             <a href="{{ url('remove-favourite/'.$lot->id) }}" class="btn btn-secondary mt-2"><i class="bi bi-heart"></i> REMOVE FAVOURITES</a>
                             @else
-                            <a href="{{ url('add-to-favourites/'.$lot->id) }}" class="btn btn-primary mt-2">ADD TO FAVOURITES</a>
+                            <a href="{{ url('add-to-favourites/'.$lot->id) }}" class="btn btn-primary lv-dt-btn mt-2">ADD TO FAVOURITES</a>
                             @endif
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-4 border-right">
@@ -47,13 +48,19 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
+                                    @if($lot->bids->count() == 0)
+                                    </tr>
+                                      <td style="font-size: 18px !important;" class="prev-lot-details-text text-left">opening bid</td>
+                                      <td style="font-size: 18px !important;" class="prev-lot-details-desc text-white text-left">R {{ number_format($lot->start_price,2) }}</td>
+                                    </tr>
+                                    @endif
+                                    <tr>
+                                      <td class="prev-lot-details-text text-left">bid increment</td>
+                                      <td class="prev-lot-details-desc text-white text-left">R {{ number_format($lot->increament_value, 2) }}</td>
+                                    </tr>
                                     <tr>
                                       <td class="prev-lot-details-text text-left">winning bid</td>
                                       <td class="prev-lot-details-desc text-white text-left">R @if($lot->highestBid()) {{ number_format($lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif</td>
-                                    </tr>
-                                      <td class="prev-lot-details-text text-left">opening bid</td>
-                                      <td class="prev-lot-details-desc text-white text-left">R {{ number_format($lot->start_price,2) }}</td>
-                                    </tr>
                                     </tr>
                                       <td class="prev-lot-details-text text-left">Next Bid</td>
                                       <td class="prev-lot-details-desc text-white text-left">R @if($lot->nextBidAmount()) {{ number_format($lot->nextBidAmount(), 2) }} @else 0.00 @endif</td>
@@ -66,11 +73,11 @@
                                   <tbody>
                                      <tr>
                                       <td class="prev-lot-details-text text-left">est repair cost</td>
-                                      <td class="prev-lot-details-desc text-left">R{{ $lot->repairTotal() }}</td>
+                                      <td class="prev-lot-details-desc text-left">R {{ $lot->repairTotal() }}</td>
                                      </tr>
                                      <tr>
                                       <td class="prev-lot-details-text text-left">trade price</td>
-                                      <td class="prev-lot-details-desc text-left">R 0.00</td>
+                                      <td class="prev-lot-details-desc text-left">R {{ $lot->trade_price }}</td>
                                     </tr>
                                     <tr>
                                       <td class="prev-lot-details-text text-left"> year</td>
@@ -117,7 +124,9 @@
                                     
                                     <div class="mb-3 mt-3">
                                         <p class="timer_{{ $lot->id }}"></p>
+                                        @if($lot->status == 1)
                                         <a href="#" class="btn btn-secondary mt-3" wire:click.prevent="placeBid">PLACE BID</a>
+                                        @endif
                                     </div>
                                 </dd>
                             </dl>
@@ -125,11 +134,10 @@
                                 <h3 class="auto-bid-title mt-2">
                                     Auto Bid
                                 </h3>
-    
-                                <form class="form-inline">
+                                <p class=" auto-max-bid-label mb-2">BID UP TO MAXIMUM</p>
+                                <form class="form">
                                     <div class="form-group row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label justify-content-start auto-max-bid-label">BID UP TO MAXIMUM</label>
-                                        <div class="input-group input-group-section col-sm-10">
+                                        <div class="input-group input-group-section col-sm-12">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text decimal-span">R</span>
                                             </div>
@@ -137,25 +145,26 @@
                                             <div class="input-group-append">
                                                 <span class="input-group-text decimal-span">.00</span>
                                             </div>
-                                            <div id="no-padding" class="col-sm-12 mt-3 ml-4">
-                                                <a href="Javascript:void(0)" class="btn btn-primary go-btn">GO</a>
-                                            </div>
+                                        </div>
+                                        <div id="no-padding" class="col-sm-12 mt-3 mb-2">
+                                            <a href="Javascript:void(0)" class="btn btn-primary go-btn mb-2">GO</a>
+                                            <p class="auto-max-bid-label">YOUR AUTO BID: R @if($lot->userHighestAutoBid()) {{ number_format($lot->userHighestAutoBid()->bid_amount, 2) }} @else 0.00 @endif</p>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12"><p class="live-bid-disclaimer">We strongly suggest that you view the car before you bid.</p></div>
                 </div>
                 <div class="col-md-12 next-lot-footer">
                 </div>
-            
             </div>
         </div>
     </div>
 @elseif($view_type == "table")
         <tr>
-           @php
+            @php
             $color = '';
             if($lot->highestBid()){
                 if($lot->highestBid()->user_id == Auth::user()->id){
@@ -165,14 +174,14 @@
                     $color = 'text-danger';
                 }
             }
-        @endphp 
+            @endphp 
             <td style="width: 5%">
                 @if($lot->vehicle->images->count() > 0)
                     <img class="img-fluid" style="border-radius:.5em" src="{{ asset('storage/'.$lot->vehicle->images->first()->image_url) }}">
                 @endif
             </td>
             <td style="width: 15%" class="{{ $color }} make-td">{{$lot->vehicle->make.' '.$lot->vehicle->model.''.$lot->vehicle->variant }}</td>
-            <td class="{{ $color }} lot-amounts-data-text">R 0.00</td>
+            <td class="{{ $color }} lot-amounts-data-text">R {{ $lot->trade_price }}</td>
             <td class="lot-amounts-data-text {{ $color }}">
                 R @if($lot->highestBid()) {{ number_format($lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif
             </td>
@@ -187,6 +196,33 @@
                  <a href="{{ url('view-lot/'.$lot->id) }}" class="btn btn-primary lv-auto-btn" target="_blank">VIEW DETAILS</a>
             </td>
             <td class="{{ $color }}"><p class="timer_{{ $lot->id }}"></p><td>
+                
+                <div class="modal fade" id="exampleModal{{$lot->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Auto Bid</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text decimal-span">R</span>
+                            </div>
+                            <input type="text" class="form-control" id="bid-amnt" wire:model.lazy="auto_bid_amount.{{ $lot->id }}"  placeholder="Auto Bid Amount">
+                            <div class="input-group-append">
+                                <span class="input-group-text decimal-span">.00</span>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer d-flex justify-content-center">
+                        <a href="Javascript:void(0)" class="btn btn-primary" data-dismiss="modal" aria-label="Close">GO</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
         </tr>
     @endif
     

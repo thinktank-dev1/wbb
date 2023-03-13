@@ -50,7 +50,12 @@
                     						&nbsp;|&nbsp;
                     						<a style="color:#8cd50a" href="{{ url('admin/auction-groups/'.$group->id) }}">View</a>
                     						&nbsp;|&nbsp;
-                    						<a style="color:#8cd50a" href="{{ url('admin/auction-groups/'.$group->id.'/edit') }}">Edit</a>
+                    						@if($group->status == 1)
+                    						    <a style="color:#8cd50a" href="javascript:void(0)">Edit</a>
+                    						@else
+                    						    <a style="color:#8cd50a" href="{{ url('admin/auction-groups/'.$group->id.'/edit') }}">Edit</a>
+                    						@endif
+                    						
                     					</th>
                     				</tr>
                     				@endforeach

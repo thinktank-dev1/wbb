@@ -30,7 +30,11 @@ class Vehicle extends Model
         'service_book',
         'service_plan',
         'warranty',
-        'notes'
+        'notes',
+        'service_km',
+        'service_year',
+        'warranty_km',
+        'warranty_year'
     ];
 
     public function extras(){

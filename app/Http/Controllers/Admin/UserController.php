@@ -194,31 +194,41 @@ class UserController extends Controller
         $vat_registration = $request->file('vat_registration');
         
         if($id_document){
-            Storage::disk('public')->delete($user->id_document);
+            if($user->id_document){
+                Storage::disk('public')->delete($user->id_document);    
+            }
             $id_url = Storage::disk('public')->putFile('documents', $id_document);  
             $user->id_document = $id_url;
         }
         
         if($proxy_id){
-            Storage::disk('public')->delete($user->proxy_id);
+            if($user->proxy_id){
+                Storage::disk('public')->delete($user->proxy_id);   
+            }
             $proxy_url = Storage::disk('public')->putFile('documents', $proxy_id);
             $user->proxy_id = $proxy_url;
         }
         
         if($proof_of_residence){
-            Storage::disk('public')->delete($user->proof_of_residence);
+            if($user->proof_of_residence){
+                Storage::disk('public')->delete($user->proof_of_residence);   
+            }
             $proof_url = Storage::disk('public')->putFile('documents', $proof_of_residence);
             $user->proof_of_residence = $proof_url;
         }
         
         if($brm){
-            Storage::disk('public')->delete($user->brm);
+            if($user->brm){
+                Storage::disk('public')->delete($user->brm);    
+            }
             $brm_url = Storage::disk('public')->putFile('documents', $brm);
             $user->brm = $brm_url;
         }
         
         if($vat_registration){
-            Storage::disk('public')->delete($user->vat_registration);
+            if($user->vat_registration){
+                Storage::disk('public')->delete($user->vat_registration);   
+            }
             $vat_url = Storage::disk('public')->putFile('document', $vat_registration);
             $user->vat_registration = $vat_url; 
         }

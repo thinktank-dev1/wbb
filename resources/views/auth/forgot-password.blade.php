@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+@section('title', 'Forgot Password')
 <section class="login">
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -36,4 +37,8 @@
         </div>
     </div>
 </section>
+
+<div class="col-md-12 home-footer-banner mt-5">
+    <img class="img-fluid" src="{{ asset('images/wbbonline_img_19.png') }}" alt="assistance-banner-top-img">
+</div>
 @endsection

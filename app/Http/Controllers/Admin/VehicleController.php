@@ -56,6 +56,8 @@ class VehicleController extends Controller
         $this->setClassValues();
         $vehicle = new Vehicle();
         $body_types = VehicleBodyType::orderBy('name', 'ASC')->get();
+        $interior = Option::where('type', 'interior')->get();
+        $interior_damages = Option::where('type', 'interior-damage')->get();
         return view('admin.vehicles.create', [
             'vehicle'=>$vehicle, 
             'body_types'=>$body_types,
@@ -76,6 +78,8 @@ class VehicleController extends Controller
             'damage_positions' => $this->damage_positions,
             'natis_options' => $this->natis_options,
             'tire_condition' => $this->tire_condition,
+            'interior' => $interior,
+            'interior_damages' => $interior_damages
         ]);
     }
 
@@ -98,7 +102,7 @@ class VehicleController extends Controller
             'transmission' => 'required',
             'color' => 'required',
             'engine_type' => 'required',
-            'cylinders' => 'required',
+            // 'cylinders' => 'required',
             'vin_number' => 'required',
             'engine_number' => 'required',
             // 'natis' => 'required',
@@ -112,12 +116,20 @@ class VehicleController extends Controller
             'mechanical_faults_warnig_lights' => 'required',
             'mechanical_faults_warnig_lights_description' => 'required_if:mechanical_faults_warnig_lights,yes',
             'windscreen_condition' => 'required',
-            'rims_condition' => 'required',
+            'rims_condition' => 'nullable',
             'interior_condition' => 'required',
             'front_left_tire' => 'required',
             'front_right_tire' => 'required',
             'back_left_tire' => 'required',
-            'back_right_tire' => 'required'
+            'back_right_tire' => 'required',
+            'front_left_rim' => 'required',
+            'front_right_rim' => 'required',
+            'back_left_rim' => 'required',
+            'back_right_rim' => 'required',
+            'service_km' => 'nullable',
+            'service_year' => 'nullable',
+            'warranty_km' => 'nullable',
+            'warranty_year' => 'nullable'
         ]);
 
         if($valid->fails()){
@@ -145,7 +157,7 @@ class VehicleController extends Controller
             'transmission' => $request->transmission,
             'color' => $request->color,
             'engine_type' => $request->engine_type,
-            'cylinders' => $request->cylinders,
+            'cylinders' => 'NULL',
             'vin_number' => $request->vin_number,
             'engine_number' => $request->engine_number,
             'natis' => $request->natis,
@@ -153,7 +165,11 @@ class VehicleController extends Controller
             'service_book' => $request->service_book,
             'service_plan' => $request->service_plan,
             'warranty' => $request->warranty,
-            'notes' => $request->notes
+            'notes' => $request->notes,
+            'service_km' => $request->service_km, 
+            'service_year' => $request->service_year,
+            'warranty_km' => $request->warranty_km,
+            'warranty_year' => $request->warranty_year, 
         ]);
 
         $extras = $request->extras;
@@ -175,7 +191,11 @@ class VehicleController extends Controller
             'front_left_tire' => $request->front_left_tire,
             'front_right_tire' => $request->front_right_tire,
             'back_left_tire' => $request->back_left_tire,
-            'back_right_tire' => $request->back_right_tire
+            'back_right_tire' => $request->back_right_tire,
+            'front_left_rim' => $request->front_left_rim,
+            'front_right_rim' => $request->front_right_rim,
+            'back_left_rim' => $request->back_left_rim,
+            'back_right_rim' => $request->back_right_rim
         ]);
 
         foreach($request->file('images') AS $image){
@@ -188,7 +208,7 @@ class VehicleController extends Controller
             }
         }
 
-        $sides = ['top', 'left', 'right', 'front', 'back'];
+        $sides = ['top', 'left', 'right', 'front', 'back','interior'];
         foreach($sides AS $side){
             $po_name = $side.'-position';
             $tp_name = $side."-type";
@@ -247,6 +267,8 @@ class VehicleController extends Controller
     {
         $this->setClassValues();
         $body_types = VehicleBodyType::orderBy('name', 'ASC')->get();
+        $interior = Option::where('type', 'interior')->get();
+        $interior_damages = Option::where('type', 'interior-damage')->get();
         return view('admin.vehicles.edit', [
             'vehicle'=>$vehicle, 
             'body_types'=>$body_types,
@@ -267,6 +289,8 @@ class VehicleController extends Controller
             'damage_positions' => $this->damage_positions,
             'natis_options' => $this->natis_options,
             'tire_condition' => $this->tire_condition,
+            'interior' => $interior,
+            'interior_damages' => $interior_damages
         ]);
     }
 
@@ -290,7 +314,7 @@ class VehicleController extends Controller
             'transmission' => 'required',
             'color' => 'required',
             'engine_type' => 'required',
-            'cylinders' => 'required',
+            // 'cylinders' => 'required',
             'vin_number' => 'required',
             'engine_number' => 'required',
             // 'natis' => 'required',
@@ -303,12 +327,20 @@ class VehicleController extends Controller
             'previous_cosmetic_repairs' => 'required',
             'mechanical_faults_warnig_lights' => 'required',
             'windscreen_condition' => 'required',
-            'rims_condition' => 'required',
+            'rims_condition' => 'nullable',
             'interior_condition' => 'required',
             'front_left_tire' => 'required',
             'front_right_tire' => 'required',
             'back_left_tire' => 'required',
-            'back_right_tire' => 'required'
+            'back_right_tire' => 'required',
+            'front_left_rim' => 'required',
+            'front_right_rim' => 'required',
+            'back_left_rim' => 'required',
+            'back_right_rim' => 'required',
+            'service_km' => 'nullable',
+            'service_year' => 'nullable',
+            'warranty_km' => 'nullable',
+            'warranty_year' => 'nullable'
         ]);
 
         if($valid->fails()){
@@ -329,7 +361,7 @@ class VehicleController extends Controller
         $vehicle->transmission = $request->transmission;
         $vehicle->color = $request->color;
         $vehicle->engine_type = $request->engine_type;
-        $vehicle->cylinders = $request->cylinders;
+        $vehicle->cylinders = 'NULL';
         $vehicle->vin_number = $request->vin_number;
         $vehicle->engine_number = $request->engine_number;
         $vehicle->natis = $request->natis;
@@ -338,6 +370,10 @@ class VehicleController extends Controller
         $vehicle->service_plan = $request->service_plan;
         $vehicle->warranty = $request->warranty;
         $vehicle->notes = $request->notes;
+        $vehicle->service_km = $request->service_km; 
+        $vehicle->service_year = $request->service_year; 
+        $vehicle->warranty_km = $request->warranty_km; 
+        $vehicle->warranty_year = $request->warranty_year; 
         $vehicle->save();
 
         $cur_extras = $vehicle->extras;
@@ -365,6 +401,10 @@ class VehicleController extends Controller
         $report->front_right_tire = $request->front_right_tire;
         $report->back_left_tire = $request->back_left_tire;
         $report->back_right_tire = $request->back_right_tire;
+        $report->front_left_rim = $request->front_left_rim;
+        $report->front_right_rim = $request->front_right_rim;
+        $report->back_left_rim = $request->back_left_rim;
+        $report->back_right_rim = $request->back_right_rim;
         $report->save();
 
         if($request->has('images')){
@@ -381,7 +421,7 @@ class VehicleController extends Controller
             //}
         }
 
-        $sides = ['top', 'left', 'right', 'front', 'back'];
+        $sides = ['top', 'left', 'right', 'front', 'back','interior'];
         foreach($sides AS $side){
             $po_name = $side.'-position';
             $tp_name = $side."-type";
@@ -427,8 +467,7 @@ class VehicleController extends Controller
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehicle $vehicle)
-    {
+    public function destroy(Vehicle $vehicle){
         //
     }
 
@@ -572,6 +611,7 @@ class VehicleController extends Controller
     }
 
     public function getVariants($year, $make, $model){
+        $model = str_replace('_', '/', $model);
         $cars = CarList::where('year', $year)->where('make', $make)->where('model', $model)->orderBy('variant', 'ASC')->get();
         $ret_html = '';
         foreach($cars AS $car){

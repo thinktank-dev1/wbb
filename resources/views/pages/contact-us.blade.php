@@ -34,7 +34,7 @@
                             <textarea name="message" class="form-control form-control-sm"></textarea>
                         </div>
                         <div class="col-md-12 mt-4 ml-1">
-                            <button type="submit" class="btn btn-primary">SUBMIT</button>
+                            <button type="submit" class="btn btn-primary contact-us-btn">SUBMIT</button>
                         </div>
                         <div class="col-md-12 mt-4 ml-1">
                             <p class="contact-disclaimer">

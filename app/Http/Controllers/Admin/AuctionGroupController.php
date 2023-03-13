@@ -18,7 +18,7 @@ class AuctionGroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $groups = AuctionGroup::orderBy('date', 'DESC')->orderBy('start_time', 'ASC')->paginate(12);
+        $groups = AuctionGroup::orderBy('name', 'DESC')->paginate(12);
         return view('admin.auction.auction_group_list', ['groups'=>$groups]);
     }
 
@@ -143,6 +143,7 @@ class AuctionGroupController extends Controller
                     'start_price' => $car['start_price'],
                     'increament_value' => $car['increament_value'],
                     'reserve_price' => $car['reserve_price'],
+                    'trade_price' => $car['trade_price'],
                     'show_reseve_price' => $show
                     
                 ]);

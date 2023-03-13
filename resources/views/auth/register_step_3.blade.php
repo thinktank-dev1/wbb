@@ -71,5 +71,8 @@
         </div>
     </div>
 </section>
-@include('includes.assistance')
+<!--@include('includes.assistance')-->
+<div class="col-md-12 home-footer-banner mt-5">
+    <img class="img-fluid" src="{{ asset('images/wbbonline_img_19.png') }}" alt="assistance-banner-top-img">
+</div>
 @endsection

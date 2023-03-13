@@ -19,4 +19,8 @@ class Bid extends Model
     public function bidder(){
         return $this->belongsTo(User::class,'user_id');
     }
+    
+    public function lot(){
+        return $this->belongsTo(Lot::class);
+    }
 }

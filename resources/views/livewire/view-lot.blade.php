@@ -118,9 +118,25 @@
                                                 <td class="lot-details--data-desc text-right">{{ $lot->vehicle->service_book }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="lot-details-data-text text-left">service plan / warranty active</td>
+                                                <td class="lot-details-data-text text-left">service plan</td>
                                                 <td class="lot-details--data-desc text-right">{{ $lot->vehicle->service_plan  }}</td>
                                             </tr>
+                                            @if($lot->vehicle->service_plan == 'yes')
+                                            <tr>
+                                                <td class="lot-details-data-text text-left">year: {{ $lot->vehicle->service_year  }}</td>
+                                                <td class="lot-details-data-text text-right">kilometers: {{ $lot->vehicle->service_km  }}km</td>
+                                            </tr>
+                                            @endif
+                                            <tr>
+                                                <td class="lot-details-data-text text-left">warranty</td>
+                                                <td class="lot-details--data-desc text-right">{{ $lot->vehicle->warranty }}</td>
+                                            </tr>
+                                            @if($lot->vehicle->warranty == 'yes')
+                                            <tr>
+                                                <td class="lot-details-data-text text-left">year: {{ $lot->vehicle->warranty_year  }}</td>
+                                                <td class="lot-details-data-text text-right">kilometers: {{ $lot->vehicle->warranty_km  }}km</td>
+                                            </tr>
+                                            @endif
                                             @if($lot->vehicle->notes)
                                             <tr>
                                                 <td class="lot-details-data-text text-left">notes</td>
@@ -145,7 +161,7 @@
                                             <p class="lot-details-text text-left"> opening bid</p>
                                         </dt>
                                         <dd class="col-sm-4">
-                                            <p class="lot-details-desc text-right">R 0.00</p>
+                                            <p class="lot-details-desc text-right">R {{ $lot->trade_price  }}</p>
                                             <p class="lot-details-desc text-right">R {{ $lot->start_price  }}</p>
                                         </dd>
                                     </dl>
@@ -167,10 +183,10 @@
                                     </div>
                                     <table class="table mt-4">
                                       <tbody>
-                                        <tr>
-                                          <td class="lot-reserve-price-text text-left">reserve price met</td>
-                                          <td class="lot-reserve-price-desc text-right">@if($lot->highestBid()) @if($lot->highestBid()->bid_amount >= $lot->reserve_price) Yes @else No @endif @else No @endif </td>
-                                        </tr>
+                                        <!--<tr>-->
+                                        <!--  <td class="lot-reserve-price-text text-left">reserve price met</td>-->
+                                        <!--  <td class="lot-reserve-price-desc text-right">@if($lot->highestBid()) @if($lot->highestBid()->bid_amount >= $lot->reserve_price) Yes @else No @endif @else No @endif </td>-->
+                                        <!--</tr>-->
                                         <tr>
                                           <td class="lot-total-bids-text text-left">total bids</td>
                                           <td class="lot-total-bids-desc text-right">{{ $lot->bids->count() }}</td>
@@ -185,24 +201,24 @@
                                         <button class="btn btn-primary bid-now-btn web-btn" wire:click.prevent="placeBid" >BID NOW</button>
                                     </div>
                                     <div class="col-md-12 auto-bid-section bid-info-blk">
-                                        <h3 class="auto-bid-title mt-2">
+                                         <h3 class="auto-bid-title mt-2">
                                             Auto Bid
                                         </h3>
-    
-                                        <form class="form-inline">
+                                        <p class=" auto-max-bid-label mb-2">BID UP TO MAXIMUM</p>
+                                        <form class="form">
                                             <div class="form-group row">
-                                                <label for="staticEmail" class="col-sm-2 col-form-label justify-content-start auto-max-bid-label">BID UP TO MAXIMUM</label>
-                                                <div class="input-group input-group-section col-sm-10">
-                                                    <div class="input-group-prepend  view-lot-prepend">
+                                                <div class="input-group input-group-section col-sm-12">
+                                                    <div class="input-group-prepend">
                                                         <span class="input-group-text decimal-span">R</span>
                                                     </div>
-                                                    <input type="text" class="form-control maximum-bid-input" id="bid-amnt" wire:model.lazy="auto_bid_amount">
+                                                    <input type="text" class="form-control list-maximum-bid-input" id="bid-amnt" wire:model.lazy="auto_bid_amount"  placeholder="Auto Bid">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text decimal-span">.00</span>
                                                     </div>
-                                                    <div class="col-sm-12 mt-3 ml-4">
-                                                        <a href="Javascript:void(0)" class="btn btn-primary">GO</a>
+                                                    <div id="no-padding" class="col-sm-12 mt-3 mb-2">
+                                                        <a href="Javascript:void(0)" class="btn btn-primary go-btn">GO</a>
                                                     </div>
+                                                    <p class="auto-max-bid-label">YOUR AUTO BID: R @if($lot->userHighestAutoBid()) {{ number_format($lot->userHighestAutoBid()->bid_amount, 2) }} @else 0.00 @endif</p>
                                                 </div>
                                             </div>
                                         </form>
@@ -300,13 +316,27 @@
                                                 <td class="lot-details-data-text text-left">windscreen condition</td>
                                                 <td class="lot-details--data-desc text-right">{{ $report->windscreen_condition }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="lot-details-data-text text-left">rims condition</td>
-                                                <td class="lot-details--data-desc text-right">{{ $report->rims_condition  }}</td>
-                                            </tr>
-                                            <tr>
+                                             <tr>
                                                 <td class="lot-details-data-text text-left">interior condition</td>
                                                 <td class="lot-details--data-desc text-right">{{ $report->interior_condition  }}</td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td class="lot-details-data-text text-left">rim condition - front left</td>
+                                                <td class="lot-details--data-desc text-right">{{ $report->front_left_rim  }}</td></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td class="lot-details-data-text text-left">rim condition - front right</td>
+                                                <td class="lot-details--data-desc text-right">{{ $report->front_right_rim  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="lot-details-data-text text-left">rim condition - rear left</td>
+                                                <td class="lot-details--data-desc text-right">{{ $report->back_left_rim  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="lot-details-data-text text-left">rim condition - rear right</td>
+                                                <td class="lot-details--data-desc text-right">{{ $report->back_right_rim  }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="lot-details-data-text text-left">tyre condition - front left</td>
@@ -614,6 +644,59 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 mb-4">
+                            <div class="card w-100 top-card">
+                                <div class="col-md-12 d-flex justify-start top-card-header">
+                                    <h5 class="top-title mt-3">Interior</h5>
+                                </div>
+                                 @php
+                                    $inspections = $lot->vehicle->inspectionBySide('interior');
+                                @endphp
+                                @if($inspections)
+                                    @foreach($inspections as $inspection)
+                                        <div class="card-body top-body">
+                                            <div class="row top-row">
+                                                <div class="col-sm-2 mb-3">
+                                                    <div class="magnify"> <a class="btn btn-primary magnify-btn zb" href="{{ asset('storage/'.$inspection->image_url) ?? ''}}" ><i class="bi bi-search" ></i></a> </div>
+                                                    <img class="img-fluid inspection-img" src="{{ asset('storage/'.$inspection->image_url) ?? ''}}" alt="no report">
+                                                </div>
+                                                <div class="col-sm-4 mb-3">
+                                                    <p class="insp-text ml-2 mt-4"> POSITION</p>
+                                                    <p class="insp-text ml-2"> {{ $inspection->poasition  }}</p>
+                                                    <hr class="line-three">
+                                                    <p class="insp-text ml-2 mt-4"> ESTIMATED REPAIR COST</p>
+                                                    <p class="insp-text ml-2"> R {{ $inspection->estimate_damage_cost   }}</p>
+                                                </div>
+                                                <div class="col-sm-3 mb-3">
+                                                    <p class="insp-text ml-2 mt-4"> TYPE OF DAMAGE</p>
+                                                    <p class="insp-text ml-2"> {{ $inspection->type  }}</p>
+                                                </div>
+                                                <div class="col-sm- mb-3">
+                                                    <p class="insp-text ml-2 mt-4"> DAMAGE SEVERITY</p>
+                                                    <p class="insp-text ml-2">{{ $inspection->severity   }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="card-body top-body">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <div class="magnify"> <a class="btn btn-primary magnify-btn" ><i class="bi bi-search" ></i></a> </div>
+                                                <img class="img-fluid" src="{{ asset('images/wbbonline_img_53.png') }}" alt="no report">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <p class="no-insp-text mt-5"> Nothing to report</p>
+                                            </div>
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-3"></div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-md-12 top-card-footer">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -669,6 +752,7 @@
                             showHideTransition: 'slide',
                             icon: 'error',
                             position: 'mid-center',
+                            hideAfter : 8000,  
                         });
                     }
                 }
@@ -688,6 +772,7 @@
                     icon: 'success',
                     //position: 'top-center',
                     position: 'mid-center',
+                    hideAfter : 8000,  
                 });
             }
             if(event.detail.type == "error"){
@@ -698,6 +783,7 @@
                     icon: 'error',
                     //position: 'top-center',
                     position: 'mid-center',
+                    hideAfter : 8000,  
                 });
             }
         });

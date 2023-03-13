@@ -70,9 +70,15 @@ class User extends Authenticatable
     public function company(){
         return $this->belongsTo(Company::class);
     }
-
+    
+    public function bids(){
+        return $this->hasMany(Bid::class)->orderBy('bid_amount', 'DESC');
+    }
+    
     public function boughtCars(){
-        return 0;
+        $count = Lot::where('winner_id', $this->id)->count();
+        
+        return $count;
     }
     
     public function favourites(){

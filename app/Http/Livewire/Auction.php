@@ -40,6 +40,11 @@ class Auction extends Component
             $end_time = $this->group->date.' '.$this->group->end_time;
             $this->end_time = date('M d, Y H:i:s', strtotime($end_time));
         }
+        
+        if($favs){
+            $this->group = AuctionGroup::where('status', 0)->orWhere('status', 1)->first();
+            $this->has_auction = true;
+        }
         $now = date('Y-m-d');
         $next_auction = AuctionGroup::where('status', 0)->where('date', '=', $now)->orWhere('date', '>', $now)->first();
         if($next_auction){
@@ -70,7 +75,7 @@ class Auction extends Component
             }
         }
         return view('livewire.auction', [
-            'lots' => $lots
+            'lots' => $lots,
         ])->extends('layouts.main');
     }
 }

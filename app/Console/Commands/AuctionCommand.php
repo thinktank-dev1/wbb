@@ -37,7 +37,7 @@ class AuctionCommand extends Command
     public function handle()
     {
         $this->init();
-        $this->removeFavourites(1);
+        //$this->removeFavourites(1);
         //$this->sendComm(1);
     }
     
@@ -91,6 +91,7 @@ class AuctionCommand extends Command
                 
                 $this->sendComm($group->id);
                 $this->removeFavourites($group->id);
+                $this->soldTo($group->id);
             }
             
             $data = ['action' => 'stop'];
@@ -148,6 +149,21 @@ class AuctionCommand extends Command
             $favs = Favourites::where('lot_id', $lot->id)->get();
             foreach($favs AS $fav){
                 $fav->delete();
+            }
+        }
+    }
+    
+    public function soldTo($id){
+        $group = AuctionGroup::find($id);
+        $lots = $group->lots;
+        foreach($lots AS $lot){
+            if($lot->highestBid()){
+                if($lot->highestBid()->bid_amount >= $lot->reserve_price){
+                    $bid = $lot->highestBid();
+                    $user = $bid->bidder; 
+                    $lot->winner_id = $user->id;
+                    $lot->save();
+                }
             }
         }
     }

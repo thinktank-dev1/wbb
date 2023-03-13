@@ -11,8 +11,7 @@
                     <i class="fa fa-user fa-stack-1x" style="color: #8cd50a"></i>
                 </span>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="{{ url('/profile') }}">Profile</a>
                 </div>
             </div>
         </div>

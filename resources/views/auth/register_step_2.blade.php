@@ -87,9 +87,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 text-center">
-                                            <input type="submit" value="NEXT" class="btn btn-primary btn-sm">
+                                            <input type="submit" value="NEXT" class="btn btn-primary btn-sm nxt-btn">
                                             <div class="mt-3">
-                                                <p>By clicking 'Register Now' you agree to our <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
+                                                <p>By clicking 'Register Now' you agree to our <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -102,5 +102,8 @@
         </div>
     </div>
 </section>
-@include('includes.assistance')
+<!--@include('includes.assistance')-->
+<div class="col-md-12 home-footer-banner mt-5">
+    <img class="img-fluid" src="{{ asset('images/wbbonline_img_19.png') }}" alt="assistance-banner-top-img">
+</div>
 @endsection

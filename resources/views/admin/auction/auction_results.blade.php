@@ -38,6 +38,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                        @php
+                                        $reserveSum = 0;
+                                        $totalBids = 0;
+                                        @endphp
                                     @foreach($group->lots AS $lot)
                                     <tr>
                                         @php $color = '#bfbfbf'; @endphp
@@ -48,12 +52,20 @@
                                                 @php $color = 'red'; @endphp
                                             @endif
                                         @endif
+                                        
+                                        @php
+                                            $reserveSum += $lot->reserve_price;
+                                            if($lot->highestBid()){
+                                                $totalBids += $lot->highestBid()->bid_amount;
+                                            }
+                                        @endphp
+                                        
                                         <td style="color: @php echo $color @endphp">{{ $lot->id }}</td>
                                         <td style="color: @php echo $color @endphp">{{ $lot->vehicle->year.' '.$lot->vehicle->make.' '.$lot->vehicle->model.' '.$lot->vehicle->variant }}</td>
                                         <td style="color: @php echo $color @endphp"class="text-end">{{ $lot->bids->count() }}</td>
                                         <td style=" white-space: nowrap; color: @php echo $color @endphp">{{ number_format($lot->reserve_price, 2)  }}</td>
                                         <td style=" white-space: nowrap; color: @php echo $color @endphp" class="text-end">R&nbsp;@if($lot->highestBid()) {{ number_format($lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif</td>
-                                        <td style=" white-space: nowrap; color: @php echo $color @endphp">@if($lot->highestBid()) {{ ucwords($lot->highestBid()->bidder->company->company_name) }} @endif</td>
+                                        <td style=" white-space: nowrap; color: @php echo $color @endphp">@if($lot->highestBid()) @if($lot->highestBid()->bidder->company()->exists()) {{ ucwords($lot->highestBid()->bidder->company->company_name) }} @else {{ ucwords($lot->highestBid()->bidder->first_name.' '.$lot->highestBid()->bidder->last_name) }} @endif @endif</td>
                                         <td style=" white-space: nowrap; color: @php echo $color @endphp">{{ $lot->status() }}</td>
                                         <td style=" white-space: nowrap;" class="text-end">
                                             <a href="{{ url('admin/vehicles/'.$lot->vehicle->id) }}">View</a>
@@ -62,6 +74,14 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Reserve Price:</td>
+                                        <td>{{ number_format($reserveSum,2) }}</td>
+                                        <td>Total Bids</td>
+                                        <td>{{ number_format($totalBids,2) }}</td
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

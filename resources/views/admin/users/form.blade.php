@@ -74,8 +74,7 @@
 				<div class="mb-3">
 					<label class="form-label">Status</label>
 					<select class="form-control custom-select custom-select-sm" name="status">
-                      <option selected>Change Status</option>
-                      <option value="{{ $user->status }}" disabled>{{ $user->status }}</option>
+                      <option disabled>Change Status</option>
                       <option value="Active"/>Approve</option>
                       <option value="Rejected"/>Reject</option>
                     </select>

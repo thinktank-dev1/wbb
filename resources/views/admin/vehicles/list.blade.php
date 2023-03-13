@@ -7,6 +7,9 @@
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0 font-size-18">Vehicles</h4>
+                        <div id="dvDisclaimer" style="display:none" class="alert alert-warning text-center">
+                            <strong>Disclaimer: Once an auction has started, you can no longer delete/edit a car that has been assigned.</strong> 
+                        </div>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Vehicles</a></li>
@@ -81,7 +84,7 @@
                 						<td>@if($vehicle->lot()->exists()){{$vehicle->lot->auction->date}}@else - @endif</td>
                 						<td style="color:#8cd50a" class="text-end">
                 						    @if($vehicle->lot()->exists())
-                						        <a style="color:#8cd50a" href="javascript:void(0)"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                						        <a style="color:#8cd50a" type="button"  id="btnVoid"><i class="mdi mdi-car-wrench"></i> Edit</a>
                 						    @else
                 						        <a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$vehicle->id.'/edit') }}"><i class="mdi mdi-car-wrench"></i> Edit</a>
                 						    @endif
@@ -89,7 +92,7 @@
                 							<a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> View</a>
                 							&nbsp;|&nbsp;
                 							@if($vehicle->lot()->exists())
-                							    <a style="color:#8cd50a" href="javascript:void(0)"><i class="mdi mdi-car-info"></i> Delete</a>
+                							    <a style="color:#8cd50a" type="button"  id="btnVoid"><i class="mdi mdi-car-info"></i> Delete</a>
                 							@else
                 							<a style="color:#8cd50a" href="{{ url('admin/vehicle/delete/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> Delete</a>
                 							@endif
@@ -130,6 +133,10 @@
             if(year != "" && make != "" && model != ""){
                 getVariants();
             }
+        });
+        
+        $("#btnVoid").on("click",function(){
+            $("#dvDisclaimer").show()
         });
     });
     function getModels(){
@@ -173,6 +180,7 @@
             }
         });
     }
+    
 </script>
 @endpush
 @endsection

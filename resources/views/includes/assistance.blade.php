@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <input type="email" name="email" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="Email">
                         </div>
-                        <center><button class="btn btn-primary assist-btn mb-2 sbmt-btn" type="submit">SUBMIT</button></center>
+                        <center><button class="btn btn-primary assist-btn mt-4 mb-4 sbmt-btn" type="submit">SUBMIT</button></center>
                     </form>
                     <p class="card-disclaimer">
                         *By clicking SUBMIT you grant We Buy Bakkies Online permission

@@ -193,12 +193,12 @@
 					<input type="text" class="form-control" name="engine_type" value="@if(old('engine_type')) {{ old('engine_type') }} @elseif($vehicle->engine_type) {{ $vehicle->engine_type }} @endif" required>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="mb-3">
-					<label class="form-label">Cylinders</label>
-					<input type="text" class="form-control" name="cylinders" id="cylinders-input" value="@if(old('cylinders')) {{ old('cylinders') }} @elseif($vehicle->cylinders) {{ $vehicle->cylinders }} @endif" required>
-				</div>
-			</div>
+			<!--<div class="col-md-3">-->
+			<!--	<div class="mb-3">-->
+			<!--		<label class="form-label">Cylinders</label>-->
+			<!--		<input type="text" class="form-control" name="cylinders" id="cylinders-input" value="@if(old('cylinders')) {{ old('cylinders') }} @elseif($vehicle->cylinders) {{ $vehicle->cylinders }} @endif" required>-->
+			<!--	</div>-->
+			<!--</div>-->
 			<div class="col-md-3">
 				<div class="mb-3">
 					<label class="form-label">VIN Number</label>
@@ -263,6 +263,34 @@
 						<input class="form-check-input" type="radio" value="no" id="sp2" name="service_plan" @if(old('service_plan') == "no") checked @elseif($vehicle->service_plan == "no") checked @endif required>
 						<label class="form-check-label" for="sp2">No</label>
 					</div>
+					<div class="col-md-12" style="display: @if(old('service_plan')) @if(old('service_plan') == "yes") block @else none @endif @elseif($vehicle->service_plan) @if($vehicle->service_plan == "yes") block @else none  @endif @else none  @endif" id="service_plan_cont" required>
+						<div class="mb-3">
+							<label class="form-label">Kilometers</label>
+							<input type="text" class="form-control" name="service_km" value="@if(old('service_km')) {{ old('service_km') }} @elseif($vehicle->service_km) {{ $vehicle->service_km }} @endif" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Year</label>
+							<select class="form-control" name="service_year" id="year-select" required>
+								<option value="">Select Option</option>
+								@php
+								$date_start = date("Y", strtotime('-30 year'));
+								$date_end = date("Y");
+								@endphp
+								@for($i = $date_end; $i >= $date_start; $i--)
+								@php
+								$sel = '';
+								if(old('year') == $i){
+									$sel = "selected";
+								}
+								elseif($vehicle->service_year == $i){
+									$sel = 'selected';
+								}
+								@endphp
+								<option value="{{ $i }}" {{ $sel }}>{{ $i }}</option>
+								@endfor
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -275,6 +303,34 @@
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" value="no" id="wr2" name="warranty" @if(old('warranty') == "no") checked @elseif($vehicle->warranty == "no") checked @endif required>
 						<label class="form-check-label" for="wr2">No</label>
+					</div>
+					<div class="col-md-12" style="display: @if(old('warranty')) @if(old('warranty') == "yes") block @else none @endif @elseif($vehicle->warranty) @if($vehicle->warranty == "yes") block @else none  @endif @else none  @endif" id="warranty_cont" required>
+						<div class="mb-3">
+							<label class="form-label">Kilometers</label>
+							<input type="text" class="form-control" name="warranty_km" value="@if(old('warranty_km')) {{ old('warranty_km') }} @elseif($vehicle->warranty_km) {{ $vehicle->warranty_km }} @endif" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Year</label>
+							<select class="form-control" name="warranty_year" id="year-select" required>
+								<option value="">Select Option</option>
+								@php
+								$date_start = date("Y", strtotime('-30 year'));
+								$date_end = date("Y");
+								@endphp
+								@for($i = $date_end; $i >= $date_start; $i--)
+								@php
+								$sel = '';
+								if(old('year') == $i){
+									$sel = "selected";
+								}
+								elseif($vehicle->warranty_year == $i){
+									$sel = 'selected';
+								}
+								@endphp
+								<option value="{{ $i }}" {{ $sel }}>{{ $i }}</option>
+								@endfor
+							</select>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -368,7 +424,7 @@
 					<textarea class="form-control" name="mechanical_faults_warnig_lights_description"> @if(old('mechanical_faults_warnig_lights_description')) {{ old('mechanical_faults_warnig_lights_description') }} @elseif($vehicle->report) {{ $vehicle->report->mechanical_faults_warnig_lights_description }} @endif</textarea>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="mb-3">
 					<label class="form-label">Wind Screen Condition</label>
 					<select class="form-control" name="windscreen_condition" required>
@@ -392,31 +448,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="mb-3">
-					<label class="form-label">Rims Condition</label>
-					<select class="form-control" name="rims_condition" required>
-						<option value="">Select Option</option>
-						@foreach($conditions_list AS $list)
-						@php
-						$sel = '';
-						if(old('rims_condition')){
-							if(old('rims_condition') == $list){
-								$sel = "selected";
-							}
-						}
-						elseif($vehicle->report){
-							if($vehicle->report->rims_condition == $list){
-								$sel = 'selected';
-							}
-						}
-						@endphp
-						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="mb-3">
 					<label class="form-label">Interior Condition</label>
 					<select class="form-control" name="interior_condition" required>
@@ -431,6 +463,102 @@
 						}
 						elseif($vehicle->report){
 							if($vehicle->report->interior_condition == $list){
+								$sel = 'selected';
+							}
+						}
+						@endphp
+						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="mb-3">
+					<label class="form-label">Rim Condition - Front Left</label>
+					<select class="form-control" name="front_left_rim" required>
+						<option value="">Select Option</option>
+						@foreach($conditions_list AS $list)
+						@php
+						$sel = '';
+						if(old('front_left_rim')){
+							if(old('front_left_rim') == $list){
+								$sel = "selected";
+							}
+						}
+						elseif($vehicle->report){
+							if($vehicle->report->front_left_rim == $list){
+								$sel = 'selected';
+							}
+						}
+						@endphp
+						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="mb-3">
+					<label class="form-label">Rim Condition - Front Right</label>
+					<select class="form-control" name="front_right_rim" required>
+						<option value="">Select Option</option>
+						@foreach($conditions_list AS $list)
+						@php
+						$sel = '';
+						if(old('front_left_rim')){
+							if(old('front_left_rim') == $list){
+								$sel = "selected";
+							}
+						}
+						elseif($vehicle->report){
+							if($vehicle->report->front_left_rim == $list){
+								$sel = 'selected';
+							}
+						}
+						@endphp
+						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="mb-3">
+					<label class="form-label">Rim Condition - Back Left</label>
+					<select class="form-control" name="back_left_rim" required>
+						<option value="">Select Option</option>
+						@foreach($conditions_list AS $list)
+						@php
+						$sel = '';
+						if(old('front_right_rim')){
+							if(old('front_right_rim') == $list){
+								$sel = "selected";
+							}
+						}
+						elseif($vehicle->report){
+							if($vehicle->report->front_right_rim == $list){
+								$sel = 'selected';
+							}
+						}
+						@endphp
+						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="mb-3">
+					<label class="form-label">Rim Condition - Back Right</label>
+					<select class="form-control" name="back_right_rim" required>
+						<option value="">Select Option</option>
+						@foreach($conditions_list AS $list)
+						@php
+						$sel = '';
+						if(old('back_left_rim')){
+							if(old('back_left_rim') == $list){
+								$sel = "selected";
+							}
+						}
+						elseif($vehicle->report){
+							if($vehicle->report->back_left_rim == $list){
 								$sel = 'selected';
 							}
 						}
@@ -734,13 +862,153 @@
 		</div>
 	</div>
 @endforeach
-
+<div class="accordion mb-3" id="accordionInterior">
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingInterior">
+				<button style="background-color: #efefef" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInterior" aria-expanded="false" aria-controls="collapseInterior">
+					<h4 class="card-title">Interior Inspection</h4>
+				</button>
+			</h2>
+			<div id="collapseInterior" class="accordion-collapse collapse" aria-labelledby="headingInterior" data-bs-parent="#accordionInterior">
+				<div class="accordion-body">
+					<div class="d-flex">
+						<div class="ms-auto mb-2">
+							<a href="#" class="btn btn-primary" id="int-add-btn">Add More</a>
+							<a href="#" class="btn btn-primary" id="int-add-custom">Add More With Custom Descriptions</a>
+						</div>
+					</div>
+					<div class="card-body interior-damage-cont">
+						<div class="row" id="interior-damesges-row">
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Upload Damage Image</label>
+									<input type="file" class="form-control field" name="interior-damage-images[]">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Position</label>
+									<select class="form-control img-input field" name="interior-position[]">
+										<option value="">Select Option</option>
+										@foreach($interior AS $int)
+										<option value="{{ $int->name }}">{{ $int->name }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Type Of Damage</label>
+									<select class="form-control img-input field" name="interior-type[]">
+										<option value="">Select Option</option>
+										@foreach($interior_damages AS $type)
+										<option value="{{ $type->name }}">{{ $type->name }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Severity Of Damage</label>
+									<select class="form-control img-input field" name="interior-severity[]">
+										<option value="">Select Option</option>
+										@foreach($damage_severity_list AS $severity)
+										<option value="{{ $severity }}">{{ $severity }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Estimate Damage Cost</label>
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon1">R</span>
+										<input type="number" class="form-control" name="interior_estimate_damage_cost[]">
+									</div>
+								</div>
+								<hr />
+							</div>
+						</div>
+						<div class="row" id="interior-custom" style="display:none">
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Upload Damage Image</label>
+									<input type="file" class="form-control img-input field" name="interior-damage-images[]">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Position</label>
+									<input type="text" class="form-control img-input field" name="interior-position[]">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Type Of Damage</label>
+									<input type="text" class="form-control img-input field" name="interior-type[]">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="mb-3">
+									<label class="form-label">Severity Of Damage</label>
+									<input type="text" class="form-control img-input field" name="interior-severity[]">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Estimate Damage Cost</label>
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon1">R</span>
+										<input type="number" class="form-control" name="interior_estimate_damage_cost[]">
+									</div>
+								</div>
+								<hr />
+							</div>
+						</div>
+						@if($vehicle->inspectionBySide('interior')->count() > 0)
+							<div class="row">
+								<div class="col-md-12">
+									<table class="table">
+										<thead>
+											<th></th>
+											<th>Position</th>
+											<th>Type Of Damage</th>
+											<th>Severity</th>
+											<th>Cost</th>
+											<th></th>
+										</thead>
+										<tbody>
+											@php
+												$damages = $vehicle->inspectionBySide('interior');
+											@endphp
+											@foreach($damages AS $damage)
+											<tr>
+												<td><img src="{{ asset('storage/'.$damage->image_url) }}" style="height:50px"></td>
+												<td>{{ $damage->poasition }}</td>
+												<td>{{ $damage->type }}</td>
+												<td>{{ $damage->severity }}</td>
+												<td>{{ $damage->estimate_damage_cost }}</td>
+												<td class="text-end">
+													<a href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
+												</td>
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+							</div>
+						@endif
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <div class="card">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="d-grid gap-2">
-					<input type="submit" class="btn btn-primary" value="SAVE">
+					<a type="submit" class="btn btn-primary" onclick="$(this).closest('form').submit();">SAVE</a>
 				</div>
 			</div>
 		</div>
@@ -765,6 +1033,24 @@
 				$('#mechanical_faults_warnig_lights_description_cont').hide();
 			}
 		})
+		
+		$('input[type=radio][name=service_plan]').change(function() {
+			if($(this).val() == "yes"){
+				$("#service_plan_cont").show();
+			}
+			else{
+				$('#service_plan_cont').hide();
+			}
+		})
+		
+		$('input[type=radio][name=warranty]').change(function() {
+			if($(this).val() == "yes"){
+				$("#warranty_cont").show();
+			}
+			else{
+				$('#warranty_cont').hide();
+			}
+		})
 
 		$('#back-add-custom').on('click', function(e){
 			e.preventDefault();
@@ -782,6 +1068,23 @@
 				$(this).val("");
 			});
 			$('.back-damage-cont').append(row);
+		});
+		$('#int-add-btn').on('click', function(e){
+			e.preventDefault();
+			var row = $('#interior-damesges-row').clone();
+			$(row).find('.field').each(function(){
+				$(this).val("");
+			});
+			$('.interior-damage-cont').append(row);
+		});
+		$('#int-add-custom').on('click', function(e){
+			e.preventDefault();
+			var row = $('#interior-custom').clone();
+			$(row).find('.field').each(function(){
+				$(this).val("");
+			});
+			$(row).css('display','flex');
+			$('.int-damage-cont').append(row);
 		});
 		$('#front-add-custom').on('click', function(e){
 			e.preventDefault();
@@ -911,6 +1214,7 @@
 		var make = $("#make-select").val();
 		var year = $('#year-select').val();
 		var model = $('#model-select').val();
+		model = model.replaceAll('/', '_');
 		$.ajax({
 			url: "{{ url('getVariants') }}/"+year+"/"+make+"/"+model,
 			type: 'GET',
@@ -931,7 +1235,7 @@
 		var make = $("#make-select").val();
 		var model = $('#model-select').val();
 		var variant = $('#variant-select').val();
-
+		variant = variant.replaceAll('/', '_');
 		$.ajax({
 			url: "{{ url('getCarInfo') }}/"+year+"/"+make+"/"+model+"/"+variant,
 			type: 'GET',
@@ -941,7 +1245,7 @@
 					var data = res.data;
 					$('#transmission-select option[value="'+data.transmission+'"]').attr("selected", "selected");
 					$('#fuel_type-select option[value="'+data.fuel_type+'"]').attr("selected", "selected");
-					$('#cylinders-input').val(data.cylinders);
+					/**$('#cylinders-input').val(data.cylinders);**/
 					$('#body_type-select option[value="'+data.body_type+'"]').attr("selected", "selected");
 				}
 			}

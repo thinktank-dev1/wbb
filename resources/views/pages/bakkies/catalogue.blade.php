@@ -129,7 +129,7 @@
                                             <label class="catalogue-search-label" for="search">SEARCH</label>
                                         </div>
                                         <div class="col-9"> 
-                                            <form method="GET" action="{{ url('filter-catalogue') }}"> 
+                                            <form method="GET" action="{{ url('search-catalogue') }}"> 
                                                 <div class="input-group">
                                                     <input class="form-control form-control-sm py-2 mt-1 border search-input" type="search" id="search" name="search">
                                                     <span class="input-group-append">
@@ -149,7 +149,7 @@
                                 <div class="col-sm-12 col-lg-8 mt-3 mb-4">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-4 col-lg-4">
-                                            <form method="get" action="{{ url('sort-catalogue') }}">
+                                            <form method="get" action="{{ url('sort-catalogue-date') }}">
                                                  <div class="row">
                                                     <div class="col-sm-2">
                                                         <label for="staticEmail" class="sort-span">SORT:</label>
@@ -166,7 +166,7 @@
                                             </form>
                                         </div>
                                         <div class="col-sm-12 col-md-4 col-lg-4">
-                                            <form method="get" action="{{ url('filter-catalogue') }}">
+                                            <form method="get" action="{{ url('sort-catalogue') }}">
                                                  <div class="row">
                                                     <div class="col-sm-2">
                                                         <label for="staticEmail" class="sort-span">SORT:</label>
@@ -182,7 +182,7 @@
                                             </form>
                                         </div>
                                         <div class="col-sm-12 col-md-4 col-lg-4">
-                                            <form method="get" action="{{ url('filter-catalogue') }}">
+                                            <form method="get" action="{{ url('paginate-catalogue') }}">
                                                 
                                                  <div class="row">
                                                     <div class="col-sm-6">
@@ -190,6 +190,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                      <select class="sort-select" name="paginate" onchange="this.form.submit()">
+                                                        <option >Value</option>
                                                         <option value="10">10</option>
                                                         <option value="15">15</option>
                                                         <option value="20">20</option>
@@ -269,7 +270,7 @@
                                                 <p class="bid-text starting-bid">OPENING BID</p>
                                                 <h6 class="starting-bid-price">R {{ number_format($vehicle->lot->start_price,2) }}</h6>
                                                 <p class="bid-text trade-price">TRADE PRICE</p>
-                                                <h6 class="starting-bid-price">R {{ number_format($vehicle->lot->reserve_price,2) }}</h6>
+                                                <h6 class="starting-bid-price">R {{ number_format($vehicle->lot->trade_price,2) }}</h6>
                                                 <p class="bid-text starting-bid">EST REPAIR COST</p>
                                                 <h6 class="starting-bid-price">R{{ $vehicle->lot->repairTotal() }}</h6>
                                             </div>
@@ -421,7 +422,10 @@
         </div>
     </div>
 </section>
-@include('includes.assistance')
+<!--@include('includes.assistance')-->
+<div class="col-md-12 home-footer-banner mt-5">
+    <img class="img-fluid" src="{{ asset('images/wbbonline_img_19.png') }}" alt="assistance-banner-top-img">
+</div>
 @push('scripts')
 <script>
 $(document).ready(function(){

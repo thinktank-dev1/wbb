@@ -93,7 +93,7 @@
                         </div>
                         </div>
                     </div>
-                    <div class="card faq-card">
+                    <div class="card faq-card mb-5">
                         <div class="card-header" id="headingFour">
                         <h2 class="faq-header">
                             <button class="btn btn-link btn-block text-left accord-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -118,6 +118,9 @@
     </div>
 </section>
 
-@include('includes.assistance')
+<!--@include('includes.assistance')-->
+<div class="col-md-12 home-footer-banner mt-5">
+    <img class="img-fluid" src="{{ asset('images/wbbonline_img_19.png') }}" alt="assistance-banner-top-img">
+</div>
 
 @endsection

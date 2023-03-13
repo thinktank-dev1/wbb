@@ -21,9 +21,20 @@
                         <h3 class="auction-heading ml-5"> LIVE AUCTION</h3>
                         @endif
                     </div>
+                    
+                    @php 
+                    $url = request()->segment(2); 
+                    @endphp
+                    
+                    @if($url == 'favourites')
+                    <div class="col d-flex justify-content-end mr-5 mobile-center">
+                        <a style="padding: 3px 30px !important; margin-left: 0 !important" class="btn btn-secondary back-to-cat-btn" href="{{ url('auction') }}">BACK TO AUCTION</a>
+                    </div>
+                    @else
                     <div class="col d-flex justify-content-end mr-5 mobile-center">
                         <a class="btn btn-secondary back-to-cat-btn" href="{{ url()->previous() }}">BACK</a>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -37,10 +48,10 @@
                     <div class="col-4 text-right mobile-max-width">
                         <div class="row lot-top-bar">
                             <div class="col-6 text-right mobile-max-width">
-                                <button class="btn btn-primary list-view-btn mt-3" id="view-grid" wire:click.prevent="changeView('list')">Full View</button>
+                                <button class="btn btn-primary list-view-btn  mt-3" id="view-grid" wire:click.prevent="changeView('list')">Full View</button>
                             </div>
                             <div class="col-6 text-left  mobile-max-width">
-                                <button class="btn btn-primary table-view-btn mt-3" id="view-list"  wire:click.prevent="changeView('table')">List View</button>
+                                <button class="btn btn-primary table-view-btn  mt-3" id="view-list"  wire:click.prevent="changeView('table')">List View</button>
                             </div>
                             
                         </div>
@@ -50,7 +61,7 @@
             </div>
         </div>
         
-        @if (session()->has('message'))
+        @if(session()->has('message'))
             <div class="alert alert-success">
                 {{ session('message') }}
             </div>
@@ -82,7 +93,7 @@
                                                 <tbody>
                                 @endif
                                 @foreach($lots AS $lot)
-                                    @if($lot->status == 1)
+                                    @if($lot->status == 1 || $is_fvourite)
                                         <livewire:auction-list-item :lot_id="$lot->id" :view_type="$view_type" :wire:key="$lot->id.uniqid()" />
                                     @endif
                                 @endforeach
@@ -92,34 +103,6 @@
                                             </table>
                                         </div>
                                     </div>
-                                    @foreach($lots AS $lot)
-                                        <div class="modal fade" id="exampleModal{{$lot->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog modal-sm">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Auto Bid</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span>
-                                                </button>
-                                              </div>
-                                              <div class="modal-body">
-                                                 <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text decimal-span">R</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" id="bid-amnt" wire:model.lazy="auto_bid_amount.{{ $lot->id }}"  placeholder="Auto Bid Amount">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text decimal-span">.00</span>
-                                                    </div>
-                                                </div>
-                                              </div>
-                                              <div class="modal-footer d-flex justify-content-center">
-                                                <a href="Javascript:void(0)" class="btn btn-primary" data-dismiss="modal" aria-label="Close">GO</a>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                    @endforeach
                                 @endif
                                 {{ $lots->links() }}
                             @else
@@ -174,7 +157,7 @@
                     </div>
                     @endif
                     <div class="col-md-12 mt-5 d-flex justify-content-center back-catalogue-btn">
-                        <a href="{{ route('catalogue') }}" class="btn btn-secondary">BACK TO CATALOGUE</a>
+                        <a href="{{ route('catalogue') }}" class="btn btn-secondary mb-5">BACK TO CATALOGUE</a>
                     </div>
                 </div>
             </div>
@@ -211,6 +194,7 @@
                             showHideTransition: 'slide',
                             icon: 'error',
                             position: 'mid-center',
+                            hideAfter : 8000,  
                         });
                     }
                 }
@@ -225,6 +209,7 @@
                     showHideTransition: 'slide',
                     icon: 'success',
                     position: 'mid-center',
+                    hideAfter : 8000,  
                 });
             }
             if(event.detail.type == "error"){
@@ -235,6 +220,7 @@
                     icon: 'error',
                     //position: 'top-center',
                     position: 'mid-center',
+                    hideAfter : 8000,  
                 });
             }
         });
@@ -261,5 +247,5 @@
     @endpush
 </section>
 
-@include('includes.assistance')
+<!--@include('includes.assistance')-->
 </div>

@@ -3,7 +3,7 @@
 	<nav class="navbar navbar-expand-md nav-container remove-nav-height">
 		<div class="container nav-container icon-nav-container nav-top-bar">
 			<a class="nav-link" href="{{ url('/') }}">
-				<img class="light-mode-item logo" src="{{ asset('images/wbbonline_img_1.png') }}" alt="logo">
+				<img class="light-mode-item logo" src="{{ asset('img/new_logo.png') }}" alt="logo">
 			</a>
 
 			<div id="nav-second-top-bar" class="d-flex order-lg-2 ms-auto header-right-icons nav-second-top-bar"> 

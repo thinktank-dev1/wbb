@@ -103,35 +103,35 @@
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Identity Document</label>
-                            					<input type="file" class="form-control" name="id_document">
+                            					<input type="file" class="form-control" name="id_document" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Proof Of Residence</label>
-                            					<input type="file" class="form-control" name="proof_of_residence">
+                            					<input type="file" class="form-control" name="proof_of_residence" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">VAT Registration</label>
-                            					<input type="file" class="form-control" name="vat_registration">
+                            					<input type="file" class="form-control" name="vat_registration" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">BRM</label>
-                            					<input type="file" class="form-control" name="brm">
+                            					<input type="file" class="form-control" name="brm" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Proxy ID</label>
-                            					<input type="file" class="form-control" name="proxy_id">
+                            					<input type="file" class="form-control" name="proxy_id" required>
                             				</div>
                             			</div>
                                         <div class="col-md-12 text-center">
-                                            <input type="submit" value="NEXT" class="btn btn-primary btn-sm">
+                                            <input type="submit" value="NEXT" class="btn btn-primary btn-sm nxt-btn">
                                             <div class="mt-3">
                                                 <p>Already have an account? <a href="{{ url('login') }}">Log In</a></p>
                                             </div>
@@ -149,5 +149,8 @@
         </div>
     </div>
 </section>
-@include('includes.assistance')
+<!--@include('includes.assistance')-->
+<div class="col-md-12 home-footer-banner mt-5">
+    <img class="img-fluid" src="{{ asset('images/wbbonline_img_19.png') }}" alt="assistance-banner-top-img">
+</div>
 @endsection

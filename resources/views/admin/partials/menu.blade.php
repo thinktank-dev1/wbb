@@ -100,6 +100,8 @@
                         <li><a href="{{ url('admin/options/extras-exterior') }}">Extras Exterior</a></li>
                         <li><a href="{{ url('admin/options/extras-standard') }}">Extras Standard</a></li>
                         <li><a href="{{ url('admin/options/extras-top-spec') }}">Extras Top Spec</a></li>
+                        <li><a href="{{ url('admin/options/interior') }}">Interior</a></li>
+                        <li><a href="{{ url('admin/options/interior-damage') }}">Interior Damage Types</a></li>
                     </ul>
                 </li>
             </ul>

@@ -22,7 +22,12 @@
                         <div class="card-header">
                             <div class="d-flex">
                                 <div class="ms-auto">
-                                    <a href="{{ url('admin/auction-groups/'.$auctionGroup->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                                    @if($auctionGroup->status == 1)
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-sm">Edit</a>
+                                    @else
+                                        <a href="{{ url('admin/auction-groups/'.$auctionGroup->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>
@@ -50,11 +55,20 @@
                             <div class="d-flex">
                                 <h4 class="card-title">Lots</h4>
                                 <span class="ms-auto">
-                                    <a href="{{ url('admin/add-lots-to-auction-group/'.$auctionGroup->id) }}" class="btn btn-primary btn-sm">Add Lots</a>
+                                    @if($auctionGroup->status == 1)
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-sm">Add Lots</a>
+                                    @else
+                                        <a href="{{ url('admin/add-lots-to-auction-group/'.$auctionGroup->id) }}" class="btn btn-primary btn-sm">Add Lots</a>
+                                    @endif
                                 </span>
                             </div>
                         </div>
                         <div class="card-body">
+                            @if($auctionGroup->status == 1)
+                            <div class="alert alert-warning text-center">
+                                <strong>Disclaimer: Once an auction has started, you can no longer remove a car that has been assigned.</strong> 
+                            </div>
+                            @endif
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -79,7 +93,8 @@
                                         <td class="text-end">{{ number_format($lot->start_price,2) }}</td>
                                         <td class="text-end">{{ number_format($lot->increament_value,2) }}</td>
                                         <td class="text-end">{{ number_format($lot->reserve_price,2) }}</td>
-                                        <th class="text-end"><a style="color:#8cd50a" href="{{ url('admin/remove-lot/'.$lot->id) }}" class="text-danger">Remove</a></th>
+                                        <th class="text-end">@if($auctionGroup->status == 0)<a style="color:#8cd50a" href="{{ url('admin/remove-lot/'.$lot->id) }}" class="text-danger">Remove</a>@else
+                                        <a style="color:#8cd50a" href="javascript:void(0)" class="text-danger">Remove</a>@endif</th>
                                     </tr>
                                     @endif
                                     @endforeach

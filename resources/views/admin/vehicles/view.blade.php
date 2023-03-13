@@ -7,6 +7,11 @@
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0 font-size-18">Vehicles</h4>
+                        @if($vehicle->lot()->exists())
+	                        <div id="dvDisclaimer" class="alert alert-warning text-center">
+	                            <strong>Disclaimer: Once an auction has started, you can no longer delete/edit a car that has been assigned.</strong> 
+	                        </div>
+                        @endif
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Vehicles</a></li>
@@ -23,7 +28,11 @@
                 			<div class="d-flex">
                 				<h4 class="card-title">Vehicle Details</h4>
                 				<div class="ms-auto">
-                					<a href="{{ url('admin/vehicles/2/edit') }}" class="btn btn-primary btn-sm"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                						@if($vehicle->lot()->exists())
+                						    <a href="javascript:void(0)" class="btn btn-primary btn-sm"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                						@else
+                							<a href="{{ url('admin/vehicles/'.$vehicle->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="mdi mdi-car-wrench"></i> Edit</a>
+                						@endif
                 				</div>
                 			</div>
                 		</div>
@@ -73,10 +82,10 @@
                 					<span class="label">Engine Type:</span>
                 					<span class="ms-auto"><b>{{ $vehicle->engine_type }}</b></span>
                 				</li>
-                				<li class="list-group-item d-flex">
-                					<span class="label">Cylinders:</span>
-                					<span class="ms-auto"><b>{{ $vehicle->cylinders }}</b></span>
-                				</li>
+                				<!--<li class="list-group-item d-flex">-->
+                				<!--	<span class="label">Cylinders:</span>-->
+                				<!--	<span class="ms-auto"><b>{{ $vehicle->cylinders }}</b></span>-->
+                				<!--</li>-->
                 				<li class="list-group-item d-flex">
                 					<span class="label">VIN:</span>
                 					<span class="ms-auto"><b>{{ $vehicle->vin_number}}</b></span>
@@ -105,7 +114,13 @@
 		                				<table class="table">
 		                					@foreach($vehicle->lot->bids->where('bid_type', 'live')->take(5) AS $bid)
 		                					<tr>
-		                						<td>{{ $bid->bidder->first_name.' '.$bid->bidder->last_name }}</td>
+		                						<td>
+			                						@if($bid->bidder->company()->exists()) 
+			                							{{ $bid->bidder->company->company_name }} 
+			                						@else
+			                							{{ $bid->bidder->first_name.' '.$bid->bidder->last_name }}
+			                						@endif
+		                						</td>
 		                						<td class="text-end">{{ number_format($bid->bid_amount, 2) }}</td>
 		                					</tr>
 		                					@endforeach
@@ -130,22 +145,27 @@
             				</tr>
             				@if($vehicle->report->mechanical_faults_warnig_lights_description)
             				<tr>
-            					<td colspan="4">
+            					<td >
             						Mechanical Faults / Warnig Lights Description<br />
             						<strong>{{ $vehicle->report->mechanical_faults_warnig_lights_description }}</strong>
             					</td>
             				</tr>
             				@endif
             				<tr>
-            					<td><div class="d-flex">Windscreen Condition: <strong class="ms-auto">{{ $vehicle->report->windscreen_condition }}</strong></div></td>
-            					<td><div class="d-flex">Rims Condition: <strong class="ms-auto">{{ $vehicle->report->rims_condition }}</strong></div></td>
-            					<td colspan="2"><div class="d-flex">Interior Condition: <strong class="ms-auto">{{ $vehicle->report->interior_condition }}</strong></div></td>
+            					<td ><div class="d-flex">Windscreen Condition: <strong class="ms-auto">{{ $vehicle->report->windscreen_condition }}</strong></div></td>
+            					<td ><div class="d-flex">Interior Condition: <strong class="ms-auto">{{ $vehicle->report->interior_condition }}</strong></div></td>
             				</tr>
             				<tr>
             					<td><div class="d-flex">Front Left Tire: <strong class="ms-auto">{{ $vehicle->report->front_left_tire }}</strong></div></td>
             					<td><div class="d-flex">Front Right Tire: <strong class="ms-auto">{{ $vehicle->report->front_right_tire }}</strong></div></td>
             					<td><div class="d-flex">Back Left Tire: <strong class="ms-auto">{{ $vehicle->report->back_left_tire }}</strong></div></td>
             					<td><div class="d-flex">Back Right Tire: <strong class="ms-auto">{{ $vehicle->report->back_right_tire }}</strong></div></td>
+            				</tr>
+            				<tr>
+            					<td><div class="d-flex">Front Left Rim: <strong class="ms-auto">{{ $vehicle->report->front_left_rim }}</strong></div></td>
+            					<td><div class="d-flex">Front Right Rim: <strong class="ms-auto">{{ $vehicle->report->front_right_rim }}</strong></div></td>
+            					<td><div class="d-flex">Back Left Rim: <strong class="ms-auto">{{ $vehicle->report->back_left_rim }}</strong></div></td>
+            					<td><div class="d-flex">Back Right Rim: <strong class="ms-auto">{{ $vehicle->report->back_right_rim }}</strong></div></td>
             				</tr>
             			</table>
                 	</div>
@@ -187,7 +207,12 @@
 										<td>{{ $damage->type }}</td>
 										<td>{{ $damage->severity }}</td>
 										<td class="text-end">
-											<a href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
+											@if($vehicle->lot()->exists())
+												<a style="color:#8cd50a"  href="javascript:void(0)"><i class="mdi mdi-car-off"></i> Delete</a>
+											@else
+												<a style="color:#8cd50a"  href="{{ url('admin/delete-report/'.$damage->id) }}"><i class="mdi mdi-car-off"></i> Delete</a>
+											@endif
+											
 										</td>
 									</tr>
 									@endforeach
@@ -202,7 +227,11 @@
 	                			@foreach($vehicle->images AS $img)
 								<div class="col-md-2">
 									<div class="d-grid gap-2 mb-2">
-										<a href="{{ url('admin/delete-vehicle-image/'.$img->id) }}" class="btn btn-danger btn-sm">REMOVE</a>
+										@if($vehicle->lot()->exists())
+											<a href="javascript:void(0)" class="btn btn-danger btn-sm">REMOVE</a>
+										@else
+											<a href="{{ url('admin/delete-vehicle-image/'.$img->id) }}" class="btn btn-danger btn-sm">REMOVE</a>
+										@endif
 									</div>
 									<img src="{{ asset('storage/'.$img->image_url) }}" class="img-thumbnail">
 								</div>

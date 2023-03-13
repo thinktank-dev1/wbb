@@ -65,6 +65,7 @@ Route::get('getModels2/{make}', [VehicleController::class, 'getModels2']);
 
 Route::get('redirects', [RedirectController::class, 'redirects']);
 
+
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('profile', [ProfileController::class, 'index']);
@@ -77,6 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::get('auction', Auction::class)->name('auction');
     Route::get('auction/{favs}', Auction::class)->name('favourites');
     Route::get('view-lot/{id}', ViewLot::class)->name('view-lot');
+    Route::post('new-password', [ProfileController::class, 'passwordReset'])->name('new.password');
     
     Route::get('getModels/{year}/{make}', [VehicleController::class, 'getModels']);
     Route::get('getVariants/{year}/{make}/{model}', [VehicleController::class, 'getVariants']);
@@ -87,8 +89,11 @@ Route::middleware('auth')->group(function () {
     Route::get('remove-favourite/{id}', [CatalogueController::class, 'remove_favourite']);
     
 
-    Route::get('filter-catalogue', [CatalogueController::class, 'filterCatalogue'])->name('filter-catalogue');    
-    Route::get('sort-catalogue',[CatalogueController::class, 'sortCatalogueByDate']);
+    Route::get('filter-catalogue', [CatalogueController::class, 'filterCatalogue'])->name('filter-catalogue');   
+    Route::get('search-catalogue', [CatalogueController::class, 'searchCatalogue'])->name('search-catalogue');
+    Route::get('sort-catalogue-date', [CatalogueController::class, 'sortCatalogueByDate']);
+    Route::get('sort-catalogue', [CatalogueController::class, 'sortCatalogue']);
+    Route::get('paginate-catalogue', [CatalogueController::class, 'paginateCatalogue']);
     
     Route::group(['prefix' => 'admin'], function(){
         Route::get('dashboard', [AdminDashboardController::class, 'index']);

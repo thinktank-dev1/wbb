@@ -21,6 +21,10 @@ class VehicleAccidentReport extends Model
         'front_left_tire',
         'front_right_tire',
         'back_left_tire',
-        'back_right_tire'
+        'back_right_tire',
+        'front_left_rim',
+        'front_right_rim',
+        'back_left_rim',
+        'back_right_rim'
     ];
 }

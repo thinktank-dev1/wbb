@@ -16,7 +16,9 @@ class Lot extends Model
     	'start_price',
     	'increament_value',
     	'reserve_price',
-    	'show_reseve_price'
+    	'show_reseve_price',
+    	'trade_price',
+    	'winner_id'
     ];
     
     public function group(){

@@ -35,13 +35,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php $bought = 0; @endphp
                                     @foreach($users AS $user)
                                     <tr>
                                         <td>{{ $user->first_name.' '.$user->last_name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->contact_primary }}</td>
                                         <td>{{ $user->roles->description }}</td>
-                                        <td>{{ $user->boughtCars() }}</td>
+                                        <td> {{ $user->boughtCars() }}</td>
                                         @if($user->status == NULL)
                                             <td> In-Active</td>
                                         @else
@@ -56,6 +57,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {!! $users->links() !!}
                         </div>
                     </div>
                 </div>

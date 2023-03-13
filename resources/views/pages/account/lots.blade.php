@@ -29,15 +29,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($cars AS $car)
-                                        <tr>
-                                            <td>{{ $car->lot->id }}</td>
-                                            <td>{{ $car->make }}</td>
-                                            <td>{{ $car->model }}</td>
-                                            <td>{{ $car->year }}</td>
-                                            <td>{{ $car->lot->group->date }}</td>
-                                            <td>{{ $car->lot->highestBid()->bid_amount }}</td>
-                                        </tr>
+                                         @foreach($cars_bought as $car)
+                                            <tr>
+                                                <td>{{ $car->id }}</td>
+                                                <td>{{ $car->vehicle->make }}</td>
+                                                <td>{{ $car->vehicle->model }}</td>
+                                                <td>{{ $car->vehicle->year }}</td>
+                                                <td>{{ $car->group->date }}</td>
+                                                <td>R {{ $car->highestBid()->bid_amount }}</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

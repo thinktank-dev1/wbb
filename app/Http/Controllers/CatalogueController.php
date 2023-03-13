@@ -27,32 +27,27 @@ class CatalogueController extends Controller
     public function catalogue()
     {
         $date = Carbon::now()->toDateString();
-        
         $time = Carbon::now()->toTimeString();
-        
         $car_list = CarList::distinct()->get(['make']);
-        
         $body_types = VehicleBodyType::all();
-        
-        $auction_date = AuctionGroup::whereDate('date', '>=', $date)->whereNot('status', '2')->first();
-        
-        $dates = AuctionGroup::whereDate('date', '>=', $date)->whereNot('status', '2')->orderBy('date', 'ASC')->get();
+        $auction_date = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->first();
+        $dates = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->orderBy('date', 'ASC')->get();
         
         $catalogue = Vehicle::whereHas('lot', function ($query) use($date){
             $query->whereHas('auction', function ($subQ) use($date){
                 $subQ->whereDate('date', '>=', $date)
-                ->whereNot('status', '2');
+                ->whereNot('status', 2);
             });
         })->paginate(5);
         
-            return view('pages.bakkies.catalogue')
-            ->with([
-                'dates' => $dates,
-                'car_list' => $car_list,
-                'catalogue' => $catalogue,
-                'body_types' => $body_types,
-                'auction_date' => $auction_date
-                ]);   
+        return view('pages.bakkies.catalogue')
+        ->with([
+            'dates' => $dates,
+            'car_list' => $car_list,
+            'catalogue' => $catalogue,
+            'body_types' => $body_types,
+            'auction_date' => $auction_date
+        ]);   
     }
     
     public function add_to_favourites($id)
@@ -120,191 +115,149 @@ class CatalogueController extends Controller
         $mileage = Filter::input('mileage');
         $from = Filter::input('from');
         $to = Filter::input('to');
-        $sort = Filter::input('sort');
-        $paginate = Filter::input('paginate');
-        $search = Filter::input('search');
-        
-       
         
         $car_list = CarList::distinct()->get(['make']);
         $body_types = VehicleBodyType::all();
-        $auction_date = AuctionGroup::whereDate('date', $date)->first();
-        $dates = AuctionGroup::whereDate('date','>=' ,$date)->orderBy('date', 'ASC')->get();
+        $auction_date = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->first();
+        $dates = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->orderBy('date', 'ASC')->get();
         
         if($mileage == 0){
-            if($make != null){
+            if($make){
             $catalogue = Vehicle::where('make', $make)
             ->whereHas('lot', function($query) use($date){
                 $query->whereHas('auction',function($subQ) use($date){
                    $subQ->whereDate('date', '>=', $date)
-                   ->whereNot('status', '2'); 
+                   ->whereNot('status', 2); 
                 });
             })->paginate(5);   
-            }elseif($body !=null){
+            }elseif($body){
                $catalogue = Vehicle::where('body_type', $body)
                 ->whereHas('lot', function($query) use($date){
                     $query->whereHas('auction',function($subQ) use($date){
                        $subQ->whereDate('date', '>=', $date)
-                       ->whereNot('status', '2'); 
+                       ->whereNot('status', 2); 
                     });
                 })->paginate(5); 
-            }elseif($from != null){
-            $catalogue = Vehicle::where('year', $from)
-            ->whereHas('lot', function($query) use($date){
-              $query->whereHas('auction', function($subQ) use($date){
-                $subQ->whereDate('date', '>=', $date)
-                ->whereNot('status', '2');  
-              }); 
-            })->paginate(5);   
-            }elseif($from != null && $to != null){
-                $catalogue = Vehicle::whereBetween('year', [$from, $to])
+            }elseif($from){
+                $catalogue = Vehicle::where('year', $from)
                 ->whereHas('lot', function($query) use($date){
+                  $query->whereHas('auction', function($subQ) use($date){
+                    $subQ->whereDate('date', '>=', $date)
+                    ->whereNot('status', 2);  
+                  }); 
+            })->paginate(5);   
+            }elseif($from && $to){
+                $catalogue = Vehicle::where(function ($between) use($from, $to) {
+                        $$between->where('year', '>=', $from)
+                            ->orWhere('year', '<=', $to);
+                    })->whereHas('lot', function($query) use($date){
                     $query->whereHas('auction', function($subQ) use($date){
                         $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');      
+                        ->whereNot('status', 2);      
                     });
                 })->paginate(5); 
-            }elseif($make != null && $model != null){
+            }elseif($make && $model){
                 $catalogue = Vehicle::where('make', $make)
                 ->where('model', $model)
                 ->whereHas('lot', function($query) use($date){
                     $query->whereHas('auction', function($subQ) use($date){
                         $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');
+                        ->whereNot('status', 2);
                     });
                 })->paginate(5);
-            }elseif($make != null && $model != null && $body){
+            }elseif($make && $model && $body){
                 $catalogue = Vehicle::where('make', $make)
                 ->where('model', $model)
                 ->where('body_type', $body)
                 ->whereHas('lot', function($query) use($date){
                     $query->whereHas('auction', function($subQ) use($date){
                        $subQ('date', '>=', $date)
-                       ->whereNot('status', '2'); 
+                       ->whereNot('status', 2); 
                     });
                 })->paginate(5);
             }
-        }else{
-           if($mileage > 0){
-            $catalogue = Vehicle::where('mileage','>=' ,$mileage)
+        }elseif($mileage != 0){
+            $catalogue = Vehicle::whereBetween('mileage', [$mileage, 500000])
             ->whereHas('lot', function($query) use($date){
                  $query->whereHas('auction',function($subQ) use($date){
                    $subQ->whereDate('date', '>=', $date)
-                   ->whereNot('status', '2'); 
+                   ->whereNot('status', 2); 
                 });
             })->paginate(5); 
-            }elseif($make != null && $model != null && $body != null && $mileage > 0){
-                $catalogue = Vehicle::where('make', $make)
-                ->where('model', $model)
-                ->where('body_type', $body)
-                ->where('mileage','>=' ,$mileage)
-                ->whereHas('lot', function($query) use($date){
-                    $query->whereHas('auction', function($subQ) use($date){
-                        $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');    
-                    });
-                })->paginate(5);
-            }elseif($make != null && $model != null && $body != null && $mileage > 0 && $from != null && $to != null){
-                $catalogue = Vehicle::where('make', $make)
-                ->where('model', $model)
-                ->where('body_type', $body)
-                ->where('mileage','>=' ,$mileage)
-                ->whereBetween('year', [$from, $to])
-                ->whereHas('lot', function($query) use($date){
-                    $query->whereHas('auction', function($subQ) use($date){
-                        $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');
-                    });
-                })->paginate(5);
-            }
-        }
-        
-        if($sort != null){
-            $catalogue = Vehicle::whereHas('lot')
-            ->orderBy('make', $sort)
+        }elseif($make && $model && $body && $mileage != 0){
+            $catalogue = Vehicle::where('make', $make)
+            ->where('model', $model)
+            ->where('body_type', $body)
+            ->whereBetween('mileage', [$mileage, 500000])
             ->whereHas('lot', function($query) use($date){
                 $query->whereHas('auction', function($subQ) use($date){
                     $subQ->whereDate('date', '>=', $date)
-                    ->whereNot('status', '2');
-                });
-            })->paginate(5);   
-        }elseif($paginate != null){
-             $catalogue = Vehicle::whereHas('lot', function($query) use($date){
-                 $query->whereHas('auction', function($subQ) use($date){
-                     $subQ->whereDate('date', '>=', $date)
-                     ->whereNot('status', '2');
-                 });
-             })->paginate($paginate);  
-        }elseif($search != null){
-            $catalogue = Vehicle::where('make','like', "%{$search}%")
-            ->whereHas('lot', function($query) use($date){
-                $query->whereHas('auction', function($subQ) use($date){
-                    $subQ->whereDate('date', '>=', $date)
-                    ->whereNot('status', '2');
+                    ->whereNot('status', 2);    
                 });
             })->paginate(5);
-            
-            if($catalogue->isEmpty()){
-               $catalogue = Vehicle::where('model', 'like', "%{$search}%")
-                ->whereHas('lot', function($query) use($date){
-                    $query->whereHas('auction', function($subQ) use($date){
-                        $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');
-                    });
-                })->paginate(5); 
-            }
-            
-            if($catalogue->isEmpty()){
-                $catalogue = Vehicle::where('variant', 'like', "%{$search}%")
-                ->whereHas('lot', function($query) use($date){
-                    $query->whereHas('auction', function($subQ) use($date){
-                        $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');
-                    });
-                })->paginate(5);
-            }
-            
-            if($catalogue->isEmpty()){
-                $catalogue = Vehicle::where('body_type', 'like', "%{$search}%")
-                ->whereHas('lot', function($query) use($date){
-                    $query->whereHas('auction', function($subQ) use($date){
-                        $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');
-                    });
-                })->paginate(5); 
-            }
-            
-            if($catalogue->isEmpty()){
-                $catalogue = Vehicle::where('year', 'like', "%{$search}%")
-                ->whereHas('lot', function($query) use($date){
-                    $query->whereHas('auction', function($subQ) use($date){
-                        $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');
-                    });
-                })->paginate(5); 
-            }
-            
-            if($catalogue->isEmpty()){
-                $catalogue = Vehicle::where('fuel_type', 'like', "%{$search}%")
-                ->whereHas('lot', function($query) use($date){
-                    $query->whereHas('auction', function($subQ) use($date){
-                        $subQ->whereDate('date', '>=', $date)
-                        ->whereNot('status', '2');
-                    });
-                })->paginate(5); 
-            }
+        }elseif($make && $model && $body && $mileage != 0 && $from && $to){
+            $catalogue = Vehicle::where('make', $make)
+            ->where('model', $model)
+            ->where('body_type', $body)
+            ->whereBetween('mileage', [$mileage, 500000])
+            ->whereBetween('year', [$from, $to])
+            ->whereHas('lot', function($query) use($date){
+                $query->whereHas('auction', function($subQ) use($date){
+                    $subQ->whereDate('date', '>=', $date)
+                    ->whereNot('status', 2);
+                });
+            })->paginate(5);
         }
         
-            return view('pages.bakkies.catalogue')
-            ->with([
-                'date' => $date,
-                'dates' => $dates,
-                'car_list' => $car_list,
-                'catalogue' => $catalogue,
-                'body_types' => $body_types,
-                'auction_date' => $auction_date
-            ]);
+        if($make == null && $model == null && $body == null && $mileage == 0 && $from == null && $to == null){
+            $catalogue = Vehicle::whereHas('lot', function ($query) use($date){
+            $query->whereHas('auction', function ($subQ) use($date){
+                $subQ->whereDate('date', '>=', $date)
+                ->whereNot('status', 2);
+            });
+            })->paginate(5);
+        }
+        
+        return view('pages.bakkies.catalogue')
+        ->with([
+            'date' => $date,
+            'dates' => $dates,
+            'car_list' => $car_list,
+            'catalogue' => $catalogue,
+            'body_types' => $body_types,
+            'auction_date' => $auction_date
+        ]);
     }  
+    
+    public function sortCatalogue()
+    {
+        $sort = Filter::input('sort');
+        $date = Carbon::now()->toDateString();
+        $car_list = CarList::distinct()->get(['make']);
+        $body_types = VehicleBodyType::all();
+        $auction_date = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->first();
+        $dates = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->orderBy('date', 'ASC')->get(); 
+        
+        if($sort){
+            $catalogue = Vehicle::orderBy('make', $sort)
+            ->whereHas('lot', function($query) use($date){
+                $query->whereHas('auction', function($subQ) use($date){
+                    $subQ->whereDate('date', '>=', $date)
+                    ->whereNot('status', 2);
+                });
+            })->paginate(5);   
+        }
+        
+        return view('pages.bakkies.catalogue')
+        ->with([
+            'date' => $date,
+            'dates' => $dates,
+            'car_list' => $car_list,
+            'catalogue' => $catalogue,
+            'body_types' => $body_types,
+            'auction_date' => $auction_date
+        ]);
+    }
     
     public function sortCatalogueByDate()
     {
@@ -312,8 +265,8 @@ class CatalogueController extends Controller
         $date = $day;
         $car_list = CarList::distinct()->get(['make']);
         $body_types = VehicleBodyType::all();
-        $auction_date = AuctionGroup::whereDate('date', $date)->first();
-        $dates = AuctionGroup::whereDate('date','>=' ,$date)->orderBy('date', 'ASC')->get();
+        $auction_date = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->first();
+        $dates = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->orderBy('date', 'ASC')->get();
         
         if($day != null){
              $catalogue = Vehicle::whereHas('lot', function ($query) use($day){
@@ -321,6 +274,116 @@ class CatalogueController extends Controller
                     $subQ->whereDate('date', $day);
                 });
              })->paginate(5);   
+        }
+        
+        return view('pages.bakkies.catalogue')
+        ->with([
+            'date' => $date,
+            'dates' => $dates,
+            'car_list' => $car_list,
+            'catalogue' => $catalogue,
+            'body_types' => $body_types,
+            'auction_date' => $auction_date
+        ]);
+    }
+    
+    public function searchCatalogue(){
+        $date = Carbon::now()->toDateString(); 
+        $search = Filter::input('search');
+        $car_list = CarList::distinct()->get(['make']);
+        $body_types = VehicleBodyType::all();
+        $auction_date = AuctionGroup::whereDate('date', '>=',$date)->whereNot('status', 2)->first();
+        $dates = AuctionGroup::whereDate('date', '>=', $date)->whereNot('status', 2)->orderBy('date', 'ASC')->get();
+       
+        if($search){
+            $catalogue = Vehicle::where('make', 'LIKE', '%'.$search.'%')
+            ->whereHas('lot', function($query) use($date){
+                    $query->whereHas('auction', function($subQ) use($date){
+                        $subQ->whereDate('date', '>=', $date)
+                        ->whereNot('status', 2);
+                    });
+                })->paginate(5);
+
+            
+            if($catalogue->isEmpty()){
+              $catalogue = Vehicle::where('model', 'LIKE', '%'.$search.'%')
+                ->whereHas('lot', function($query) use($date){
+                    $query->whereHas('auction', function($subQ) use($date){
+                        $subQ->whereDate('date', '>=', $date)
+                        ->whereNot('status', 2);
+                    });
+                })->paginate(5); 
+            }
+            
+            if($catalogue->isEmpty()){
+                $catalogue = Vehicle::where('variant', 'LIKE', '%'.$search.'%')
+                ->whereHas('lot', function($query) use($date){
+                    $query->whereHas('auction', function($subQ) use($date){
+                        $subQ->whereDate('date', '>=', $date)
+                        ->whereNot('status', 2);
+                    });
+                })->paginate(5);
+            }
+            
+            if($catalogue->isEmpty()){
+                $catalogue = Vehicle::where('body_type', 'LIKE', '%'.$search.'%')
+                ->whereHas('lot', function($query) use($date){
+                    $query->whereHas('auction', function($subQ) use($date){
+                        $subQ->whereDate('date', '>=', $date)
+                        ->whereNot('status', 2);
+                    });
+                })->paginate(5); 
+            }
+            
+            if($catalogue->isEmpty()){
+                $catalogue = Vehicle::where('year', 'LIKE', '%'.$search.'%')
+                ->whereHas('lot', function($query) use($date){
+                    $query->whereHas('auction', function($subQ) use($date){
+                        $subQ->whereDate('date', '>=', $date)
+                        ->whereNot('status', 2);
+                    });
+                })->paginate(5); 
+            }
+            
+            if($catalogue->isEmpty()){
+                $catalogue = Vehicle::where('fuel_type', 'LIKE', '%'.$search.'%')
+                ->whereHas('lot', function($query) use($date){
+                    $query->whereHas('auction', function($subQ) use($date){
+                        $subQ->whereDate('date', '>=', $date)
+                        ->whereNot('status', 2);
+                    });
+                })->paginate(5); 
+            }
+            
+        }
+        
+        return view('pages.bakkies.catalogue')
+        ->with([
+            'date' => $date,
+            'dates' => $dates,
+            'car_list' => $car_list,
+            'catalogue' => $catalogue,
+            'body_types' => $body_types,
+            'auction_date' => $auction_date
+        ]);
+    }
+    
+    public function paginateCatalogue(){
+        $date = Carbon::now()->toDateString();
+        $paginate = Filter::input('paginate');
+        
+        $car_list = CarList::distinct()->get(['make']);
+        $body_types = VehicleBodyType::all();
+        $auction_date = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->first();
+        $dates = AuctionGroup::whereDate('date','>=' ,$date)->whereNot('status', 2)->orderBy('date', 'ASC')->get();
+        
+        if($paginate){
+            $catalogue = Vehicle::whereHas('lot', function($query) use($date){
+                $query->whereHas('auction', function($subQ) use($date){
+                    $subQ->whereDate('date', '>=', $date)
+                    ->whereNot('status', 2);
+                });
+            })->paginate($paginate);  
         }
         
         return view('pages.bakkies.catalogue')

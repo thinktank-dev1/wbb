@@ -1,9 +1,10 @@
 @extends('layouts.main')
 @section('content')
+@section('title', 'Reset Password')
 <section class="login">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-5 text-center">
+            <div class="col-md-5 mt-5 mb-5 text-center">
                 <div class="card login-card">
                     <div class="card-body">
                         <h5 class="card-title login-title">PASSWORD RESET</h5>
@@ -15,9 +16,8 @@
                             </div>
                             @endif
                         </div>
-                        <form method="POST" action="{{ route('password.update') }}">
+                        <form method="POST" action="{{ route('new.password') }}">
                             @csrf
-                            @method('PUT')
                             <input type="hidden" name="token" value="{{ $request->route('token') }}">
                             <div class="row">
                                 <div class="col-md-12">
@@ -52,4 +52,7 @@
         </div>
     </div>
 </section>
+<div class="col-md-12 home-footer-banner mt-5">
+    <img class="img-fluid" src="{{ asset('images/wbbonline_img_19.png') }}" alt="assistance-banner-top-img">
+</div>
 @endsection

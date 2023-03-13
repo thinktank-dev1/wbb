@@ -114,6 +114,13 @@ body {
 .footer-register-btn{
     color: #2e2d2c;
     font-family: Bold;
+    margin-top: 12%;
+}
+
+.scrollBtn {
+  margin-left: -42%;
+  position: relative;
+  z-index: 2;
 }
 
 .copyright{
@@ -300,12 +307,12 @@ div .buttons {
     margin-left: 155px;
     margin-top: -48px;
     padding: 17px;
-    box-shadow: 10px 8px 20px #888888;
+    box-shadow: 10px 8px 20px rgba(46, 30, 24, 0.3);
 }
 
 .assist-btn{
     padding: 2px 55px !important;
-    box-shadow: 10px 4px 10px #888888;
+    box-shadow: 10px 4px 10px rgba(46, 30, 24, 0.3);
     font-weight: 600;
 }
 
@@ -543,7 +550,7 @@ div .buttons {
     margin-top: -130px;
     margin-left: 70px;
     padding: 17px;
-    box-shadow: 10px 8px 20px #888888;
+    box-shadow: 10px 8px 20px rgba(46, 30, 24, 0.3);
 }
 
 .assistance-text{
@@ -904,7 +911,6 @@ div .buttons {
     background-color: #2e2d2c;
     margin-left: -20px;
     padding-top: 1px;
-    padding-bottom: 10px;
 }
 
 .similar-lot-section{
@@ -949,10 +955,6 @@ div .buttons {
     color: #ffffff !important;
 }
 
-.input-group-section{
-    margin-left: 130px;
-    margin-top: -50px;
-}
 .text-bid-td{
     font-size: 12px;
     font-weight: 500;
@@ -1561,14 +1563,14 @@ div .buttons {
     font-family: Medium;
     font-size: 12px;
     color: #8cd50a; 
-    line-height: 1;
+    line-height: .2;
 }
 
 .specifications-span{
     font-family: Regular;
     font-size: 14px;
     color: #2e2d2c;
-    line-height: 1;
+    line-height: .2;
 }
 
 .lot-text{
@@ -1644,10 +1646,9 @@ div .buttons {
 
 .favourite-span{
     font-family: Bold;
-    font-size: 12px;
+    font-size: 14px;
     color: #8cd50a;
     line-height: 1;
-    margin-top: 10px !important;
 }
 
 .added-span {
@@ -1737,7 +1738,7 @@ div .buttons {
     font-family: Medium;
     font-size: 14px;
     color: #8cd50a;
-    line-height: .5;
+    line-height: 1;
 }
 
 .contact-disclaimer{
@@ -1855,6 +1856,30 @@ div .buttons {
     font-size: 18px !important;
 }
 
+.list-view-btn:focus, .table-view-btn:focus, .assist-btn:focus,
+.contact-us-btn:focus, .footer-register-btn:focus, .nxt-btn:focus,
+.lgn-btn:focus, .finder-search-btn:focus, .finder-reset-btn:focus,
+.go-btn:focus, .lv-dt-btn:focus, .bid-now-btn:focus, .lt-at-bid-btn:focus{
+    box-shadow: 0 0 0 .2rem rgb(140, 213, 10) !important;
+    background-color: #ffffff !important;
+    border : none !important;
+    color: #8cd50a!important;
+}
+
+.zoomin-btn:focus{
+    box-shadow: 0 0 0 .2rem rgb(140, 213, 10) !important;
+    background-color: #ffffff !important;
+    border : none !important;
+    color: #8cd50a!important; 
+}
+
+.live-bid-disclaimer {
+  font-size: 15px;
+  line-height: 1 !important;
+  margin-bottom: -1rem !important;
+  color: #2e2d2c;
+}
+
 
 
 input[type=range] {
@@ -1905,11 +1930,6 @@ input[type="range"]::-moz-range-track {
     /** Home Start **/
     .navbar-mobile, .mobile-nav-collapse{
         display:none;
-    }
-    
-    .input-group-section{
-        margin-left: 90px;
-        margin-top: -50px;
     }
 
     .banner {
@@ -2088,7 +2108,11 @@ input[type="range"]::-moz-range-track {
     }
     
     .list-maximum-bid-input {
-      max-width: 91px !important;
+      max-width: 122px !important;
+    }
+    
+    .scrollBtn {
+      margin-left: -26%;
     }
 }
 
@@ -2139,7 +2163,7 @@ input[type="range"]::-moz-range-track {
 
     /** Auth Start **/
     .login-btn {
-    margin-left: 305px;
+        margin-left: 305px;
     }
 
     .login-input {
@@ -2163,12 +2187,13 @@ input[type="range"]::-moz-range-track {
     .assistance-bakkie {
         margin-top: 105px;
         margin-left: 74px;
+        max-width: 90%;
     }
 
     .assistance-form-card {
         width: 78% !important;
         margin-top: -105px;
-        margin-left: 42px;
+        margin-left: -10px;
     }
 
     .assistance-btn {
@@ -2195,7 +2220,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .input-group-section {
-      margin-left: 100px
+      margin-left: 0px
     }
     
     .contact-bakkies {
@@ -2203,7 +2228,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .list-maximum-bid-input {
-      max-width: 97px !important;
+      max-width: 112px !important;
     }
     
     .back-to-cat-btn {
@@ -2269,7 +2294,7 @@ input[type="range"]::-moz-range-track {
     /** Auction End **/
     
     .input-group-section {
-      margin-left: 90px;
+      margin-left: 0px;
     }
     
     .contact-bakkies {
@@ -2285,7 +2310,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .list-maximum-bid-input {
-      max-width: 94px !important;
+      max-width: 122px !important;
     }
     
     .make-td,.lv-auto-btn {
@@ -2385,11 +2410,11 @@ input[type="range"]::-moz-range-track {
     .assistance-form-card {
       width: 92% !important;
       margin-top: -105px;
-      margin-left: -10px;
+      margin-left: -28px;
     }
     
     .assistance-bakkie {
-      margin-left: 28px;
+      margin-left: 50px;
     }
     
     .contact-bakkies {
@@ -2432,7 +2457,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .input-group-section {
-      margin-left: 80px;
+      margin-left: 0px;
     }
     
     .tbl-maximum-bid-input {
@@ -2445,6 +2470,14 @@ input[type="range"]::-moz-range-track {
     
     .back-to-cat-btn {
       margin-left: 80%;
+    }
+    
+    .scrollBtn {
+      margin-left: -14%;
+    }
+    
+    .bid-price {
+      font-size: 18px !important;
     }
 }
 
@@ -2508,9 +2541,9 @@ input[type="range"]::-moz-range-track {
     }
 
     .assistance-form-card {
-      width: 82% !important;
+      width: 88% !important;
       margin-top: -122px;
-      margin-left: 10px;
+      margin-left: -30px;
     }
 
     .assistance-bakkie {
@@ -2521,7 +2554,7 @@ input[type="range"]::-moz-range-track {
     .assistance-btn {
         margin-top: -60px;
         margin-bottom: 75px;
-        margin-left: -68px;
+        margin-left: 16px;
     }
 
     .assistance-banner-bottom-img {
@@ -2561,7 +2594,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .input-group-section {
-      margin-left: 72px;
+      margin-left: 0px;
     }
     
     .lot-next-bid-desc {
@@ -2577,7 +2610,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .list-maximum-bid-input {
-      max-width: 88px !important;
+      max-width: 122px !important;
     }
     
     .variant-spec-span {
@@ -2586,6 +2619,14 @@ input[type="range"]::-moz-range-track {
     
     .lv-bid-btn {
       padding: 10px 30px !important
+    }
+    
+    .scrollBtn {
+      margin-left: 3%;
+    }
+    
+    .bid-price {
+      font-size: 18px !important;
     }
 }
 
@@ -2602,12 +2643,15 @@ input[type="range"]::-moz-range-track {
     }
 
     .assistance-bakkie {
-        margin-left: 20px;
+      margin-left: 22px;
+      max-width: 100%;
+      margin-top: 132px;
     }
-
+    
     .assistance-btn {
-        margin-top: 97px;
-        margin-bottom: -97px;
+      margin-top: 97px;
+      margin-bottom: -97px;
+      margin-left: 54px;
     }
 
     .assistance-banner-bottom {
@@ -2696,7 +2740,23 @@ input[type="range"]::-moz-range-track {
     .table-view-btn{
       margin-left: -93%;
     }
-
+    
+    .footer-email-link{
+        font-size: 15px !important;
+    }
+    
+    .scrollBtn {
+      margin-left: 24%;
+    }
+    
+    .scl-lnk-icon{
+         display: block !important;   
+    }
+    
+    .assistance-icons{
+        max-width: 100%;  
+        display: contents;
+    }
 }
 
 @media screen and (max-device-width: 992px){
@@ -2731,9 +2791,6 @@ input[type="range"]::-moz-range-track {
         width: 100%;
         margin-left: 0px;
         margin-top: 20px;
-    }
-    .banner-btns{
-        display: block!important;
     }
     .view-catalogue-card {
         margin-left: 0px;
@@ -2835,32 +2892,41 @@ input[type="range"]::-moz-range-track {
         justify-content: center;
 
     }
+    
     #no-padding{
         padding: 0px!important;
     }
+    
     .winning-bid-title{
         width: 100%;
     }
+    
     .go-btn{
         margin-right: 12px;
     }
+    
     .input-group-section{
         margin-top: 0px;
     }
+    
     #view-list{
         display: none!important;
     }
+    
     .table-view-btn {
         margin-left: 0%
     }
+    
     .lot-top-bar{
         display: block!important;
         width: 100%!important;
         margin: 0px;
     }
+    
     .lot-number-title{
         text-align: center!important;
     }
+    
     .back-to-cat-btn {
         position: relative!important;
     }
@@ -2869,16 +2935,20 @@ input[type="range"]::-moz-range-track {
         display: block!important;
         text-align: center!important;
     }
+    
     .auction-heading{
         margin: 0px!important;
     }
+    
     .mobile-max-width{
         max-width: 100%!important;
         text-align: center!important;
     }
+    
     .lot-title-div {
         padding-bottom: 30px;
     }
+    
     .next-lot-header {
         text-align: center;
     }
@@ -2889,14 +2959,17 @@ input[type="range"]::-moz-range-track {
     .border-right{
         padding-top: 20px;
     }
+    
     .lot-details-text, .auction-details-desc, .staring-bid-desc, 
     .prev-lot-status, .prev-lot-status-span, .prev-lot-make-model, 
     .prev-lot-details-text {
         text-align: center!important;
     }
+    
     .prev-lot-details-desc{
         text-align: center!important;
     }
+    
     .back-catalogue-btn{
         margin: 0px!important;
         margin-bottom: 30px!important;
@@ -2909,6 +2982,7 @@ input[type="range"]::-moz-range-track {
     .btm-padding{
         padding-bottom: 30px;
     }
+    
     .home-navigation ul{
         padding-right: 0px!important;
     }
@@ -2921,16 +2995,20 @@ input[type="range"]::-moz-range-track {
         padding-bottom: 15px;
 
     }
+    
     .home-navigation ul li a{
         display: block!important;
     }
+    
     .home-navigation ul li a .title {
         width: 100%!important;
         text-align: center!important;
     }
+    
     .home-navigation ul li a .icon {
         text-align: center;
     }
+    
     .mrg-btm{
         margin-bottom: 20px;
     }
@@ -2959,20 +3037,22 @@ input[type="range"]::-moz-range-track {
 
   
     .join-auction-banner {
-        height: 16vh;
+        height: 5vh !important;
     }
-    /*
+    
     .join-auction-card {
-        margin-top: -86px;
+        margin-top: -55px;
+        width: 124%;
+        margin-left: -4px;
     }
-    */
-/*
+    
+
     .view-catalogue-card {
-        margin-top: -86px;
-        width: 74%;
-        margin-left: 23px;
+      margin-top: -53px;
+      width: 94%;
+      margin-left: 28px;
     }
-*/
+
     .registration-info {
         min-height: 64vh;
     }
@@ -3073,10 +3153,6 @@ input[type="range"]::-moz-range-track {
         margin-left: 98px;
     }
 
-    
-
-    
-
     .assistance-banner-bottom {
         height: 5vh;
     }
@@ -3095,6 +3171,14 @@ input[type="range"]::-moz-range-track {
         margin-top: 20px;
     }
     /** Auction End **/
+    
+    .footer-btn-div {
+      margin-left: 55px;
+    }
+    
+    .scrollBtn {
+      margin-left: -68%;
+    }
 }
 
 @media screen and (max-device-width: 768px){
@@ -3333,6 +3417,33 @@ input[type="range"]::-moz-range-track {
     .view-lot-prepend {
       margin-left: -120px;
     }
+    
+    .banner-btns {
+      display: block !important;
+    }
+    
+    .join-auction-card {
+      width: 98%;
+      margin-left: 6px;
+      margin-bottom: 15px;
+    }
+    
+    .view-catalogue-card {
+      width: 98%;
+      margin-left: 6px;
+    }
+    
+    .footer-btn-div {
+      margin-left: -25px !important;
+    }
+    
+    .scrollBtn {
+      margin-left: -12% !important;
+    }
+    
+    .list-view-btn {
+        display: none;
+    }
 }
 
 @media screen and (max-device-width: 428px){
@@ -3343,7 +3454,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .online-auction-info {
-        min-height: 60vh;
+        min-height: 45vh;
     }
 
     .container-img {
@@ -3403,10 +3514,6 @@ input[type="range"]::-moz-range-track {
 
     .learn-more-img{
         max-width: 42%;
-    }
-
-    .online-auction-image {
-        height: 35vh !important;
     }
     /** Home End **/
 
@@ -3494,7 +3601,7 @@ input[type="range"]::-moz-range-track {
 @media screen and (max-device-width: 414px){
     /** Home Start **/
     .online-auction-info {
-        min-height: 62vh;
+        min-height: 48vh;
     }
 
     .info-heading {
@@ -3604,6 +3711,10 @@ input[type="range"]::-moz-range-track {
       margin-top: 35px;
       margin-left: -2%;
     }
+    
+    .register-info-heading {
+      margin-left: 20px;
+    }
 }
 
 @media screen and (max-device-width: 412px){
@@ -3613,11 +3724,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .online-auction-info {
-        min-height: 58vh;
-    }
-
-    .online-auction-image{
-        height: 38vh !important;
+        min-height: 48vh;
     }
 
     .info-heading {
@@ -3734,7 +3841,7 @@ input[type="range"]::-moz-range-track {
     /** Home Start **/
 
     .online-auction-info {
-        min-height: 62vh;
+        min-height: 48vh;
     }
 
     /** Home End **/
@@ -3817,7 +3924,7 @@ input[type="range"]::-moz-range-track {
     }
 
     .online-auction-info {
-        min-height: 64vh;
+        min-height: 48vh;
     }
 
     .registration-info {
@@ -3916,15 +4023,11 @@ input[type="range"]::-moz-range-track {
     }  
     
     .online-auction-info {
-        min-height: 68vh;
+        min-height: 58vh;
     }
 
     .registration-info {
         min-height: 74vh;
-    }
-    
-    .online-auction-image {
-        height: 36vh !important;
     }
 
     .online-auction-bakkie {

@@ -45,7 +45,10 @@
                                         <td>{{ number_format($car->lot->reserve_price,2) }}</td>
                                         <td class="text-end">{{ $car->lot->bids->count() }}</td>
                                         <td class="text-end">R @if($car->lot->highestBid()) {{ number_format($car->lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif</td>
-                                        <td>@if($car->lot->highestBid()) {{ ucwords($car->lot->highestBid()->bidder->first_name.' '.$car->lot->highestBid()->bidder->last_name) }} @endif</td>
+                                        <td>
+                                            @if($car->lot->highestBid()) @if($car->lot->highestBid()->bidder->company()->exists()) {{ ucwords($car->lot->highestBid()->bidder->company->company_name) }} @else {{ ucwords($car->lot->highestBid()->bidder->first_name.' '.$car->lot->highestBid()->bidder->last_name) }} @endif @endif
+                                            
+                                        </td>
                                         <td class="text-end">
                                             <a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$car->id) }}">View</a>
                                         </td>
