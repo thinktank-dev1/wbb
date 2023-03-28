@@ -9,7 +9,7 @@
                         <h4 class="mb-sm-0 font-size-18">Vehicles</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Vehicles</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('admin/vehicles') }}">Vehicles</a></li>
                                 <li class="breadcrumb-item active">Create Vehicle</li>
                             </ol>
                         </div>

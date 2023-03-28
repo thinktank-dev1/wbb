@@ -14,7 +14,7 @@
                         @endif
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Vehicles</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('admin/vehicles') }}">Vehicles</a></li>
                                 <li class="breadcrumb-item active">View Vehicle</li>
                             </ol>
                         </div>
@@ -237,6 +237,25 @@
 								</div>
 								@endforeach
 							</div>
+                		</div>
+                	</div>
+                	@endif
+                	
+                	@if($vehicle->vids->count() > 0)
+                	<div class="card">
+                		<div class="card-body">
+                			<div class="row">
+                				@foreach($vehicle->vids AS $vid)
+                				<div class="col-md-3">
+									<video width="320" height="240" controls>
+										<source src="{{ asset('storage/'.$vid->video_url) }}" type="video/mp4">
+									</video>
+									<div class="d-grid">
+										<a href="{{ url('admin/remove-video/'.$vid->id) }}" class="btn btn-danger btn-sm">Remove</a>
+									</div>
+								</div>
+                				@endforeach
+                			</div>
                 		</div>
                 	</div>
                 	@endif

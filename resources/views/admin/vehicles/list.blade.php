@@ -27,10 +27,11 @@
                                 <h4 class="card-title">List Vehicles</h4>
                                 <div class="ms-auto">
                                     <div class="">
-                                        <form method="get">
+                                        <form method="get" action="{{ url('admin/search') }}">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Search Key">
-                                                <select class="form-control" id="year-select">
+                                                <input type="text" class="form-control" placeholder="Search Key" name="key">
+                                                <select class="form-control" id="year-select" name="year">
+                                                    <option value="" selected>Select Year</option>
                                                     @php
                                                     $date_start = date("Y", strtotime('-30 year'));
                                                     $date_end = date("Y");
@@ -39,19 +40,19 @@
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
                                                 </select>
-                                                <select class="form-control" id="make-select">
-                                                    <option value="" disabled selected>Select Make</option>
+                                                <select class="form-control" id="make-select" name="make">
+                                                    <option value="" selected>Select Make</option>
                                                     @foreach($car_list AS $list)
                                                     <option value="{{ $list->make }}">{{ $list->make }}</option>
                                                     @endforeach
                                                 </select>
-                                                <select class="form-control" id="model-select">
+                                                <select class="form-control" id="model-select" name="model">
                                                     <option value="">Select Make First</option>
                                                 </select>
-                                                <select class="form-control" id="variant-select">
+                                                <select class="form-control" id="variant-select" name="variant">
                                                     <option value="">Select Make & Model First</option>
                                                 </select>
-                                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bx bx-search-alt align-middle"></i></button>
+                                                <button class="btn btn-outline-secondary" type="submit"><i class="bx bx-search-alt align-middle"></i></button>
                                             </div>
                                         </form>
                                     </div>
@@ -101,6 +102,7 @@
                 					@endforeach
                 				</tbody>
                 			</table>
+                			{{ $vehicles->appends($_GET)->links() }}
                 		</div>
                 	</div>
                 </div>

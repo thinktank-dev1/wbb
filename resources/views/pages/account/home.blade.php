@@ -69,7 +69,7 @@
                                                     <th>Make</th>
                                                     <th>Model</th>
                                                     <th>Year</th>
-                                                    <th>Acution Date</th>
+                                                    <th>Auction Date</th>
                                                     <th>Price</th>
                                                     <th></th>
                                                 </tr>

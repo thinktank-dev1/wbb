@@ -3,19 +3,25 @@
 	<nav class="navbar navbar-expand-md nav-container remove-nav-height">
 		<div class="container nav-container icon-nav-container nav-top-bar">
 			<a class="nav-link" href="{{ url('/') }}">
-				<img class="light-mode-item logo" src="{{ asset('img/new_logo.png') }}" alt="logo">
+				<img class="light-mode-item logo" src="{{ asset('img/wbbonline_img_1d.png') }}" alt="logo">
 			</a>
 
 			<div id="nav-second-top-bar" class="d-flex order-lg-2 ms-auto header-right-icons nav-second-top-bar"> 
+				@if(Auth::user())
+					<form method="POST" action="{{ route('logout') }}" id="logout">
+						@csrf
+						<a class="btn btn-secondary logout-nav" href="#" onclick="event.preventDefault(); this.closest('form').submit();">LOG OUT    <i class="bi bi-box-arrow-in-right ml-2"></i></a>
+					</form>
+				@endif
 				<ul id="nav-second-top-bar" class="navbar-nav justify-content-end nav-second-top-bar">
 					@if(Auth::user())
 					@else
-						<li class="nav-item">
+					<li class="nav-item">
 						<a class="nav-link" href="{{ route('register') }}"><img class="register-nav" src="{{ asset('images/wbbonline_btn_1.png') }}" alt="register"></a>
 					</li>
 					@endif
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('favourites', 'favourites') }}"><img class="favourites-nav" src="{{ asset('images/wbbonline_btn_2.png') }}" alt="favourites"></a>
+						<a class="btn btn-primary lv-dt-btn my-fav-btn" href="{{ route('favourites', 'favourites') }}">MY FAVOURITES <i class="bi bi-heart ml-2"></i></a>
 					</li>
 				</ul>
 			</div>
@@ -51,7 +57,7 @@
 							<form method="POST" action="{{ route('logout') }}" id="logout">
 							@csrf
 							<a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">LOGOUT</a>
-						</form>
+							</form>
 						@endif
 					</div>
 				</li>
@@ -69,11 +75,11 @@
 					COMPANY
 					</a>
 					<div id="dropdown" class="dropdown-menu">
-						<a class="dropdown-item" href="{{ url('/about-us') }}">ABOUT</a>
+						<a class="dropdown-item" href="{{ url('/FAQs') }}">FAQs</a>
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url('/contact-us') }}"><img class="contact-nav" src="{{ asset('images/wbbonline_btn_3.png') }}" alt="contact-us"></a>
+					<button class="btn btn-secondary contact-us-btn" onclick="location.href='{{ url('/contact-us') }}';">CONTACT US</button>
 				</li>
 			</ul>
 		</div>
@@ -135,11 +141,11 @@
 					COMPANY
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="{{ url('about-us') }}">ABOUT</a>
+						<a class="dropdown-item" href="{{ url('FAQs') }}">FAQs</a>
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url('contact-us') }}"><img class="contact-nav" src="{{ asset('images/wbbonline_btn_3.png') }}" alt="contact-us"></a>
+					<button class="btn btn-secondary contact-us-btn ml" onclick="location.href='{{ url('/contact-us') }}';">CONTACT US</button>
 				</li>
 			</ul>
 		</div>

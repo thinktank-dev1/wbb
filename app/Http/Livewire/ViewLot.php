@@ -7,10 +7,12 @@ use Livewire\Component;
 use App\Models\Lot;
 use Auth;
 use App\Lib\AuctionFunctions;
+use App\models\VehicleVideo;
 
 class ViewLot extends Component
 {
     public $lot, $auto_bid_amount;
+    public $cur_vid_url;
     
     protected $listeners = ['reloadCar' => 'reloadCar'];
     
@@ -21,6 +23,13 @@ class ViewLot extends Component
     public function reloadCar(){
         $id = $this->lot->id;
         $this->lot = Lot::find($id);
+    }
+    
+    public function showVid($id){
+        $vid = VehicleVideo::find($id);
+        $path = $vid->video_url;
+        $path = url('storage/'.$path);
+        $this->dispatchBrowserEvent('showVid', ['path'=>$path]);
     }
     
     public function placeBid(){

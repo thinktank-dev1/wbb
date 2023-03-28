@@ -51,40 +51,63 @@
                         		<li class="list-group-item d-flex justify-content-between align-items-center">
                         		    Identity Documnent:
                         		    @if($user->id_document)
-                						<a href="{{ url('storage/'.$user->id_document) }}" target="_blank">
-                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						<a href="{{ url('storage/'.$user->id_document) }}" target="_blank" style="color:#8cd50a">
+                							<i class="mdi mdi-file"></i>
+                							View
                 						</a>
                 					@endif
                         		</li>
                         		<li class="list-group-item d-flex justify-content-between align-items-center">
                         		    Proof Of Residence:
                         			@if($user->proof_of_residence)
-                						<a href="{{ url('storage/'.$user->proof_of_residence) }}" target="_blank">
-                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						<a href="{{ url('storage/'.$user->proof_of_residence) }}" target="_blank" style="color:#8cd50a">
+                							<i class="mdi mdi-file"></i>
+                							View
                 						</a>
                     				@endif
                     			</li>
                     			<li class="list-group-item d-flex justify-content-between align-items-center">
                         		    VAT Registration:
                         			@if($user->vat_registration)
-                						<a href="{{ url('storage/'.$user->vat_registration) }}" target="_blank">
-                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						<a href="{{ url('storage/'.$user->vat_registration) }}" target="_blank" style="color:#8cd50a">
+                							<i class="mdi mdi-file"></i>
+                							View
                 						</a>
                     				@endif
                     		    </li>
                     		    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        		    BRM:
+                        		    BRN:
                         		    @if($user->brm)
-                						<a href="{{ url('storage/'.$user->brm) }}" target="_blank">
-                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						<a href="{{ url('storage/'.$user->brm) }}" target="_blank" style="color:#8cd50a">
+                							<i class="mdi mdi-file"></i>
+                							View
                 						</a>
                     				@endif
                 				</li>
                 				<li class="list-group-item d-flex justify-content-between align-items-center">
                         		    Proxy ID:
                 					@if($user->proxy_id)
-                						<a href="{{ url('storage/'.$user->proxy_id) }}" target="_blank">
-                							<i style="font-size:20px; color:#8cd50a" class="mdi mdi-file"></i>
+                						<a href="{{ url('storage/'.$user->proxy_id) }}" target="_blank" style="color:#8cd50a">
+                							<i class="mdi mdi-file"></i>
+                							View
+                						</a>
+                    				@endif
+                    			</li>
+                    			<li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    Company Docments (CIPRO):
+                					@if($user->cipro)
+                						<a href="{{ url('storage/'.$user->cipro) }}" target="_blank" style="color:#8cd50a">
+                							<i class="mdi mdi-file"></i>
+                							View
+                						</a>
+                    				@endif
+                    			</li>
+                    			<li class="list-group-item d-flex justify-content-between align-items-center">
+                        		    Company Letterhead:
+                					@if($user->company_letter_head)
+                						<a href="{{ url('storage/'.$user->company_letter_head) }}" target="_blank" style="color:#8cd50a">
+                							<i class="mdi mdi-file"></i>
+                							View
                 						</a>
                     				@endif
                     			</li>

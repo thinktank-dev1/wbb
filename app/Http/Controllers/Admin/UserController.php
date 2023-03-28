@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Company;
 use App\Models\CompanyPayment;
+use Mail;
+use App\Lib\SmsApi;
 
 class UserController extends Controller
 {
@@ -175,7 +177,9 @@ class UserController extends Controller
         if($valid->fails()){
             return back()->withErrors($valid)->withInput();
         }
-
+    
+        $cur_status = $user->status;
+        
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->contact_primary = $request->input('contact_primary');
@@ -233,6 +237,24 @@ class UserController extends Controller
             $user->vat_registration = $vat_url; 
         }
         
+        $cipro = $request->file('cipro');
+        if($cipro){
+            if($user->cipro){
+                Storage::disk('public')->delete($user->cipro);   
+            }
+            $cipro_url = Storage::disk('public')->putFile('document', $cipro);
+            $user->cipro = $cipro_url; 
+        }
+        
+        $company_letter_head = $request->file('company_letter_head');
+        if($company_letter_head){
+            if($user->company_letter_head){
+                Storage::disk('public')->delete($user->company_letter_head);   
+            }
+            $company_letter_head_url = Storage::disk('public')->putFile('document', $company_letter_head);
+            $user->company_letter_head = $company_letter_head_url; 
+        }
+        
         $user->save();
 
         $cmp = null;
@@ -276,6 +298,27 @@ class UserController extends Controller
                 $payment->code = $request->input('payment_code');
             }
         }
+        
+        //Send Welcome Email && SMS
+        if($cur_status != "Active" && $request->input('status') == "Active"){
+            //Email
+            $data = [
+                'name' => $user->first_name.' '.$user->last_name,
+            ];
+            Mail::send('mail.welcome', $data, function($message) use($user){
+                $message
+                ->to($user->email, $user->first_name.' '.$user->last_name)
+                ->subject('Welcome to We Buy Bakkies');
+                $message->from('info@webuybakkies.co.za','We Buy Bakkies');
+            });
+            
+            //SMS
+            $sms = new SmsApi();
+            $message = "Thank you for registering on the We Buy Bakkies auction platform, your account has been approved and you are welcome to now log in and start bidding.";
+            $cell = $user->contact_primary;
+            $res = $sms->sendSms($cell, $message);
+        }
+        
         return redirect('admin/users');
     }
 

@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <title>WE BUY BAKKIES::ADMIN</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/wbbo_fav48.png') }}">
         <link href="{{ asset('admin-assets/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('admin-assets/css/preloader.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('admin-assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />

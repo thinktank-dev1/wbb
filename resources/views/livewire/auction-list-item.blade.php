@@ -18,9 +18,9 @@
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-lg-2">
                             @if($lot->vehicle->images->count() > 0)
-                                <img src="{{ asset('storage/'.$lot->vehicle->images->first()->image_url) }}" class="w-100">
+                                <img loading="lazy" src="{{ asset('storage/'.$lot->vehicle->images->first()->image_url) }}" class="w-100">
                             @else
-                                <img src="{{ asset('../images/wbbonline_img_53.png') }}" class="w-100">
+                                <img loading="lazy" src="{{ asset('../images/wbbonline_img_53.png') }}" class="w-100">
                             @endif
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-3 border-right">
@@ -31,9 +31,9 @@
                             <br />
                             <a href="{{ url('view-lot/'.$lot->id) }}" class="btn btn-primary lv-dt-btn mt-2">VIEW DETAILS</a>
                             @if($lot->favourite(Auth::user()->id, $lot->id))
-                            <a href="{{ url('remove-favourite/'.$lot->id) }}" class="btn btn-secondary mt-2"><i class="bi bi-heart"></i> REMOVE FAVOURITES</a>
+                            <a href="#" class="btn btn-secondary mt-2" wire:click.prevent="removeFavourite({{ $lot->id }})"><i class="bi bi-heart"></i> REMOVE FAVOURITES</a>
                             @else
-                            <a href="{{ url('add-to-favourites/'.$lot->id) }}" class="btn btn-primary lv-dt-btn mt-2">ADD TO FAVOURITES</a>
+                            <a href="#" class="btn btn-primary lv-dt-btn mt-2" wire:click.prevent="addToFavourites({{ $lot->id }})">ADD TO FAVOURITES</a>
                             @endif
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-4 border-right">
@@ -73,12 +73,12 @@
                                   <tbody>
                                      <tr>
                                       <td class="prev-lot-details-text text-left">est repair cost</td>
-                                      <td class="prev-lot-details-desc text-left">R {{ $lot->repairTotal() }}</td>
+                                      <td class="prev-lot-details-desc text-left">R {{ number_format($lot->repairTotal(), 2) }}</td>
                                      </tr>
-                                     <tr>
-                                      <td class="prev-lot-details-text text-left">trade price</td>
-                                      <td class="prev-lot-details-desc text-left">R {{ $lot->trade_price }}</td>
-                                    </tr>
+                                    <!-- <tr>-->
+                                    <!--  <td class="prev-lot-details-text text-left">trade price</td>-->
+                                    <!--  <td class="prev-lot-details-desc text-left">R {{ $lot->trade_price }}</td>-->
+                                    <!--</tr>-->
                                     <tr>
                                       <td class="prev-lot-details-text text-left"> year</td>
                                       <td class="prev-lot-details-desc text-left">{{ $lot->vehicle->year }}</td>
@@ -177,11 +177,11 @@
             @endphp 
             <td style="width: 5%">
                 @if($lot->vehicle->images->count() > 0)
-                    <img class="img-fluid" style="border-radius:.5em" src="{{ asset('storage/'.$lot->vehicle->images->first()->image_url) }}">
+                    <img loading="lazy" class="img-fluid" style="border-radius:.5em" src="{{ asset('storage/'.$lot->vehicle->images->first()->image_url) }}">
                 @endif
             </td>
             <td style="width: 15%" class="{{ $color }} make-td">{{$lot->vehicle->make.' '.$lot->vehicle->model.''.$lot->vehicle->variant }}</td>
-            <td class="{{ $color }} lot-amounts-data-text">R {{ $lot->trade_price }}</td>
+            <!--<td class="{{ $color }} lot-amounts-data-text">R {{ $lot->trade_price }}</td>-->
             <td class="lot-amounts-data-text {{ $color }}">
                 R @if($lot->highestBid()) {{ number_format($lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif
             </td>

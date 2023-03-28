@@ -33,6 +33,8 @@ class User extends Authenticatable
         'brm',
         'vat_registration',
         'id_document',
+        'cipro',
+        'company_letter_head',
         'status',
     ];
 

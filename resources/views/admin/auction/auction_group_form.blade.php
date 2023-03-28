@@ -35,13 +35,13 @@
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">Start Time</label>
-							<input type="time" class="form-control" name="start_time" value="{{ old('start_time') ?? $auctionGroup->start_time }}">
+							<input type="time" step="1800" class="form-control" name="start_time" value="{{ old('start_time') ?? $auctionGroup->start_time }}">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="mb-3">
 							<label class="form-label">End Time</label>
-							<input type="time" class="form-control" name="end_time" value="{{ old('end_time') ?? $auctionGroup->end_time }}">
+							<input type="time" step="1800" class="form-control" name="end_time" value="{{ old('end_time') ?? $auctionGroup->end_time }}">
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -54,3 +54,4 @@
 		</div>
 	</div>
 </div>
+

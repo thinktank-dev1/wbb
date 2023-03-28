@@ -52,7 +52,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('about-us', [PagesController::class, 'about'])->name('about-us');
+Route::get('FAQs', [PagesController::class, 'about'])->name('FAQs');
 Route::get('contact-us', [PagesController::class, 'contact'])->name('contact-us');
 Route::get('register/step2', [RegisterController::class, 'showStep2']);
 Route::post('register/step2', [RegisterController::class, 'saveStep2']);
@@ -117,6 +117,9 @@ Route::middleware('auth')->group(function () {
         Route::get('options/{type}/{id}', [OptionsController::class, 'index']);
         Route::post('saveOption', [OptionsController::class, 'saveOption']);
         Route::get('delete-option/{id}', [OptionsController::class, 'deleteOption']);
+        
+        Route::get('remove-video/{id}', [VehicleController::class, 'deleteVideo']);
+        Route::get('search', [VehicleController::class, 'search']);
     });
 });
 

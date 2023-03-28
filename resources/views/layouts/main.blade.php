@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>{{ config('app.name') }} | @yield('title')</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/wbbo_fav48.png') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Fonts -->

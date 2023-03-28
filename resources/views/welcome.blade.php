@@ -29,20 +29,43 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 text-left online-auction-info">
             <h2 class="info-heading mb-4">100% ONLINE BAKKIE AUCTIONS</h2>
             <p class="info-paragraph">
-                With over 35 years of experience We Buy Bakkies now offers ONLINE bakkie auctions, providing top quality vehicles and a transparent and fair buying process. 
+                Our passion for bakkies inspired us to become a destination in the Bakkie Industry,  thus enabling us to provide our Dealer partners with easy access to quality bakkies at the click of a button. 
+            </p>            
+            <p class="info-paragraph info-paragraph-two">
+                The executive team of the Company collectively brings more than 75 years of hands-on experience to the table, while our personnel were brought up in the industry we are so passionate about. Our expertise and focus assures consistency and quality in our performance We believe in - values, principles, integrity, honesty and human dignity. 
+            </p>
+            <p class="info-paragraph info-paragraph-three">
+                Over many years, our daily interaction with retailers, wholesalers, fleet owners, financial institutions and Corporate businesses have provided us with the inside knowledge of the latest market, price, consumer and industry trends.
+            </p>
+            <p class="info-paragraph info-paragraph-three">
+                Our mission is to create opportunities for everyone we interact with, enabling:
             </p>
             <p class="info-paragraph">
-                With a simple sign-up and registration process, you can have access to top-class inventory. Check out our auctions to see what’s for sale on which auction dates AND mark your favourites to get notified when they are available. 
+                • Our CUSTOMERS to build their businesses
             </p>
             <p class="info-paragraph">
-                It’s bakkie buying, simplified! 
+                • Our EMPLOYEES to build their future
             </p>
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 learn-more-btn">
-                <a class="btn btn-secondary learn-more-btn" href="{{ url('about-us') }}">LEARN MORE</a>
-            </div>
+            <p class="info-paragraph">
+                • Our SHAREHOLDERS to build their wealth
+            </p>
+            <p class="info-paragraph info-paragraph-three mb-5">
+                WE ENCOURAGE YOU TO WALK THE JOURNEY WITH US - "Living the Bakkie Life"
+            </p>
         </div>
+        
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 online-auction-info online-auction-image">
-            <img class="img-fluid online-auction-bakkie" src="{{ asset('images/wbbonline_img_7.png') }}" alt="section-two-img">
+            <img class="img-fluid online-auction-bakkie mb-5" src="{{ asset('images/wbbonline_img_7.png') }}" alt="section-two-img">
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 text-center procedure-div">
+            <p class="procedure-heading">OUR PROCEDURE</p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9 text-center procedure-div">
+            <img class="img-fluid steps steps-two" src="{{ asset('images/wbbonline_img_61.png') }}" alt="step-one-img">
+            <span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_60.png') }}" alt="registering-arrow"></span>
+            <img class="img-fluid steps steps-two registering-steps-img" src="{{ asset('images/wbbonline_img_62.png') }}" alt="step-two-img">
+            <span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_60.png') }}" alt="registering-arrow"></span>
+            <img class="img-fluid steps steps-two registering-steps-img" src="{{ asset('images/wbbonline_img_63.png') }}" alt="step-three-img">
         </div>
     </div>
 </section>
@@ -71,11 +94,6 @@
                 <li>
                     <p class="reg-paragraph ml-3">
                         Bid from anywhere, on any smart device or web-browser.    
-                    </p>
-                </li>
-                <li>
-                    <p class="reg-paragraph ml-3">
-                        Don’t let our best bakkie buys get away!    
                     </p>
                 </li>
             </ul>      
@@ -108,7 +126,7 @@
                         <div class="form-group">
                             <input type="email" name="email" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="Email">
                         </div>
-                        <center><button class="btn btn-primary assist-btn mb-2 sbmt-btn" type="submit">SUBMIT</button></center>
+                        <center><button class="btn btn-primary assist-btn mt-2 mb-3 sbmt-btn" type="submit">SUBMIT</button></center>
                     </form>
                     <p class="card-disclaimer">
                         *By clicking SUBMIT you grant We Buy Bakkies Online permission

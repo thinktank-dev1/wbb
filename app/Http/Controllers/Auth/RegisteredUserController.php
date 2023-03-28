@@ -49,6 +49,9 @@ class RegisteredUserController extends Controller
         $brm = $request->file('brm');
         $vat_registration = $request->file('vat_registration');
         
+        $cipro = $request->file('cipro');
+        $company_letter_head = $request->file('company_letter_head');
+        
         if($id_document){
             $id_url = Storage::disk('public')->putFile('documents', $id_document);  
         }
@@ -70,6 +73,14 @@ class RegisteredUserController extends Controller
         if($vat_registration){
             $vat_url = Storage::disk('public')->putFile('documents', $vat_registration);
         }
+        
+        if($cipro){
+            $cipro_url = Storage::disk('public')->putFile('documents', $cipro);
+        }
+        
+        if($company_letter_head){
+            $company_letter_head_url = Storage::disk('public')->putFile('documents', $company_letter_head);
+        }
     
         $role = Role::where('name', 'user')->first();
         $user = User::create([
@@ -88,6 +99,8 @@ class RegisteredUserController extends Controller
             'brm' => $brm_url,
             'vat_registration' => $vat_url,
             'id_document' => $id_url,
+            'cipro' => $cipro_url,
+            'company_letter_head' => $company_letter_head_url,
             'status' => 'In-Active'
         ]);
 

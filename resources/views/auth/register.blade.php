@@ -120,7 +120,7 @@
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
-                            					<label class="form-label">BRM</label>
+                            					<label class="form-label">BRN</label>
                             					<input type="file" class="form-control" name="brm" required>
                             				</div>
                             			</div>
@@ -128,6 +128,18 @@
                             				<div class="mb-3">
                             					<label class="form-label">Proxy ID</label>
                             					<input type="file" class="form-control" name="proxy_id" required>
+                            				</div>
+                            			</div>
+                            			<div class="col-md-6">
+                            				<div class="mb-3">
+                            					<label class="form-label">Company Docments (CIPRO)</label>
+                            					<input type="file" class="form-control" name="cipro" required>
+                            				</div>
+                            			</div>
+                            			<div class="col-md-6">
+                            				<div class="mb-3">
+                            					<label class="form-label">Company Letterhead</label>
+                            					<input type="file" class="form-control" name="company_letter_head" required>
                             				</div>
                             			</div>
                                         <div class="col-md-12 text-center">

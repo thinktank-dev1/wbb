@@ -68,4 +68,8 @@ class Vehicle extends Model
     public function totalDamageCost(){
         return $this->inspection->sum('estimate_damage_cost');
     }
+    
+    public function vids(){
+        return $this->hasMany(VehicleVideo::class);
+    }
 }

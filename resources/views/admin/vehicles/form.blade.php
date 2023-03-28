@@ -315,7 +315,7 @@
 								<option value="">Select Option</option>
 								@php
 								$date_start = date("Y", strtotime('-30 year'));
-								$date_end = date("Y");
+								$date_end = date("Y", strtotime('+10 year'));
 								@endphp
 								@for($i = $date_end; $i >= $date_start; $i--)
 								@php
@@ -705,6 +705,40 @@
 		@endif
 	</div>
 </div>
+
+<div style="background-color: #efefef" class="card">
+	<div style="background-color: #efefef" class="card-header">
+		<div class="d-flex">
+			<h4 class="card-title">Videos</h4>
+			<div class="ms-auto">
+				<a href="#" class="btn btn-primary" id="add-vid-btn"><i class="mdi mdi-car-2-plus"></i> Add Video</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="vid-cont">
+			<div class="row mb-3" id="vid-row">
+				<div class="mb-3">
+					<label class="form-label">Select Video File</label>
+					<input type="file" class="form-control" name="videos[]">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			@foreach($vehicle->vids AS $vid)
+			<div class="col-md-3">
+				<video width="320" height="240" controls>
+					<source src="{{ asset('storage/'.$vid->video_url) }}" type="video/mp4">
+				</video>
+				<div class="d-grid">
+					<a href="{{ url('admin/remove-video/'.$vid->id) }}" class="btn btn-danger btn-sm">Remove</a>
+				</div>
+			</div>
+			@endforeach
+		</div>
+	</div>
+</div>
+
 @foreach($damage_positions AS $pos)
 	<div class="accordion mb-3" id="accordion{{$pos}}">
 		<div class="accordion-item">
@@ -1019,6 +1053,13 @@
 <script>
 	const choices = new Choices('.single-select');
 	$(document).ready(function(){
+		$('#add-vid-btn').on('click', function(e){
+			e.preventDefault();
+			var vid_cont = $('#vid-row').clone();
+			$(vid_cont).find(".vid-input").val("");
+			$('.vid-cont').append(vid_cont);
+		});
+	
 		onLoadValues();
 		
 		$('#mmcode').on('input', function(){

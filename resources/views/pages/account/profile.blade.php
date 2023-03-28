@@ -66,8 +66,9 @@
                                     				</div>
                                     				@if($user->id_document)
                                     					<div class="mb-3">
-                                    						<a href="{{ url('storage/'.$user->id_document) }}" target="_blank">
-                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						<a href="{{ url('storage/'.$user->id_document) }}" target="_blank" style="color:#8cd50a">
+                                    							<i class="bi bi-file-earmark-pdf-fill"></i>
+                                    							View Document
                                     						</a>
                                     					</div>
                                     				@endif
@@ -79,8 +80,9 @@
                                     				</div>
                                     				@if($user->proof_of_residence)
                                     					<div class="mb-3">
-                                    						<a href="{{ url('storage/'.$user->proof_of_residence) }}" target="_blank">
-                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						<a href="{{ url('storage/'.$user->proof_of_residence) }}" target="_blank" style="color:#8cd50a">
+                                    							<i class="bi bi-file-earmark-pdf-fill"></i>
+                                    							View Document
                                     						</a>
                                     					</div>
                                     				@endif
@@ -92,21 +94,37 @@
                                     				</div>
                                     				@if($user->vat_registration)
                                     					<div class="mb-3">
-                                    						<a href="{{ url('storage/'.$user->vat_registration) }}" target="_blank">
-                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						<a href="{{ url('storage/'.$user->vat_registration) }}" target="_blank" style="color:#8cd50a">
+                                    							<i class="bi bi-file-earmark-pdf-fill"></i>
+                                    							View Document
                                     						</a>
                                     					</div>
                                     				@endif
                                     			</div>
                                     			<div class="col-md-6">
                                     				<div class="form-group">
-                                    					<label class="form-label">BRM</label>
+                                    					<label class="form-label">BRN</label>
                                     					<input type="file" class="form-control" name="brm">
                                     				</div>
                                     				@if($user->brm)
                                     					<div class="mb-3">
-                                    						<a href="{{ url('storage/'.$user->brm) }}" target="_blank">
-                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						<a href="{{ url('storage/'.$user->brm) }}" target="_blank" style="color:#8cd50a">
+                                    							<i class="bi bi-file-earmark-pdf-fill"></i>
+                                    							View Document
+                                    						</a>
+                                    					</div>
+                                    				@endif
+                                    			</div>
+                                    			<div class="col-md-6">
+                                    				<div class="form-group">
+                                    					<label class="form-label">Company Docments (CIPRO)</label>
+                                    					<input type="file" class="form-control" name="cipro">
+                                    				</div>
+                                    				@if($user->cipro)
+                                    					<div class="mb-3">
+                                    						<a href="{{ url('storage/'.$user->cipro) }}" target="_blank" style="color:#8cd50a">
+                                    							<i class="bi bi-file-earmark-pdf-fill"></i>
+                                    							View Document
                                     						</a>
                                     					</div>
                                     				@endif
@@ -118,8 +136,23 @@
                                     				</div>
                                     				@if($user->proxy_id)
                                     					<div class="mb-3">
-                                    						<a href="{{ url('storage/'.$user->proxy_id) }}" target="_blank">
-                                    							<i style="font-size:30px; color:#8cd50a" class="bi bi-file-earmark-pdf-fill"></i>
+                                    						<a href="{{ url('storage/'.$user->proxy_id) }}" target="_blank" style="color:#8cd50a">
+                                    							<i class="bi bi-file-earmark-pdf-fill"></i>
+                                    							View Document
+                                    						</a>
+                                    					</div>
+                                    				@endif
+                                    			</div>
+                                    			<div class="col-md-6">
+                                    				<div class="form-group">
+                                    					<label class="form-label">Company Letterhead</label>
+                                    					<input type="file" class="form-control" name="company_letter_head">
+                                    				</div>
+                                    				@if($user->company_letter_head)
+                                    					<div class="mb-3">
+                                    						<a href="{{ url('storage/'.$user->company_letter_head) }}" target="_blank" style="color:#8cd50a">
+                                    							<i class="bi bi-file-earmark-pdf-fill"></i>
+                                    							View Document
                                     						</a>
                                     					</div>
                                     				@endif

@@ -8,6 +8,7 @@ use Auth;
 use App\Models\AuctionGroup;
 use App\Lib\AuctionFunctions;
 use App\Models\Lot;
+use App\Models\Favourites;
 
 class AuctionListItem extends Component
 {
@@ -33,6 +34,25 @@ class AuctionListItem extends Component
             $this->time_left = date('M d, Y H:i:s', strtotime($start_time));
         }
         //dd($this->time_left);
+    }
+    
+    public function addToFavourites($id){
+            $favourite = new Favourites;
+            $favourite->user_id = Auth::id();
+            $favourite->lot_id = $id;
+            $favourite->save();
+            return back();
+    }
+    
+    public function removeFavourite($id){
+            $user_id = Auth::id();
+            $favourite = Favourites::where('user_id', $user_id)->where('lot_id', $id)->first();
+    
+            if($favourite != null){
+                $favourite->delete();
+                return redirect()->back();
+            }
+            return back();
     }
     
     public function updatedViewType(){
@@ -69,9 +89,9 @@ class AuctionListItem extends Component
                     $now = strtotime($now);
                     //dd($end_time, $now);
                     $diff = ($end_time - $now) / 60;
-                    if($diff < 3){
+                    if($diff < 6){
                         $added_time = $this->lot->extra_time;
-                        $added_time += 2;
+                        $added_time += 5;
                         
                         $this->lot->extra_time = $added_time;
                         $this->lot->save();

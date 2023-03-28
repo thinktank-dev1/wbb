@@ -18,8 +18,11 @@ use App\Models\VehicleInspection;
 use App\Models\Lot;
 use App\Models\Bid;
 use App\Models\Option;
+use App\Models\VehicleVideo;
 
 use App\Lib\TransUnionApi;
+
+use Request As Filter;
 
 class VehicleController extends Controller
 {
@@ -40,6 +43,64 @@ class VehicleController extends Controller
     {
         $this->setClassValues();
         $vehicles = Vehicle::paginate(12);
+        return view('admin.vehicles.list', [
+            'vehicles'=>$vehicles,
+            'car_list' => $this->car_list,
+        ]);
+    }
+    
+    public function search(){
+        
+        $this->setClassValues();
+        $search = Filter::input('key');
+        $year = Filter::input('year');
+        $make = Filter::input('make');
+        $model = Filter::input('model');
+        $variant = Filter::input('variant');
+        
+        if($search){
+            $vehicles = Vehicle::where('make', 'LIKE', '%'.$search.'%')
+            ->orWhere('model', 'LIKE', '%'.$search.'%')
+            ->orWhere('variant', 'LIKE', '%'.$search.'%')
+            ->orWhere('body_type', 'LIKE', '%'.$search.'%')
+            ->orWhere('year', 'LIKE', '%'.$search.'%')
+            ->orWhere('fuel_type', 'LIKE', '%'.$search.'%')
+            ->orWhere('stock_number', 'LIKE', '%'.$search.'%')
+            ->orWhere('mmcode', 'LIKE', '%'.$search.'%')
+            ->paginate(12);
+        }
+        
+        if($year){
+            $vehicles = Vehicle::where('year', $year)
+            ->paginate(12);
+        }
+        
+        if($make){
+             $vehicles = Vehicle::where('make', $make)
+            ->paginate(12); 
+        }
+        
+        if($year && $make){
+            $vehicles = Vehicle::where('year', $year)
+            ->where('make', $make)
+            ->paginate(12); 
+        }
+        
+        if($year && $make && $model){
+            $vehicles = Vehicle::where('year', $year)
+            ->where('make', $make)
+            ->where('model', $model)
+            ->paginate(12); 
+        }
+        
+        if($year && $make && $model && $variant){
+            $vehicles = Vehicle::where('year', $year)
+            ->where('make', $make)
+            ->where('model', $model)
+            ->where('variant', $variant)
+            ->paginate(12); 
+        }
+        
         return view('admin.vehicles.list', [
             'vehicles'=>$vehicles,
             'car_list' => $this->car_list,
@@ -205,6 +266,18 @@ class VehicleController extends Controller
                     'vehicle_id' => $vehicle->id,
                     'image_url' => $path
                 ]);
+            }
+        }
+        
+        if($request->file('videos')){
+            foreach($request->file('videos') AS $vid){
+                if($vid->isValid()){
+                    $path = Storage::disk('public')->putFile('videos', $vid);
+                    VehicleVideo::create([
+                        'vehicle_id' => $vehicle->id,
+                        'video_url' => $path
+                    ]);
+                }
             }
         }
 
@@ -419,6 +492,18 @@ class VehicleController extends Controller
                     }
                 }
             //}
+        }
+        
+        if($request->file('videos')){
+            foreach($request->file('videos') AS $vid){
+                if($vid->isValid()){
+                    $path = Storage::disk('public')->putFile('videos', $vid);
+                    VehicleVideo::create([
+                        'vehicle_id' => $vehicle->id,
+                        'video_url' => $path
+                    ]);
+                }
+            }
         }
 
         $sides = ['top', 'left', 'right', 'front', 'back','interior'];
@@ -793,6 +878,12 @@ class VehicleController extends Controller
             $bid->delete();
         }
         $lot->delete();
+        return back();
+    }
+    
+    public function deleteVideo($id){
+        $vid = VehicleVideo::find($id);
+        $vid->delete();
         return back();
     }
 }

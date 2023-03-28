@@ -36,7 +36,7 @@ class AuctionFunctions{
                         //dd($high_bid->bid_amount);
                         return [
                             'status' => "error",
-                            'message' => "Auto Bid is lower then currant auto bid notification"
+                            'message' => "Auto Bid is lower then current auto bid notification"
                         ];
                     }
                 }
@@ -45,7 +45,7 @@ class AuctionFunctions{
                 if($prev_amount > $bid_amount){
                     return [
                         'status' => "error",
-                        'message' => "Auto Bid is lower then currant auto bid notification"
+                        'message' => "Auto Bid is lower then current auto bid notification"
                     ];    
                 }
                 elseif($prev_amount == $bid_amount){
@@ -66,7 +66,7 @@ class AuctionFunctions{
                     
                     return [
                         'status' => 'success',
-                        'message' => 'Bid placed sucessfully'
+                        'message' => 'Bid placed successfully'
                     ];
                 }
                 elseif($lot->nextBidAmount() > $bid_amount){
@@ -99,7 +99,7 @@ class AuctionFunctions{
                     
                     return [
                         'status' => 'success',
-                        'message' => 'Bid placed sucessfully'
+                        'message' => 'Bid placed successfully'
                     ];
                 }
             }
@@ -138,7 +138,7 @@ class AuctionFunctions{
                     
                     return [
                         'status' => 'success',
-                        'message' => 'Bid placed sucessfully'
+                        'message' => 'Bid placed successfully'
                     ];
                 }
             }
@@ -169,7 +169,7 @@ class AuctionFunctions{
                 
                 return [
                     'status' => 'success',
-                    'message' => 'Bid placed sucessfully'
+                    'message' => 'Bid placed successfully'
                 ];
             }
             else{
@@ -184,7 +184,7 @@ class AuctionFunctions{
                 
                 return [
                     'status' => 'success',
-                    'message' => 'Bid placed sucessfully'
+                    'message' => 'Bid placed successfully'
                 ];
             }
         }
@@ -200,7 +200,7 @@ class AuctionFunctions{
             
             return [
                 'status' => 'success',
-                'message' => 'Bid placed sucessfully'
+                'message' => 'Bid placed successfully'
             ];
         }
         

@@ -38,8 +38,7 @@ $url = request()->segment(1);
   
         <h2 class="footer-headings">Company</h2>
         <ul class="ml-0 mb-3">
-          <li><a class="footer-links" href="{{ route('about-us') }}">About</a></li>
-          <li><a class="footer-links" href="{{ url('about-us') }}">FAQs</a></li>
+          <li><a class="footer-links" href="{{ url('FAQs') }}">FAQs</a></li>
           <li><a class="footer-links" href="{{ route('contact-us') }}">Contact Us</a></li>
         </ul>
       </div>
@@ -69,16 +68,19 @@ $url = request()->segment(1);
               <a class="btn btn-secondary footer-login-btn" href="{{ route('login') }}">LOG IN</a>  
               @endif
             </div>
-             
           </div>
           <div class="col-sm-6 scrollTop" id="stop">
               <a  class="scrollBtn" href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_11.png') }}" alt="scroll" onclick="scrollToTop()"></a>
           </div>
+          <div class="col-sm-6 follow-us-div">
+              <h2 class="footer-headings">follow us</h2>
+              <a class="footer-links" href="https://www.facebook.com/WeBuyBakkies" target="blank"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_14.png') }}" alt="facebook"></a>
+              <a class="footer-links" href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_15.png') }}" alt="whatsapp"></a>
+          </div>
+          <div class="col-sm-6">
+              <a class="wbb-logo" href=""><img class="img-fluid" src="{{ asset('img/wbbonline_logo_footer.png') }}" alt="logo"></a>  
+          </div>
         </div>
-  
-        <h2 class="footer-headings">follow us</h2>
-          <a class="footer-links" href="https://www.facebook.com/WeBuyBakkies" target="blank"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_14.png') }}" alt="facebook"></a>
-          <a class="footer-links" href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_15.png') }}" alt="whatsapp"></a>
       </div>
     </div>
     

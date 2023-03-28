@@ -55,6 +55,25 @@ class ProfileController extends Controller
         $brm = Request::file('brm');
         $vat_registration = Request::file('vat_registration');
         
+        $cipro = Request::file('vat_registration');
+        $company_letter_head = Request::file('vat_registration');
+        
+        if($cipro){
+            if($usr->cipro){
+               Storage::disk('public')->delete($usr->cipro); 
+            }
+            $cipro_url = Storage::disk('public')->putFile('documents', $cipro);  
+            $usr->cipro = $cipro_url;
+        }
+        
+        if($company_letter_head){
+            if($usr->company_letter_head){
+               Storage::disk('public')->delete($usr->company_letter_head); 
+            }
+            $company_letter_head_url = Storage::disk('public')->putFile('documents', $company_letter_head);  
+            $usr->company_letter_head = $company_letter_head_url;
+        }
+        
         if($id_document){
             if($usr->id_document){
                Storage::disk('public')->delete($usr->id_document); 

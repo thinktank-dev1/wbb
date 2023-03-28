@@ -28,11 +28,11 @@
                     
                     @if($url == 'favourites')
                     <div class="col d-flex justify-content-end mr-5 mobile-center">
-                        <a style="padding: 3px 30px !important; margin-left: 0 !important" class="btn btn-secondary back-to-cat-btn" href="{{ url('auction') }}">BACK TO AUCTION</a>
+                        <a style="padding: 3px 30px; margin-left: 0 !important" class="btn btn-secondary liv-back-to-cat-btn" href="{{ url('auction') }}">BACK TO AUCTION</a>
                     </div>
                     @else
                     <div class="col d-flex justify-content-end mr-5 mobile-center">
-                        <a class="btn btn-secondary back-to-cat-btn" href="{{ url()->previous() }}">BACK</a>
+                        <a style="padding: 3px 30px" class="btn btn-secondary liv-back-to-cat-btn" href="{{ url()->previous() }}">BACK</a>
                     </div>
                     @endif
                 </div>
@@ -43,7 +43,7 @@
             <div class="col lot-title-div mt-3">
                 <div class="row lot-top-bar">
                     <div class="col-8 mobile-max-width">
-                        <h3 class="lot-number-title mt-3"> AUCTION NAME<span class="lot-number-span ml-3">@if($has_auction) {{ $group->name }} @endif</span></h3>
+                        <h3 class="lot-number-title mt-3"> AUCTION NAME<span class="lot-number-span ml-3">@if($is_fvourite) @elseif($has_auction) {{ $group->name }} @endif</span></h3>
                     </div>
                     <div class="col-4 text-right mobile-max-width">
                         <div class="row lot-top-bar">
@@ -81,7 +81,7 @@
                                                     <tr>
                                                       <th></th>
                                                       <th class="auction-details-data-text">Vehicle</th>
-                                                      <th class="auction-details-data-text">Trade Price</th>
+                                                      <!--<th class="auction-details-data-text">Trade Price</th>-->
                                                       <th class="auction-details-data-text">Highest Bid</th>
                                                       <th class="auction-details-data-text">Next Bid</th>
                                                       <th></th>
@@ -202,7 +202,7 @@
         });
         window.addEventListener('toast', event => {
             //alert('Name updated to: ' + event.detail.message);
-            if(event.detail.type == "success"){
+            /**if(event.detail.type == "success"){
                 $.toast({
                     heading: 'Success',
                     text: event.detail.message,
@@ -211,7 +211,7 @@
                     position: 'mid-center',
                     hideAfter : 8000,  
                 });
-            }
+            }**/
             if(event.detail.type == "error"){
                 $.toast({
                     heading: 'Error',
