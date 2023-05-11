@@ -77,7 +77,7 @@
                                         <th>Model</th>
                                         <th>Variant</th>
                                         <th>Start Price</th>
-                                        <th>Increament</th>
+                                        <th>Increment</th>
                                         <th>Reserve</th>
                                         <th></th>
                                     </tr>

@@ -11,6 +11,7 @@
         <link href="{{ asset('admin-assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('admin-assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
         <link href="{{ asset('admin-assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+        @livewireStyles
     </head>
     <body>
         <div id="layout-wrapper">
@@ -29,7 +30,7 @@
         <script src="{{ asset('admin-assets/libs/pace-js/pace.min.js') }}"></script>
         <script src="{{ asset('admin-assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
         <script src="{{ asset('admin-assets/js/app.js') }}"></script>
-
+        @livewireScripts
         @stack('scripts')
 
     </body>

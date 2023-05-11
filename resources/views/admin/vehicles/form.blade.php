@@ -18,6 +18,19 @@
 	</div>
 	<div class="card-body">
 		<div class="row">
+				<div class="col-md-12">
+				<div class="mb-3">
+					<label class="form-label">External Sale: </label><br />
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" value="yes" id="wr1" name="external_sale" @if(old('external_sale') == "yes") checked @elseif($vehicle->external_sale == "yes") checked @endif required>
+						<label class="form-check-label" for="wr1">Yes</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" value="no" id="wr2" name="external_sale" @if(old('external_sale') == "no") checked @elseif($vehicle->external_sale == "no") checked @endif required>
+						<label class="form-check-label" for="wr2">No</label>
+					</div>
+				</div>
+			</div>
 			<div class="col-md-12">
 				<div class="mb-3">
 					<label class="form-label">Stock Number</label>
@@ -271,10 +284,10 @@
 						<div class="mb-3">
 							<label class="form-label">Year</label>
 							<select class="form-control" name="service_year" id="year-select" required>
-								<option value="">Select Option</option>
+								<option value="">Select Year</option>
 								@php
 								$date_start = date("Y", strtotime('-30 year'));
-								$date_end = date("Y");
+								$date_end = date("Y", strtotime('+10 year'));
 								@endphp
 								@for($i = $date_end; $i >= $date_start; $i--)
 								@php
@@ -290,8 +303,8 @@
 								@endfor
 							</select>
 						</div>
+						</div>
 					</div>
-				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
@@ -310,26 +323,52 @@
 							<input type="text" class="form-control" name="warranty_km" value="@if(old('warranty_km')) {{ old('warranty_km') }} @elseif($vehicle->warranty_km) {{ $vehicle->warranty_km }} @endif" required>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Year</label>
-							<select class="form-control" name="warranty_year" id="year-select" required>
-								<option value="">Select Option</option>
-								@php
-								$date_start = date("Y", strtotime('-30 year'));
-								$date_end = date("Y", strtotime('+10 year'));
-								@endphp
-								@for($i = $date_end; $i >= $date_start; $i--)
-								@php
-								$sel = '';
-								if(old('year') == $i){
-									$sel = "selected";
-								}
-								elseif($vehicle->warranty_year == $i){
-									$sel = 'selected';
-								}
-								@endphp
-								<option value="{{ $i }}" {{ $sel }}>{{ $i }}</option>
-								@endfor
-							</select>
+							<div class="row">
+								<div class="col-6">
+									<label class="form-label">Year</label>
+									<select class="form-control" name="warranty_year" id="year-select" required>
+										<option value="">Select Option</option>
+										@php
+										$date_start = date("Y", strtotime('-30 year'));
+										$date_end = date("Y", strtotime('+10 year'));
+										@endphp
+										@for($i = $date_end; $i >= $date_start; $i--)
+										@php
+										$sel = '';
+										if(old('year') == $i){
+											$sel = "selected";
+										}
+										elseif($vehicle->warranty_year == $i){
+											$sel = 'selected';
+										}
+										@endphp
+										<option value="{{ $i }}" {{ $sel }}>{{ $i }}</option>
+										@endfor
+									</select>
+								</div>
+								<div class="col-6">
+									<label class="form-label">Month</label>
+									<select class="form-control" name="warranty_month">
+										@if($vehicle->warranty_month)
+											<option value="{{ $vehicle->warranty_month }}" selected>{{ $vehicle->warranty_month }}</option>
+										@else
+										<option value="">Select Month</option>
+										@endif
+										<option value="January">January</option>
+										<option value="February">February</option>
+										<option value="March">March</option>
+										<option value="April">April</option>
+										<option value="May">May</option>
+										<option value="June">June</option>
+										<option value="July">July</option>
+										<option value="August">August</option>
+										<option value="September">September</option>
+										<option value="October">October</option>
+										<option value="November">November</option>
+										<option value="December">December</option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -570,97 +609,105 @@
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
-					<label class="form-label">Tire Condition - Front Left</label>
+					<label class="form-label">Tyre Condition - Front Left</label>
 					<select class="form-control" name="front_left_tire" required>
 						<option value="">Select Option</option>
-						@foreach($tire_condition AS $list)
-						@php
-						$sel = '';
-						if(old('front_left_tire')){
-							if(old('front_left_tire') == $list){
-								$sel = "selected";
-							}
-						}
-						elseif($vehicle->report){
-							if($vehicle->report->front_left_tire == $list){
-								$sel = 'selected';
-							}
-						}
-						@endphp
-						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
-						@endforeach
+						@if($tyre_condition)
+							@foreach($tyre_condition AS $list)
+								@php
+								$sel = '';
+								if(old('front_left_tire')){
+									if(old('front_left_tire') == $list->name){
+										$sel = "selected";
+									}
+								}
+								elseif($vehicle->report){
+									if($vehicle->report->front_left_tire == $list->name){
+										$sel = 'selected';
+									}
+								}
+								@endphp
+								<option value="{{ $list->name }}" {{ $sel }}>{{ $list->name }}</option>
+							@endforeach
+						@endif
 					</select>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
-					<label class="form-label">Tire Condition - Front Right</label>
+					<label class="form-label">Tyre Condition - Front Right</label>
 					<select class="form-control" name="front_right_tire" required>
 						<option value="">Select Option</option>
-						@foreach($tire_condition AS $list)
-						@php
-						$sel = '';
-						if(old('front_right_tire')){
-							if(old('front_right_tire') == $list){
-								$sel = "selected";
+						@if($tyre_condition)
+							@foreach($tyre_condition AS $list)
+							@php
+							$sel = '';
+							if(old('front_right_tire')){
+								if(old('front_right_tire') == $list->name){
+									$sel = "selected";
+								}
 							}
-						}
-						elseif($vehicle->report){
-							if($vehicle->report->front_right_tire == $list){
-								$sel = 'selected';
+							elseif($vehicle->report){
+								if($vehicle->report->front_right_tire == $list->name){
+									$sel = 'selected';
+								}
 							}
-						}
-						@endphp
-						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
-						@endforeach
+							@endphp
+							<option value="{{ $list->name }}" {{ $sel }}>{{ $list->name }}</option>
+							@endforeach
+						@endif
 					</select>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
-					<label class="form-label">Tire Condition - Back Left</label>
+					<label class="form-label">Tyre Condition - Back Left</label>
 					<select class="form-control" name="back_left_tire" required>
 						<option value="">Select Option</option>
-						@foreach($tire_condition AS $list)
-						@php
-						$sel = '';
-						if(old('back_left_tire')){
-							if(old('back_left_tire') == $list){
-								$sel = "selected";
+						@if($tyre_condition)
+							@foreach($tyre_condition AS $list)
+							@php
+							$sel = '';
+							if(old('back_left_tire')){
+								if(old('back_left_tire') == $list->name){
+									$sel = "selected";
+								}
 							}
-						}
-						elseif($vehicle->report){
-							if($vehicle->report->back_left_tire == $list){
-								$sel = 'selected';
+							elseif($vehicle->report){
+								if($vehicle->report->back_left_tire == $list->name){
+									$sel = 'selected';
+								}
 							}
-						}
-						@endphp
-						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
-						@endforeach
+							@endphp
+							<option value="{{ $list->name }}" {{ $sel }}>{{ $list->name }}</option>
+							@endforeach
+						@endif
 					</select>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="mb-3">
-					<label class="form-label">Tire Condition - Back Right</label>
+					<label class="form-label">Tyre Condition - Back Right</label>
 					<select class="form-control" name="back_right_tire" required>
 						<option value="">Select Option</option>
-						@foreach($tire_condition AS $list)
+						@if($tyre_condition)
+						@foreach($tyre_condition AS $list)
 						@php
 						$sel = '';
 						if(old('back_right_tire')){
-							if(old('back_right_tire') == $list){
+							if(old('back_right_tire') == $list->name){
 								$sel = "selected";
 							}
 						}
 						elseif($vehicle->report){
-							if($vehicle->report->back_right_tire == $list){
+							if($vehicle->report->back_right_tire == $list->name){
 								$sel = 'selected';
 							}
 						}
 						@endphp
-						<option value="{{ $list }}" {{ $sel }}>{{ $list }}</option>
+						<option value="{{ $list->name }}" {{ $sel }}>{{ $list->name }}</option>
 						@endforeach
+						@endif
 					</select>
 				</div>
 			</div>
@@ -912,7 +959,7 @@
 						</div>
 					</div>
 					<div class="card-body interior-damage-cont">
-						<div class="row" id="interior-damesges-row">
+						<div class="row" id="interior-damages-row">
 							<div class="col-md-3">
 								<div class="mb-3">
 									<label class="form-label">Upload Damage Image</label>
@@ -1102,6 +1149,7 @@
 			$(row).css('display','flex');
 			$('.back-damage-cont').append(row);
 		});
+		
 		$('#back-add-btn').on('click', function(e){
 			e.preventDefault();
 			var row = $('#back-damesges-row').clone();
@@ -1110,14 +1158,16 @@
 			});
 			$('.back-damage-cont').append(row);
 		});
+		
 		$('#int-add-btn').on('click', function(e){
 			e.preventDefault();
-			var row = $('#interior-damesges-row').clone();
+			var row = $('#interior-damages-row').clone();
 			$(row).find('.field').each(function(){
 				$(this).val("");
 			});
 			$('.interior-damage-cont').append(row);
 		});
+		
 		$('#int-add-custom').on('click', function(e){
 			e.preventDefault();
 			var row = $('#interior-custom').clone();
@@ -1125,8 +1175,9 @@
 				$(this).val("");
 			});
 			$(row).css('display','flex');
-			$('.int-damage-cont').append(row);
+			$('.interior-damage-cont').append(row);
 		});
+		
 		$('#front-add-custom').on('click', function(e){
 			e.preventDefault();
 			var row = $('#front-custom').clone();

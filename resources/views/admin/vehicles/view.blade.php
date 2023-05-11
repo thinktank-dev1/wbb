@@ -55,7 +55,7 @@
                 					<span class="ms-auto"><b>{{ $vehicle->model }}</b></span>
                 				</li>
                 				<li class="list-group-item d-flex">
-                					<span class="label">Varinat:</span>
+                					<span class="label">Variant:</span>
                 					<span class="ms-auto"><b>{{ $vehicle->variant }}</b></span>
                 				</li>
                 				<li class="list-group-item d-flex">
@@ -108,7 +108,11 @@
 		                	<div class="row mb-3">
 		                		<div class="card">
 		                			<div class="card-header">
-		                				<h4 class="card-title">TOP Bids</h4>
+		                				<div class="d-flex">
+	                						<div class="ms-auto">
+			                					<a onclick="history.back()" class="btn btn-secondary btn-sm"><i class="bx bx-arrow-back"></i> Back</a>
+			                				</div>
+			                			</div>
 		                			</div>
 		                			<div class="card-body">
 		                				<table class="table">
@@ -135,18 +139,31 @@
             				<tr>
             					<td><div class="d-flex">Service History: <strong class="ms-auto">{{ ucwords($vehicle->service_history) }}</strong></div></td>
             					<td><div class="d-flex">Service Book: <strong class="ms-auto">{{ ucwords($vehicle->service_book) }}</strong></div></td>
-            					<td><div class="d-flex">Service Plan: <strong class="ms-auto">{{ ucwords($vehicle->service_plan) }}</strong></div></td>
-            					<td><div class="d-flex">Warranty: <strong class="ms-auto">{{ ucwords($vehicle->warranty) }}</strong></div></td>
+            					<td>
+            						<div class="d-block">
+            							Service Plan: <strong class="ms-auto">{{ ucwords($vehicle->service_plan) }}</strong><br>
+            							Kilometers: <strong class="ms-auto">{{ ucwords($vehicle->service_km) }} km</strong><br>
+            							Year: <strong class="ms-auto">{{ ucwords($vehicle->service_year) }}</strong>
+            						</div>
+            					</td>
+            					<td>
+            						<div class="d-block">
+            							Warranty: <strong class="ms-auto">{{ ucwords($vehicle->warranty) }}</strong><br>
+            							Kilometers: <strong class="ms-auto">{{ ucwords($vehicle->warranty_km) }} km</strong><br>
+            							Year: <strong class="ms-auto">{{ ucwords($vehicle->warranty_year) }}</strong><br>
+            							Month: <strong class="ms-auto">{{ ucwords($vehicle->warranty_month) }}</strong>
+            						</div>
+            					</td>
             				</tr>
             				<tr>
-            					<td><div class="d-flex">Prevoius Body Repairs: <strong class="ms-auto">{{ ucwords($vehicle->report->previous_body_repairs) }}</strong></div></td>
+            					<td><div class="d-flex">Previous Body Repairs: <strong class="ms-auto">{{ ucwords($vehicle->report->previous_body_repairs) }}</strong></div></td>
             					<td><div class="d-flex">Previous Cosmetic Repairs: <strong class="ms-auto">{{ ucwords($vehicle->report->previous_cosmetic_repairs) }}</strong></div></td>
-            					<td colspan="2"><div class="d-flex">Mechanical Faults / Warnig Lights: <strong class="ms-auto">{{ ucwords($vehicle->report->mechanical_faults_warnig_lights) }}</strong></div></td>
+            					<td colspan="2"><div class="d-flex">Mechanical Faults / Warning Lights: <strong class="ms-auto">{{ ucwords($vehicle->report->mechanical_faults_warnig_lights) }}</strong></div></td>
             				</tr>
             				@if($vehicle->report->mechanical_faults_warnig_lights_description)
             				<tr>
             					<td >
-            						Mechanical Faults / Warnig Lights Description<br />
+            						Mechanical Faults / Warning Lights Description<br />
             						<strong>{{ $vehicle->report->mechanical_faults_warnig_lights_description }}</strong>
             					</td>
             				</tr>

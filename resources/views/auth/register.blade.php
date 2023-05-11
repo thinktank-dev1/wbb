@@ -33,19 +33,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>First Name</label>
-                                                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}">
+                                                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Last Name</label>
-                                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
+                                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Contact Number (Primary)</label>
-                                                <input type="text" class="form-control" name="contact_primary" value="{{ old('contact_primary') }}">
+                                                <input type="text" class="form-control" name="contact_primary" value="{{ old('contact_primary') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -57,19 +57,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="text" class="form-control" name="email" value="{{ old('email') }}">
+                                                <input type="text" class="form-control" name="email" value="{{ old('email') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Confirm Email</label>
-                                                <input type="text" class="form-control" name="email_confirmation" value="{{ old('email_confirmation') }}">
+                                                <input type="text" class="form-control" name="email_confirmation" value="{{ old('email_confirmation') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>ID Type</label>
-                                                <select class="form-control" name="id_type">
+                                                <select class="form-control" name="id_type" required>
                                                     <option value="">Select Option</option>
                                                     <option value="SA ID Number" @if(old('id_type')) @if(old('id_type') == 'SA ID Number') selected @endif @endif >SA ID Number</option>
                                                     <option value="Passport" @if(old('id_type')) @if(old('id_type') == 'Passport') selected @endif @endif >Passport Number</option>
@@ -79,19 +79,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>ID Number</label>
-                                                <input type="text" class="form-control" name="id_number" value="{{ old('id_number') }}">
+                                                <input type="text" class="form-control" name="id_number" value="{{ old('id_number') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input type="password" class="form-control" name="password">
+                                                <input type="password" class="form-control" name="password" value="{{ old('password') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Confirm Password</label>
-                                                <input type="password" class="form-control" name="password_confirmation">
+                                                <input type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -103,43 +103,43 @@
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Identity Document</label>
-                            					<input type="file" class="form-control" name="id_document" required>
+                            					<input type="file" class="form-control" name="id_document" value="{{ old('id_document') }}" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Proof Of Residence</label>
-                            					<input type="file" class="form-control" name="proof_of_residence" required>
+                            					<input type="file" class="form-control" name="proof_of_residence" value="{{ old('proof_of_residence') }}" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">VAT Registration</label>
-                            					<input type="file" class="form-control" name="vat_registration" required>
+                            					<input type="file" class="form-control" name="vat_registration" value="{{ old('vat_registration') }}" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">BRN</label>
-                            					<input type="file" class="form-control" name="brm" required>
+                            					<input type="file" class="form-control" name="brm" value="{{ old('brm') }}" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Proxy ID</label>
-                            					<input type="file" class="form-control" name="proxy_id" required>
+                            					<input type="file" class="form-control" name="proxy_id" value="{{ old('proxy_id') }}" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Company Docments (CIPRO)</label>
-                            					<input type="file" class="form-control" name="cipro" required>
+                            					<input type="file" class="form-control" name="cipro" value="{{ old('cipro') }}" required>
                             				</div>
                             			</div>
                             			<div class="col-md-6">
                             				<div class="mb-3">
                             					<label class="form-label">Company Letterhead</label>
-                            					<input type="file" class="form-control" name="company_letter_head" required>
+                            					<input type="file" class="form-control" name="company_letter_head" value="{{ old('company_letter_hea') }}" required>
                             				</div>
                             			</div>
                                         <div class="col-md-12 text-center">
@@ -148,7 +148,7 @@
                                                 <p>Already have an account? <a href="{{ url('login') }}">Log In</a></p>
                                             </div>
                                             <div class="mt-1 mb-2 text-center">
-                                                <input type="checkbox" class="form-check-input register-terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
+                                                <input type="checkbox" class="form-check-input register-terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="{{ asset('files/WeBuyBakkiesOnline_AuctionTermsConditions_revised042023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WeBuyBakkiesOnlineAuctions_PrivacyPolicy_revised042023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
                                             </div>
                                         </div>
                                     </div>

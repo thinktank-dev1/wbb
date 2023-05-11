@@ -13,6 +13,8 @@ use Mail;
 
 use App\Lib\SmsApi;
 
+use PDF;
+
 class AuctionCommand extends Command
 {
     /**
@@ -39,6 +41,7 @@ class AuctionCommand extends Command
         $this->init();
         //$this->removeFavourites(1);
         //$this->sendComm(1);
+        //$this->sendComm(20);
     }
     
     public function init(){
@@ -71,7 +74,7 @@ class AuctionCommand extends Command
                 $now = date('Y-m-d H:i:s');
                 if($lot->extra_time){
                     $auction_end_time = $group->date.' '.$group->end_time;
-                    $end_time = date('Y-m-d H:i:s', strtotime("+".$lot->extra_time." minutes ".$auction_end_time));
+                    $end_time = date('Y-m-d H:i:s', strtotime("+".$lot->extra_time." seconds ".$auction_end_time));
                     if($end_time <= $now){
                         $lot->status = 2;
                         $lot->save();
@@ -112,7 +115,6 @@ class AuctionCommand extends Command
                     $user = $bid->bidder;
                     $car = $lot->vehicle;
                     
-                    
                     $data = [
                         'name' => $user->first_name.' '.$user->last_name,
                         'year' => $car->year,
@@ -122,12 +124,24 @@ class AuctionCommand extends Command
                         'amount' => number_format($bid->bid_amount, 2)    
                     ];
                     
-                    Mail::send('mail.comm1', $data, function($message) use($user){
+                    $pdf_data = [
+                        'lot' => $lot    
+                    ];
+                    
+                    $pdf = PDF::loadView('pdf.report2', $pdf_data);
+                    //$pdf = null;
+                    
+                    Mail::send('mail.comm1', $data, function($message) use($user, $pdf){
                         $message
                         ->to($user->email, $user->first_name.' '.$user->last_name)
-                        ->cc('ndlovu28@gmail.com', 'We Buy Bakkies')
+                        ->cc([
+                            'francois@webuybakkies.co.za' => 'We Buy Bakkies',
+                            'cornel@webuybakkies.co.za' => 'We Buy Bakkies',
+                            'jean@webuybakkies.co.za' => 'We Buy Bakkies'
+                        ])
                         ->subject('We Buy Bakkies Auction Results');
                         $message->from('info@webuybakkies.co.za','We Buy Bakkies');
+                        $message->attachData($pdf->output(), "car_info.pdf");
                     });
                     
                     //Send SMS

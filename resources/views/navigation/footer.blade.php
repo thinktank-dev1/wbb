@@ -45,14 +45,14 @@ $url = request()->segment(1);
       <div class="col-lg-3 col-xs-12 mt-3">
         <h2 class="footer-headings">Privacy</h2>
         <ul class="ml-0 mb-3">
-          <li><a class="footer-links" href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a></li>
-          <li><a class="footer-links" href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">Privacy Policy</a></li>
+          <li><a class="footer-links" href="{{ asset('files/WeBuyBakkiesOnline_AuctionTermsConditions_revised042023_1.pdf') }}" target="_blank">Terms and Conditions</a></li>
+          <li><a class="footer-links" href="{{ asset('files/WeBuyBakkiesOnlineAuctions_PrivacyPolicy_revised042023_1.pdf') }}" target="_blank">Privacy Policy</a></li>
         </ul>
       </div>
       <div class="col-lg-4 col-xs-12 mt-3">
         <h2 class="footer-headings">contact</h2>
         <ul class="m-0">
-          <a class="footer-links footer-email-link" href="mailto:info@webuybakkiesonline.co.za"><img class="img-fluid" src="{{ asset('images/wbbonline_img_18.png') }}" alt="mail"> info@webuybakkiesonline.co.za</a>
+          <a class="footer-links footer-email-link" href="mailto:info@bakkieauctions.co.za"><img class="img-fluid" src="{{ asset('images/wbbonline_img_18.png') }}" alt="mail"> info@bakkieauctions.co.za</a>
         </ul>
         <div class="row ml-4">
           <div class="col-sm-6">
@@ -72,13 +72,13 @@ $url = request()->segment(1);
           <div class="col-sm-6 scrollTop" id="stop">
               <a  class="scrollBtn" href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_11.png') }}" alt="scroll" onclick="scrollToTop()"></a>
           </div>
-          <div class="col-sm-6 follow-us-div">
-              <h2 class="footer-headings">follow us</h2>
-              <a class="footer-links" href="https://www.facebook.com/WeBuyBakkies" target="blank"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_14.png') }}" alt="facebook"></a>
-              <a class="footer-links" href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_15.png') }}" alt="whatsapp"></a>
-          </div>
+          <!--<div class="col-sm-6 follow-us-div">-->
+          <!--    <h2 class="footer-headings">follow us</h2>-->
+          <!--    <a class="footer-links" href="https://www.facebook.com/WeBuyBakkies" target="blank"><img class="img-fluid" src="{{ asset('images/wbbonline_btn_14.png') }}" alt="facebook"></a>-->
+          <!--    <a class="footer-links" href=""><img class="img-fluid" src="{{ asset('images/wbbonline_btn_15.png') }}" alt="whatsapp"></a>-->
+          <!--</div>-->
           <div class="col-sm-6">
-              <a class="wbb-logo" href=""><img class="img-fluid" src="{{ asset('img/wbbonline_logo_footer.png') }}" alt="logo"></a>  
+              <a class="wbb-logo" href="JavaScript:void(0);"><img class="img-fluid" src="{{ asset('img/wbbonline_logo_footer.png') }}" alt="logo"></a>  
           </div>
         </div>
       </div>

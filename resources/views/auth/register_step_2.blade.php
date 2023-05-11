@@ -89,7 +89,7 @@
                                         <div class="col-md-12 text-center">
                                             <input type="submit" value="NEXT" class="btn btn-primary btn-sm nxt-btn">
                                             <div class="mt-3">
-                                                <p>By clicking 'Register Now' you agree to our <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
+                                                <p>By clicking 'Register Now' you agree to our <a href="{{ asset('files/WeBuyBakkiesOnline_AuctionTermsConditions_revised042023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WeBuyBakkiesOnlineAuctions_PrivacyPolicy_revised042023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
                                             </div>
                                         </div>
                                     </div>

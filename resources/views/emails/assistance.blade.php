@@ -5,7 +5,7 @@
 </head>
 <body>
     <p>Good day,</p>
-    <p>{{ $data['first-name'] $data['last-name']}} requires assistance.</p>
+    <p>{{ $data['first-name'] }} {{ $data['last-name'] }} requires assistance.</p>
 
     <h3>Contact Details</h3>
     <p>Contact Number: {{ $data['number'] }}</p>

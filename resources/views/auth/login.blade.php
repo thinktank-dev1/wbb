@@ -48,11 +48,12 @@
                                         <a class="" href="{{ route('password.request') }}">Forgot your password?</a>
                                     </div>
                                     <div class="col-md-6 text-right fp-txt">
-                                        <span>Not registered?<a class="register-anchor" href="{{ route('register') }}">Click here</a></span>
+                                        <span>Not registered? <a class="register-anchor" href="{{ route('register') }}">Click here</a></span>
                                     </div>
                                 </div>
                                 <div class="mt-1 mb-2 text-left">
-                                    <input type="checkbox" class="form-check-input terms-check" id="termsAndConditions" required><p class="ml-4">I accept the <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WBBO_OnlineAuctionTermsAndConditions_022023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
+                                    <input type="checkbox" class="form-check-input terms-check" id="termsAndConditions" required>
+                                    <p class="ml-4">I accept the <a href="{{ asset('files/WeBuyBakkiesOnline_AuctionTermsConditions_revised042023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WeBuyBakkiesOnlineAuctions_PrivacyPolicy_revised042023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
                                 </div>
                                 <div class="d-flex justify-content-center mb-5">
                                     <button type="submit" class="btn btn-primary btn-sm lgn-btn">LOG IN</button>

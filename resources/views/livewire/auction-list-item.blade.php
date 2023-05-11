@@ -56,14 +56,14 @@
                                     @endif
                                     <tr>
                                       <td class="prev-lot-details-text text-left">bid increment</td>
-                                      <td class="prev-lot-details-desc text-white text-left">R {{ number_format($lot->increament_value, 2) }}</td>
+                                      <td class="prev-lot-details-desc text-white text-left mb-2">R {{ number_format($lot->increament_value, 2) }}</td>
                                     </tr>
                                     <tr>
-                                      <td class="prev-lot-details-text text-left">winning bid</td>
-                                      <td class="prev-lot-details-desc text-white text-left">R @if($lot->highestBid()) {{ number_format($lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif</td>
+                                      <td class="prev-lot-details-text text-left"></td>
+                                      <td class="prev-lot-details-desc text-white text-left mb-2"></td>
                                     </tr>
-                                      <td class="prev-lot-details-text text-left">Next Bid</td>
-                                      <td class="prev-lot-details-desc text-white text-left">R @if($lot->nextBidAmount()) {{ number_format($lot->nextBidAmount(), 2) }} @else 0.00 @endif</td>
+                                      <td style="font-size: 18px !important;" class="prev-lot-details-text text-left">Next Bid</td>
+                                      <td style="font-size: 18px !important;" class="prev-lot-details-desc text-white text-left">R @if($lot->nextBidAmount()) {{ number_format($lot->nextBidAmount(), 2) }} @else 0.00 @endif</td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -112,18 +112,19 @@
                                 <dd class="col-sm-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="winning-bid-title">
+                                            <h5 style="font-weight:600">Highest Bid: R @if($lot->highestBid()) {{ number_format($lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif</h5>
                                             @if($lot->highestBid())
                                                 @if($lot->highestBid()->user_id == Auth::user()->id)
-                                                    <h4 class="text-success">You Are Winning</h4>
+                                                    <h5 style="font-weight:600" class="text-success">You Are Winning</h5>
                                                 @else
-                                                    <h4 class="text-danger">You Are Losing</h4>
+                                                    <h5 style="font-weight:600" class="text-danger">You Are Losing</h5>
                                                 @endif
                                             @endif
                                         </div>
                                     </div>
                                     
                                     <div class="mb-3 mt-3">
-                                        <p class="timer_{{ $lot->id }}"></p>
+                                        <p class="timer_{{ $lot->id }} timer_num timer_full_view" wire:poll.1000ms="gettimeLeft" >{{ $count_down }}</p>
                                         @if($lot->status == 1)
                                         <a href="#" class="btn btn-secondary mt-3" wire:click.prevent="placeBid">PLACE BID</a>
                                         @endif
@@ -147,15 +148,14 @@
                                             </div>
                                         </div>
                                         <div id="no-padding" class="col-sm-12 mt-3 mb-2">
-                                            <a href="Javascript:void(0)" class="btn btn-primary go-btn mb-2">GO</a>
-                                            <p class="auto-max-bid-label">YOUR AUTO BID: R @if($lot->userHighestAutoBid()) {{ number_format($lot->userHighestAutoBid()->bid_amount, 2) }} @else 0.00 @endif</p>
+                                            <a href="Javascript:void(0)" class="btn btn-primary go-btn mb-2" wire:click.prevent="testAutoBidAmount">GO</a>
+                                            <p style="font-size:16px !important" class="auto-max-bid-label">YOUR AUTO BID: R @if($lot->userHighestAutoBid()) {{ number_format($lot->userHighestAutoBid()->bid_amount, 2) }} @else 0.00 @endif</p>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12"><p class="live-bid-disclaimer">We strongly suggest that you view the car before you bid.</p></div>
                 </div>
                 <div class="col-md-12 next-lot-footer">
                 </div>
@@ -163,7 +163,7 @@
         </div>
     </div>
 @elseif($view_type == "table")
-        <tr>
+        <tr id="{{ $lot->id }}">
             @php
             $color = '';
             if($lot->highestBid()){
@@ -175,6 +175,7 @@
                 }
             }
             @endphp 
+            <td style="width: 5%" class="{{ $color }} make-td">{{$lot->vehicle->year }}</td>
             <td style="width: 5%">
                 @if($lot->vehicle->images->count() > 0)
                     <img loading="lazy" class="img-fluid" style="border-radius:.5em" src="{{ asset('storage/'.$lot->vehicle->images->first()->image_url) }}">
@@ -182,22 +183,23 @@
             </td>
             <td style="width: 15%" class="{{ $color }} make-td">{{$lot->vehicle->make.' '.$lot->vehicle->model.''.$lot->vehicle->variant }}</td>
             <!--<td class="{{ $color }} lot-amounts-data-text">R {{ $lot->trade_price }}</td>-->
+            <td class="lot-amounts-data-text {{ $color }}">R @if($lot->userHighestBid()) {{ number_format($lot->userHighestBid()->bid_amount, 2) }} @else 0.00 @endif</td>
             <td class="lot-amounts-data-text {{ $color }}">
                 R @if($lot->highestBid()) {{ number_format($lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif
             </td>
             <td class="lot-amounts-data-text {{ $color }}">R @if($lot->nextBidAmount()) {{ number_format($lot->nextBidAmount(), 2) }} @else 0.00 @endif</td>
+            
             <td>
               <a href="#" class="btn btn-secondary lv-bid-btn" wire:click.prevent="placeBid">BID</a>
             </td>
             <td >
-                <button type="button" class="btn btn-secondary lv-auto-btn" data-toggle="modal" data-target="#exampleModal{{ $lot->id }}">AUTO BID</button>
+                <button type="button" class="btn btn-secondary lv-auto-btn" data-toggle="modal"  data-target="#staticBackdrop{{ $lot->id }}">AUTO BID</button>
             </td>
             <td>
-                 <a href="{{ url('view-lot/'.$lot->id) }}" class="btn btn-primary lv-auto-btn" target="_blank">VIEW DETAILS</a>
+                 <a href="{{ url('view-lot/'.$lot->id) }}" class="btn btn-primary lv-auto-btn">VIEW</a>
             </td>
-            <td class="{{ $color }}"><p class="timer_{{ $lot->id }}"></p><td>
-                
-                <div class="modal fade" id="exampleModal{{$lot->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <td class="{{ $color }}"><p class="timer_{{ $lot->id }} timer_num" wire:poll.1000ms="gettimeLeft" >{{ $count_down }}</p><td>
+                <div class="modal fade" id="staticBackdrop{{$lot->id}}" wire:ignore.self tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -211,23 +213,25 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text decimal-span">R</span>
                             </div>
-                            <input type="text" class="form-control" id="bid-amnt" wire:model.lazy="auto_bid_amount.{{ $lot->id }}"  placeholder="Auto Bid Amount">
+                            <input type="text" class="form-control" id="bid-amnt" wire:model.defer="auto_bid_amount.{{ $lot->id }}"  placeholder="Auto Bid Amount">
                             <div class="input-group-append">
                                 <span class="input-group-text decimal-span">.00</span>
                             </div>
                         </div>
                       </div>
                       <div class="modal-footer d-flex justify-content-center">
-                        <a href="Javascript:void(0)" class="btn btn-primary" data-dismiss="modal" aria-label="Close">GO</a>
+                        <a href="Javascript:void(0)" class="btn btn-primary" data-dismiss="modal" wire:click.prevent="testAutoBidAmount" aria-label="Close">GO</a>
                       </div>
                     </div>
                   </div>
                 </div>
+            </td>
         </tr>
     @endif
     
     @push('scripts')
     <script>
+        /*
         $(document).ready(function(){
             var countDownDate = new Date("{{ $time_left }}").getTime();
             var x = setInterval(function() {
@@ -238,17 +242,24 @@
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
+                <!--var formatDays = days.toString().padStart(2,'0');-->
+                <!--var formatHours = hours.toString().padStart(2,'0');-->
+                <!--var formatMinutes = minutes.toString().padStart(2,'0');-->
+                <!--var formatSeconds = seconds.toString().padStart(2,'0');-->
+                
                 var time = '<span class="timer_num">' + hours + '</span><span class="timer_lt">H</span> <span class="timer_num">'+ minutes + '</span><span class="timer_lt">M</span> <span class="timer_num">' + seconds + '</span><span class="timer_lt">S</span> <span>';
                 $('.timer_{{ $lot->id }}').html(time);
                 if (distance < 0) {
                     clearInterval(x);
                     document.getElementById("demo").innerHTML = "EXPIRED";
+                    $(".{{ $lot->id }}").hide();
                 }
             }, 1000);
         });
-        
+        */
         window.addEventListener('timer-reset', event => {
             location.reload();
+            //Livewire.emit('reloadSingle', [{{ $lot->id }}]);
         })
     </script>
     @endpush

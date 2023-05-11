@@ -115,7 +115,7 @@
                         	
                         </div>
                     </div>
-                    @if($user->company)
+                    @if($user->company()->exists())
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Company Information</h4>
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     @endif
-                    @if($user->company->payment)
+                    @if($user->company()->exists())
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Billing Information</h4>

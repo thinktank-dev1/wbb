@@ -20,7 +20,7 @@ html {
 
 body {
     font-family: Regular;
-    margin: 0;
+    margin: 0
 }
 
 [hidden] {
@@ -775,6 +775,8 @@ div .buttons {
 .lot-details-body{
     background-color:#efefef;
     padding-bottom: 175px;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
 }
 
 .lot-details-text, .lot-reserve-price-text, .lot-total-bids-text{
@@ -992,10 +994,14 @@ div .buttons {
 
 .extras-details-body{
     background-color: #efefef;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
 }
 
 .report-details-body{
     background-color: #efefef;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
 }
 
 .question-mark{
@@ -1574,7 +1580,7 @@ div .buttons {
     font-family: Regular;
     font-size: 14px;
     color: #2e2d2c;
-    line-height: .2;
+    line-height: 1.2;
 }
 
 .lot-text{
@@ -1860,6 +1866,10 @@ div .buttons {
     font-size: 18px !important;
 }
 
+.timer_full_view{
+    font-size: 25px !important;
+}
+
 .list-view-btn:focus, .table-view-btn:focus, .assist-btn:focus,
 .contact-us-btn:focus, .footer-register-btn:focus, .nxt-btn:focus,
 .lgn-btn:focus, .finder-search-btn:focus, .finder-reset-btn:focus,
@@ -1938,7 +1948,7 @@ input[type="range"]::-moz-range-track {
   margin-top: 12px;
   font-weight: 600;
   top: 0;
-  margin-left: 50% !important;
+  margin-left: 75% !important;
   line-height: 1 !important;
 }
 
@@ -1982,6 +1992,16 @@ input[type="range"]::-moz-range-track {
     margin-top: 19%;
 }
 
+.catalogue-disclaimer{
+    font-size: 18px;
+    font-family: Regular;
+}
+
+.vat-text{
+    font-size: 12px;
+    font-family: Regular; 
+    font-weight: 600;
+}
 @media screen and (max-device-width: 1600px) {
     /** Home Start **/
     .navbar-mobile, .mobile-nav-collapse{
@@ -2178,7 +2198,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .back-to-auc-btn, .liv-back-to-cat-btn {
-      margin-left: 38% !important;
+      margin-left: 73% !important;
     }
     
     .follow-us-div {
@@ -2311,6 +2331,10 @@ input[type="range"]::-moz-range-track {
     .back-to-cat-btn {
         margin-left: 83% !important;
     }
+    
+    .back-to-auc-btn, .liv-back-to-cat-btn {
+      margin-left: 69% !important;
+    }
 }
 
 @media screen and (max-device-width: 1440px) {
@@ -2322,7 +2346,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .back-to-auc-btn {
-      margin-left: 25% !important;
+      margin-left: 65% !important;
     }
     /** Home Start **/
     .banner {
@@ -2533,7 +2557,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .specifications-span {
-      line-height: 1;
+      line-height: 1.2;
     }
     
     .favourite-heart-div {
@@ -2901,6 +2925,7 @@ input[type="range"]::-moz-range-track {
     /*Home Start*/
     .logout-nav {
       margin-top: 10% !important;
+      margin-left: 1%;
     }
     
     .nav-top-bar{
@@ -3192,6 +3217,19 @@ input[type="range"]::-moz-range-track {
     
     .info-paragraph {
       font-size: 20px;
+    }
+    
+    .back-to-auc-btn {
+      margin-left: 39% !important;
+    }
+    
+    .fav-btn {
+      margin-left: -73% !important;
+    }
+    
+    .my-fav-btn {
+      margin-top: 3%;
+      margin-right: 10%;
     }
 }
 
@@ -3556,7 +3594,7 @@ input[type="range"]::-moz-range-track {
     }
 
    
-     .lot-dt-tbl{
+    .lot-dt-tbl{
         display: none !important;
     }
     
@@ -3678,8 +3716,27 @@ input[type="range"]::-moz-range-track {
     
     .my-fav-btn {
       margin-top: 7%;
-      margin-left: -6%;
+      margin-left: 4%;
     }
+    
+    .logout-nav{
+        padding: 2px 55px !important;
+        margin: 20px;
+    }
+    
+    .remove-nav-height {
+      display: block !important;
+      height: 270px;
+    }
+    
+    .rg_step_cont{
+        display: none !important;
+    }
+    
+    .catalogue-title, .date-span{
+        font-size: 16px;
+    }
+    
 }
 
 @media screen and (max-device-width: 428px){
@@ -3810,7 +3867,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .catalogue-card {
-      margin-left: 0%;
+      margin-left: 5%;
     }
     
     .mobile-bakkie-card{
@@ -3831,6 +3888,23 @@ input[type="range"]::-moz-range-track {
       margin-left: -5% !important;
       padding: 11px 30px !important;
       margin-top: -14% !important;
+    }
+    
+    .my-fav-btn {
+      margin-top: 0px;
+      margin-left: 9%;
+    }
+    
+    .register-terms-check {
+      margin-left: -41%;
+    }
+    
+    .rg_step_cont{
+        display: none !important;
+    }
+    
+    .ml {
+      margin-left: 7rem !important;
     }
 
 }
@@ -3926,7 +4000,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .catalogue-card {
-      margin-left: 0%;
+      margin-left: 5%;
     }
     
     .mobile-bakkie-card{
@@ -3951,6 +4025,15 @@ input[type="range"]::-moz-range-track {
     
     .register-info-heading {
       margin-left: 20px;
+    }
+    
+    .my-fav-btn {
+      margin-top: 0%;
+      margin-left: 12%;
+    }
+    
+    .rg_step_cont{
+        display: none !important;
     }
 }
 
@@ -4025,16 +4108,7 @@ input[type="range"]::-moz-range-track {
         margin-left: 14px;
         width: 90%;
     }
-    /** About End **/
 
-    /** Auth Start **/
-
-    /** Auth End **/
-
-    /** Assistance Banner Start **/
-
-    
-    /** Assistance Banner End **/
     .lot-dt-tbl{
         display: none !important;
     }
@@ -4071,6 +4145,15 @@ input[type="range"]::-moz-range-track {
       position: absolute !important;
       margin-top: 35px;
       margin-left: -2%;
+    }
+    
+    .my-fav-btn {
+      margin-top: 0%;
+      margin-left: 10%;
+    }
+    
+    .rg_step_cont{
+        display: none !important;
     }
 }
 
@@ -4129,7 +4212,7 @@ input[type="range"]::-moz-range-track {
     }
     
     .catalogue-card {
-      margin-left: 0%;
+      margin-left: 1%;
     }
     
     .mobile-bakkie-card{
@@ -4154,6 +4237,14 @@ input[type="range"]::-moz-range-track {
     
     .liv-back-to-cat-btn {
       margin-top: 47.5% !important;
+    }
+    
+    .rg_step_cont{
+        display: none !important;
+    }
+    
+    .ml {
+      margin-left: 6rem !important;
     }
 }
 
@@ -4260,12 +4351,16 @@ input[type="range"]::-moz-range-track {
       margin-top: 99.5% !important;
       margin-left: -16% !important;
     }
+    
+    .rg_step_cont{
+        display: none !important;
+    }
 }
 
 @media screen and (max-device-width: 375px){
     /** Home Start **/
     .register-nav {
-        margin-left: -4%;
+        margin-left: -2%;
     }  
     
     .online-auction-info {
@@ -4356,6 +4451,15 @@ input[type="range"]::-moz-range-track {
     
     .view-lot-prepend {
       margin-left: -76px;
+    }
+    
+    .my-fav-btn {
+      margin-top: 0%;
+      margin-left: 10%;
+    }
+    
+    .rg_step_cont{
+        display: none !important;
     }
 }
 

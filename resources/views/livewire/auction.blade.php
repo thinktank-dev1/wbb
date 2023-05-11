@@ -79,14 +79,17 @@
                                             <table class="table auction-tbl">
                                                 <thead>
                                                     <tr>
+                                                      <th class="auction-details-data-text">Year</th>
                                                       <th></th>
                                                       <th class="auction-details-data-text">Vehicle</th>
                                                       <!--<th class="auction-details-data-text">Trade Price</th>-->
+                                                      <th class="auction-details-data-text">Your Bid</th>
                                                       <th class="auction-details-data-text">Highest Bid</th>
                                                       <th class="auction-details-data-text">Next Bid</th>
                                                       <th></th>
                                                       <th></th>
                                                       <th></th>
+                                                     
                                                       <th class="auction-details-data-text">Time Left</th>
                                                     </tr>
                                                 </thead>
@@ -104,7 +107,17 @@
                                         </div>
                                     </div>
                                 @endif
-                                {{ $lots->links() }}
+                               
+                                <div class="col-sm-7 mt-4 mb-4 ml-1">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <span class="sort-span">GO TO PAGE:</span>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            {{ $lots->appends($_GET)->links() }}
+                                        </div>
+                                    </div>
+                                </div>
                             @else
                                 <div class="col-md-12">
                                     <div class="card">
@@ -165,7 +178,8 @@
     </div>
     @push('scripts')
     @vite('resources/js/app.js')
-    <script src="//{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
+    <!--<script src="//{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>-->
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
     @vite('resources/js/laravel_echo_setup.js')
     <script>
         $(document).ready(function(){
@@ -198,7 +212,7 @@
                         });
                     }
                 }
-            });    
+            });
         });
         window.addEventListener('toast', event => {
             //alert('Name updated to: ' + event.detail.message);
@@ -235,7 +249,12 @@
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
-                var start = '<span class="timer_num">' + days + '</span><span class="timer_lt">Days</span> <span class="timer_num">' + hours + '</span><span class="timer_lt">H</span> <span class="timer_num">'+ minutes + '</span><span class="timer_lt">M</span> <span class="timer_num">' + seconds + '</span><span class="timer_lt">S</span> <span>';
+                var formatDays = days.toString().padStart(2,'0');
+                var formatHours = hours.toString().padStart(2,'0');
+                var formatMinutes = minutes.toString().padStart(2,'0');
+                var formatSeconds = seconds.toString().padStart(2,'0');
+                
+                var start = '<span class="timer_num">' + formatDays + '</span><span class="timer_lt">Days</span> <span class="timer_num">' + formatHours + '</span><span class="timer_lt">H</span> <span class="timer_num">'+ formatMinutes + '</span><span class="timer_lt">M</span> <span class="timer_num">' + formatSeconds + '</span><span class="timer_lt">S</span> <span>';
                 $('.startTimer').html(start);
                 if (distance < 0) {
                     clearInterval(x);

@@ -3,17 +3,19 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 
 use Auth;
+use Session;
 use App\Models\AuctionGroup;
 use App\Models\Lot;
 use App\Lib\AuctionFunctions;
+use Livewire\WithPagination;
 
 class Auction extends Component
 {
-    use WithPagination;
     
+     use WithPagination;
+     
     public $group;
     public $end_time;
     public $start_time;
@@ -24,15 +26,20 @@ class Auction extends Component
     public $is_fvourite;
     public $auto_bid_amount;
     
-    protected $listeners = ['reloadCar' => '$refresh'];
-    
     //protected $listeners = ['refreshComponent' => '$refresh'];
     
     public function mount($favs = null){
         if($favs){
             $this->is_fvourite = true;
         }
-        $this->view_type = "list";
+        
+        if(Session::has('view_type')){
+            $this->view_type = Session::get('view_type');
+        }
+        else{
+            $this->view_type = "list";
+        }
+        
         $this->has_auction = null;
         $this->group = $group = AuctionGroup::where('status', 1)->first();
         if($group){
@@ -56,6 +63,7 @@ class Auction extends Component
     
     public function changeView($view){
         $this->view_type = $view;
+        Session::put('view_type', $view);
     }
     
     public function render(){

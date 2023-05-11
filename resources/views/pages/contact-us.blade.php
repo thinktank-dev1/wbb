@@ -7,11 +7,12 @@
             <div class="col-md-12 mt-5 ml-5 contact-txt-block">
                 <h2 class="contact-title">contact us</h2>
                 <h4 class="contact-subtitle">Please feel free to send us an email for more information</h4>
-                <a href="mailto:info@webuybakkiesonline.co.za" class="contact-email"><img class="img-fluid" src="{{ asset('images/wbbonline_img_50.png') }}" alt="mail"> info@webuybakkiesonline.co.za</a>
+                <a href="mailto:info@bakkieauctions.co.za" class="contact-email"><img class="img-fluid" src="{{ asset('images/wbbonline_img_50.png') }}" alt="mail"> info@bakkieauctions.co.za</a>
                 <h4 class="contact-subtitle mt-4">OR fill in your details below and we will get in touch with you.</h4>
             </div>
             <div class="col-md-5 ml-5 contact-txt-block">
-                <form method="get" action="{{ url('') }}">
+                <form method="post" action="{{ url('contact') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3 ">
                             <label for="name" class="contact-label">First Name</label>
@@ -40,7 +41,7 @@
                             <p class="contact-disclaimer">
                                 *By clicking SUBMIT you grant We Buy Bakkies Online permission to collect and 
                                 manage your information according to the POPI Act. 
-                                Read more about our Privacy Policy <a href="{{ asset('files/WBBO_OnlineAuction_PrivacyPolicy_022023_1.pdf') }}" target="_blank">here</a>. 
+                                Read more about our Privacy Policy <a href="{{ asset('files/WeBuyBakkiesOnlineAuctions_PrivacyPolicy_revised042023_1.pdf') }}" target="_blank">here</a>. 
                             </p>
                         </div>
                     </div>

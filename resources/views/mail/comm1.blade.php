@@ -85,7 +85,7 @@
         </style>
     </head>
     <body style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
-        <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Congradulation, Your We Buy Bakkies Bid Won.</span>
+        <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Congratulations, Your We Buy Bakkies Bid Won.</span>
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f6f6f6; width: 100%;" width="100%" bgcolor="#f6f6f6">
             <tr>
                 <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;" valign="top">&nbsp;</td>
@@ -111,11 +111,11 @@
                                                     <tr><td>Make:</td><td><b>{{ $make }}</b></td></tr>
                                                     <tr><td>Model:</td><td><b>{{ $model }}</b></td></tr>
                                                     <tr><td>Variant:</td><td><b>{{ $variant }}</b></td></tr>
-                                                    <tr><td>Bid Amount:</td><td><b>{{ $amount }}</b></td></tr>
+                                                    <tr><td>Bid Amount: R</td><td><b>{{ $amount }}</b></td></tr>
                                                 </table>
                                                 <br /><br />
                                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
-                                                    Our team is reviewing the action results. You will recieve your invoice in due course.
+                                                    Our team is reviewing the action results. You will receive your invoice in due course.
                                                 </p>
                                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">
                                                     Thank You,<br />

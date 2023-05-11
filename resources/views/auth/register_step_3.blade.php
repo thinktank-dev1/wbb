@@ -58,7 +58,7 @@
                                         <div class="col-md-12 text-center">
                                             <input type="submit" value="Register Now" class="btn btn-primary btn-sm">
                                             <div class="mt-3">
-                                                <p>By clicking 'Register Now' you agree to our <a href="#">Terms and Conditions</a> and <a href="">Privacy Policy</a></p>
+                                                <p>By clicking 'Register Now' you agree to our <a href="{{ asset('files/WeBuyBakkiesOnline_AuctionTermsConditions_revised042023_1.pdf') }}" target="_blank">Terms and Conditions</a> and <a href="{{ asset('files/WeBuyBakkiesOnlineAuctions_PrivacyPolicy_revised042023_1.pdf') }}" target="_blank">Privacy Policy</a></p>
                                             </div>
                                         </div>
                                     </div>

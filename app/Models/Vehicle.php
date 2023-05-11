@@ -34,7 +34,9 @@ class Vehicle extends Model
         'service_km',
         'service_year',
         'warranty_km',
-        'warranty_year'
+        'warranty_year',
+        'warranty_month',
+        'external_sale'
     ];
 
     public function extras(){

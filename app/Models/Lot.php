@@ -18,7 +18,8 @@ class Lot extends Model
     	'reserve_price',
     	'show_reseve_price',
     	'trade_price',
-    	'winner_id'
+    	'winner_id',
+    	'lot_number'
     ];
     
     public function group(){

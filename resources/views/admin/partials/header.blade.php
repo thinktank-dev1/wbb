@@ -4,18 +4,18 @@
             <div class="navbar-brand-box">
                 <a href="{{ url('admin/dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ asset('img/wbbonline_img_1d.png') }}" alt="" height="24">
+                        <img src="{{ asset('img/wbbonline_img_1d (1).png') }}" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('img/wbbonline_img_1d.png') }}" alt="" height="24">
+                        <img src="{{ asset('img/wbbonline_img_1d (1).png') }}" alt="" height="24">
                     </span>
                 </a>
                 <a href="{{ url('admin/dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('img/wbbonline_img_1d.png') }}" alt="" height="24">
+                        <img src="{{ asset('img/wbbonline_img_1d (1).png') }}" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('img/wbbonline_img_1d.png') }}" alt="" height="24">
+                        <img src="{{ asset('img/wbbonline_img_1d (1).png') }}" alt="" height="24">
                     </span>
                 </a>
             </div>

@@ -21,7 +21,6 @@
                                 <a class="fav-btn" href="{{ url('add-to-favourites/'.$lot->id) }}"><img loading="lazy" class="img-fluid" src="{{ asset('images/wbbonline_btn_47.png') }}" alt="add-to-favourites"></a>
                                 @endif
                                 <a style="padding: 3px 30px !important" class="btn btn-secondary back-to-auc-btn" href="{{ url('auction') }}">BACK TO AUCTION</a>
-                                <a class="btn btn-secondary back-to-cat-btn" href="{{ url()->previous() }}">BACK</a>
                             </div>
                         </div>
                     </div>
@@ -113,10 +112,10 @@
                                                     <td class="lot-details-data-text text-left">engine size</td>
                                                     <td class="lot-details--data-desc text-right">{{ $lot->vehicle->engine_type }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="lot-details-data-text text-left">cylinders</td>
-                                                    <td class="lot-details--data-desc text-right">{{ $lot->vehicle->cylinders }}</td>
-                                                </tr>
+                                                <!--<tr>-->
+                                                <!--    <td class="lot-details-data-text text-left">cylinders</td>-->
+                                                <!--    <td class="lot-details--data-desc text-right">{{ $lot->vehicle->cylinders }}</td>-->
+                                                <!--</tr>-->
                                                 <tr>
                                                     <td class="lot-details-data-text text-left">colour</td>
                                                     <td class="lot-details--data-desc text-right">{{ $lot->vehicle->color }}</td>
@@ -181,17 +180,12 @@
                                     <div class="card-body lot-details-body lot-auto-body bid-info-block">
                                         <dl class="row bid-info-row">
                                             <dt class="col-sm-8">
-                                                @if($lot->group->status == 0)
                                                 <p class="lot-details-text text-left"> trade price</p>
-                                                @endif
-                                                <p class="lot-details-text text-left"> opening bid</p>
+                                                <!--<p class="lot-details-text text-left"> opening bid</p>-->
                                             </dt>
                                             <dd class="col-sm-4">
-                                                @if($lot->group->status == 0)
-                                                <p class="lot-details-desc text-right">R {{ $lot->trade_price  }}</p>
-                                                @endif
-                                                <p class="lot-details-desc text-right">R {{ number_format($lot->start_price,2)  }}</p>
-                                                
+                                                <p class="lot-details-desc text-right">R {{ number_format($lot->trade_price,2)  }}</p>
+                                                <!--<p class="lot-details-desc text-right">R {{ number_format($lot->start_price,2)  }}</p>-->
                                             </dd>
                                         </dl>
                                         <div class="bids-block">
@@ -204,7 +198,7 @@
                                                         </tr>
                                                         <tr>
                                                           <td class="lot-bid-increment-text text-left ml-2"> Bid increment</td>
-                                                          <td class="lot-bid-increment-desc text-right mr-2">R {{ $lot->increament_value }}</td>
+                                                          <td class="lot-bid-increment-desc text-right mr-2">R {{ number_format($lot->increament_value,2) }}</td>
                                                         </tr>
                                                      </tbody>
                                                 </table>  
@@ -228,6 +222,9 @@
                                         </table>
                                         <div class="col-md-12 bid-now-btn-section d-flex justify-content-end mb-1 bid-btn-row">
                                             <button class="btn btn-primary bid-now-btn web-btn" wire:click.prevent="placeBid" >BID NOW</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p class="vat-text">Lot will have a R 1750.00 VAT inclusive Admin Fee added to final Price.</p>
                                         </div>
                                         <div class="col-md-12 auto-bid-section bid-info-blk">
                                              <h3 class="auto-bid-title mt-2">

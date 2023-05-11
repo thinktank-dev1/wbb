@@ -40,8 +40,9 @@
                                              
                                             <td>
                                                 <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Lot Number" name="car[{{ $car->id }}][lot_number]">
                                                     <input type="text" class="form-control" placeholder="Start Price" name="car[{{ $car->id }}][start_price]">
-                                                    <input type="text" class="form-control" placeholder="Increament Value" name="car[{{ $car->id }}][increament_value]">
+                                                    <input type="text" class="form-control" placeholder="Increment Value" name="car[{{ $car->id }}][increament_value]">
                                                     <input type="text" class="form-control" placeholder="Reserve Price" name="car[{{ $car->id }}][reserve_price]">
                                                     <input type="text" class="form-control" placeholder="Trade Price" name="car[{{ $car->id }}][trade_price]">
                                                 </div>

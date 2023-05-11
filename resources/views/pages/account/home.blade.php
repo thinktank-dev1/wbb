@@ -22,25 +22,25 @@
                                         <table class="table table-borderless table-sm client-detail-tbl">
                                             <tbody>
                                                 <tr>
-                                                    <td>Name</td>
+                                                    <td>NAME</td>
                                                     <td>{{ Auth::user()->first_name }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Surname</td>
+                                                    <td>SURNAME</td>
                                                     <td>{{ Auth::user()->last_name }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Email</td>
+                                                    <td>EMAIL</td>
                                                     <td>{{ Auth::user()->email }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Business Name</td>
+                                                    <td>BUSINESS NAME</td>
                                                     @if(Auth::user()->company)
                                                     <td>{{ Auth::user()->company->company_name }}</td>
                                                     @endif
                                                 </tr>
                                                 <tr>
-                                                    <td>Number</td>
+                                                    <td>NUMBER</td>
                                                     <td>{{ Auth::user()->contact_primary }}</td>
                                                 </tr>
                                             </tbody>

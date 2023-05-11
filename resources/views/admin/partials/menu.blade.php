@@ -25,6 +25,11 @@
                                 <span data-key="t-auction-result">Auction Results</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url('admin/auction-monitor') }}">
+                                <span data-key="t-auction-result">Auction Monitor</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -94,7 +99,7 @@
                         <li><a href="{{ url('admin/options/front-positions') }}">Front Positions</a></li>
                         <li><a href="{{ url('admin/options/back-positions') }}">Back Positions</a></li>
                         <li><a href="{{ url('admin/options/natis-options') }}">Natis Options</a></li>
-                        <li><a href="{{ url('admin/options/tire-condition') }}">Tire Condition Options</a></li>
+                        <li><a href="{{ url('admin/options/tyre-condition') }}">Tyre Condition Options</a></li>
                         <li><a href="{{ url('admin/options/service-history') }}">Service History Options</a></li>
                         <li><a href="{{ url('admin/options/extras-basic') }}">Extras Basic</a></li>
                         <li><a href="{{ url('admin/options/extras-exterior') }}">Extras Exterior</a></li>

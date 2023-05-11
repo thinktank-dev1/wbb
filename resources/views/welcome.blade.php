@@ -29,13 +29,14 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 text-left online-auction-info">
             <h2 class="info-heading mb-4">100% ONLINE BAKKIE AUCTIONS</h2>
             <p class="info-paragraph">
-                Our passion for bakkies inspired us to become a destination in the Bakkie Industry,  thus enabling us to provide our Dealer partners with easy access to quality bakkies at the click of a button. 
+                Our passion for bakkies inspired us to become a destination in the Bakkie Industry, thus enabling us to provide our Dealer partners with easy access to quality bakkies at the click of a button.
             </p>            
             <p class="info-paragraph info-paragraph-two">
-                The executive team of the Company collectively brings more than 75 years of hands-on experience to the table, while our personnel were brought up in the industry we are so passionate about. Our expertise and focus assures consistency and quality in our performance We believe in - values, principles, integrity, honesty and human dignity. 
+                The executive team of the Company collectively brings more than 75 years of hands-on experience to the table, while our personnel was brought up in the industry we are so passionate about. 
+                Our expertise and focus ensure consistency and quality in our performance. The foundation of our business is built on the values of integrity, honesty, and human dignity.  
             </p>
             <p class="info-paragraph info-paragraph-three">
-                Over many years, our daily interaction with retailers, wholesalers, fleet owners, financial institutions and Corporate businesses have provided us with the inside knowledge of the latest market, price, consumer and industry trends.
+                Over many years, our daily interaction with retailers, wholesalers, fleet owners, financial institutions, and Corporate businesses has provided us with the inside knowledge of the latest market, price, consumer, and industry trends.
             </p>
             <p class="info-paragraph info-paragraph-three">
                 Our mission is to create opportunities for everyone we interact with, enabling:
@@ -61,11 +62,11 @@
             <p class="procedure-heading">OUR PROCEDURE</p>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9 text-center procedure-div">
-            <img class="img-fluid steps steps-two" src="{{ asset('images/wbbonline_img_61.png') }}" alt="step-one-img">
+            <img class="img-fluid steps steps-two" src="{{ asset('images/wbbonline_img_61b.png') }}" alt="step-one-img">
             <span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_60.png') }}" alt="registering-arrow"></span>
-            <img class="img-fluid steps steps-two registering-steps-img" src="{{ asset('images/wbbonline_img_62.png') }}" alt="step-two-img">
+            <img class="img-fluid steps steps-two registering-steps-img" src="{{ asset('images/wbbonline_img_62c.png') }}" alt="step-two-img">
             <span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_60.png') }}" alt="registering-arrow"></span>
-            <img class="img-fluid steps steps-two registering-steps-img" src="{{ asset('images/wbbonline_img_63.png') }}" alt="step-three-img">
+            <img class="img-fluid steps steps-two registering-steps-img" src="{{ asset('images/wbbonline_img_63b.png') }}" alt="step-three-img">
         </div>
     </div>
 </section>
@@ -83,7 +84,7 @@
                 </li>
                 <li>
                     <p class="reg-paragraph ml-3">
-                        Detailed inspection reports and photos to show the conditions of the vehicles from top to bottom.   
+                        Detailed inspection reports and photos to show the condition of the vehicles from top to bottom.  
                     </p>
                 </li>
                 <li>
@@ -105,14 +106,14 @@
                     <h6 class="card-subtitle assistance-card-subtitle mb-2">Get in touch with us</h6>
                     <div class="row scl-lnk-icon">
                         <div id="grid-lnks" class="col-5 assistance-icons">
-                            <a href=""><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_11.png') }}" alt="phone-icon"></a><span class="card-span">CALL US</span>
+                            <a href="tel:012 657 0234"><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_11.png') }}" alt="phone-icon"></a><span class="card-span">CALL US</span>
                         </div>
                         <div id="grid-lnks" class="col-7 assistance-icons"> 
-                            <a href="mailto:info@webuybakkiesonline.co.za"><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_10.png') }}" alt="email-icon"></a><span class="card-span">SEND AN EMAIL</span>
+                            <a href="mailto:info@bakkieauctions.co.za"><img class="img-fluid card-icons" src="{{ asset('images/wbbonline_img_10.png') }}" alt="email-icon"></a><span class="card-span">SEND AN EMAIL</span>
                         </div>
                     </div>
                     <p class="assistance-text"><span class="reg-paragraph">OR</span> Fill in the form and we will contact you.</p>
-                    <form method="get" action="{{ url('') }}">
+                    <form method="post" action="{{ url('assistance') }}">
                         @csrf
                         <div class="form-group">
                             <input type="text" name="first-name" class="form-control form-control-sm" type="text" placeholder="First Name">
@@ -148,10 +149,10 @@
                 <h2 class="registering-steps-heading">REGISTERING IS EASY!</h2>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-                <img class="img-fluid steps" src="{{ asset('images/wbbonline_img_14.png') }}" alt="step-one-img"><span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_12.png') }}" alt="registering-arrow"></span>
-                <img class="img-fluid steps registering-steps-img" src="{{ asset('images/wbbonline_img_15.png') }}" alt="step-two-img"><span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_12.png') }}" alt="registering-arrow"></span>
-                <img class="img-fluid steps registering-steps-img" src="{{ asset('images/wbbonline_img_16.png') }}" alt="step-three-img"><span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_12.png') }}" alt="registering-arrow"></span>
-                <img class="img-fluid steps registering-steps-img" src="{{ asset('images/wbbonline_img_17.png') }}" alt="step-four-img"><span>
+                <img class="img-fluid steps" src="{{ asset('images/wbbonline_img_14b.png') }}" alt="step-one-img"><span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_12.png') }}" alt="registering-arrow"></span>
+                <img class="img-fluid steps registering-steps-img" src="{{ asset('images/wbbonline_img_15b.png') }}" alt="step-two-img"><span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_12.png') }}" alt="registering-arrow"></span>
+                <img class="img-fluid steps registering-steps-img" src="{{ asset('images/wbbonline_img_16b.png') }}" alt="step-three-img"><span><img class="img-fluid registering-steps-arrow-img" src="{{ asset('images/wbbonline_img_12.png') }}" alt="registering-arrow"></span>
+                <img class="img-fluid steps registering-steps-img" src="{{ asset('images/wbbonline_img_17b.png') }}" alt="step-four-img"><span>
             </div>
         </div>
     </div>

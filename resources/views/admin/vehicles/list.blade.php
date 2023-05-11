@@ -90,7 +90,11 @@
                 						        <a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$vehicle->id.'/edit') }}"><i class="mdi mdi-car-wrench"></i> Edit</a>
                 						    @endif
                 							&nbsp;|&nbsp;
-                							<a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> View</a>
+                							@if($vehicle->lot()->exists())
+                							    <a style="color:#8cd50a" href="{{ url('view-lot/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> View</a>
+                							@else
+                							    <a style="color:#8cd50a" href="{{ url('admin/vehicles/'.$vehicle->id) }}"><i class="mdi mdi-car-info"></i> View</a>
+                							@endif
                 							&nbsp;|&nbsp;
                 							@if($vehicle->lot()->exists())
                 							    <a style="color:#8cd50a" type="button"  id="btnVoid"><i class="mdi mdi-car-info"></i> Delete</a>

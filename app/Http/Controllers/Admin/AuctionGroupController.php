@@ -18,7 +18,7 @@ class AuctionGroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $groups = AuctionGroup::orderBy('name', 'DESC')->paginate(12);
+        $groups = AuctionGroup::orderBy('date', 'DESC')->paginate(12);
         return view('admin.auction.auction_group_list', ['groups'=>$groups]);
     }
 
@@ -121,7 +121,7 @@ class AuctionGroupController extends Controller
     }
     
     public function showAddLots($id){
-        $cars = Vehicle::whereDoesntHave('lot')->get();
+        $cars = Vehicle::whereDoesntHave('lot')->where('external_sale', 'yes')->get();
         return view('admin.auction.add_lots', ['group_id'=>$id, 'cars'=>$cars]);
     }
 

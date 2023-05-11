@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\AuctionGroupController;
 use App\Http\Controllers\Admin\AuctionController;
 use App\Http\Controllers\Admin\OptionsController;
 
+use App\Http\Livewire\Admin\AuctionMonitor;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,14 +36,10 @@ use App\Http\Controllers\Admin\OptionsController;
 */
 
 Route::get('test-mail', function(){
-    $options = [
+    $data = [
         'name' => 'Wilson Ndlovu',
-        'year' => '2016',
-        'make' => 'Ford',
-        'model' => 'Fogo',
-        'variant' => 'Titanium Power Shift 1.5D'
     ];
-    return view('mail.comm1', ['options' => $options]);
+    return view('mail.admin', $data);
 });
 
 Route::get('/', function () {
@@ -60,7 +58,7 @@ Route::get('register/step3', [RegisterController::class, 'showStep3']);
 Route::post('register/step3', [RegisterController::class, 'saveStep3']);
 Route::post('assistance', [PagesController::class, 'assistance'])->name('assistance');
 Route::post('contact', [PagesController::class, 'contactUs'])->name('contact');
-
+Route::get('catalogue', [CatalogueController::class, 'catalogue'])->name('catalogue');
 Route::get('getModels2/{make}', [VehicleController::class, 'getModels2']);
 
 Route::get('redirects', [RedirectController::class, 'redirects']);
@@ -73,7 +71,6 @@ Route::middleware('auth')->group(function () {
     Route::get('payments', [PaymentsController::class, 'index']);
     Route::post('payments', [PaymentsController::class, 'updatePayments']);
     Route::get('my-lots', [LotsController::class, 'user_lots']);
-    Route::get('catalogue', [CatalogueController::class, 'catalogue'])->name('catalogue');
     Route::get('lot/{id}', [LotsController::class, 'view_lot'])->name('lot');
     Route::get('auction', Auction::class)->name('auction');
     Route::get('auction/{favs}', Auction::class)->name('favourites');
@@ -120,6 +117,8 @@ Route::middleware('auth')->group(function () {
         
         Route::get('remove-video/{id}', [VehicleController::class, 'deleteVideo']);
         Route::get('search', [VehicleController::class, 'search']);
+        
+        Route::get('auction-monitor', AuctionMonitor::class);
     });
 });
 

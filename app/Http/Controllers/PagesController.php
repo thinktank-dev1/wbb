@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Mail\AssistanceMail;
 use App\Mail\ContactMail;
@@ -25,7 +26,7 @@ class PagesController extends Controller
 
     public function assistance(Request $request)
     {
-        $recipient = 'info@webuybakkiesonline.co.za';
+        $recipient = 'info@bakkieauctions.co.za';
 
         $data = [
             'first-name' => $request->input('first-name'),
@@ -41,7 +42,7 @@ class PagesController extends Controller
 
     public function contactUs(Request $request)
     {
-        $recipient = 'info@webuybakkiesonline.co.za';
+        $recipient = 'info@bakkieauctions.co.za';
 
         $data = [
             'first-name' => $request->input('first-name'),

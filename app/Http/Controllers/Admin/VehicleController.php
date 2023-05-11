@@ -33,7 +33,7 @@ class VehicleController extends Controller
     public $extras_options = [];
     public $damage_positions = [];
     public $natis_options = [];
-    public $tire_condition;
+    public $tyre_condition;
     /**
      * Display a listing of the resource.
      *
@@ -116,9 +116,11 @@ class VehicleController extends Controller
     {
         $this->setClassValues();
         $vehicle = new Vehicle();
-        $body_types = VehicleBodyType::orderBy('name', 'ASC')->get();
+        $body_types = Option::where('type', 'body-types')->orderBy('name', 'ASC')->get(); //VehicleBodyType::orderBy('name', 'ASC')->get();
+        //dd($body_types);
         $interior = Option::where('type', 'interior')->get();
         $interior_damages = Option::where('type', 'interior-damage')->get();
+        $tyre_condition = Option::where('type', 'tyre-condition')->get();
         return view('admin.vehicles.create', [
             'vehicle'=>$vehicle, 
             'body_types'=>$body_types,
@@ -138,7 +140,8 @@ class VehicleController extends Controller
             'extras_options' => $this->extras_options,
             'damage_positions' => $this->damage_positions,
             'natis_options' => $this->natis_options,
-            'tire_condition' => $this->tire_condition,
+            // 'tire_condition' => $this->tire_condition,
+            'tyre_condition' => $tyre_condition,
             'interior' => $interior,
             'interior_damages' => $interior_damages
         ]);
@@ -190,7 +193,9 @@ class VehicleController extends Controller
             'service_km' => 'nullable',
             'service_year' => 'nullable',
             'warranty_km' => 'nullable',
-            'warranty_year' => 'nullable'
+            'warranty_year' => 'nullable',
+            'warranty_month' => 'nullable',
+            'external_sale' => 'nullable'
         ]);
 
         if($valid->fails()){
@@ -231,6 +236,8 @@ class VehicleController extends Controller
             'service_year' => $request->service_year,
             'warranty_km' => $request->warranty_km,
             'warranty_year' => $request->warranty_year, 
+            'warranty_month' => $request->warranty_month,
+            'external_sale' => $request->external_sale
         ]);
 
         $extras = $request->extras;
@@ -339,9 +346,10 @@ class VehicleController extends Controller
     public function edit(Vehicle $vehicle)
     {
         $this->setClassValues();
-        $body_types = VehicleBodyType::orderBy('name', 'ASC')->get();
+        $body_types = Option::where('type', 'body-types')->orderBy('name', 'ASC')->get();
         $interior = Option::where('type', 'interior')->get();
         $interior_damages = Option::where('type', 'interior-damage')->get();
+        $tyre_condition = Option::where('type', 'tyre-condition')->get();
         return view('admin.vehicles.edit', [
             'vehicle'=>$vehicle, 
             'body_types'=>$body_types,
@@ -361,7 +369,8 @@ class VehicleController extends Controller
             'extras_options' => $this->extras_options,
             'damage_positions' => $this->damage_positions,
             'natis_options' => $this->natis_options,
-            'tire_condition' => $this->tire_condition,
+            // 'tire_condition' => $this->tire_condition,
+            'tyre_condition' => $tyre_condition,
             'interior' => $interior,
             'interior_damages' => $interior_damages
         ]);
@@ -413,7 +422,9 @@ class VehicleController extends Controller
             'service_km' => 'nullable',
             'service_year' => 'nullable',
             'warranty_km' => 'nullable',
-            'warranty_year' => 'nullable'
+            'warranty_year' => 'nullable',
+            'warranty_month' => 'nullable',
+            'external_sale' => 'nullable'
         ]);
 
         if($valid->fails()){
@@ -447,6 +458,8 @@ class VehicleController extends Controller
         $vehicle->service_year = $request->service_year; 
         $vehicle->warranty_km = $request->warranty_km; 
         $vehicle->warranty_year = $request->warranty_year; 
+        $vehicle->warranty_month = $request->warranty_month; 
+        $vehicle->external_sale = $request->external_sale;
         $vehicle->save();
 
         $cur_extras = $vehicle->extras;
@@ -465,7 +478,7 @@ class VehicleController extends Controller
         $report->vehicle_id = $vehicle->id;
         $report->previous_body_repairs = $request->previous_body_repairs;
         $report->previous_cosmetic_repairs = $request->previous_cosmetic_repairs;
-        $report->mechanical_faults_warnig_lights = $request->previous_cosmetic_repairs;
+        $report->mechanical_faults_warnig_lights = $request->mechanical_faults_warnig_lights;
         $report->mechanical_faults_warnig_lights_description = $request->mechanical_faults_warnig_lights_description;
         $report->windscreen_condition = $request->windscreen_condition;
         $report->rims_condition = $request->rims_condition;
@@ -790,7 +803,9 @@ class VehicleController extends Controller
 
     public function deleteReport($id){
         $report = VehicleInspection::find($id);
-        unlink('storage/'.$report->image_url);
+        if($report->image_url){
+            unlink('storage/'.$report->image_url);
+        }
         $report->delete();
         return back();
     }
