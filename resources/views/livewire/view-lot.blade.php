@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <div class="row lot-row">
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-lot-box">
-                                <h3 class="lot-heading ml-5">LOT: <span class="lot-heading-span">#{{ str_pad($lot->id, 4, '0', STR_PAD_LEFT) }}</span> </h3>
+                                <h3 class="lot-heading ml-5">LOT: <span class="lot-heading-span">#{{ str_pad($lot->lot_number, 4, '0', STR_PAD_LEFT) }}</span> </h3>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-sm-block d-xl-flex d-lg-flex d-md-flex justify-content-center col-5 col-lot-box">
                                 <!--<a href=""><img loading="lazy" class="img-fluid " src="{{ asset('images/wbbonline_btn_46.png') }}" alt="share"></a>-->

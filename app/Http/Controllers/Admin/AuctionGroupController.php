@@ -121,7 +121,7 @@ class AuctionGroupController extends Controller
     }
     
     public function showAddLots($id){
-        $cars = Vehicle::whereDoesntHave('lot')->where('external_sale', 'yes')->get();
+        $cars = Vehicle::whereDoesntHave('lot')->where('external_sale', 'no')->get();
         return view('admin.auction.add_lots', ['group_id'=>$id, 'cars'=>$cars]);
     }
 
@@ -130,7 +130,7 @@ class AuctionGroupController extends Controller
         $cars = $request->car;
         
         foreach($cars AS $k=>$car){
-            if($car['start_price'] && $car['increament_value'] && $car['reserve_price']){
+            if($car['lot_number'] && $car['start_price'] && $car['increament_value'] && $car['reserve_price']){
                 $show = 0;
                 if(isset($car['show_reseve_price'])){
                     if($car['show_reseve_price']){
@@ -139,6 +139,7 @@ class AuctionGroupController extends Controller
                 }
                 Lot::create([
                     'auction_group_id' => $group_id,
+                    'lot_number' => $car['lot_number'],
                     'vehicle_id' => $k,
                     'start_price' => $car['start_price'],
                     'increament_value' => $car['increament_value'],
