@@ -267,7 +267,7 @@
                                         </table>
                                     </div>
                                     <div class="col-3">
-                                        <p class="lot-text">Lot #<span class="lot-span">{{ str_pad($vehicle->lot->id, 4, '0', STR_PAD_LEFT) }}</span></p>
+                                        <p class="lot-text">Lot #<span class="lot-span">{{ str_pad($vehicle->lot->lot_number, 4, '0', STR_PAD_LEFT) }}</span></p>
                                         <p class="bid-text">CURRENT BID</p>
                                         <h6 class="bid-price">R @if($vehicle->lot->highestBid()) {{ number_format($vehicle->lot->highestBid()->bid_amount, 2) }} @else 0.00 @endif</h6> 
                                         <!--<p class="bid-text starting-bid mt-2">OPENING BID</p>-->
@@ -335,7 +335,7 @@
                                         @endif
                                     </div>
                                     <div class="col-sm-12">
-                                        <p class="lot-text mt-3">Lot #<span class="lot-span">{{ str_pad($vehicle->lot->id, 4, '0', STR_PAD_LEFT) }}</span></p>
+                                        <p class="lot-text mt-3">Lot #<span class="lot-span">{{ str_pad($vehicle->lot->lot_number, 4, '0', STR_PAD_LEFT) }}</span></p>
                                         <table class="table catalogue-details-table">
                                           <tbody>
                                              <tr>

@@ -24,7 +24,7 @@
                             @endif
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-3 border-right">
-                            <p style="font-weight: 800;" class="prev-lot-no"> lot no<span class="prev-lot-span"> {{ str_pad($lot->id, 4, '0', STR_PAD_LEFT) }}</span></p>
+                            <p style="font-weight: 800;" class="prev-lot-no"> lot no<span class="prev-lot-span"> {{ str_pad($lot->lot_number, 4, '0', STR_PAD_LEFT) }}</span></p>
                             <p class="prev-lot-make-model">{{ $lot->vehicle->make }}</p>
                             <p class="prev-lot-make-model">{{ $lot->vehicle->model }}</p>
                             <p class="prev-lot-make-model">{{ $lot->vehicle->variant }}</p>
