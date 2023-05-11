@@ -1,5 +1,5 @@
 {
-	"authHost": "bakkieauctions.co.za:6002",
+	"authHost": "wbbakkiesonline.co.za:6002",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
@@ -20,8 +20,8 @@
 	"protocol": "https",
 	"socketio": {},
 	"secureOptions": 67108864,
-	"sslCertPath": "/etc/letsencrypt/live/bakkieauctions.co.za/fullchain.pem",
-	"sslKeyPath": "/etc/letsencrypt/live/bakkieauctions.co.za/privkey.pem",
+	"sslCertPath": "/etc/letsencrypt/live/wbbakkiesonline.co.za/fullchain.pem",
+	"sslKeyPath": "/etc/letsencrypt/live/wbbakkiesonline.co.za/privkey.pem",
 	"sslCertChainPath": "",
 	"sslPassphrase": "",
 	"subscribers": {
