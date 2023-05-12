@@ -867,6 +867,10 @@ class VehicleController extends Controller
         })->get();
         
         if($status == "not-sold"){
+            $z_lots = Lot::has('bids', '=', 0)->get();
+            foreach($z_lots AS $lot){
+                $car_arr[] = $lot->vehicle_id;
+            }
             foreach($lots AS $lot){
                 if($lot->reserve_price > $lot->highestBid()->bid_amount){
                     $car_arr[] = $lot->vehicle_id;    
