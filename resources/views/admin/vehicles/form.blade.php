@@ -20,7 +20,7 @@
 		<div class="row">
 				<div class="col-md-12">
 				<div class="mb-3">
-					<label class="form-label">External Sale: </label><br />
+					<label class="form-label">Add Vehicle  To Auction: </label><br />
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" value="yes" id="wr1" name="external_sale" @if(old('external_sale') == "yes") checked @elseif($vehicle->external_sale == "yes") checked @endif required>
 						<label class="form-check-label" for="wr1">Yes</label>

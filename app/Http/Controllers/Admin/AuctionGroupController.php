@@ -121,7 +121,7 @@ class AuctionGroupController extends Controller
     }
     
     public function showAddLots($id){
-        $cars = Vehicle::whereDoesntHave('lot')->where('external_sale', 'no')->get();
+        $cars = Vehicle::whereDoesntHave('lot')->where('external_sale', 'yes')->get();
         return view('admin.auction.add_lots', ['group_id'=>$id, 'cars'=>$cars]);
     }
 
