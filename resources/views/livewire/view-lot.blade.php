@@ -767,7 +767,10 @@
     @vite('resources/js/laravel_echo_setup.js')
     <script>
         $(document).ready(function(){
+            
+            
             window.Echo.channel('auction-chanel').listen('.auction.update', (data) => {
+                console.log(data);
                 if(data.action == 'bid_placed'){
                     Livewire.emit('reloadCar');
                 }
@@ -793,7 +796,7 @@
                         });
                     }
                 }
-            });   
+            }); 
             
             $(document).ready(function(){
                 $(".zb").zbox( { margin:40 } );

@@ -184,7 +184,7 @@
     <script>
         $(document).ready(function(){
             startTimer();
-        
+            
             window.Echo.channel('auction-chanel').listen('.auction.update', (data) => {
                 console.log(data);
                 if(data.action == 'bid_placed'){
