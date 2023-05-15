@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex">
@@ -72,6 +72,8 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Lot No</th>
+                                        <th>Stock No</th>
                                         <th>Year</th>
                                         <th>Make</th>
                                         <th>Model</th>
@@ -86,6 +88,8 @@
                                     @foreach($auctionGroup->lots AS $lot)
                                     @if($lot->vehicle)
                                     <tr>
+                                        <td>{{ $lot->lot_number }}</td>
+                                        <td>{{ $lot->vehicle->stock_number }}</td>
                                         <td>{{ $lot->vehicle->year }}</td>
                                         <td>{{ $lot->vehicle->make }}</td>
                                         <td>{{ $lot->vehicle->model }}</td>
